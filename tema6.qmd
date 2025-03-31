@@ -1,0 +1,39 @@
+---
+title: "Reproducción de figuras"
+---
+
+A partir del [Github del articulo](https://github.com/reenadebray/loss-of-resistance) realizamos modificaciones de los scripts y generamos un [fork](https://github.com/EveliaCoss/loss-of-resistance) con las modificaciones realizadas.
+
+## Figuras 1 a 3
+
+> Modificado por Evelia Coss
+
+Este script contempla el codigo de las figuras:
+
+- Figura 1. Input: "Costs_of_Res.xlsx"
+- Figura 2A. Input: "Fitness_over_Time.xlsx"
+- Figura 2B. Input: "Resistance_over_Time.xlsx"
+- Figura 3. Input: "Replay.xlsx"
+
+Puedes descargar el codigo en español o ingles:
+
+> En español: [1_Phenotype_data_analysis_ELCN.R](https://github.com/R-Ladies-Morelia/Reprohack2024/blob/main/Grupo2/1_Phenotype_data_analysis_ELCN.R)
+> 
+> En ingles: [1_Phenotype_data_analysis.R](https://github.com/EveliaCoss/loss-of-resistance/blob/main/1_Phenotype_data_analysis.R)
+
+## Figuras 4 y 5
+
+> Modificado por Amairani Cancino
+
+- Figura 4A y 4B. Input: "Mutation tables", "Cost_of_Res.xlsx"
+- Figura 5A y 5B. Input: "Mutation tables", "Cost_of_Res.xlsx"
+
+Puedes descargar el código en español o inglés: 
+
+> En Español: 
+Código completo: [2_Genome_data_analysis_ESP.R](https://github.com/R-Ladies-Morelia/Reprohack2024/blob/main/Grupo2/2_Genome_data_analysis_ESP.R)
+Código solo para las figuras: [Figuras_4y5.R](https://github.com/R-Ladies-Morelia/Reprohack2024/blob/main/Grupo2/Figuras_4y5.R)
+>
+> En Inglés: 
+Código completo:[2_Genomes_data_analysis.R](https://github.com/EveliaCoss/loss-of-resistance/blob/main/2_Genomes_data_analysis.R)
+Código solo para las figuras:[Figures_4&5.R](https://github.com/EveliaCoss/loss-of-resistance/blob/main/Figures_4%265.R)
