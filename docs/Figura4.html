@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -132,7 +98,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tema5.html">Acerca de las funciones y figuras del artículo</a></li><li class="breadcrumb-item"><a href="./Figura4.html">Figura 4</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tema3.html">Figuras del artículo</a></li><li class="breadcrumb-item"><a href="./Figura4.html">Figura 4</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -169,7 +135,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tema1.html" class="sidebar-item-text sidebar-link">
+  <a href="./resumen.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Resumen</span></a>
   </div>
 </li>
@@ -181,8 +147,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./information.html" class="sidebar-item-text sidebar-link">
+  <a href="./glosario.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Glosario</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tema2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Buenas prácticas en la bioinformática</span></a>
   </div>
 </li>
       </ul>
@@ -190,7 +162,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
- <span class="menu-text">Revisión de temas</span></a>
+ <span class="menu-text">Figuras del artículo</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -198,42 +170,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tema2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Buenas prácticas en la bioinformática</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./tema3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Formato de archivos</span></a>
+ <span class="menu-text">Reprocesamiento de los datos</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tema4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ggplot2</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
- <span class="menu-text">Acerca de las funciones y figuras del artículo</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./tema5.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Documentación de funciones</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./tema6.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Reproducción de figuras</span></a>
   </div>
 </li>
@@ -241,12 +184,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./retos.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Retos y problemas con el código</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Figura1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Figura 1</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -285,14 +222,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#contingencia-histórica-en-la-evolución-del-genoma" id="toc-contingencia-histórica-en-la-evolución-del-genoma" class="nav-link active" data-scroll-target="#contingencia-histórica-en-la-evolución-del-genoma">Contingencia histórica en la evolución del genoma</a></li>
-  <li><a href="#figura-4-a-y-4-b" id="toc-figura-4-a-y-4-b" class="nav-link" data-scroll-target="#figura-4-a-y-4-b">Figura 4 A y 4 B</a>
-  <ul class="collapse">
-  <li><a href="#esquema" id="toc-esquema" class="nav-link" data-scroll-target="#esquema">Esquema</a></li>
-  <li><a href="#dificultades" id="toc-dificultades" class="nav-link" data-scroll-target="#dificultades">Dificultades</a></li>
-  <li><a href="#paquetes" id="toc-paquetes" class="nav-link" data-scroll-target="#paquetes">Paquetes</a></li>
-  <li><a href="#cargar-objetos" id="toc-cargar-objetos" class="nav-link" data-scroll-target="#cargar-objetos">Cargar objetos</a></li>
-  </ul></li>
+  <li><a href="#transferencia-horizontal-de-genes-mediado-por-mges-hgt" id="toc-transferencia-horizontal-de-genes-mediado-por-mges-hgt" class="nav-link active" data-scroll-target="#transferencia-horizontal-de-genes-mediado-por-mges-hgt">Transferencia Horizontal de Genes Mediado por MGEs (HGT)</a></li>
+  <li><a href="#figura-4a" id="toc-figura-4a" class="nav-link" data-scroll-target="#figura-4a">Figura 4A</a></li>
+  <li><a href="#figura-4b" id="toc-figura-4b" class="nav-link" data-scroll-target="#figura-4b">Figura 4B</a></li>
+  <li><a href="#figura-4c" id="toc-figura-4c" class="nav-link" data-scroll-target="#figura-4c">Figura 4C</a></li>
+  <li><a href="#figura-4d" id="toc-figura-4d" class="nav-link" data-scroll-target="#figura-4d">Figura 4D</a></li>
   </ul>
 </nav>
     </div>
@@ -316,108 +250,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="contingencia-histórica-en-la-evolución-del-genoma" class="level2">
-<h2 class="anchored" data-anchor-id="contingencia-histórica-en-la-evolución-del-genoma">Contingencia histórica en la evolución del genoma</h2>
+<section id="transferencia-horizontal-de-genes-mediado-por-mges-hgt" class="level2">
+<h2 class="anchored" data-anchor-id="transferencia-horizontal-de-genes-mediado-por-mges-hgt">Transferencia Horizontal de Genes Mediado por MGEs (HGT)</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="img/figure4.jpeg" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Fig. 4. Contingencia genética en la identidad de los genes mutados durante la evolución experimental.</figcaption>
+<figcaption class="figure-caption">Figura 4. Transferencia horizontal de genes mediada por MGEs (HGT)</figcaption>
 </figure>
 </div>
+<ol type="A">
+<li>La ocurrencia de eventos recientes de HGT mediada por MGEs disminuye considerablemente con la distancia taxonómica.</li>
+<li>Resumen de los eventos de HGT mediada por MGEs a través de un árbol filogenético (basado en genes marcadores filogenéticos) de clases taxonómicas. El mapa de calor cuantifica los eventos de HGT (coloreados según la leyenda en la parte inferior) entre las clases taxonómicas y los arcos indican la contribución de los elementos transponibles (en rojo) sobre otras categorías de MGEs (en gris).</li>
+<li>Análisis de anidamiento de integrones con diferentes categorías de MGEs muestra su anidamiento significativo con CE-Elementos conjugativos (razón de probabilidades de Fisher 4.3, valor P = 2.9e−86) en el subconjunto de HGT en comparación con todas las ocurrencias anidadas.</li>
+<li>Mapas de calor que ilustran la transferencia horizontal promiscuosa de elementos transponibles a través de hábitats en comparación con otras categorías de MGEs. Todas las categorías de MGEs muestran una alta dinámica de MGE</li>
+</ol>
 </section>
-<section id="figura-4-a-y-4-b" class="level2">
-<h2 class="anchored" data-anchor-id="figura-4-a-y-4-b">Figura 4 A y 4 B</h2>
-<p>Para generar las figuras 4A y 4B se tuvieron que seguir varios pasos para procesar los datos, por simplicidad, sólo presentaremos un esquema de los pasos que se siguieron y tomaremos las variables relevantes para generar las figuras.</p>
-<section id="esquema" class="level3">
-<h3 class="anchored" data-anchor-id="esquema">Esquema</h3>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="img/Fig4y5_workflow.png" class="img-fluid figure-img" width="1500"></p>
-<figcaption class="figure-caption">Esquema</figcaption>
-</figure>
-</div>
+<section id="figura-4a" class="level2">
+<h2 class="anchored" data-anchor-id="figura-4a">Figura 4A</h2>
 </section>
-<section id="dificultades" class="level3">
-<h3 class="anchored" data-anchor-id="dificultades">Dificultades</h3>
-<ul>
-<li>Los paquetes no estabas especificados.</li>
-<li>La carpeta Breseq indicada, en realidad es la carpeta “Mutation tables” presente en el Github.</li>
-<li>El P value no aparecía en la gráfica de la Figura 4A.</li>
-</ul>
-<p>En los heatmap:</p>
-<ul>
-<li>eran cuadrados y los valores del porcentaje iban de 0, 50, 100.</li>
-<li>Los colores no correspondían.</li>
-<li>Los nombres de las mutantes no correspondían.</li>
-<li>El código para las figuras 4 y 5 estaban juntos.</li>
-</ul>
+<section id="figura-4b" class="level2">
+<h2 class="anchored" data-anchor-id="figura-4b">Figura 4B</h2>
 </section>
-<section id="paquetes" class="level3">
-<h3 class="anchored" data-anchor-id="paquetes">Paquetes</h3>
-<p>Los paquetes que vamos a cargar son necesarios para las gráficas:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co"># Generar gráficos</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(viridis) <span class="co"># Generar paleta de colores</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<section id="figura-4c" class="level2">
+<h2 class="anchored" data-anchor-id="figura-4c">Figura 4C</h2>
 </section>
-<section id="cargar-objetos" class="level3">
-<h3 class="anchored" data-anchor-id="cargar-objetos">Cargar objetos</h3>
-<p>Los objetos y variables que cargamos y ocuparemos para esta figura son:</p>
-<ul>
-<li><ol type="1">
-<li><code>test_gene_df_day6</code>: Data frame con 2 columnas: <code>sim_coef</code> y <code>label</code></li>
-</ol></li>
-<li><ol start="2" type="1">
-<li><code>annotation_day6</code>: Guarda el texto para el p valor.</li>
-</ol></li>
-<li><ol start="3" type="1">
-<li><code>breseq_gene_props_day6</code>: Data frame con 3 columnas: <code>top_gene</code>, <code>res_gene</code> y <code>percent_pops</code></li>
-</ol></li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"data/ReproHack_data_figures4_5.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Es importante notar que la figura 4 muestra datos para el pase 2, es decir para el día 6 del experimento. Para obetener la figurs 4A se generar boxplots usang ggplot2. Los datos graficados son los de nuestro df: test_gene_df_day6. En este df encontramos los coeficientes de similitud a pares de las 22 poblaciones, la etiquetas nos muestra si tienen la mutación que confiere resistencia en el mismo o en diferente gen. Para colocar el pvalue del test de alotearización se cargó el objeto annotation_day6</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>p_day6 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(test_gene_df_day6, <span class="fu">aes</span>(label, sim_coef)) <span class="sc">+</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>, <span class="at">width =</span> <span class="fl">0.4</span>, <span class="at">size =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.05</span>, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size =</span> <span class="dv">18</span>) <span class="sc">+</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Overlap in acquired mutations</span><span class="sc">\n</span><span class="st">(Pairwise Sørensen-Dice similarity)"</span>) <span class="sc">+</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.spacing =</span> <span class="fu">unit</span>(<span class="dv">3</span>, <span class="st">"lines"</span>),</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">18</span>, <span class="at">face =</span> <span class="st">"bold"</span>)) <span class="sc">+</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="fl">0.1</span>, <span class="fl">0.55</span>) <span class="sc">+</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">1.5</span>, <span class="at">y =</span> <span class="fl">0.55</span>, <span class="at">label =</span> annotation_day6, <span class="at">size =</span> <span class="dv">6</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">vjust =</span> <span class="fl">1.5</span>, <span class="at">color =</span> <span class="st">"black"</span>)</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p_day6)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="Figura4_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="768"></p>
-</div>
-</div>
-<p>Para el heatmap de las figura 4B usamos ggplot. Nuestra información la tomamos del objeto: breseq_gene_props_day6. Este dataframe nos da información sobre el porcentaje de poblaciones (agrupads por gen de resistencia) que tienen mutación en el top20 de genes.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(breseq_gene_props_day6, <span class="fu">aes</span>(top_gene, res_gene, <span class="at">fill =</span> percent_pops <span class="sc">*</span> <span class="dv">100</span>)) <span class="sc">+</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">"grey80"</span>) <span class="sc">+</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">family =</span> <span class="st">"Arial"</span>)  <span class="co"># Define all adjustments in one call</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis</span>(</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Populations</span><span class="sc">\n</span><span class="st">with mutation (%)"</span>,</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">100</span>),  <span class="co"># Define scale limits</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">25</span>, <span class="dv">50</span>, <span class="dv">75</span>, <span class="dv">100</span>)  <span class="co"># Define specific breaks to display</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Day 6 of experimental evolution"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="Figura4_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="960"></p>
-</div>
-</div>
+<section id="figura-4d" class="level2">
+<h2 class="anchored" data-anchor-id="figura-4d">Figura 4D</h2>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

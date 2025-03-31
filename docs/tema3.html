@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Formato de archivos</title>
+<title>Reprocesamiento de los datos</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,40 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -132,7 +98,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tema2.html">Revisión de temas</a></li><li class="breadcrumb-item"><a href="./tema3.html">Formato de archivos</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tema3.html">Figuras del artículo</a></li><li class="breadcrumb-item"><a href="./tema3.html">Reprocesamiento de los datos</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -142,7 +108,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -169,7 +135,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tema1.html" class="sidebar-item-text sidebar-link">
+  <a href="./resumen.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Resumen</span></a>
   </div>
 </li>
@@ -181,8 +147,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./information.html" class="sidebar-item-text sidebar-link">
+  <a href="./glosario.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Glosario</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tema2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Buenas prácticas en la bioinformática</span></a>
   </div>
 </li>
       </ul>
@@ -190,7 +162,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
- <span class="menu-text">Revisión de temas</span></a>
+ <span class="menu-text">Figuras del artículo</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -198,42 +170,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tema2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Buenas prácticas en la bioinformática</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./tema3.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Formato de archivos</span></a>
+ <span class="menu-text">Reprocesamiento de los datos</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tema4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ggplot2</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
- <span class="menu-text">Acerca de las funciones y figuras del artículo</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./tema5.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Documentación de funciones</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./tema6.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Reproducción de figuras</span></a>
   </div>
 </li>
@@ -241,12 +184,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./retos.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Retos y problemas con el código</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Figura1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Figura 1</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -285,26 +222,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#importar-datos-en-r" id="toc-importar-datos-en-r" class="nav-link active" data-scroll-target="#importar-datos-en-r">Importar datos en R</a>
-  <ul class="collapse">
-  <li><a href="#a-datos-separados-por-un-valor" id="toc-a-datos-separados-por-un-valor" class="nav-link" data-scroll-target="#a-datos-separados-por-un-valor">A) Datos separados por un valor</a></li>
-  </ul></li>
-  <li><a href="#datos-en-formato-csv" id="toc-datos-en-formato-csv" class="nav-link" data-scroll-target="#datos-en-formato-csv">Datos en formato CSV</a></li>
-  <li><a href="#datos-en-formato-tsv" id="toc-datos-en-formato-tsv" class="nav-link" data-scroll-target="#datos-en-formato-tsv">Datos en formato TSV</a>
-  <ul class="collapse">
-  <li><a href="#b-archivos-tipo-rdata" id="toc-b-archivos-tipo-rdata" class="nav-link" data-scroll-target="#b-archivos-tipo-rdata">B) Archivos tipo RData</a></li>
-  <li><a href="#c-archivos-tipo-rds" id="toc-c-archivos-tipo-rds" class="nav-link" data-scroll-target="#c-archivos-tipo-rds">C) Archivos tipo RDS</a></li>
-  <li><a href="#d-archivos-de-excel" id="toc-d-archivos-de-excel" class="nav-link" data-scroll-target="#d-archivos-de-excel">D) Archivos de Excel</a></li>
-  </ul></li>
+  <li><a href="#datos" id="toc-datos" class="nav-link active" data-scroll-target="#datos">Datos</a></li>
+  <li><a href="#procesamiento-de-datos-para-la-figuras" id="toc-procesamiento-de-datos-para-la-figuras" class="nav-link" data-scroll-target="#procesamiento-de-datos-para-la-figuras">Procesamiento de datos para la Figuras</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content column-body" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Formato de archivos</h1>
+<h1 class="title">Reprocesamiento de los datos</h1>
 </div>
 
 
@@ -319,75 +247,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="importar-datos-en-r" class="level2">
-<h2 class="anchored" data-anchor-id="importar-datos-en-r">Importar datos en R</h2>
-<p>Existen distintos tipos de formatos de datos que podemos ingresar a R para su análisis. Los principales son:</p>
-<section id="a-datos-separados-por-un-valor" class="level3">
-<h3 class="anchored" data-anchor-id="a-datos-separados-por-un-valor">A) Datos separados por un valor</h3>
-<p>Por ejemplo por comas (.csv), tab (.tsv) o espacios. Aunque la siguiente función puede leer por cualquier separador.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.table</span>(<span class="st">"/path/dataset.csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">delim =</span> <span class="st">","</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">read.table</span>(<span class="st">"/path/dataset.tsv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">delim =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">read.table</span>(<span class="st">"/path/dataset."</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">delim =</span> <span class="st">","</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>El parámetro header nos dice si considerar la primera fila como nombre de las variables.</p>
-<p>También podemos leer un archivo .csv directamente:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.csv</span>(<span class="st">"/path/dataset.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-</section>
-<section id="datos-en-formato-csv" class="level2">
-<h2 class="anchored" data-anchor-id="datos-en-formato-csv">Datos en formato CSV</h2>
-<p>Archivos separados por comas.</p>
-<p>Este ejemplo fue obtenido del repositorio de Github de <a href="dataset_shdb/charactersStats.csv">Cosmoduende</a>.</p>
+<p>A partir de la pagina web de Git <a href="https://git.embl.de/khedkar/promge">proMGE</a> realizamos modificaciones de los scripts para mejorar la documentación de los mismos.</p>
+<section id="datos" class="level2">
+<h2 class="anchored" data-anchor-id="datos">Datos</h2>
+<blockquote class="blockquote">
+<p>Modificado por Evelia Coss</p>
+</blockquote>
+<p>Todos los datos utilizados en este estudio están publicados y a disposición del público, como se indica en la sección de <a href="https://academic.oup.com/nar/article/50/6/3155/6552054#347997597">material y métodos del manuscrito</a>.</p>
+<ul>
+<li>Los datos de todos los genomas procariotas utilizados en el estudio están disponibles en https://progenomes.embl.de/.</li>
+<li>La información sobre el hábitat está disponible en <a href="https://gmgc.embl.de/">GMGC</a>.</li>
+</ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="img/formatoCSV_marvel.png" class="img-fluid figure-img" width="800"></p>
+<p><img src="img/figure1.jpeg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Flujo de trabajo para la identificación de elementos genéticos móviles (MGEs) en procariotas y análisis de carga genética. (A) Se anotaron cinco familias principales de recombinasas en proGenomes2 usando HMMs a nivel de subfamilia y validación con EggNOG y RefSeq. (B) Se asignaron recombinasas a seis categorías de MGEs y se diferenciaron de recombinasas celulares mediante análisis de límites de pangenomas, asociación con subfamilias y la presencia de genes accesorios específicos. (C) Se presentan ejemplos de MGEs con genes de resistencia a antibióticos (ARG), destacando su novedad en aspectos como diversificación funcional, MGEs anidados, transferencia horizontal de genes entre dominios de vida y nuevas asociaciones de dominios proteicos.</figcaption>
 </figure>
 </div>
 </section>
-<section id="datos-en-formato-tsv" class="level2">
-<h2 class="anchored" data-anchor-id="datos-en-formato-tsv">Datos en formato TSV</h2>
-<p>Archivo separado por tabuladores.</p>
-<p>Este ejemplo proviene de la base de datos de <em>Arabidopsis thaliana</em>, la planta modelo en el estudio de la genómica. Este archivo indica el tipo o característica del gen anotado en <a href="https://www.arabidopsis.org/download_files/Genes/Araport11_genome_release/Araport11_gene_type">Araport11</a>.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="img/formatoTSV_arabidopsis.png" class="img-fluid figure-img" width="500"></p>
-</figure>
-</div>
-<section id="b-archivos-tipo-rdata" class="level3">
-<h3 class="anchored" data-anchor-id="b-archivos-tipo-rdata">B) Archivos tipo RData</h3>
-<p>Usualmente cargan todo el ambiente o varias variables</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"/path/ambiente.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="c-archivos-tipo-rds" class="level3">
-<h3 class="anchored" data-anchor-id="c-archivos-tipo-rds">C) Archivos tipo RDS</h3>
-<p>Se usan para cargar variables, usualmente muy pesadas</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>variable <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"/path/variable.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="d-archivos-de-excel" class="level3">
-<h3 class="anchored" data-anchor-id="d-archivos-de-excel">D) Archivos de Excel</h3>
-<p>El paquete que vamos a emplear se llama <a href="https://readxl.tidyverse.org/"><code>readxl</code></a> se encuentra integrado en <code>tidyverse</code>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># El archivo, hoja 1</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>costs_of_res <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"Costs_of_Res.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Podemos cargar una hoja en especifico:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># por el nombre</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">read_excel</span>(xlsx_example, <span class="at">sheet =</span> <span class="st">"chickwts"</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># por el numero de la hoja</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">read_excel</span>(<span class="st">"Costs_of_Res.xlsx"</span>, <span class="at">sheet =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<section id="procesamiento-de-datos-para-la-figuras" class="level2">
+<h2 class="anchored" data-anchor-id="procesamiento-de-datos-para-la-figuras">Procesamiento de datos para la Figuras</h2>
+<p>Los autores nos informan que se realizaron modificacione sobre los inputs para generar las Figuras 2 a 5 empleando codigo de <code>perl</code>. Para mas informacion vista la fuente original del <a href="https://git.embl.de/khedkar/promge/-/tree/main?ref_type=heads">Git</a>.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

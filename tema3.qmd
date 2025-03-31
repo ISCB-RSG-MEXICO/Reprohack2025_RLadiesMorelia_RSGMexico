@@ -1,81 +1,20 @@
 ---
-title: "Formato de archivos"
-format: 
-  html:
-    page-layout: full 
+title: "Reprocesamiento de los datos"
 ---
 
-## Importar datos en R
+A partir de la pagina web de Git [proMGE](https://git.embl.de/khedkar/promge) realizamos modificaciones de los scripts para mejorar la documentación de los mismos.
 
-Existen distintos tipos de formatos de datos que podemos ingresar a R para su análisis. Los principales son:
+## Datos
 
-### A) Datos separados por un valor
+> Modificado por Evelia Coss
 
-Por ejemplo por comas (.csv), tab (.tsv) o espacios. Aunque la siguiente función puede leer por cualquier separador.
+Todos los datos utilizados en este estudio están publicados y a disposición del público, como se indica en la sección de [material y métodos del manuscrito](https://academic.oup.com/nar/article/50/6/3155/6552054#347997597).
 
-```{r, eval=FALSE}
-read.table("/path/dataset.csv", header = TRUE, delim = ",")
-read.table("/path/dataset.tsv", header = TRUE, delim = "\t")
-read.table("/path/dataset.", header = TRUE, delim = ",")
-```
+-   Los datos de todos los genomas procariotas utilizados en el estudio están disponibles en https://progenomes.embl.de/.
+-   La información sobre el hábitat está disponible en [GMGC](https://gmgc.embl.de/).
 
-El parámetro header nos dice si considerar la primera fila como nombre de las variables.
+![Flujo de trabajo para la identificación de elementos genéticos móviles (MGEs) en procariotas y análisis de carga genética. (A) Se anotaron cinco familias principales de recombinasas en proGenomes2 usando HMMs a nivel de subfamilia y validación con EggNOG y RefSeq. (B) Se asignaron recombinasas a seis categorías de MGEs y se diferenciaron de recombinasas celulares mediante análisis de límites de pangenomas, asociación con subfamilias y la presencia de genes accesorios específicos. (C) Se presentan ejemplos de MGEs con genes de resistencia a antibióticos (ARG), destacando su novedad en aspectos como diversificación funcional, MGEs anidados, transferencia horizontal de genes entre dominios de vida y nuevas asociaciones de dominios proteicos.](img/figure1.jpeg)
 
-También podemos leer un archivo .csv directamente:
+## Procesamiento de datos para la Figuras
 
-```{r, eval=FALSE}
-read.csv("/path/dataset.csv")
-```
-
-## Datos en formato CSV
-
-Archivos separados por comas. 
-
-Este ejemplo fue obtenido del repositorio de Github de [Cosmoduende](dataset_shdb/charactersStats.csv).
-
-![](img/formatoCSV_marvel.png){width="800" fig-align="center"}
-
-## Datos en formato TSV
-
-Archivo separado por tabuladores. 
-
-Este ejemplo proviene de la base de datos de *Arabidopsis thaliana*, la planta modelo en el estudio de la genómica. Este archivo indica el tipo o característica del gen anotado en [Araport11](https://www.arabidopsis.org/download_files/Genes/Araport11_genome_release/Araport11_gene_type).
-
-![](img/formatoTSV_arabidopsis.png){width="500" fig-align="center"}
-
-### B) Archivos tipo RData
-
-Usualmente cargan todo el ambiente o varias variables
-
-```{r, eval = F}
-load("/path/ambiente.RData")
-```
-
-### C) Archivos tipo RDS
-
-Se usan para cargar variables, usualmente muy pesadas
-
-```{r, eval = F}
-variable <- readRDS("/path/variable.RData")
-```
-
-### D) Archivos de Excel
-
-El paquete que vamos a emplear se llama [`readxl`](https://readxl.tidyverse.org/) se encuentra integrado en `tidyverse`.
-
-```{r, eval=FALSE}
-library(readxl)
-# El archivo, hoja 1
-costs_of_res <- read_excel("Costs_of_Res.xlsx")
-```
-
-Podemos cargar una hoja en especifico:
-
-```{r, eval=FALSE}
-# por el nombre
-read_excel(xlsx_example, sheet = "chickwts")
-# por el numero de la hoja
-read_excel("Costs_of_Res.xlsx", sheet = 4)
-```
-
-
+Los autores nos informan que se realizaron modificacione sobre los inputs para generar las Figuras 2 a 5 empleando codigo de `perl`. Para mas informacion vista la fuente original del [Git](https://git.embl.de/khedkar/promge/-/tree/main?ref_type=heads).

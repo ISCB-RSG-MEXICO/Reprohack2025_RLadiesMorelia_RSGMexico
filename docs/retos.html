@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -132,7 +98,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tema5.html">Acerca de las funciones y figuras del artículo</a></li><li class="breadcrumb-item"><a href="./retos.html">Retos y problemas con el código</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tema3.html">Figuras del artículo</a></li><li class="breadcrumb-item"><a href="./retos.html">Retos y problemas con el código</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -169,7 +135,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tema1.html" class="sidebar-item-text sidebar-link">
+  <a href="./resumen.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Resumen</span></a>
   </div>
 </li>
@@ -181,8 +147,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./information.html" class="sidebar-item-text sidebar-link">
+  <a href="./glosario.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Glosario</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tema2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Buenas prácticas en la bioinformática</span></a>
   </div>
 </li>
       </ul>
@@ -190,7 +162,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
- <span class="menu-text">Revisión de temas</span></a>
+ <span class="menu-text">Figuras del artículo</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -198,42 +170,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tema2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Buenas prácticas en la bioinformática</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./tema3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Formato de archivos</span></a>
+ <span class="menu-text">Reprocesamiento de los datos</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tema4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ggplot2</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
- <span class="menu-text">Acerca de las funciones y figuras del artículo</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./tema5.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Documentación de funciones</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./tema6.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Reproducción de figuras</span></a>
   </div>
 </li>
@@ -241,12 +184,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./retos.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Retos y problemas con el código</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Figura1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Figura 1</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -285,18 +222,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#ausencia-de-instrucciones" id="toc-ausencia-de-instrucciones" class="nav-link active" data-scroll-target="#ausencia-de-instrucciones">Ausencia de instrucciones</a>
-  <ul class="collapse">
-  <li><a href="#reto-1" id="toc-reto-1" class="nav-link" data-scroll-target="#reto-1">Reto 1</a></li>
-  <li><a href="#reto-2" id="toc-reto-2" class="nav-link" data-scroll-target="#reto-2">Reto 2</a></li>
-  <li><a href="#reto-3" id="toc-reto-3" class="nav-link" data-scroll-target="#reto-3">Reto 3</a></li>
-  <li><a href="#retos-figuras-4-y-5" id="toc-retos-figuras-4-y-5" class="nav-link" data-scroll-target="#retos-figuras-4-y-5">Retos figuras 4 y 5</a></li>
-  <li><a href="#reto-1-1" id="toc-reto-1-1" class="nav-link" data-scroll-target="#reto-1-1">Reto 1</a></li>
-  <li><a href="#reto-2-1" id="toc-reto-2-1" class="nav-link" data-scroll-target="#reto-2-1">Reto 2</a></li>
-  <li><a href="#reto-3-1" id="toc-reto-3-1" class="nav-link" data-scroll-target="#reto-3-1">Reto 3</a></li>
-  <li><a href="#reto-4" id="toc-reto-4" class="nav-link" data-scroll-target="#reto-4">Reto 4</a></li>
-  <li><a href="#reto-5" id="toc-reto-5" class="nav-link" data-scroll-target="#reto-5">Reto 5</a></li>
-  </ul></li>
+  <li><a href="#ausencia-de-instrucciones" id="toc-ausencia-de-instrucciones" class="nav-link active" data-scroll-target="#ausencia-de-instrucciones">Ausencia de instrucciones</a></li>
   </ul>
 </nav>
     </div>
@@ -322,86 +248,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="ausencia-de-instrucciones" class="level2">
 <h2 class="anchored" data-anchor-id="ausencia-de-instrucciones">Ausencia de instrucciones</h2>
-<section id="reto-1" class="level3">
-<h3 class="anchored" data-anchor-id="reto-1">Reto 1</h3>
-<p>En el código no se mencionaba con que paquetes realizaban la importación de los datos de excel que te daban, solo daban instrucciones como la siguiente:</p>
-<blockquote class="blockquote">
-<p>Cargar informacion de “Costs_of_Res.xlsx” como variable <code>costs_of_res</code>.</p>
-</blockquote>
-<p><strong>Solución:</strong> En este caso decidimos usar el paquete <code>readxl</code> para la importación de archivos.</p>
-<p><br></p>
-</section>
-<section id="reto-2" class="level3">
-<h3 class="anchored" data-anchor-id="reto-2">Reto 2</h3>
-<p>Para graficar la figura 2, el código mencionaba la variable <code>LOR_res_long</code>, sin embargo esta variable no se encontraba declarada en el código. Solo daba el siguiente fragmento:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(LOR_res_long[<span class="sc">!</span>LOR_res_long<span class="sc">$</span>isolate <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"FMS6"</span>,<span class="st">"SNK6"</span>),], <span class="fu">aes</span>(passage<span class="sc">*</span><span class="dv">3</span>,value<span class="sc">*</span><span class="dv">100</span>,<span class="at">group=</span>isolate,<span class="at">color=</span>(isolate<span class="sc">%in%</span><span class="fu">c</span>(<span class="st">"SNK7"</span>,<span class="st">"QAC5"</span>,<span class="st">"VCM4"</span>)))) <span class="sc">+</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="fl">4.5</span>,<span class="at">shape=</span><span class="dv">18</span>) <span class="sc">+</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size=</span><span class="fl">0.8</span>)<span class="sc">+</span><span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">color=</span>F)<span class="sc">+</span><span class="fu">scale_color_brewer</span>(<span class="at">palette=</span><span class="st">"Dark2"</span>) <span class="sc">+</span> </span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">12</span>,<span class="dv">24</span>,<span class="dv">36</span>)) <span class="sc">+</span> </span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span><span class="dv">16</span>) <span class="sc">+</span> </span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Proportion of phage sensitivity in population (%)"</span>) <span class="sc">+</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Day of experimental evolution"</span>) <span class="sc">+</span> </span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title.y=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">14</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><strong>Solución:</strong> Agregamos todo el código de inicio a fin en Chatgpt y le solicitamos que nos dijera cómo generar la variable X a partir de los datos que le dimos. Logrando obtener la información faltante.</p>
-<p><br></p>
-</section>
-<section id="reto-3" class="level3">
-<h3 class="anchored" data-anchor-id="reto-3">Reto 3</h3>
-<p>Variables erróneas colocadas en el código. Para la figura 3 menciona que se usa la variable <code>Prop_R_P12</code>, sin embargo sta variable no existe si no que se llama <code>Prop_S_P12</code>.</p>
-<p><strong>Solución:</strong> corregimos el código cambiando la variable.</p>
-</section>
-<section id="retos-figuras-4-y-5" class="level3">
-<h3 class="anchored" data-anchor-id="retos-figuras-4-y-5">Retos figuras 4 y 5</h3>
-</section>
-<section id="reto-1-1" class="level3">
-<h3 class="anchored" data-anchor-id="reto-1-1">Reto 1</h3>
-<p>En el código no se especificaban los paquetes que se utilizarían, ni se mencionaban los paquetes necesarios para la importación de datos desde archivos de Excel. <strong>Solución:</strong> En este caso decidimos usar los paquetes <code>readxl</code> para la importación de archivos, <code>ggplot2</code> para la generación de gráficas y <code>vidiris</code> para la paleta de colores.</p>
-<p><br></p>
-</section>
-<section id="reto-2-1" class="level3">
-<h3 class="anchored" data-anchor-id="reto-2-1">Reto 2</h3>
-<p>En el código no se mencionaba cómo se generaba la variable <code>Breseq</code>. <strong>Solución:</strong> Esta variable se generaba a partir de las tablas presentes en la carpeta <code>Mutation tables</code>.</p>
-<p><br></p>
-</section>
-<section id="reto-3-1" class="level3">
-<h3 class="anchored" data-anchor-id="reto-3-1">Reto 3</h3>
-<p>En el código para la figura 4A no había una línea para agregar el p value. <strong>Solución:</strong> Agregamos este fragmento al código:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare data</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>test_gene_df_day6 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">sim_coef =</span> <span class="fu">c</span>(test_same_P2_day6, test_diff_P2_day6),</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"Same</span><span class="sc">\n</span><span class="st">resistance</span><span class="sc">\n</span><span class="st">gene"</span>, <span class="fu">length</span>(test_same_P2_day6)), <span class="fu">rep</span>(<span class="st">"Different</span><span class="sc">\n</span><span class="st">resistance</span><span class="sc">\n</span><span class="st">gene"</span>, <span class="fu">length</span>(test_diff_P2_day6)))</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(test_gene_df_day6) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"sim_coef"</span>, <span class="st">"label"</span>)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>test_gene_df_day6<span class="sc">$</span>label <span class="ot">&lt;-</span> <span class="fu">factor</span>(test_gene_df_day6<span class="sc">$</span>label, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Same</span><span class="sc">\n</span><span class="st">resistance</span><span class="sc">\n</span><span class="st">gene"</span>, <span class="st">"Different</span><span class="sc">\n</span><span class="st">resistance</span><span class="sc">\n</span><span class="st">gene"</span>))</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate day 6 p-value</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>p_value_P2_day6 <span class="ot">&lt;-</span> <span class="fu">length</span>(perm_gene_P2_day6[perm_gene_P2_day6 <span class="sc">&gt;=</span> test_gene_P2_day6]) <span class="sc">/</span> <span class="fu">length</span>(perm_gene_P2_day6)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p_value_P2_day6)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up p-value annotation</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (p_value_P2_day6 <span class="sc">&lt;</span> <span class="fl">0.001</span>) {</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  annotation_day6 <span class="ot">&lt;-</span> <span class="st">"p &lt; 0.001***"</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  annotation_day6 <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"p = "</span>, <span class="fu">format</span>(p_value_P2_day6, <span class="at">digits =</span> <span class="dv">3</span>))</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><br></p>
-</section>
-<section id="reto-4" class="level3">
-<h3 class="anchored" data-anchor-id="reto-4">Reto 4</h3>
-<p>En el código de los Heatmaps, los nombres de las mutantes no correspondían, los colores del heatmap no correspondían y había algunos símbolos que fueron modificados. <strong>Solución:</strong> Acomodamos los nombres de las mutantes, utilizamos la librería <code>vidiris</code> y la familia tipografica Arial.</p>
-<p><br></p>
-</section>
-<section id="reto-5" class="level3">
-<h3 class="anchored" data-anchor-id="reto-5">Reto 5</h3>
-<p>En el código no aparecía el análisis para la figura 5. <strong>Solución:</strong> El código tuvo que ser dividido en 2 partes para generar la aleatorizacion del día 6 y del día 36 por separado.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

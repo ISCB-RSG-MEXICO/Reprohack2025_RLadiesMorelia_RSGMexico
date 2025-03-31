@@ -27,20 +27,15 @@ website:
       - section: "Introducción"
         contents:
           - index.qmd
-          - tema1.qmd
+          - resumen.qmd
           - datos.qmd
-          - information.qmd
-      - section: "Revisión de temas"
-        contents:
+          - glosario.qmd
           - tema2.qmd
+      - section: "Figuras del artículo"
+        contents:
           - tema3.qmd
           - tema4.qmd
-      - section: "Acerca de las funciones y figuras del artículo"
-        contents:
-          - tema5.qmd
-          - tema6.qmd
           - retos.qmd
-          - Figura1.qmd
           - Figura2.qmd
           - Figura3.qmd
           - Figura4.qmd
