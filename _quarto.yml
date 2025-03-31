@@ -12,11 +12,11 @@ website:
     
     tools:
       - icon: facebook 
-        href: https://www.facebook.com/profile.php?id=100093337606435
+        href: https://www.facebook.com/rsgmexico/?locale=es_LA
       - icon: github
         menu:
           - text: Source Code
-            url:  https://github.com/R-Ladies-Morelia/Reprohack2024/tree/main/Grupo2
+            url:  https://github.com/ISCB-RSG-MEXICO/Reprohack2025_RLadiesMorelia_RSGMexico
             
   sidebar:
     style: "floating"

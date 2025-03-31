@@ -1,25 +1,60 @@
 ---
 title: "Sobre nosotras"
+editor: 
+  markdown: 
+    wrap: 72
 ---
 
-Esta sesión promueve la reproducibilidad del código, la buena documentación del código y buenas prácticas para generar un mejor futuro en la ciencia con acceso libre a la información. Siendo parte del [Reprohack2024](https://github.com/R-Ladies-Morelia/Reprohack2024) de R-Ladies Morelia.
+Esta sesión promueve la **reproducibilidad del código, la buena
+documentación del código y buenas prácticas** para generar un mejor
+futuro en la **ciencia con acceso libre a la información**. Siendo parte
+del
+[Reprohack2025](https://github.com/ISCB-RSG-MEXICO/Reprohack2025_RLadiesMorelia_RSGMexico)
+de [R-Ladies Morelia](https://r-ladies-morelia.github.io/) y
+[RSG_Mexico](https://rsg-mexico.iscbsc.org/).
 
-## Grupo 2: ggplot y variantes genéticas
+## Un enfoque computacional para el estudio de los elementos genéticos móviles en procariotas
 
-El artículo seleccionado tiene como idea principal investigar cómo la selección por fagos afecta la **evolución de la resistencia en bacterias**, específicamente en *Pseudomonas syringae*. Los autores se centran en estudiar si la **sensibilidad a los fagos puede reaparecer** cuando ya no están presentes (es decir, cuando la presión selectiva disminuye). Para ello, rastrean la evolución de la **resistencia a lo largo del tiempo** y descubren que, en la mayoría de los casos, las bacterias no vuelven a ser sensibles. Además, examinan cómo las **mutaciones compensatorias** pueden influir en este proceso.
+El artículo explora cómo los **elementos genéticos móviles (MGEs)**,
+como transposones, integrones, fagos y plásmidos, contribuyen a la
+**evolución procariota y a la dispersión de resistencia a
+antibióticos**. Usando un enfoque computacional basado en recombinasas y
+datos de pangenomas, analizaron \~84,000 genomas, identificando 2.8
+millones de MGEs. Descubrieron que **los elementos transponibles son los
+más abundantes y los principales portadores de genes de resistencia**.
+Además, presentan una **base de datos** (http://promge.embl.de/) para
+futuras investigaciones.
 
-Aquí puedes encontrar el artículo completo: [Historical contingency drives compensatory evolution and rare reversal of phage resistance](https://academic.oup.com/mbe/article/39/9/msac182/6673247)
+Aquí puedes encontrar el artículo completo: [Landscape of mobile genetic
+elements and their antibiotic resistance cargo in prokaryotic
+genomes](https://academic.oup.com/nar/article/50/6/3155/6552054)
 
 ## Integrantes
 
-- Amairani Cancino Bello, Estudiante de doctorado, Cinvestav-IPN [correo](amairani.bello@cinvestav.mx)
-- María José Palma Martínez
-- Evelia Coss, LIIGH-UNAM, [correo](ecoss@liigh.unam.mx), [pagina web](https://eveliacoss.github.io/)
-- Sofia Zorrilla [correo](sofia.zorrilla@gmail.com), [github](https://github.com/sofiazorrilla)
-- Maribel Arenas [correo](marenasn@iztacala.unam.mx)
-- Mayra Fragoso [correo](mcfragoso@cieco.unam.mx)
-- Aline Cazares Solis [correo](aline.cazares@cinvestav.mx)
-- Frida Soledad López [correo](flopezp1700@alumno.ipn.mx)
+-   **Evelia Coss** - posdoctoral LIIGH-UNAM, RSG-México y RLadies
+    Morelia. Contacto: [correo](ecoss@liigh.unam.mx), [pagina
+    web](https://eveliacoss.github.io/)
+-   **Marisol Navarro** - RSG-México y RLadies Morelia
+-   **Diana Barceló** - RSG-México y RLadies Morelia
+-   **Johana Castelán** -
 
------------------------------
+## **Citar y reutilizar el material del curso**
+
+Los datos del curso se pueden reutilizar y adaptar libremente con la
+debida atribución. Todos los datos de los cursos de estos repositorios
+están sujetos a la licencia [Attribution-NonCommercial-ShareAlike 4.0
+International (CC BY-NC-SA
+4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+
+## Patrocinadores
+
+::: {style="display: flex; justify-content: center; gap: 10px;"}
+![](icons/LIIGHUNAM_logo.jpg){width="100"}
+![](icons/rladies_morelia.png){width="100"}
+![](icons/rsgMexico.jpeg){width="100"}
+![](icons/ViernesBioinfo_logo.png){width="100"}
+:::
+
+------------------------------------------------------------------------
+
 Cursos hechos con amor 💜

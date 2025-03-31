@@ -1,122 +1,10 @@
 [
   {
-    "objectID": "tema3.html",
-    "href": "tema3.html",
-    "title": "Formato de archivos",
-    "section": "",
-    "text": "Existen distintos tipos de formatos de datos que podemos ingresar a R para su análisis. Los principales son:\n\n\nPor ejemplo por comas (.csv), tab (.tsv) o espacios. Aunque la siguiente función puede leer por cualquier separador.\n\nread.table(\"/path/dataset.csv\", header = TRUE, delim = \",\")\nread.table(\"/path/dataset.tsv\", header = TRUE, delim = \"\\t\")\nread.table(\"/path/dataset.\", header = TRUE, delim = \",\")\n\nEl parámetro header nos dice si considerar la primera fila como nombre de las variables.\nTambién podemos leer un archivo .csv directamente:\n\nread.csv(\"/path/dataset.csv\")"
-  },
-  {
-    "objectID": "tema3.html#importar-datos-en-r",
-    "href": "tema3.html#importar-datos-en-r",
-    "title": "Formato de archivos",
-    "section": "",
-    "text": "Existen distintos tipos de formatos de datos que podemos ingresar a R para su análisis. Los principales son:\n\n\nPor ejemplo por comas (.csv), tab (.tsv) o espacios. Aunque la siguiente función puede leer por cualquier separador.\n\nread.table(\"/path/dataset.csv\", header = TRUE, delim = \",\")\nread.table(\"/path/dataset.tsv\", header = TRUE, delim = \"\\t\")\nread.table(\"/path/dataset.\", header = TRUE, delim = \",\")\n\nEl parámetro header nos dice si considerar la primera fila como nombre de las variables.\nTambién podemos leer un archivo .csv directamente:\n\nread.csv(\"/path/dataset.csv\")"
-  },
-  {
-    "objectID": "tema3.html#datos-en-formato-csv",
-    "href": "tema3.html#datos-en-formato-csv",
-    "title": "Formato de archivos",
-    "section": "Datos en formato CSV",
-    "text": "Datos en formato CSV\nArchivos separados por comas.\nEste ejemplo fue obtenido del repositorio de Github de Cosmoduende."
-  },
-  {
-    "objectID": "tema3.html#datos-en-formato-tsv",
-    "href": "tema3.html#datos-en-formato-tsv",
-    "title": "Formato de archivos",
-    "section": "Datos en formato TSV",
-    "text": "Datos en formato TSV\nArchivo separado por tabuladores.\nEste ejemplo proviene de la base de datos de Arabidopsis thaliana, la planta modelo en el estudio de la genómica. Este archivo indica el tipo o característica del gen anotado en Araport11.\n\n\n\n\n\n\nB) Archivos tipo RData\nUsualmente cargan todo el ambiente o varias variables\n\nload(\"/path/ambiente.RData\")\n\n\n\nC) Archivos tipo RDS\nSe usan para cargar variables, usualmente muy pesadas\n\nvariable &lt;- readRDS(\"/path/variable.RData\")\n\n\n\nD) Archivos de Excel\nEl paquete que vamos a emplear se llama readxl se encuentra integrado en tidyverse.\n\nlibrary(readxl)\n# El archivo, hoja 1\ncosts_of_res &lt;- read_excel(\"Costs_of_Res.xlsx\")\n\nPodemos cargar una hoja en especifico:\n\n# por el nombre\nread_excel(xlsx_example, sheet = \"chickwts\")\n# por el numero de la hoja\nread_excel(\"Costs_of_Res.xlsx\", sheet = 4)"
-  },
-  {
-    "objectID": "tema1.html",
-    "href": "tema1.html",
-    "title": "Resumen",
-    "section": "",
-    "text": "Este artículo se enfoca en estudiar la idea de la contigencia histórica. En este caso en particular se estudia cómo la selección por fagos puede afectar las trayectorias evolutivas de los hospederos.\nEl costo sobre el fitness de adquirir una resistencia puede ser alto por lo que se interesan por observar si la sensibilidad se recupera cuando la presión selectiva disminuye, en esta caso, cuando ya no hay fagos.\nEn el artículo se mencionan casos importantes para la conservación de la resistencia, por ejemplo cuando el costo en términos de fitness es pequeño. Otra caso importante considerar es que hay mutaciones posteriores a la adquisición de la resistencia y que en ocasiones las mutaciones nuevas pueden compensar de alguna manera el gasto que se genera al adquirir la resistencia o que incluso las nuevas mutaciones podrían ser letales en un bakground wild type, lo que no permite que se regrese al estado de sensibilidad.\nPara evaluar si la sensibilidad hacia los fagos tiende a reaparecer en ausencia de fagos, los autores rastrea la resistencia a fagos a través del tiempo en poblaciones de evolución experimental de la bacteria Pseudomonoas syringae. De menara experimental lo primero que hicieron fue generar un panel de bacterias resistentes a la infección por fagos. Con el objetivo variación en los mecanismos de resistencia y en el fitness se utilizaron cinco diferentes fagos de Pseudomonas. Posteriormente se aislaron y secuenciaron 22 colonias, en las que se encontraron 17 diferentes mutaciones que confieren resistencia. Dichas mutaciones se mapearon los genes correspondientes. Posteriormente se inocularon 22 microcosmos cada uno con una de las colonias resistentes. Además se inocularon 6 microcosmos con el ancestro sensible. Las poblaciones fueron cambiadas a medio fresco cada 3 días para un total de 36 días. Las tazas de crecimiento de dichas bacterias fueron medidas.\nDe manera interante los autores encuentran que en la mayoría de sus poblaciones no se regresa al fenotipo sensible. Para conocer cómo la sensibilidad reevoluciona las colonias sensibles fueron aisladas y sus genomas secuenciados.\nSe realizó la secuenciación (pool-sequencing) de cada una de las poblaciones al día 6 (en ausencia de fagos) y finalmente al día 36.\nAquí puedes encontrar el artículo completo: Historical contingency drives compensatory evolution and rare reversal of phage resistance"
-  },
-  {
-    "objectID": "tema1.html#reprohack-historical-contingency-drives-compensatory-evolution-and-rare-reversal-of-phage-resistance",
-    "href": "tema1.html#reprohack-historical-contingency-drives-compensatory-evolution-and-rare-reversal-of-phage-resistance",
-    "title": "Resumen",
-    "section": "",
-    "text": "Este artículo se enfoca en estudiar la idea de la contigencia histórica. En este caso en particular se estudia cómo la selección por fagos puede afectar las trayectorias evolutivas de los hospederos.\nEl costo sobre el fitness de adquirir una resistencia puede ser alto por lo que se interesan por observar si la sensibilidad se recupera cuando la presión selectiva disminuye, en esta caso, cuando ya no hay fagos.\nEn el artículo se mencionan casos importantes para la conservación de la resistencia, por ejemplo cuando el costo en términos de fitness es pequeño. Otra caso importante considerar es que hay mutaciones posteriores a la adquisición de la resistencia y que en ocasiones las mutaciones nuevas pueden compensar de alguna manera el gasto que se genera al adquirir la resistencia o que incluso las nuevas mutaciones podrían ser letales en un bakground wild type, lo que no permite que se regrese al estado de sensibilidad.\nPara evaluar si la sensibilidad hacia los fagos tiende a reaparecer en ausencia de fagos, los autores rastrea la resistencia a fagos a través del tiempo en poblaciones de evolución experimental de la bacteria Pseudomonoas syringae. De menara experimental lo primero que hicieron fue generar un panel de bacterias resistentes a la infección por fagos. Con el objetivo variación en los mecanismos de resistencia y en el fitness se utilizaron cinco diferentes fagos de Pseudomonas. Posteriormente se aislaron y secuenciaron 22 colonias, en las que se encontraron 17 diferentes mutaciones que confieren resistencia. Dichas mutaciones se mapearon los genes correspondientes. Posteriormente se inocularon 22 microcosmos cada uno con una de las colonias resistentes. Además se inocularon 6 microcosmos con el ancestro sensible. Las poblaciones fueron cambiadas a medio fresco cada 3 días para un total de 36 días. Las tazas de crecimiento de dichas bacterias fueron medidas.\nDe manera interante los autores encuentran que en la mayoría de sus poblaciones no se regresa al fenotipo sensible. Para conocer cómo la sensibilidad reevoluciona las colonias sensibles fueron aisladas y sus genomas secuenciados.\nSe realizó la secuenciación (pool-sequencing) de cada una de las poblaciones al día 6 (en ausencia de fagos) y finalmente al día 36.\nAquí puedes encontrar el artículo completo: Historical contingency drives compensatory evolution and rare reversal of phage resistance"
-  },
-  {
-    "objectID": "information.html",
-    "href": "information.html",
-    "title": "Glosario",
-    "section": "",
-    "text": "Bacteriofagos (Fagos): Virus que infectan exclusivamente bacterias\nPseudomonas: bacilos aerobios gramnegativos.\nMicrocosmos: ecosistema artificial y simplificado a pequeña escala que sirve como modelo representativo de un entorno más amplio. Se utiliza en biología y ecología para estudiar, simular y predecir procesos, interacciones y dinámicas de ecosistemas naturales más complejos bajo condiciones controladas.\nFitness: capacidad de un organismo para sobrevivir y reproducirse en su entorno, contribuyendo así genes a la siguiente generación.\nContingencia histórica: El proceso por el cual eventos aleatorios y circunstancias únicas del pasado determinan el curso de la evolución, haciendo que el desarrollo de la vida sea impredecible y no repetible.\nOpen Reading frames (ORF): Un marco abierto de lectura (ORF, por sus siglas en inglés) es una secuencia continua de nucleótidos en el ADN o ARN que tiene el potencial de codificar una proteína. Comienza con un codón de inicio, contiene una serie de codones que codifican para aminoácidos y termina con un codón de parada (UAA, UAG o UGA).\nMutación: cualquier cambio en la secuencia del ADN de un organismos.\nSNPs: variante genómica en la posición de una base única en el ADN."
-  },
-  {
-    "objectID": "information.html#conceptos-importantes-del-articulo",
-    "href": "information.html#conceptos-importantes-del-articulo",
-    "title": "Glosario",
-    "section": "",
-    "text": "Bacteriofagos (Fagos): Virus que infectan exclusivamente bacterias\nPseudomonas: bacilos aerobios gramnegativos.\nMicrocosmos: ecosistema artificial y simplificado a pequeña escala que sirve como modelo representativo de un entorno más amplio. Se utiliza en biología y ecología para estudiar, simular y predecir procesos, interacciones y dinámicas de ecosistemas naturales más complejos bajo condiciones controladas.\nFitness: capacidad de un organismo para sobrevivir y reproducirse en su entorno, contribuyendo así genes a la siguiente generación.\nContingencia histórica: El proceso por el cual eventos aleatorios y circunstancias únicas del pasado determinan el curso de la evolución, haciendo que el desarrollo de la vida sea impredecible y no repetible.\nOpen Reading frames (ORF): Un marco abierto de lectura (ORF, por sus siglas en inglés) es una secuencia continua de nucleótidos en el ADN o ARN que tiene el potencial de codificar una proteína. Comienza con un codón de inicio, contiene una serie de codones que codifican para aminoácidos y termina con un codón de parada (UAA, UAG o UGA).\nMutación: cualquier cambio en la secuencia del ADN de un organismos.\nSNPs: variante genómica en la posición de una base única en el ADN."
-  },
-  {
-    "objectID": "Figura4.html",
-    "href": "Figura4.html",
-    "title": "Figura 4",
-    "section": "",
-    "text": "Fig. 4. Contingencia genética en la identidad de los genes mutados durante la evolución experimental."
-  },
-  {
-    "objectID": "Figura4.html#contingencia-histórica-en-la-evolución-del-genoma",
-    "href": "Figura4.html#contingencia-histórica-en-la-evolución-del-genoma",
-    "title": "Figura 4",
-    "section": "",
-    "text": "Fig. 4. Contingencia genética en la identidad de los genes mutados durante la evolución experimental."
-  },
-  {
-    "objectID": "Figura4.html#figura-4-a-y-4-b",
-    "href": "Figura4.html#figura-4-a-y-4-b",
-    "title": "Figura 4",
-    "section": "Figura 4 A y 4 B",
-    "text": "Figura 4 A y 4 B\nPara generar las figuras 4A y 4B se tuvieron que seguir varios pasos para procesar los datos, por simplicidad, sólo presentaremos un esquema de los pasos que se siguieron y tomaremos las variables relevantes para generar las figuras.\n\nEsquema\n\n\n\nEsquema\n\n\n\n\nDificultades\n\nLos paquetes no estabas especificados.\nLa carpeta Breseq indicada, en realidad es la carpeta “Mutation tables” presente en el Github.\nEl P value no aparecía en la gráfica de la Figura 4A.\n\nEn los heatmap:\n\neran cuadrados y los valores del porcentaje iban de 0, 50, 100.\nLos colores no correspondían.\nLos nombres de las mutantes no correspondían.\nEl código para las figuras 4 y 5 estaban juntos.\n\n\n\nPaquetes\nLos paquetes que vamos a cargar son necesarios para las gráficas:\n\nlibrary(ggplot2) # Generar gráficos\nlibrary(viridis) # Generar paleta de colores\n\n\n\nCargar objetos\nLos objetos y variables que cargamos y ocuparemos para esta figura son:\n\n\ntest_gene_df_day6: Data frame con 2 columnas: sim_coef y label\n\n\nannotation_day6: Guarda el texto para el p valor.\n\n\nbreseq_gene_props_day6: Data frame con 3 columnas: top_gene, res_gene y percent_pops\n\n\n\nload(\"data/ReproHack_data_figures4_5.RData\")\n\nEs importante notar que la figura 4 muestra datos para el pase 2, es decir para el día 6 del experimento. Para obetener la figurs 4A se generar boxplots usang ggplot2. Los datos graficados son los de nuestro df: test_gene_df_day6. En este df encontramos los coeficientes de similitud a pares de las 22 poblaciones, la etiquetas nos muestra si tienen la mutación que confiere resistencia en el mismo o en diferente gen. Para colocar el pvalue del test de alotearización se cargó el objeto annotation_day6\n\np_day6 &lt;- ggplot(test_gene_df_day6, aes(label, sim_coef)) +\n  geom_boxplot(outlier.shape = NA, width = 0.4, size = 0.8) +\n  geom_jitter(width = 0.05, size = 2, alpha = 0.2) +\n  theme_classic(base_size = 18) +\n  xlab(\"\") +\n  ylab(\"Overlap in acquired mutations\\n(Pairwise Sørensen-Dice similarity)\") +\n  theme(panel.spacing = unit(3, \"lines\"),\n        strip.text = element_text(size = 18, face = \"bold\")) +\n  ylim(0.1, 0.55) +\n  annotate(\"text\", x = 1.5, y = 0.55, label = annotation_day6, size = 6, hjust = 0.5, vjust = 1.5, color = \"black\")\n\nprint(p_day6)\n\n\n\n\nPara el heatmap de las figura 4B usamos ggplot. Nuestra información la tomamos del objeto: breseq_gene_props_day6. Este dataframe nos da información sobre el porcentaje de poblaciones (agrupads por gen de resistencia) que tienen mutación en el top20 de genes.\n\nggplot(breseq_gene_props_day6, aes(top_gene, res_gene, fill = percent_pops * 100)) +\n  geom_tile(color = \"grey80\") +\n  theme_classic(base_size = 14) +\n  theme(\n    axis.text.x = element_text(angle = 90, hjust = 1, size = 10, family = \"Arial\")  # Define all adjustments in one call\n  ) +\n  scale_fill_viridis(\n    name = \"Populations\\nwith mutation (%)\",\n    limits = c(0, 100),  # Define scale limits\n    breaks = c(0, 25, 50, 75, 100)  # Define specific breaks to display\n  ) +\n  ylab(\"\") +\n  xlab(\"\") +\n  ggtitle(\"Day 6 of experimental evolution\")"
-  },
-  {
-    "objectID": "retos.html",
-    "href": "retos.html",
-    "title": "Retos y problemas con el código",
-    "section": "",
-    "text": "En el código no se mencionaba con que paquetes realizaban la importación de los datos de excel que te daban, solo daban instrucciones como la siguiente:\n\nCargar informacion de “Costs_of_Res.xlsx” como variable costs_of_res.\n\nSolución: En este caso decidimos usar el paquete readxl para la importación de archivos.\n\n\n\n\nPara graficar la figura 2, el código mencionaba la variable LOR_res_long, sin embargo esta variable no se encontraba declarada en el código. Solo daba el siguiente fragmento:\n\nggplot(LOR_res_long[!LOR_res_long$isolate %in% c(\"FMS6\",\"SNK6\"),], aes(passage*3,value*100,group=isolate,color=(isolate%in%c(\"SNK7\",\"QAC5\",\"VCM4\")))) +\n  geom_point(size=4.5,shape=18) +\n  geom_line(size=0.8)+theme_classic() +\n  guides(color=F)+scale_color_brewer(palette=\"Dark2\") + \n  scale_x_continuous(breaks=c(0,12,24,36)) + \n  theme_classic(base_size=16) + \n  ylab(\"Proportion of phage sensitivity in population (%)\") +\n  xlab(\"Day of experimental evolution\") + \n  theme(axis.title.y=element_text(size=14))\n\nSolución: Agregamos todo el código de inicio a fin en Chatgpt y le solicitamos que nos dijera cómo generar la variable X a partir de los datos que le dimos. Logrando obtener la información faltante.\n\n\n\n\nVariables erróneas colocadas en el código. Para la figura 3 menciona que se usa la variable Prop_R_P12, sin embargo sta variable no existe si no que se llama Prop_S_P12.\nSolución: corregimos el código cambiando la variable.\n\n\n\n\n\n\nEn el código no se especificaban los paquetes que se utilizarían, ni se mencionaban los paquetes necesarios para la importación de datos desde archivos de Excel. Solución: En este caso decidimos usar los paquetes readxl para la importación de archivos, ggplot2 para la generación de gráficas y vidiris para la paleta de colores.\n\n\n\n\nEn el código no se mencionaba cómo se generaba la variable Breseq. Solución: Esta variable se generaba a partir de las tablas presentes en la carpeta Mutation tables.\n\n\n\n\nEn el código para la figura 4A no había una línea para agregar el p value. Solución: Agregamos este fragmento al código:\n\n# Prepare data\ntest_gene_df_day6 &lt;- data.frame(\n  sim_coef = c(test_same_P2_day6, test_diff_P2_day6),\n  label = c(rep(\"Same\\nresistance\\ngene\", length(test_same_P2_day6)), rep(\"Different\\nresistance\\ngene\", length(test_diff_P2_day6)))\n)\ncolnames(test_gene_df_day6) &lt;- c(\"sim_coef\", \"label\")\ntest_gene_df_day6$label &lt;- factor(test_gene_df_day6$label, levels = c(\"Same\\nresistance\\ngene\", \"Different\\nresistance\\ngene\"))\n\n# Calculate day 6 p-value\np_value_P2_day6 &lt;- length(perm_gene_P2_day6[perm_gene_P2_day6 &gt;= test_gene_P2_day6]) / length(perm_gene_P2_day6)\nprint(p_value_P2_day6)\n\n# Set up p-value annotation\nif (p_value_P2_day6 &lt; 0.001) {\n  annotation_day6 &lt;- \"p &lt; 0.001***\"\n} else {\n  annotation_day6 &lt;- paste0(\"p = \", format(p_value_P2_day6, digits = 3))\n}\n\n\n\n\n\nEn el código de los Heatmaps, los nombres de las mutantes no correspondían, los colores del heatmap no correspondían y había algunos símbolos que fueron modificados. Solución: Acomodamos los nombres de las mutantes, utilizamos la librería vidiris y la familia tipografica Arial.\n\n\n\n\nEn el código no aparecía el análisis para la figura 5. Solución: El código tuvo que ser dividido en 2 partes para generar la aleatorizacion del día 6 y del día 36 por separado."
-  },
-  {
-    "objectID": "retos.html#ausencia-de-instrucciones",
-    "href": "retos.html#ausencia-de-instrucciones",
-    "title": "Retos y problemas con el código",
-    "section": "",
-    "text": "En el código no se mencionaba con que paquetes realizaban la importación de los datos de excel que te daban, solo daban instrucciones como la siguiente:\n\nCargar informacion de “Costs_of_Res.xlsx” como variable costs_of_res.\n\nSolución: En este caso decidimos usar el paquete readxl para la importación de archivos.\n\n\n\n\nPara graficar la figura 2, el código mencionaba la variable LOR_res_long, sin embargo esta variable no se encontraba declarada en el código. Solo daba el siguiente fragmento:\n\nggplot(LOR_res_long[!LOR_res_long$isolate %in% c(\"FMS6\",\"SNK6\"),], aes(passage*3,value*100,group=isolate,color=(isolate%in%c(\"SNK7\",\"QAC5\",\"VCM4\")))) +\n  geom_point(size=4.5,shape=18) +\n  geom_line(size=0.8)+theme_classic() +\n  guides(color=F)+scale_color_brewer(palette=\"Dark2\") + \n  scale_x_continuous(breaks=c(0,12,24,36)) + \n  theme_classic(base_size=16) + \n  ylab(\"Proportion of phage sensitivity in population (%)\") +\n  xlab(\"Day of experimental evolution\") + \n  theme(axis.title.y=element_text(size=14))\n\nSolución: Agregamos todo el código de inicio a fin en Chatgpt y le solicitamos que nos dijera cómo generar la variable X a partir de los datos que le dimos. Logrando obtener la información faltante.\n\n\n\n\nVariables erróneas colocadas en el código. Para la figura 3 menciona que se usa la variable Prop_R_P12, sin embargo sta variable no existe si no que se llama Prop_S_P12.\nSolución: corregimos el código cambiando la variable.\n\n\n\n\n\n\nEn el código no se especificaban los paquetes que se utilizarían, ni se mencionaban los paquetes necesarios para la importación de datos desde archivos de Excel. Solución: En este caso decidimos usar los paquetes readxl para la importación de archivos, ggplot2 para la generación de gráficas y vidiris para la paleta de colores.\n\n\n\n\nEn el código no se mencionaba cómo se generaba la variable Breseq. Solución: Esta variable se generaba a partir de las tablas presentes en la carpeta Mutation tables.\n\n\n\n\nEn el código para la figura 4A no había una línea para agregar el p value. Solución: Agregamos este fragmento al código:\n\n# Prepare data\ntest_gene_df_day6 &lt;- data.frame(\n  sim_coef = c(test_same_P2_day6, test_diff_P2_day6),\n  label = c(rep(\"Same\\nresistance\\ngene\", length(test_same_P2_day6)), rep(\"Different\\nresistance\\ngene\", length(test_diff_P2_day6)))\n)\ncolnames(test_gene_df_day6) &lt;- c(\"sim_coef\", \"label\")\ntest_gene_df_day6$label &lt;- factor(test_gene_df_day6$label, levels = c(\"Same\\nresistance\\ngene\", \"Different\\nresistance\\ngene\"))\n\n# Calculate day 6 p-value\np_value_P2_day6 &lt;- length(perm_gene_P2_day6[perm_gene_P2_day6 &gt;= test_gene_P2_day6]) / length(perm_gene_P2_day6)\nprint(p_value_P2_day6)\n\n# Set up p-value annotation\nif (p_value_P2_day6 &lt; 0.001) {\n  annotation_day6 &lt;- \"p &lt; 0.001***\"\n} else {\n  annotation_day6 &lt;- paste0(\"p = \", format(p_value_P2_day6, digits = 3))\n}\n\n\n\n\n\nEn el código de los Heatmaps, los nombres de las mutantes no correspondían, los colores del heatmap no correspondían y había algunos símbolos que fueron modificados. Solución: Acomodamos los nombres de las mutantes, utilizamos la librería vidiris y la familia tipografica Arial.\n\n\n\n\nEn el código no aparecía el análisis para la figura 5. Solución: El código tuvo que ser dividido en 2 partes para generar la aleatorizacion del día 6 y del día 36 por separado."
-  },
-  {
     "objectID": "datos.html",
     "href": "datos.html",
     "title": "Sobre los datos",
     "section": "",
     "text": "Costs_of_Res.xlsx\n# Read in \"Costs_of_Res.xlsx\" as costs_of_res\ncosts_of_res &lt;- read_excel(\"Costs_of_Res.xlsx\")\n\n# 412 columns x 9 rows\n$ Well: chr [1:412]  Ubicación en el ensayo de placa de 96 pocillos\n$ Population: chr [1:412]  Identidad de la población resistente a los fagos\n$ r: num [1:412]  Tasa de crecimiento del modelo logístico\n$ Row: chr [1:412]  Ubicación en el ensayo de placa de 96 pocillos (fila)\n$ Column: num [1:412]  Ubicación en el ensayo de placa de 96 pocillos (columna)\n$ Plate: chr [1:412]  Lote técnico\n$ Position: chr [1:412]  Mutación de resistencia*\n$ Gene: chr [1:412]  Gen con mutación de resistencia*\n$ Annotation: chr [1:412]  Función prevista del gen*\n\n# *NA para el stock ancestral y MS15 (no se detectaron diferencias genéticas respecto al ancestro)\nFitness_over_Time.xlsx\n# Read in \"Fitness_over_Time.xlsx\" as fitness_over_time\n\nfitness_over_time &lt;- read_excel(\"Fitness_over_Time.xlsx\")\n\n# Descripción de los datos\n# 191 columnas x 9 filas\n$ Well: chr [1:191]  Ubicación en el ensayo de placa de 96 pocillos\n$ Sample: chr [1:191]  Identidad de la población y tiempo muestreado\n$ r: num [1:191]  Tasa de crecimiento del modelo logístico\n$ Row: chr [1:191]  Ubicación en el ensayo (fila)\n$ Column: num [1:191]  Ubicación en el ensayo (columna)\n$ Population: chr [1:191]  Identidad de la población\n$ Passage: num [1:191]  Tiempo muestreado\n$ Type: chr [1:191]  Tipo de bacteria\n$ Plate: chr [1:191]  Lote técnico\nReplay.xlsx\n# Read in \"Replay.xlsx\" as replay\nreplay &lt;- read_excel(\"Replay.xlsx\", sheet = \"Data\")\n\n# Descripción de los datos\n# 60 columnas x 8 filas\n$ Founder_outcome: chr [1:60] Indica si la población fundadora permaneció resistente (R) o desarrolló sensibilidad (S).\n$ Founder: chr [1:60] Identidad de la población fundadora\n$ Resistance_gene: chr [1:60] Gen con mutación de resistencia en la población fundadora\n$ Population: num [1:60] Identidad de la población de reproducción\n$ R_P12: chr [1:60] Colonias resistentes en el paso 12\n$ M_P12: chr [1:60] Colonias intermedias en el paso 12\n$ S_P12: chr [1:60] Colonias sensibles en el paso 12\n$ Prop_S_P12: num [1:60] Proporción de colonias sensibles en el paso 12\nResistance_over_Time.xlsx\n# Read in \"Resistance_over_Time.xlsx\" as res_over_time\nres_over_time &lt;- read_excel(\"Resistance_over_Time.xlsx\")\n\n# Descripción de la tabla\n# 23 columnas x 14 filas\n$ isolate (Population): Identidad de la población\n$ Prop_S_P0: Proporción de colonias sensibles al inicio\n$ P4_R: Colonias resistentes en el paso 4\n$ P4_M: Colonias intermedias en el paso 4\n$ P4_S: Colonias sensibles en el paso 4\n$ Prop_S_P4: Proporción de colonias sensibles en el paso 4\n$ P8_R: Colonias resistentes en el paso 8\n$ P8_M: Colonias intermedias en el paso 8\n$ P8_S: Colonias sensibles en el paso 8\n$ Prop_S_P8: Proporción de colonias sensibles en el paso 8\n$ P12_R: Colonias resistentes en el paso 12\n$ P12_M: Colonias intermedias en el paso 12\n$ P12_S: Colonias sensibles en el paso 12\n$ Prop_S_P12: Proporción de colonias sensibles en el paso 12"
-  },
-  {
-    "objectID": "Figura5.html",
-    "href": "Figura5.html",
-    "title": "Figura 5",
-    "section": "",
-    "text": "NOTA: Agregar el diagrama con descripcion del analisis.\n\n\n\n\nFig. 5. La contingencia genética ya no es detectable tras una evolución prolongada en ausencia de fagos."
-  },
-  {
-    "objectID": "Figura5.html#el-efecto-de-la-historia-en-la-evolución-del-genoma-disminuye-con-el-tiempo",
-    "href": "Figura5.html#el-efecto-de-la-historia-en-la-evolución-del-genoma-disminuye-con-el-tiempo",
-    "title": "Figura 5",
-    "section": "",
-    "text": "NOTA: Agregar el diagrama con descripcion del analisis.\n\n\n\n\nFig. 5. La contingencia genética ya no es detectable tras una evolución prolongada en ausencia de fagos."
-  },
-  {
-    "objectID": "Figura5.html#figura-5-a-y-5-b",
-    "href": "Figura5.html#figura-5-a-y-5-b",
-    "title": "Figura 5",
-    "section": "Figura 5 A y 5 B",
-    "text": "Figura 5 A y 5 B\nPara generar las figuras 5A y 5B se tuvieron que seguir varios pasos para procesar los datos, por simplicidad, sólo presentaremos un esquema de los pasos que se siguieron y tomaremos las variables relevantes para generar las figuras.\n\nEsquema\n\n\n\nEsquema\n\n\nLos paquetes que vamos a cargar son necesarios para las gráficas\n\n\nPaquetes\n\nlibrary(ggplot2) # Generar gráficos\nlibrary(viridis) # Generar paleta de colores\n\n\n\nCargar objetos\nLos objetos y variables que cargamos y ocuparemos para esta figura son: 1. test_gene_df_day36 # Data frame con 2 columnas: sim_coef y label 3. breseq_gene_props_day36 #Data frame con 3 columnas: top_gene, res_gene y percent_pops\n\nload(\"data/ReproHack_data_figures4_5.RData\")\n\nEs importante notar que la figura 5 muestra datos para el pase 12, es decir para el día 36 del experimento. Para obetener la figurs 4A se generar boxplots usang ggplot2. Los datos graficados son los de nuestro df: test_gene_df_day36. En este df encontramos los coeficientes de similitud a pares de las 22 poblaciones, la etiquetas nos muestra si tienen la mutación que confiere resistencia en el mismo o en diferente gen.\n\np_day36 &lt;- ggplot(test_gene_df_day36, aes(label, sim_coef)) +\n  geom_boxplot(outlier.shape = NA, width = 0.4, size = 0.8) +\n  geom_jitter(width = 0.05, size = 2, alpha = 0.2) +\n  theme_classic(base_size = 18) +\n  xlab(\"\") +\n  ylab(\"Overlap in acquired mutations\\n(Paired Sørensen-Dice similarity)\") +\n  theme(panel.spacing = unit(3, \"lines\"),\n        strip.text = element_text(size = 18, face = \"bold\")) +\n  ylim(0.1, 0.55)\n\nprint(p_day36)\n\n\n\n\nPara el heatmap de las figura 5B usamos ggplot. Nuestra información la tomamos del objeto: breseq_gene_props_day36. Este dataframe nos da información sobre el porcentaje de poblaciones (agrupads por gen de resistencia) que tienen mutación en el top20 de genes.\n\nggplot(breseq_gene_props_day36, aes(top_gene, res_gene, fill = percent_pops * 100)) +\n  geom_tile(color = \"grey80\") +\n  theme_classic(base_size = 14) +\n  theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 10, family = \"Arial\")) +\n  scale_fill_viridis(name = \"Populations\\nwith mutation (%)\", limits = c(0, 100), breaks = c(0, 25, 50, 75, 100)) +\n  ylab(\"\") +\n  xlab(\"\") +\n  ggtitle(\"Day 36 of experimental evolution\")"
   },
   {
     "objectID": "Figura1.html",
@@ -138,27 +26,6 @@
     "title": "Figura 1",
     "section": "Figure 1B. La resistencia es costosa",
     "text": "Figure 1B. La resistencia es costosa\n\nPaquetes\n\nlibrary(growthrates) # fit_growthmodel(): Calcular la tasa de crecimiento a partir de datos de microplacas.\nlibrary(lmerTest) # Pruebas estadisticas\n# Paquetes adicionales (no los mencionan pero son necesarios)\nlibrary(readxl) # lectura de archivos de excel\nlibrary(tidyverse) # Manipulacion de datos\nlibrary(reshape2) # melt(): reduccion de datos\nlibrary(ggh4x) # paquete que extiende las funcionalidades de facet_wrap y facet_grid\nlibrary(RColorBrewer) # Paquete para asignar paleta de colores\n\n\nNOTA: La funcion fit_growthmodel(), toma los datos de la siguiente forma: cada fila es la medida de un único pocillo en un único punto temporal, con columnas adicionales «Tratamiento» y «DO». Se ajusta una curva logística a cada pocillo por separado utilizando la DO a lo largo del tiempo. He utilizado los siguientes parámetros: lower=c(y0=0.000001,mumax=0,K=0),upper=c(y0=0.05,mumax=5,K=1.5)),p=c(y0=0.01,mumax=0.2,K=0.1)\n\n\n\nGC_long_to_growthrates() function\n\n#' @title Calcular tasas de crecimiento\n#' @description\n#' Esta función procesa los datos de crecimiento de un experimento en múltiples pozos, ajusta un modelo logístico de \n#' crecimiento para cada pozo, y extrae la tasa de crecimiento r. \n#' @author Reena Debray\n#' \n#' @param GC_long # Un data frame en formato largo que contiene los datos de crecimiento.\n#' @param lower   # Un vector de límites inferiores para los parámetros del modelo de crecimiento.\n#' @param upper   # Un vector de límites superiores para los parámetros del modelo de crecimiento.\n#' @param p       # Un vector de parámetros iniciales para el ajuste del modelo.\n#'\n#' @return # El resultado es un data frame con las tasas de crecimiento para cada combinación de pozo y tratamiento.\n#' \\item{well}{The identifier of the well.}\n#' \\item{treatment}{The treatment associated with the well.}\n#' \\item{r}{The growth rate obtained from the fitted logistic model.}\n#' \n#' @import growthrates \n#' @import lmerTest\n#'\n#' @export\n#' \n#' @examples\n#' # Example data\n#' GC_long &lt;- data.frame(\n#'   Well = rep(c(\"A1\", \"A2\"), each = 10),\n#'   Time = rep(1:10, 2),\n#'   OD = runif(20),\n#'   Treatment = rep(c(\"Control\", \"Treatment\"), each = 10)\n#' )\n#'\n#' # Parameters for the logistic model\n#' lower &lt;- c(y0 = 0.000001, mumax = 0, K = 0)\n#' upper &lt;- c(y0 = 0.05, mumax = 5, K = 1.5)\n#' p &lt;- c(y0 = 0.01, mumax = 0.2, K = 0.1)\n#'\n#' # Calculate growth rates\n#' growth_rates &lt;- GC_long_to_growthrates(GC_long, lower, upper, p)\n#' print(growth_rates)\n\nGC_long_to_growthrates &lt;- function(GC_long, lower, upper, p){\n  ### initialize data frame / Iniciar dataframe\n  # Objeto donde se almacenarán las tasas de crecimiento calculadas\n  growthrates&lt;-data.frame(matrix(nrow=0, ncol=3)) \n  # Populate with model fit / Rellenar con el ajuste del modelo\n  # Argumentos:\n  # `treatment`: Para cada pozo, se extrae el tratamiento asociado a partir de la columna Treatment.\n  # Modelo de crecimiento: Se ajusta un modelo de crecimiento logístico (especificado por `grow_logistic`) a los datos de tiempo (`Time`) \n  # y densidad óptica (`OD`) para el pozo actual.\n  # `r`: Se extrae el coeficiente de crecimiento (r) del modelo ajustado usando coef, y se convierte a un número con as.numeric.\n  # Agregar a growthrates: Se añade una nueva fila al data frame growthrates que contiene el pozo (well), \n  # el tratamiento (treatment) y la tasa de crecimiento (r).\n  for (well in unique(GC_long$Well)){\n    treatment &lt;- GC_long[GC_long$Well == well,\"Treatment\"][1]\n    r &lt;- as.numeric(coef(fit_growthmodel(FUN = grow_logistic, GC_long[GC_long$Well==well,\"Time\"], GC_long[GC_long$Well==well,\"OD\"],p=p,lower=lower,upper=upper))[2])\n    # Cambiar formato a numerico\n    growthrates &lt;- rbind(growthrates,c(well,treatment,r))\n  }\n  ### Return output\n  colnames(growthrates)=c(\"well\",\"treatment\",\"r\")\n  growthrates$r &lt;- as.numeric(growthrates$r)\n  return(growthrates)\n}\n\n\n\nCargar datos\nCargar informacion de “Costs_of_Res.xlsx” como variable costs_of_res.\n\ncosts_of_res &lt;- read_excel(\"data/Costs_of_Res.xlsx\")\n\n\n\nResistencia del fago y la disposición de la placa\nCalcular los valores ajustados controlando la resistencia del fago y la disposición de la placa. Expresar los valores ajustados como porcentaje de la aptitud de tipo wild-type.\n\ncosts_of_res$fitted &lt;- fitted.values(lm(r~(Population==\"ancDC3000\") + Column + Plate,costs_of_res))\ncosts_of_res$fitted_percWT &lt;- costs_of_res$fitted/mean(unlist(costs_of_res[costs_of_res$Population==\"ancDC3000\",\"fitted\"]))*100\n\nReordenar los aislados por gen de resistencia y tasa de crecimiento.\n\ncosts_of_res&lt;-costs_of_res[order(costs_of_res$Gene,-costs_of_res$r),]\n\nColoque el aislado sin diferencias genéticas detectadas en la parte derecha del gráfico.\n\ncosts_of_res[costs_of_res$Population==\"MS15\",\"Gene\"] &lt;- \"Z\" \ncosts_of_res[costs_of_res$Population==\"MS15\",\"Annotation\"] &lt;- \"Z\" \ncosts_of_res$order&lt;-seq(1,nrow(costs_of_res))\n\n\n\nLas bacterias resistentes crecen más despacio que sus antepasadas sensibles\n\ncosts_of_res_R&lt;-costs_of_res[costs_of_res$Population!=\"ancDC3000\",]\ncosts_agg&lt;-aggregate(costs_of_res_R$fitted_percWT,by=list(costs_of_res_R$Population,costs_of_res_R$Gene),FUN=mean)\ncolnames(costs_agg)&lt;-c(\"Population\",\"Gene\",\"fitted_percWT\")\nt.test(x = costs_agg$fitted_percWT,mu = 100,alternative = \"less\")\n\n\n    One Sample t-test\n\ndata:  costs_agg$fitted_percWT\nt = -8.4049, df = 21, p-value = 1.849e-08\nalternative hypothesis: true mean is less than 100\n95 percent confidence interval:\n     -Inf 91.98815\nsample estimates:\nmean of x \n 89.92562 \n\n# La variación en las tasas de crecimiento no se explica por el gen de resistencia (excluir la población sin mutaciones detectadas)\nanova(lm(fitted_percWT~Gene,costs_agg[costs_agg$Population!=\"MS15\",]))\n\nAnalysis of Variance Table\n\nResponse: fitted_percWT\n          Df Sum Sq Mean Sq F value Pr(&gt;F)\nGene       3  65.56  21.854  0.6731 0.5802\nResiduals 17 551.95  32.468               \n\n\n\n\nSalvar la variable\nPordemos salvar la variable para la figura 2.\n\nsave(costs_agg, file = \"data/costs_agg.RData\")\n\n\n\nGrafica\nTasas de crecimiento de la población de cepas resistentes en ausencia de fago, basadas en un modelo logístico ajustado a una curva de crecimiento de 40 h (n = 22 cepas).\n\n# Asignar colores a los titulos de los facets\nstrip &lt;- strip_themed(text_x = elem_list_text(color = brewer.pal(5, \"Dark2\")))\n\n# Guardar las etiquetas que van en los títulos de los facets\nstrip_label &lt;- distinct(costs_of_res[,c(\"Gene\",\"Annotation\")])[-c(1:2),] %&gt;% \n  mutate(Annotation = str_replace(Annotation, \"_\",\"\\n\"),label = paste(Gene,Annotation, sep = \"\\n\"))\n\n# Crear la figura\ncosts_of_res[costs_of_res$Population!=\"ancDC3000\",] %&gt;% # El siguiente paso quita las Z que asignamos antes y más bien asigna el orden utilizando niveles en el factor de label\n  mutate(Population = ifelse(Population == \"MS15\",\"no detected\\nmutation\",Population),\n         Gene = ifelse(Gene == \"Z\",\"\",Gene),\n         Annotation = ifelse(Annotation == \"Z\",\"\",Annotation),\n         Annotation = str_replace(Annotation, \"_\",\"\\n\"),\n         label = paste(Gene,Annotation, sep = \"\\n\")) %&gt;% \n  mutate(label = factor(label, levels = c(strip_label$label,\"\\n\"))) %&gt;% \nggplot()+\n  stat_summary(aes(x = reorder(Population,-fitted_percWT),\n                   y = fitted_percWT,\n                   group=Population,\n                   fill=Gene),\n               geom=\"pointrange\",\n               shape=21,\n               size=0.8)+\n  geom_hline(yintercept=100,linetype=\"dashed\")+\n  scale_fill_brewer(palette=\"Dark2\")+\n  guides(fill=F)+\n  ylab(\"Fitness (% of wild-type)\")+\n  facet_wrap2(~label,\n             scales=\"free_x\",\n             #space=\"free_x\", \n             strip.position = \"bottom\",\n             nrow = 1,\n             strip = strip\n             )+\n  theme_classic(base_size=18)+\n  theme(axis.title.x=element_blank(),\n                axis.text.x=element_text(angle = 90),\n                #axis.ticks.x=element_blank(),\n        strip.background = element_blank(),\n        strip.placement = \"outside\",\n        strip.text = element_text(size = 12))"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Sobre nosotras",
-    "section": "",
-    "text": "Esta sesión promueve la reproducibilidad del código, la buena documentación del código y buenas prácticas para generar un mejor futuro en la ciencia con acceso libre a la información. Siendo parte del Reprohack2024 de R-Ladies Morelia."
-  },
-  {
-    "objectID": "index.html#grupo-2-ggplot-y-variantes-genéticas",
-    "href": "index.html#grupo-2-ggplot-y-variantes-genéticas",
-    "title": "Sobre nosotras",
-    "section": "Grupo 2: ggplot y variantes genéticas",
-    "text": "Grupo 2: ggplot y variantes genéticas\nEl artículo seleccionado tiene como idea principal investigar cómo la selección por fagos afecta la evolución de la resistencia en bacterias, específicamente en Pseudomonas syringae. Los autores se centran en estudiar si la sensibilidad a los fagos puede reaparecer cuando ya no están presentes (es decir, cuando la presión selectiva disminuye). Para ello, rastrean la evolución de la resistencia a lo largo del tiempo y descubren que, en la mayoría de los casos, las bacterias no vuelven a ser sensibles. Además, examinan cómo las mutaciones compensatorias pueden influir en este proceso.\nAquí puedes encontrar el artículo completo: Historical contingency drives compensatory evolution and rare reversal of phage resistance"
-  },
-  {
-    "objectID": "index.html#integrantes",
-    "href": "index.html#integrantes",
-    "title": "Sobre nosotras",
-    "section": "Integrantes",
-    "text": "Integrantes\n\nAmairani Cancino Bello, Estudiante de doctorado, Cinvestav-IPN correo\nMaría José Palma Martínez\nEvelia Coss, LIIGH-UNAM, correo, pagina web\nSofia Zorrilla correo, github\nMaribel Arenas correo\nMayra Fragoso correo\nAline Cazares Solis correo\nFrida Soledad López correo\n\n\nCursos hechos con amor 💜"
   },
   {
     "objectID": "Figura2.html",
@@ -217,46 +84,123 @@
     "text": "Figura 3C: Los resultados de Resistencia a los fagos en el experimento de repetición reflejan los resultados de su población fundadora\n\nCargar datos\nCargar informacion de “Replay.xlsx” como variable replay\n\nreplay &lt;- read_excel(\"data/Replay.xlsx\", sheet = \"Data\")\nreplay$Prop_S_P12 &lt;- as.numeric(as.character(replay$Prop_S_P12)) # Convert as numeric / Convertir a numerico\n\n\nNOTA: no encuentro la variableProp_R_P12, es mas bien la variable se llamaba Prop_S_P12.\n\n\n\nCalculo de sensibilidad a fagos\nLas poblaciones derivadas de un fundador que reevolucionó la sensibilidad tenían más probabilidades de reevolucionar también la sensibilidad\n\nt.test(Prop_S_P12~Founder_outcome, data=replay)\n\n\n    Welch Two Sample t-test\n\ndata:  Prop_S_P12 by Founder_outcome\nt = -4.6491, df = 25.811, p-value = 8.624e-05\nalternative hypothesis: true difference in means between group R and group S is not equal to 0\n95 percent confidence interval:\n -0.6141986 -0.2375002\nsample estimates:\nmean in group R mean in group S \n      0.0148947       0.4407441 \n\n\n\nagg &lt;- data.frame(\n  aggregate(100*replay$Prop_S_P12, by=list(replay$Founder_outcome), FUN=function(x){mean(x,na.rm=T)}) ,\n  aggregate(100*replay$Prop_S_P12,by=list(replay$Founder_outcome),FUN=function(x){sd(x,na.rm=T)/sqrt(length(x))}))\n\n# Renombrar columnas\ncolnames(agg) &lt;- c(\"Founder_outcome\",\"mean\",\"Founder_2\",\"SE\")\n\n\n\nDescripción de la figura\nProporción de colonias en cada población que se calificaron como sensibles a los fagos después de 36 días en ausencia de fagos, según lo indicado por la interrupción del crecimiento bacteriano al encontrar fagos en una placa de agar (n = 54 poblaciones con 96 colonias muestreadas por población).\n\n\nGrafica\n\nggplot() +\n  geom_errorbar(data=agg,aes(Founder_outcome,ymax=mean+SE,ymin=mean-SE),alpha=0.4,width=0.6,size=0.8) +\n  stat_summary(data=agg,aes(Founder_outcome,mean,fill=Founder_outcome),geom=\"bar\",fun=mean,width=0.8,color=\"black\") +\n  geom_jitter(data=replay,aes(Founder_outcome,Prop_S_P12*100),size=3,alpha=0.4,width=0.05,height=1) + \n  theme_classic(base_size=16) +\n  scale_fill_brewer(palette=\"Dark2\") + \n  scale_x_discrete(labels = c(\"R\" = \"Remained\\nphage-resistant\",\"S\"=\"Re-evolved\\nphage sensitivity\"))+\n  guides(fill=F) + \n  xlab(\"Outcome of founder population\") + ylab(\"Proportion of phage sensitivity in replay populations (%)\")"
   },
   {
-    "objectID": "tema6.html",
-    "href": "tema6.html",
-    "title": "Reproducción de figuras",
+    "objectID": "Figura4.html",
+    "href": "Figura4.html",
+    "title": "Figura 4",
     "section": "",
-    "text": "A partir del Github del articulo realizamos modificaciones de los scripts y generamos un fork con las modificaciones realizadas."
+    "text": "Fig. 4. Contingencia genética en la identidad de los genes mutados durante la evolución experimental."
   },
   {
-    "objectID": "tema6.html#figuras-1-a-3",
-    "href": "tema6.html#figuras-1-a-3",
-    "title": "Reproducción de figuras",
-    "section": "Figuras 1 a 3",
-    "text": "Figuras 1 a 3\n\nModificado por Evelia Coss\n\nEste script contempla el codigo de las figuras:\n\nFigura 1. Input: “Costs_of_Res.xlsx”\nFigura 2A. Input: “Fitness_over_Time.xlsx”\nFigura 2B. Input: “Resistance_over_Time.xlsx”\nFigura 3. Input: “Replay.xlsx”\n\nPuedes descargar el codigo en español o ingles:\n\nEn español: 1_Phenotype_data_analysis_ELCN.R\nEn ingles: 1_Phenotype_data_analysis.R"
-  },
-  {
-    "objectID": "tema6.html#figuras-4-y-5",
-    "href": "tema6.html#figuras-4-y-5",
-    "title": "Reproducción de figuras",
-    "section": "Figuras 4 y 5",
-    "text": "Figuras 4 y 5\n\nModificado por Amairani Cancino\n\n\nFigura 4A y 4B. Input: “Mutation tables”, “Cost_of_Res.xlsx”\nFigura 5A y 5B. Input: “Mutation tables”, “Cost_of_Res.xlsx”\n\nPuedes descargar el código en español o inglés:\n\nEn Español: Código completo: 2_Genome_data_analysis_ESP.R Código solo para las figuras: Figuras_4y5.R\nEn Inglés: Código completo:2_Genomes_data_analysis.R Código solo para las figuras:Figures_4&5.R"
-  },
-  {
-    "objectID": "tema5.html",
-    "href": "tema5.html",
-    "title": "Documentación de funciones",
+    "objectID": "Figura4.html#contingencia-histórica-en-la-evolución-del-genoma",
+    "href": "Figura4.html#contingencia-histórica-en-la-evolución-del-genoma",
+    "title": "Figura 4",
     "section": "",
-    "text": "En esta seccion solo hablaremos sobre su documentacion, sin embargo si te interesa conocer mas sobre como se generan las funciones, puedes ver el material sobre El ABC de las funciones y loops en R en los VieRnes de Bioinformática."
+    "text": "Fig. 4. Contingencia genética en la identidad de los genes mutados durante la evolución experimental."
   },
   {
-    "objectID": "tema5.html#ejemplo",
-    "href": "tema5.html#ejemplo",
-    "title": "Documentación de funciones",
-    "section": "Ejemplo",
-    "text": "Ejemplo\nSynthesize image files for testing circularity estimation algorithm.\n\nUsage: make_images.py -f fuzzing -n flaws -o output -s seed -v -w size\n\nwhere:\n-f fuzzing = fuzzing range of blobs (typically 0.0-0.2)\n-n flaws   = p(success) for geometric distribution of # flaws/sample (e.g. 0.5-0.8)\n-o output  = name of output file\n-s seed    = random number generator seed (large integer)\n-v         = verbose\n-w size    = image width/height in pixels (typically 480-800)\n-h = show help message\n\nCuando ya vayamos a crear un paquete podemos usar roxygen2 para la documentacion de las funciones.\n\nYo uso el ejemplo de la funcion sum().\nGood Enough Practices for Scientific Computing\n\nEjemplo de como realizo mis documentos 💜\nAqui les dejo el script que les doy a mis alumnos VisualizacionDatos.R del curso de Análisis de datos de RNA-Seq."
+    "objectID": "Figura4.html#figura-4-a-y-4-b",
+    "href": "Figura4.html#figura-4-a-y-4-b",
+    "title": "Figura 4",
+    "section": "Figura 4 A y 4 B",
+    "text": "Figura 4 A y 4 B\nPara generar las figuras 4A y 4B se tuvieron que seguir varios pasos para procesar los datos, por simplicidad, sólo presentaremos un esquema de los pasos que se siguieron y tomaremos las variables relevantes para generar las figuras.\n\nEsquema\n\n\n\nEsquema\n\n\n\n\nDificultades\n\nLos paquetes no estabas especificados.\nLa carpeta Breseq indicada, en realidad es la carpeta “Mutation tables” presente en el Github.\nEl P value no aparecía en la gráfica de la Figura 4A.\n\nEn los heatmap:\n\neran cuadrados y los valores del porcentaje iban de 0, 50, 100.\nLos colores no correspondían.\nLos nombres de las mutantes no correspondían.\nEl código para las figuras 4 y 5 estaban juntos.\n\n\n\nPaquetes\nLos paquetes que vamos a cargar son necesarios para las gráficas:\n\nlibrary(ggplot2) # Generar gráficos\nlibrary(viridis) # Generar paleta de colores\n\n\n\nCargar objetos\nLos objetos y variables que cargamos y ocuparemos para esta figura son:\n\n\ntest_gene_df_day6: Data frame con 2 columnas: sim_coef y label\n\n\nannotation_day6: Guarda el texto para el p valor.\n\n\nbreseq_gene_props_day6: Data frame con 3 columnas: top_gene, res_gene y percent_pops\n\n\n\nload(\"data/ReproHack_data_figures4_5.RData\")\n\nEs importante notar que la figura 4 muestra datos para el pase 2, es decir para el día 6 del experimento. Para obetener la figurs 4A se generar boxplots usang ggplot2. Los datos graficados son los de nuestro df: test_gene_df_day6. En este df encontramos los coeficientes de similitud a pares de las 22 poblaciones, la etiquetas nos muestra si tienen la mutación que confiere resistencia en el mismo o en diferente gen. Para colocar el pvalue del test de alotearización se cargó el objeto annotation_day6\n\np_day6 &lt;- ggplot(test_gene_df_day6, aes(label, sim_coef)) +\n  geom_boxplot(outlier.shape = NA, width = 0.4, size = 0.8) +\n  geom_jitter(width = 0.05, size = 2, alpha = 0.2) +\n  theme_classic(base_size = 18) +\n  xlab(\"\") +\n  ylab(\"Overlap in acquired mutations\\n(Pairwise Sørensen-Dice similarity)\") +\n  theme(panel.spacing = unit(3, \"lines\"),\n        strip.text = element_text(size = 18, face = \"bold\")) +\n  ylim(0.1, 0.55) +\n  annotate(\"text\", x = 1.5, y = 0.55, label = annotation_day6, size = 6, hjust = 0.5, vjust = 1.5, color = \"black\")\n\nprint(p_day6)\n\n\n\n\nPara el heatmap de las figura 4B usamos ggplot. Nuestra información la tomamos del objeto: breseq_gene_props_day6. Este dataframe nos da información sobre el porcentaje de poblaciones (agrupads por gen de resistencia) que tienen mutación en el top20 de genes.\n\nggplot(breseq_gene_props_day6, aes(top_gene, res_gene, fill = percent_pops * 100)) +\n  geom_tile(color = \"grey80\") +\n  theme_classic(base_size = 14) +\n  theme(\n    axis.text.x = element_text(angle = 90, hjust = 1, size = 10, family = \"Arial\")  # Define all adjustments in one call\n  ) +\n  scale_fill_viridis(\n    name = \"Populations\\nwith mutation (%)\",\n    limits = c(0, 100),  # Define scale limits\n    breaks = c(0, 25, 50, 75, 100)  # Define specific breaks to display\n  ) +\n  ylab(\"\") +\n  xlab(\"\") +\n  ggtitle(\"Day 6 of experimental evolution\")"
   },
   {
-    "objectID": "tema5.html#paquete-roxygen2",
-    "href": "tema5.html#paquete-roxygen2",
-    "title": "Documentación de funciones",
-    "section": "Paquete roxygen2",
-    "text": "Paquete roxygen2\n\nEjemplo:\nEl software detecta la informacion que esta posterior al #'.\n\n# install.packages(\"docstring\")\nlibrary(docstring)\n# install.packages(\"roxygen2\")\nlibrary(roxygen2)\n\n#' @title Multiply two numbers\n#' @description This function takes two\n#' input numbers and multiplies\n#' them. It returns the multiplied result.\n#' \n#' @param x The first value\n#' @param y The second value\n#' @return The two arguments multiplied.\n\nmultiply &lt;- function(x,y){\n  return(x*y)\n}\n\nEjercicio tomado de aqui. Documentacion docstring.\n\nNOTA: Ahora que ya se instalo el paquete se activa una nueva funcion en Code/Insert Roxygen Skeleton."
+    "objectID": "Figura5.html",
+    "href": "Figura5.html",
+    "title": "Figura 5",
+    "section": "",
+    "text": "NOTA: Agregar el diagrama con descripcion del analisis.\n\n\n\n\nFig. 5. La contingencia genética ya no es detectable tras una evolución prolongada en ausencia de fagos."
+  },
+  {
+    "objectID": "Figura5.html#el-efecto-de-la-historia-en-la-evolución-del-genoma-disminuye-con-el-tiempo",
+    "href": "Figura5.html#el-efecto-de-la-historia-en-la-evolución-del-genoma-disminuye-con-el-tiempo",
+    "title": "Figura 5",
+    "section": "",
+    "text": "NOTA: Agregar el diagrama con descripcion del analisis.\n\n\n\n\nFig. 5. La contingencia genética ya no es detectable tras una evolución prolongada en ausencia de fagos."
+  },
+  {
+    "objectID": "Figura5.html#figura-5-a-y-5-b",
+    "href": "Figura5.html#figura-5-a-y-5-b",
+    "title": "Figura 5",
+    "section": "Figura 5 A y 5 B",
+    "text": "Figura 5 A y 5 B\nPara generar las figuras 5A y 5B se tuvieron que seguir varios pasos para procesar los datos, por simplicidad, sólo presentaremos un esquema de los pasos que se siguieron y tomaremos las variables relevantes para generar las figuras.\n\nEsquema\n\n\n\nEsquema\n\n\nLos paquetes que vamos a cargar son necesarios para las gráficas\n\n\nPaquetes\n\nlibrary(ggplot2) # Generar gráficos\nlibrary(viridis) # Generar paleta de colores\n\n\n\nCargar objetos\nLos objetos y variables que cargamos y ocuparemos para esta figura son: 1. test_gene_df_day36 # Data frame con 2 columnas: sim_coef y label 3. breseq_gene_props_day36 #Data frame con 3 columnas: top_gene, res_gene y percent_pops\n\nload(\"data/ReproHack_data_figures4_5.RData\")\n\nEs importante notar que la figura 5 muestra datos para el pase 12, es decir para el día 36 del experimento. Para obetener la figurs 4A se generar boxplots usang ggplot2. Los datos graficados son los de nuestro df: test_gene_df_day36. En este df encontramos los coeficientes de similitud a pares de las 22 poblaciones, la etiquetas nos muestra si tienen la mutación que confiere resistencia en el mismo o en diferente gen.\n\np_day36 &lt;- ggplot(test_gene_df_day36, aes(label, sim_coef)) +\n  geom_boxplot(outlier.shape = NA, width = 0.4, size = 0.8) +\n  geom_jitter(width = 0.05, size = 2, alpha = 0.2) +\n  theme_classic(base_size = 18) +\n  xlab(\"\") +\n  ylab(\"Overlap in acquired mutations\\n(Paired Sørensen-Dice similarity)\") +\n  theme(panel.spacing = unit(3, \"lines\"),\n        strip.text = element_text(size = 18, face = \"bold\")) +\n  ylim(0.1, 0.55)\n\nprint(p_day36)\n\n\n\n\nPara el heatmap de las figura 5B usamos ggplot. Nuestra información la tomamos del objeto: breseq_gene_props_day36. Este dataframe nos da información sobre el porcentaje de poblaciones (agrupads por gen de resistencia) que tienen mutación en el top20 de genes.\n\nggplot(breseq_gene_props_day36, aes(top_gene, res_gene, fill = percent_pops * 100)) +\n  geom_tile(color = \"grey80\") +\n  theme_classic(base_size = 14) +\n  theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 10, family = \"Arial\")) +\n  scale_fill_viridis(name = \"Populations\\nwith mutation (%)\", limits = c(0, 100), breaks = c(0, 25, 50, 75, 100)) +\n  ylab(\"\") +\n  xlab(\"\") +\n  ggtitle(\"Day 36 of experimental evolution\")"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Sobre nosotras",
+    "section": "",
+    "text": "Esta sesión promueve la reproducibilidad del código, la buena documentación del código y buenas prácticas para generar un mejor futuro en la ciencia con acceso libre a la información. Siendo parte del Reprohack2025 de R-Ladies Morelia y RSG_Mexico."
+  },
+  {
+    "objectID": "index.html#un-enfoque-computacional-para-el-estudio-de-los-elementos-genéticos-móviles-en-procariotas",
+    "href": "index.html#un-enfoque-computacional-para-el-estudio-de-los-elementos-genéticos-móviles-en-procariotas",
+    "title": "Sobre nosotras",
+    "section": "Un enfoque computacional para el estudio de los elementos genéticos móviles en procariotas",
+    "text": "Un enfoque computacional para el estudio de los elementos genéticos móviles en procariotas\nEl artículo explora cómo los elementos genéticos móviles (MGEs), como transposones, integrones, fagos y plásmidos, contribuyen a la evolución procariota y a la dispersión de resistencia a antibióticos. Usando un enfoque computacional basado en recombinasas y datos de pangenomas, analizaron ~84,000 genomas, identificando 2.8 millones de MGEs. Descubrieron que los elementos transponibles son los más abundantes y los principales portadores de genes de resistencia. Además, presentan una base de datos (http://promge.embl.de/) para futuras investigaciones.\nAquí puedes encontrar el artículo completo: Landscape of mobile genetic elements and their antibiotic resistance cargo in prokaryotic genomes"
+  },
+  {
+    "objectID": "index.html#integrantes",
+    "href": "index.html#integrantes",
+    "title": "Sobre nosotras",
+    "section": "Integrantes",
+    "text": "Integrantes\n\nEvelia Coss - posdoctoral LIIGH-UNAM, RSG-México y RLadies Morelia. Contacto: correo, pagina web\nMarisol Navarro - RSG-México y RLadies Morelia\nDiana Barceló - RSG-México y RLadies Morelia\nJohana Castelán -"
+  },
+  {
+    "objectID": "index.html#citar-y-reutilizar-el-material-del-curso",
+    "href": "index.html#citar-y-reutilizar-el-material-del-curso",
+    "title": "Sobre nosotras",
+    "section": "Citar y reutilizar el material del curso",
+    "text": "Citar y reutilizar el material del curso\nLos datos del curso se pueden reutilizar y adaptar libremente con la debida atribución. Todos los datos de los cursos de estos repositorios están sujetos a la licencia Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)."
+  },
+  {
+    "objectID": "index.html#patrocinadores",
+    "href": "index.html#patrocinadores",
+    "title": "Sobre nosotras",
+    "section": "Patrocinadores",
+    "text": "Patrocinadores\n\n   \n\n\nCursos hechos con amor 💜"
+  },
+  {
+    "objectID": "information.html",
+    "href": "information.html",
+    "title": "Glosario",
+    "section": "",
+    "text": "Asignadas: Diana Barcelo y Marisol Navarro"
+  },
+  {
+    "objectID": "information.html#conceptos-importantes-del-articulo",
+    "href": "information.html#conceptos-importantes-del-articulo",
+    "title": "Glosario",
+    "section": "",
+    "text": "Asignadas: Diana Barcelo y Marisol Navarro"
+  },
+  {
+    "objectID": "retos.html",
+    "href": "retos.html",
+    "title": "Retos y problemas con el código",
+    "section": "",
+    "text": "En el código no se mencionaba con que paquetes realizaban la importación de los datos de excel que te daban, solo daban instrucciones como la siguiente:\n\nCargar informacion de “Costs_of_Res.xlsx” como variable costs_of_res.\n\nSolución: En este caso decidimos usar el paquete readxl para la importación de archivos.\n\n\n\n\nPara graficar la figura 2, el código mencionaba la variable LOR_res_long, sin embargo esta variable no se encontraba declarada en el código. Solo daba el siguiente fragmento:\n\nggplot(LOR_res_long[!LOR_res_long$isolate %in% c(\"FMS6\",\"SNK6\"),], aes(passage*3,value*100,group=isolate,color=(isolate%in%c(\"SNK7\",\"QAC5\",\"VCM4\")))) +\n  geom_point(size=4.5,shape=18) +\n  geom_line(size=0.8)+theme_classic() +\n  guides(color=F)+scale_color_brewer(palette=\"Dark2\") + \n  scale_x_continuous(breaks=c(0,12,24,36)) + \n  theme_classic(base_size=16) + \n  ylab(\"Proportion of phage sensitivity in population (%)\") +\n  xlab(\"Day of experimental evolution\") + \n  theme(axis.title.y=element_text(size=14))\n\nSolución: Agregamos todo el código de inicio a fin en Chatgpt y le solicitamos que nos dijera cómo generar la variable X a partir de los datos que le dimos. Logrando obtener la información faltante.\n\n\n\n\nVariables erróneas colocadas en el código. Para la figura 3 menciona que se usa la variable Prop_R_P12, sin embargo sta variable no existe si no que se llama Prop_S_P12.\nSolución: corregimos el código cambiando la variable.\n\n\n\n\n\n\nEn el código no se especificaban los paquetes que se utilizarían, ni se mencionaban los paquetes necesarios para la importación de datos desde archivos de Excel. Solución: En este caso decidimos usar los paquetes readxl para la importación de archivos, ggplot2 para la generación de gráficas y vidiris para la paleta de colores.\n\n\n\n\nEn el código no se mencionaba cómo se generaba la variable Breseq. Solución: Esta variable se generaba a partir de las tablas presentes en la carpeta Mutation tables.\n\n\n\n\nEn el código para la figura 4A no había una línea para agregar el p value. Solución: Agregamos este fragmento al código:\n\n# Prepare data\ntest_gene_df_day6 &lt;- data.frame(\n  sim_coef = c(test_same_P2_day6, test_diff_P2_day6),\n  label = c(rep(\"Same\\nresistance\\ngene\", length(test_same_P2_day6)), rep(\"Different\\nresistance\\ngene\", length(test_diff_P2_day6)))\n)\ncolnames(test_gene_df_day6) &lt;- c(\"sim_coef\", \"label\")\ntest_gene_df_day6$label &lt;- factor(test_gene_df_day6$label, levels = c(\"Same\\nresistance\\ngene\", \"Different\\nresistance\\ngene\"))\n\n# Calculate day 6 p-value\np_value_P2_day6 &lt;- length(perm_gene_P2_day6[perm_gene_P2_day6 &gt;= test_gene_P2_day6]) / length(perm_gene_P2_day6)\nprint(p_value_P2_day6)\n\n# Set up p-value annotation\nif (p_value_P2_day6 &lt; 0.001) {\n  annotation_day6 &lt;- \"p &lt; 0.001***\"\n} else {\n  annotation_day6 &lt;- paste0(\"p = \", format(p_value_P2_day6, digits = 3))\n}\n\n\n\n\n\nEn el código de los Heatmaps, los nombres de las mutantes no correspondían, los colores del heatmap no correspondían y había algunos símbolos que fueron modificados. Solución: Acomodamos los nombres de las mutantes, utilizamos la librería vidiris y la familia tipografica Arial.\n\n\n\n\nEn el código no aparecía el análisis para la figura 5. Solución: El código tuvo que ser dividido en 2 partes para generar la aleatorizacion del día 6 y del día 36 por separado."
+  },
+  {
+    "objectID": "retos.html#ausencia-de-instrucciones",
+    "href": "retos.html#ausencia-de-instrucciones",
+    "title": "Retos y problemas con el código",
+    "section": "",
+    "text": "En el código no se mencionaba con que paquetes realizaban la importación de los datos de excel que te daban, solo daban instrucciones como la siguiente:\n\nCargar informacion de “Costs_of_Res.xlsx” como variable costs_of_res.\n\nSolución: En este caso decidimos usar el paquete readxl para la importación de archivos.\n\n\n\n\nPara graficar la figura 2, el código mencionaba la variable LOR_res_long, sin embargo esta variable no se encontraba declarada en el código. Solo daba el siguiente fragmento:\n\nggplot(LOR_res_long[!LOR_res_long$isolate %in% c(\"FMS6\",\"SNK6\"),], aes(passage*3,value*100,group=isolate,color=(isolate%in%c(\"SNK7\",\"QAC5\",\"VCM4\")))) +\n  geom_point(size=4.5,shape=18) +\n  geom_line(size=0.8)+theme_classic() +\n  guides(color=F)+scale_color_brewer(palette=\"Dark2\") + \n  scale_x_continuous(breaks=c(0,12,24,36)) + \n  theme_classic(base_size=16) + \n  ylab(\"Proportion of phage sensitivity in population (%)\") +\n  xlab(\"Day of experimental evolution\") + \n  theme(axis.title.y=element_text(size=14))\n\nSolución: Agregamos todo el código de inicio a fin en Chatgpt y le solicitamos que nos dijera cómo generar la variable X a partir de los datos que le dimos. Logrando obtener la información faltante.\n\n\n\n\nVariables erróneas colocadas en el código. Para la figura 3 menciona que se usa la variable Prop_R_P12, sin embargo sta variable no existe si no que se llama Prop_S_P12.\nSolución: corregimos el código cambiando la variable.\n\n\n\n\n\n\nEn el código no se especificaban los paquetes que se utilizarían, ni se mencionaban los paquetes necesarios para la importación de datos desde archivos de Excel. Solución: En este caso decidimos usar los paquetes readxl para la importación de archivos, ggplot2 para la generación de gráficas y vidiris para la paleta de colores.\n\n\n\n\nEn el código no se mencionaba cómo se generaba la variable Breseq. Solución: Esta variable se generaba a partir de las tablas presentes en la carpeta Mutation tables.\n\n\n\n\nEn el código para la figura 4A no había una línea para agregar el p value. Solución: Agregamos este fragmento al código:\n\n# Prepare data\ntest_gene_df_day6 &lt;- data.frame(\n  sim_coef = c(test_same_P2_day6, test_diff_P2_day6),\n  label = c(rep(\"Same\\nresistance\\ngene\", length(test_same_P2_day6)), rep(\"Different\\nresistance\\ngene\", length(test_diff_P2_day6)))\n)\ncolnames(test_gene_df_day6) &lt;- c(\"sim_coef\", \"label\")\ntest_gene_df_day6$label &lt;- factor(test_gene_df_day6$label, levels = c(\"Same\\nresistance\\ngene\", \"Different\\nresistance\\ngene\"))\n\n# Calculate day 6 p-value\np_value_P2_day6 &lt;- length(perm_gene_P2_day6[perm_gene_P2_day6 &gt;= test_gene_P2_day6]) / length(perm_gene_P2_day6)\nprint(p_value_P2_day6)\n\n# Set up p-value annotation\nif (p_value_P2_day6 &lt; 0.001) {\n  annotation_day6 &lt;- \"p &lt; 0.001***\"\n} else {\n  annotation_day6 &lt;- paste0(\"p = \", format(p_value_P2_day6, digits = 3))\n}\n\n\n\n\n\nEn el código de los Heatmaps, los nombres de las mutantes no correspondían, los colores del heatmap no correspondían y había algunos símbolos que fueron modificados. Solución: Acomodamos los nombres de las mutantes, utilizamos la librería vidiris y la familia tipografica Arial.\n\n\n\n\nEn el código no aparecía el análisis para la figura 5. Solución: El código tuvo que ser dividido en 2 partes para generar la aleatorizacion del día 6 y del día 36 por separado."
+  },
+  {
+    "objectID": "tema1.html",
+    "href": "tema1.html",
+    "title": "Resumen",
+    "section": "",
+    "text": "Resumen: Diana Barcelo\nAquí puedes encontrar el artículo completo: Landscape of mobile genetic elements and their antibiotic resistance cargo in prokaryotic genomes"
+  },
+  {
+    "objectID": "tema1.html#reprohack-landscape-of-mobile-genetic-elements-and-their-antibiotic-resistance-cargo-in-prokaryotic-genomes",
+    "href": "tema1.html#reprohack-landscape-of-mobile-genetic-elements-and-their-antibiotic-resistance-cargo-in-prokaryotic-genomes",
+    "title": "Resumen",
+    "section": "",
+    "text": "Resumen: Diana Barcelo\nAquí puedes encontrar el artículo completo: Landscape of mobile genetic elements and their antibiotic resistance cargo in prokaryotic genomes"
   },
   {
     "objectID": "tema2.html",
@@ -308,6 +252,34 @@
     "text": "Puntos claves para buenas practicas en bioinfo ⭐\n\nEscriba programas para personas, no para computadoras (Documenta qué hace y por qué). - Se coherente en la nomenclatura, indentación y otros aspectos del estilo.\nDivide los programas en *funciones cortas de un solo propósito. 💻 📚\nNo repitas tu código. Crea pasos reproducibles o que se repitan por si solas. ➰\nPlanifique los errores (Programacion defensiva) 🚩\nOptimice el software sólo después de que funcione correctamente. - Si funciona no lo modifiques, simplificalo.\nColaborar - Busque siempre bibliotecas de software bien mantenidas que hagan lo que necesita. 👥"
   },
   {
+    "objectID": "tema3.html",
+    "href": "tema3.html",
+    "title": "Formato de archivos",
+    "section": "",
+    "text": "Existen distintos tipos de formatos de datos que podemos ingresar a R para su análisis. Los principales son:\n\n\nPor ejemplo por comas (.csv), tab (.tsv) o espacios. Aunque la siguiente función puede leer por cualquier separador.\n\nread.table(\"/path/dataset.csv\", header = TRUE, delim = \",\")\nread.table(\"/path/dataset.tsv\", header = TRUE, delim = \"\\t\")\nread.table(\"/path/dataset.\", header = TRUE, delim = \",\")\n\nEl parámetro header nos dice si considerar la primera fila como nombre de las variables.\nTambién podemos leer un archivo .csv directamente:\n\nread.csv(\"/path/dataset.csv\")"
+  },
+  {
+    "objectID": "tema3.html#importar-datos-en-r",
+    "href": "tema3.html#importar-datos-en-r",
+    "title": "Formato de archivos",
+    "section": "",
+    "text": "Existen distintos tipos de formatos de datos que podemos ingresar a R para su análisis. Los principales son:\n\n\nPor ejemplo por comas (.csv), tab (.tsv) o espacios. Aunque la siguiente función puede leer por cualquier separador.\n\nread.table(\"/path/dataset.csv\", header = TRUE, delim = \",\")\nread.table(\"/path/dataset.tsv\", header = TRUE, delim = \"\\t\")\nread.table(\"/path/dataset.\", header = TRUE, delim = \",\")\n\nEl parámetro header nos dice si considerar la primera fila como nombre de las variables.\nTambién podemos leer un archivo .csv directamente:\n\nread.csv(\"/path/dataset.csv\")"
+  },
+  {
+    "objectID": "tema3.html#datos-en-formato-csv",
+    "href": "tema3.html#datos-en-formato-csv",
+    "title": "Formato de archivos",
+    "section": "Datos en formato CSV",
+    "text": "Datos en formato CSV\nArchivos separados por comas.\nEste ejemplo fue obtenido del repositorio de Github de Cosmoduende."
+  },
+  {
+    "objectID": "tema3.html#datos-en-formato-tsv",
+    "href": "tema3.html#datos-en-formato-tsv",
+    "title": "Formato de archivos",
+    "section": "Datos en formato TSV",
+    "text": "Datos en formato TSV\nArchivo separado por tabuladores.\nEste ejemplo proviene de la base de datos de Arabidopsis thaliana, la planta modelo en el estudio de la genómica. Este archivo indica el tipo o característica del gen anotado en Araport11.\n\n\n\n\n\n\nB) Archivos tipo RData\nUsualmente cargan todo el ambiente o varias variables\n\nload(\"/path/ambiente.RData\")\n\n\n\nC) Archivos tipo RDS\nSe usan para cargar variables, usualmente muy pesadas\n\nvariable &lt;- readRDS(\"/path/variable.RData\")\n\n\n\nD) Archivos de Excel\nEl paquete que vamos a emplear se llama readxl se encuentra integrado en tidyverse.\n\nlibrary(readxl)\n# El archivo, hoja 1\ncosts_of_res &lt;- read_excel(\"Costs_of_Res.xlsx\")\n\nPodemos cargar una hoja en especifico:\n\n# por el nombre\nread_excel(xlsx_example, sheet = \"chickwts\")\n# por el numero de la hoja\nread_excel(\"Costs_of_Res.xlsx\", sheet = 4)"
+  },
+  {
     "objectID": "tema4.html",
     "href": "tema4.html",
     "title": "ggplot2",
@@ -334,5 +306,47 @@
     "title": "ggplot2",
     "section": "Ejercicios",
     "text": "Ejercicios\nTe invitamos a que corras el ejercicio propuesto en el script ggplo2_R_Ladies_Morelia_.R por Fernanda Miron."
+  },
+  {
+    "objectID": "tema5.html",
+    "href": "tema5.html",
+    "title": "Documentación de funciones",
+    "section": "",
+    "text": "En esta seccion solo hablaremos sobre su documentacion, sin embargo si te interesa conocer mas sobre como se generan las funciones, puedes ver el material sobre El ABC de las funciones y loops en R en los VieRnes de Bioinformática."
+  },
+  {
+    "objectID": "tema5.html#ejemplo",
+    "href": "tema5.html#ejemplo",
+    "title": "Documentación de funciones",
+    "section": "Ejemplo",
+    "text": "Ejemplo\nSynthesize image files for testing circularity estimation algorithm.\n\nUsage: make_images.py -f fuzzing -n flaws -o output -s seed -v -w size\n\nwhere:\n-f fuzzing = fuzzing range of blobs (typically 0.0-0.2)\n-n flaws   = p(success) for geometric distribution of # flaws/sample (e.g. 0.5-0.8)\n-o output  = name of output file\n-s seed    = random number generator seed (large integer)\n-v         = verbose\n-w size    = image width/height in pixels (typically 480-800)\n-h = show help message\n\nCuando ya vayamos a crear un paquete podemos usar roxygen2 para la documentacion de las funciones.\n\nYo uso el ejemplo de la funcion sum().\nGood Enough Practices for Scientific Computing\n\nEjemplo de como realizo mis documentos 💜\nAqui les dejo el script que les doy a mis alumnos VisualizacionDatos.R del curso de Análisis de datos de RNA-Seq."
+  },
+  {
+    "objectID": "tema5.html#paquete-roxygen2",
+    "href": "tema5.html#paquete-roxygen2",
+    "title": "Documentación de funciones",
+    "section": "Paquete roxygen2",
+    "text": "Paquete roxygen2\n\nEjemplo:\nEl software detecta la informacion que esta posterior al #'.\n\n# install.packages(\"docstring\")\nlibrary(docstring)\n# install.packages(\"roxygen2\")\nlibrary(roxygen2)\n\n#' @title Multiply two numbers\n#' @description This function takes two\n#' input numbers and multiplies\n#' them. It returns the multiplied result.\n#' \n#' @param x The first value\n#' @param y The second value\n#' @return The two arguments multiplied.\n\nmultiply &lt;- function(x,y){\n  return(x*y)\n}\n\nEjercicio tomado de aqui. Documentacion docstring.\n\nNOTA: Ahora que ya se instalo el paquete se activa una nueva funcion en Code/Insert Roxygen Skeleton."
+  },
+  {
+    "objectID": "tema6.html",
+    "href": "tema6.html",
+    "title": "Reproducción de figuras",
+    "section": "",
+    "text": "A partir del Github del articulo realizamos modificaciones de los scripts y generamos un fork con las modificaciones realizadas."
+  },
+  {
+    "objectID": "tema6.html#figuras-1-a-3",
+    "href": "tema6.html#figuras-1-a-3",
+    "title": "Reproducción de figuras",
+    "section": "Figuras 1 a 3",
+    "text": "Figuras 1 a 3\n\nModificado por Evelia Coss\n\nEste script contempla el codigo de las figuras:\n\nFigura 1. Input: “Costs_of_Res.xlsx”\nFigura 2A. Input: “Fitness_over_Time.xlsx”\nFigura 2B. Input: “Resistance_over_Time.xlsx”\nFigura 3. Input: “Replay.xlsx”\n\nPuedes descargar el codigo en español o ingles:\n\nEn español: 1_Phenotype_data_analysis_ELCN.R\nEn ingles: 1_Phenotype_data_analysis.R"
+  },
+  {
+    "objectID": "tema6.html#figuras-4-y-5",
+    "href": "tema6.html#figuras-4-y-5",
+    "title": "Reproducción de figuras",
+    "section": "Figuras 4 y 5",
+    "text": "Figuras 4 y 5\n\nModificado por Amairani Cancino\n\n\nFigura 4A y 4B. Input: “Mutation tables”, “Cost_of_Res.xlsx”\nFigura 5A y 5B. Input: “Mutation tables”, “Cost_of_Res.xlsx”\n\nPuedes descargar el código en español o inglés:\n\nEn Español: Código completo: 2_Genome_data_analysis_ESP.R Código solo para las figuras: Figuras_4y5.R\nEn Inglés: Código completo:2_Genomes_data_analysis.R Código solo para las figuras:Figures_4&5.R"
   }
 ]
