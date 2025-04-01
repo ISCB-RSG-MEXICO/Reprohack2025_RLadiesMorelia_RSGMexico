@@ -28,6 +28,10 @@ mge_pg <- read_tsv("data/processed_data/mge_bins_per_genome_final.txt.gz", col_n
 mge_solitary <- read_tsv("data/processed_data/solitary_mge_bins_final.txt.gz", col_names = F)
 rec_class <- read_tsv("data/raw_data/recombinase.list.gz", col_names = F)
 glist <- read_tsv("data/raw_data/genome_status_supplementary_tableS2.txt.gz", col_names = T)
+
+# Obtener la calidad mas alta en los genomas
+glist_high <- glist %>% 
+  filter(genome_quality == "high")
 ```
 
 
