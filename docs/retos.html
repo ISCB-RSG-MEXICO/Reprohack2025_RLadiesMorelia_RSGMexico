@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -222,7 +256,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#ausencia-de-instrucciones" id="toc-ausencia-de-instrucciones" class="nav-link active" data-scroll-target="#ausencia-de-instrucciones">Ausencia de instrucciones</a></li>
+  <li><a href="#carga-de-archivos-comprimidos-en-r" id="toc-carga-de-archivos-comprimidos-en-r" class="nav-link active" data-scroll-target="#carga-de-archivos-comprimidos-en-r">Carga de Archivos Comprimidos en R</a></li>
   </ul>
 </nav>
     </div>
@@ -246,8 +280,19 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="ausencia-de-instrucciones" class="level2">
-<h2 class="anchored" data-anchor-id="ausencia-de-instrucciones">Ausencia de instrucciones</h2>
+<section id="carga-de-archivos-comprimidos-en-r" class="level2">
+<h2 class="anchored" data-anchor-id="carga-de-archivos-comprimidos-en-r">Carga de Archivos Comprimidos en R</h2>
+<p>Notas clave:</p>
+<ol type="1">
+<li><strong>Uso de Archivos Comprimidos:</strong> Cuando trabajen con archivos comprimidos (por ejemplo, con extensión .gz), no es necesario descomprimirlos manualmente antes de cargarlos en R.</li>
+<li><strong>Código Correcto para Cargar Archivos Comprimidos:</strong> Para cargar archivos comprimidos sin descomprimirlos previamente, utilicen el siguiente código:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mge_pg <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"data/processed_data/mge_bins_per_genome_final.txt.gz"</span>, <span class="at">col_names =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="3" type="1">
+<li><strong>Diferencia con el Código Original:</strong> En el código original, el archivo estaba descomprimido. Sin embargo, con la extensión <code>.gz</code>, se puede leer directamente el archivo comprimido sin la necesidad de usar herramientas adicionales para descomprimirlo.</li>
+</ol>
 
 
 </section>

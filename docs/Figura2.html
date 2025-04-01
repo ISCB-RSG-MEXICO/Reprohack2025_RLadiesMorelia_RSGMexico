@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -222,8 +256,16 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#censo-de-elementos-genéticos-móviles-en-procariotas" id="toc-censo-de-elementos-genéticos-móviles-en-procariotas" class="nav-link active" data-scroll-target="#censo-de-elementos-genéticos-móviles-en-procariotas">Censo de Elementos Genéticos Móviles en Procariotas</a></li>
-  <li><a href="#figura-2a" id="toc-figura-2a" class="nav-link" data-scroll-target="#figura-2a">Figura 2A</a></li>
+  <li><a href="#censo-de-elementos-genéticos-móviles-en-procariotas" id="toc-censo-de-elementos-genéticos-móviles-en-procariotas" class="nav-link active" data-scroll-target="#censo-de-elementos-genéticos-móviles-en-procariotas">Censo de Elementos Genéticos Móviles en Procariotas</a>
+  <ul class="collapse">
+  <li><a href="#paso-1-importar-datos" id="toc-paso-1-importar-datos" class="nav-link" data-scroll-target="#paso-1-importar-datos">PASO 1: Importar datos</a></li>
+  <li><a href="#paso-2-manipulación-y-limpieza-de-los-datos" id="toc-paso-2-manipulación-y-limpieza-de-los-datos" class="nav-link" data-scroll-target="#paso-2-manipulación-y-limpieza-de-los-datos">PASO 2: Manipulación y Limpieza de los datos</a></li>
+  <li><a href="#paso-3-clasificación-y-conteo-de-mge" id="toc-paso-3-clasificación-y-conteo-de-mge" class="nav-link" data-scroll-target="#paso-3-clasificación-y-conteo-de-mge">PASO 3: Clasificación y Conteo de MGE</a></li>
+  </ul></li>
+  <li><a href="#figura-2a-contribución-de-las-principales-familias-de-recombinasas" id="toc-figura-2a-contribución-de-las-principales-familias-de-recombinasas" class="nav-link" data-scroll-target="#figura-2a-contribución-de-las-principales-familias-de-recombinasas">Figura 2A: Contribución de las principales familias de recombinasas</a>
+  <ul class="collapse">
+  <li><a href="#paso-4-selección-de-las-familias-de-recombinasas" id="toc-paso-4-selección-de-las-familias-de-recombinasas" class="nav-link" data-scroll-target="#paso-4-selección-de-las-familias-de-recombinasas">PASO 4: Selección de las familias de recombinasas</a></li>
+  </ul></li>
   <li><a href="#figura-2b" id="toc-figura-2b" class="nav-link" data-scroll-target="#figura-2b">Figura 2B</a></li>
   <li><a href="#figura-2c" id="toc-figura-2c" class="nav-link" data-scroll-target="#figura-2c">Figura 2C</a>
   <ul class="collapse">
@@ -265,9 +307,303 @@ ul.task-list li input[type="checkbox"] {
 <li>Número de MGEs por categoría (gráfico de barras) y porcentaje de cada categoría (gráfico de dona) en 76,000 genomas de 3,000 especies, utilizando el flujo de trabajo descrito en la Figura 1.</li>
 <li>Longitudes predichas de MGEs no anidados en pares de bases. Los bigotes representan el rango entre los percentiles 10 y 90.</li>
 </ol>
+<section id="paso-1-importar-datos" class="level3">
+<h3 class="anchored" data-anchor-id="paso-1-importar-datos">PASO 1: Importar datos</h3>
+<ol type="1">
+<li><p><strong>Uso de Archivos Comprimidos:</strong> Cuando trabajen con archivos comprimidos (por ejemplo, con extensión .gz), no es necesario descomprimirlos manualmente antes de cargarlos en R.</p></li>
+<li><p><strong>Código Correcto para Cargar Archivos Comprimidos:</strong> Para cargar archivos comprimidos sin descomprimirlos previamente, utilicen el siguiente código:</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mge_pg <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"data/processed_data/mge_bins_per_genome_final.txt.gz"</span>, <span class="at">col_names =</span> T)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>mge_solitary <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"data/processed_data/solitary_mge_bins_final.txt.gz"</span>, <span class="at">col_names =</span> F)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>rec_class <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"data/raw_data/recombinase.list.gz"</span>, <span class="at">col_names =</span> F)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>glist <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"data/raw_data/genome_status_supplementary_tableS2.txt.gz"</span>, <span class="at">col_names =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Diferencia con el Código Original
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>En el código original, el archivo estaba descomprimido. Sin embargo, con la extensión <code>.gz</code>, se puede leer directamente el archivo comprimido sin la necesidad de usar herramientas adicionales para descomprimirlo.</p>
+</div>
+</div>
 </section>
-<section id="figura-2a" class="level2">
-<h2 class="anchored" data-anchor-id="figura-2a">Figura 2A</h2>
+<section id="paso-2-manipulación-y-limpieza-de-los-datos" class="level3">
+<h3 class="anchored" data-anchor-id="paso-2-manipulación-y-limpieza-de-los-datos">PASO 2: Manipulación y Limpieza de los datos</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtener los genomas con la mas alta calidad</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>glist_high <span class="ot">&lt;-</span> glist <span class="sc">%&gt;%</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(genome_quality <span class="sc">==</span> <span class="st">"high"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Renombrar columnas en rec_class</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>rec_class <span class="ot">&lt;-</span> rec_class <span class="sc">%&gt;%</span> </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Cambiar X1 por class y X2 por mgeR</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">class =</span> X1, <span class="at">mgeR =</span> X2)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Renombrar columnas en mge_solitary</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>mge_solitary <span class="ot">&lt;-</span> mge_solitary <span class="sc">%&gt;%</span> </span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">IS_Tn =</span> X1, <span class="at">Phage =</span> X2, <span class="at">Phage_like =</span> X3, <span class="at">CE =</span> X4, <span class="at">Integron =</span> X5, <span class="at">MI =</span> X6,   <span class="at">Hotspot =</span> X7, <span class="at">UC =</span> X8,  <span class="at">Cellular =</span> X9, <span class="at">island =</span> X10, <span class="at">island_size =</span> X11, <span class="at">prot_count =</span> X12,   <span class="at">phage_count =</span> X13, <span class="at">CONJ_T4SS =</span> X14, <span class="at">mgeR =</span> X15)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Transformación y Filtrado de Datos de MGE Solitario</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>mge_solitary_melted <span class="ot">&lt;-</span> mge_solitary <span class="sc">%&gt;%</span> </span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>,<span class="dv">15</span>) <span class="sc">%&gt;%</span> <span class="co"># Seleccionar columnas de la 1 a la 11, y la 15</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Convierte las columnas 1 a 9 de formato ancho a largo utilizando gather().</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># - mge: Nombre de la nueva columna que contendrá los nombres originales de las variables.</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># - mge_pa: Nueva columna que almacenará los valores de las celdas de las columnas originales.</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(mge, mge_pa, <span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(mge_pa <span class="sc">==</span><span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="co"># filtrar por valores igual a 1 en la columna mge_pa</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(.,<span class="sc">!</span><span class="fu">grepl</span>(<span class="st">"UC"</span>, mge)) <span class="sc">%&gt;%</span> <span class="co"># Elimina las filas donde la columna mge contenga la cadena "UC", usando grepl() con ! (negación lógica).</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(.,<span class="sc">!</span><span class="fu">grepl</span>(<span class="st">"Hotspot"</span>, mge)) <span class="sc">%&gt;%</span> <span class="co"># Elimina las filas donde mge contenga la palabra "Hotspot".</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mgeRn =</span> <span class="fu">str_replace_all</span>(mgeR,<span class="st">"_"</span>,<span class="st">""</span>)) <span class="sc">%&gt;%</span> <span class="co"># Crea una nueva columna mgeRn, eliminando todos los guiones bajos (_) en la columna mgeR</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(mgeRn, <span class="st">'[:alnum:] &amp;{1,}'</span>)) <span class="sc">%&gt;%</span> <span class="co"># Filtra las filas donde mgeRn NO contenga un patrón de caracteres alfanuméricos seguidos de &amp;.</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>mgeRn) <span class="sc">%&gt;%</span> <span class="co"># Elimina la columna mgeRn</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mgeR =</span> <span class="fu">str_replace_all</span>(mgeR,<span class="st">"&amp;"</span>,<span class="st">""</span>)) <span class="co"># Modifica mgeR, eliminando todos los caracteres &amp;.</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualizar datos</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mge_solitary_melted)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 5
+  island                                       island_size mgeR           mge   mge_pa
+  &lt;chr&gt;                                              &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt;  &lt;dbl&gt;
+1 562.SAMN04376786.LVNY01000045:952-4426              3474 rve            IS_Tn      1
+2 1313.SAMEA1032643.CNPJ02000077:179268-184242        4974 huh_y1         IS_Tn      1
+3 90371.SAMN06345841.MVIX01000065:110-337              227 huh_y1         IS_Tn      1
+4 766148.SAMN00792444.AFGX01000029:22-9946            9924 rve            IS_Tn      1
+5 95486.SAMN05002005.MUWP01000187:1439-20561         19122 DDE_3          IS_Tn      1
+6 562.SAMN03075146.JRLD01000012:423-1556              1133 Transposase_20 IS_Tn      1</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mge_solitary_melted_dw <span class="ot">&lt;-</span> mge_solitary_melted <span class="sc">%&gt;%</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>mgeR,<span class="sc">-</span>mge_pa) <span class="sc">%&gt;%</span>  <span class="co"># Elimina las columnas mgeR y mge_pa</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">island1 =</span> island) <span class="sc">%&gt;%</span> <span class="co"># Crea una nueva columna island1, duplicando el valor de la columna island.</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(island1, <span class="fu">c</span>(<span class="st">"g1"</span>,<span class="st">"g2"</span>,<span class="st">"g3"</span>)) <span class="sc">%&gt;%</span> <span class="co"># Divide la columna island1 en tres nuevas columnas (g1, g2, g3), usando separate(). NOTA: Se asume que island1 contiene valores separados por un delimitador (por defecto, "_" o ".").</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">genome =</span> <span class="fu">paste</span>(g1, g2, <span class="at">sep =</span> <span class="st">"."</span>)) <span class="sc">%&gt;%</span>  <span class="co"># Identificador del genoma. Crea una nueva columna genome, concatenando g1 y g2 con un punto (".") entre ellos.</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>g1,<span class="sc">-</span>g2,<span class="sc">-</span>g3) <span class="sc">%&gt;%</span> <span class="co"># Elimina las columnas g1, g2 y g3</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(genome <span class="sc">%in%</span> glist_high<span class="sc">$</span>genome) <span class="sc">%&gt;%</span> <span class="co"># Solo quedarse con genomas de alta calidad</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>genome) <span class="co"># Eliminar columna genoma</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mge_solitary_melted_dw)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  island                                       island_size mge  
+  &lt;chr&gt;                                              &lt;dbl&gt; &lt;chr&gt;
+1 562.SAMN04376786.LVNY01000045:952-4426              3474 IS_Tn
+2 1313.SAMEA1032643.CNPJ02000077:179268-184242        4974 IS_Tn
+3 90371.SAMN06345841.MVIX01000065:110-337              227 IS_Tn
+4 766148.SAMN00792444.AFGX01000029:22-9946            9924 IS_Tn
+5 95486.SAMN05002005.MUWP01000187:1439-20561         19122 IS_Tn
+6 562.SAMN03075146.JRLD01000012:423-1556              1133 IS_Tn</code></pre>
+</div>
+</div>
+<p>Almacenar variable</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(mge_solitary_melted_dw,<span class="at">file=</span><span class="st">"processed_data/mge_bins_final_solitary_collapsed.txt"</span>, <span class="at">sep =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="at">row.names =</span> F, <span class="at">col.names =</span> T, <span class="at">quote =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="paso-3-clasificación-y-conteo-de-mge" class="level3">
+<h3 class="anchored" data-anchor-id="paso-3-clasificación-y-conteo-de-mge">PASO 3: Clasificación y Conteo de MGE</h3>
+<p>Distribución de diferentes clases de MGE y cuántas veces aparecen en el conjunto de datos.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Unir la informacion a traves de la columna mgeR</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>mge_solitary_rclass_all <span class="ot">&lt;-</span> <span class="fu">left_join</span>(mge_solitary_melted, rec_class, <span class="at">by =</span> <span class="st">"mgeR"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>island_size, <span class="sc">-</span>mge_pa, <span class="sc">-</span>mgeR) <span class="sc">%&gt;%</span> <span class="co"># Elimina las columnas island_size, mge_pa y mgeR</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(island, <span class="fu">c</span>(<span class="st">"g1"</span>,<span class="st">"g2"</span>,<span class="st">"g3"</span>)) <span class="sc">%&gt;%</span> <span class="co"># Divide la columna island en tres nuevas columnas (g1, g2, g3).</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">genome =</span> <span class="fu">paste</span>(g1, g2, <span class="at">sep =</span> <span class="st">"."</span>)) <span class="sc">%&gt;%</span> <span class="co"># Crea una nueva columna genome, concatenando g1 y g2 con un punto (".") entre ellos.</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>g1,<span class="sc">-</span>g2,<span class="sc">-</span>g3) <span class="sc">%&gt;%</span> <span class="co"># Elimina las columnas auxiliares (g1, g2, g3), ya que su información ahora está en genome.</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(class,mge) <span class="sc">%&gt;%</span> <span class="co"># Agrupa los datos por class y mge </span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">n</span>()) <span class="co"># Cuenta cuántas veces aparece cada combinación de class y mge</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mge_solitary_rclass_all)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+# Groups:   class [3]
+  class mge         count
+  &lt;chr&gt; &lt;chr&gt;       &lt;int&gt;
+1 cas   IS_Tn       12184
+2 dde   CE            181
+3 dde   IS_Tn      913577
+4 dde   Phage       10154
+5 dde   Phage_like    131
+6 huh   CE          18627</code></pre>
+</div>
+</div>
+<p>Distribución de diferentes clases de MGE en <strong>genomas de alta calidad.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Unir la informacion a traves de la columna mgeR</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>mge_solitary_rclass <span class="ot">&lt;-</span> <span class="fu">left_join</span>(mge_solitary_melted,rec_class, <span class="at">by =</span> <span class="st">"mgeR"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>island_size, <span class="sc">-</span>mge_pa, <span class="sc">-</span>mgeR) <span class="sc">%&gt;%</span> <span class="co"># Elimina las columnas island_size, mge_pa y mgeR</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(island, <span class="fu">c</span>(<span class="st">"g1"</span>,<span class="st">"g2"</span>,<span class="st">"g3"</span>)) <span class="sc">%&gt;%</span> <span class="co"># Divide la columna island en tres nuevas columnas (g1, g2, g3).</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">genome =</span> <span class="fu">paste</span>(g1, g2, <span class="at">sep =</span> <span class="st">"."</span>)) <span class="sc">%&gt;%</span> <span class="co"># Crea una nueva columna genome, concatenando g1 y g2 con un punto (".") entre ellos.</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>g1,<span class="sc">-</span>g2,<span class="sc">-</span>g3) <span class="sc">%&gt;%</span> <span class="co"># Elimina las columnas auxiliares (g1, g2, g3), ya que su información ahora está en genome.</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(genome <span class="sc">%in%</span> glist_high<span class="sc">$</span>genome) <span class="sc">%&gt;%</span> <span class="co"># Solo quedarse con genomas de alta calidad</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(class,mge) <span class="sc">%&gt;%</span> <span class="co"># Agrupa los datos por class y mge </span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">n</span>()) <span class="co"># Cuenta cuántas veces aparece cada combinación de class y mge</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mge_solitary_rclass)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+# Groups:   class [3]
+  class mge         count
+  &lt;chr&gt; &lt;chr&gt;       &lt;int&gt;
+1 cas   IS_Tn       12024
+2 dde   CE            180
+3 dde   IS_Tn      904177
+4 dde   Phage       10078
+5 dde   Phage_like    129
+6 huh   CE          18385</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="figura-2a-contribución-de-las-principales-familias-de-recombinasas" class="level2">
+<h2 class="anchored" data-anchor-id="figura-2a-contribución-de-las-principales-familias-de-recombinasas">Figura 2A: Contribución de las principales familias de recombinasas</h2>
+<section id="paso-4-selección-de-las-familias-de-recombinasas" class="level3">
+<h3 class="anchored" data-anchor-id="paso-4-selección-de-las-familias-de-recombinasas">PASO 4: Selección de las familias de recombinasas</h3>
+<p>Definición de Colores para las Familias de Recombinasa (vector)</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Crea un vector <code>colclass</code> con códigos de color hexadecimales (en este caso, todos son <code>"CDCCCC"</code>).</p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Paleta general de colores</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>colc <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"#D55E00"</span>, <span class="st">"#E69F00"</span>, <span class="st">"#F0E442"</span>, <span class="st">"#56B4E9"</span>, <span class="st">"#009E73"</span>, <span class="st">"#0072B2"</span>,<span class="st">"#CECCCC"</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(colc) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"IS_Tn"</span>, <span class="st">"Phage"</span>, <span class="st">"Phage_like"</span>, <span class="st">"CE"</span>, <span class="st">"Integron"</span>, <span class="st">"MI"</span>, <span class="st">"Cellular"</span>) </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Paleta de colores para recombinasas</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>colclass <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"CDCCCC"</span>, <span class="st">"CDCCCC"</span>, <span class="st">"CDCCCC"</span>, <span class="st">"CDCCCC"</span>, <span class="st">"CDCCCC"</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(colclass) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"cas"</span>, <span class="st">"dde"</span>, <span class="st">"huh"</span>, <span class="st">"ser"</span>, <span class="st">"tyr"</span>)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>colall <span class="ot">&lt;-</span> <span class="fu">c</span>(colclass, colc)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>colall</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       cas        dde        huh        ser        tyr      IS_Tn      Phage Phage_like         CE   Integron 
+  "CDCCCC"   "CDCCCC"   "CDCCCC"   "CDCCCC"   "CDCCCC"  "#D55E00"  "#E69F00"  "#F0E442"  "#56B4E9"  "#009E73" 
+        MI   Cellular 
+ "#0072B2"  "#CECCCC" </code></pre>
+</div>
+</div>
+<p>Ordenamiento de las Categorías</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>order_class <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="st">"cas"</span>, <span class="st">"dde"</span>,<span class="st">"huh"</span>, <span class="st">"ser"</span>, <span class="st">"tyr"</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>order_mge <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"IS_Tn"</span>, <span class="st">"Phage_like"</span>, <span class="st">"Phage"</span>, <span class="st">"CE"</span>, <span class="st">"MI"</span>, <span class="st">"Integron"</span>, <span class="st">"Cellular"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Define el orden en el que se mostrarán las clases (<code>order_class</code>) y los tipos de MGE (<code>order_mge</code>).</p>
+<ul>
+<li><code>order_class</code> organiza las familias de recombinasas.</li>
+<li><code>order_mge</code> organiza los distintos tipos de elementos genéticos móviles.</li>
+</ul>
+<p>Transformación de Datos para Visualización</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>mge_solitary_rclass<span class="sc">$</span>mge <span class="ot">&lt;-</span> <span class="fu">factor</span>(mge_solitary_rclass<span class="sc">$</span>mge, <span class="at">levels =</span> order_mge) <span class="co"># Convierte la variable mge en un factor, asignándole el orden definido en order_mge</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>mge_solitary_rclass_p <span class="ot">&lt;-</span> <span class="fu">gather_set_data</span>(mge_solitary_rclass, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) <span class="co"># Reestructura los datos con gather_set_data(), seleccionando las primeras dos columnas (1:2). NOTA: Se asume que esta función organiza los datos en un formato adecuado para un gráfico tipo "alluvial" o "sankey".</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>mge_solitary_rclass_p<span class="sc">$</span>y <span class="ot">&lt;-</span> <span class="fu">factor</span>(mge_solitary_rclass_p<span class="sc">$</span>y, <span class="at">levels =</span> <span class="fu">c</span>(order_class, order_mge)) <span class="co"># Convierte la variable y en un factor con el orden de order_class y order_mge, asegurando que los datos se alineen correctamente en la visualización.</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>mge_solitary_rclass_p <span class="ot">&lt;-</span> mge_solitary_rclass_p <span class="sc">%&gt;%</span> <span class="fu">add_column</span>(<span class="at">col =</span> colall[<span class="fu">match</span>(.<span class="sc">$</span>y, <span class="fu">names</span>(colall))])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><p>Añade una columna <code>col</code> con <strong>colores</strong> según la correspondencia entre los valores de <code>y</code> y los nombres en <code>colall</code>.</p>
+<ul>
+<li><p><code>match(.$y, names(colall))</code> encuentra el color correspondiente a cada categoría en <code>colall</code>.</p></li>
+<li><p><code>add_column()</code> agrega esta información a <code>mge_solitary_rclass_p</code>.</p></li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>rclass_mge_alluvial <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mge_solitary_rclass_p, <span class="fu">aes</span>(x, <span class="at">id =</span> id, <span class="at">split =</span> y, <span class="at">value =</span> count)) <span class="sc">+</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># x = categorias, id = identificador unico para cada flujo</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># split = y conexión entre las categorías (clases de recombinasas y tipos de MGE).</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># value = count: determina el ancho de los flujos según la cantidad de ocurrencias.</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Dibujar los flujos entre categorías, con un grosor proporcional a count.</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_parallel_sets</span>(<span class="fu">aes</span>(<span class="at">fill =</span> mge), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">lwd =</span> <span class="fl">0.2</span>, <span class="at">axis.width =</span> <span class="fl">0.26</span>) <span class="sc">+</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_parallel_sets_axes</span>(<span class="at">axis.width =</span> <span class="fl">0.22</span>, <span class="at">fill =</span> <span class="st">"grey80"</span>) <span class="sc">+</span> <span class="co"># Dibuja los ejes de las categorías con un ancho de 0.22 y color gris claro ("grey80").</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_parallel_sets_labels</span>( <span class="co"># Añade etiquetas a los ejes con color negro, tamaño ajustado (12/.pt), y sin rotación (angle = 0).</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">'black'</span>,</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">12</span><span class="sc">/</span>.pt,</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">angle =</span> <span class="dv">0</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Configuración de Escalas</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="cn">NULL</span>,</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.12</span>)</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Elimina marcas en el eje y y ajusta la escala para mejor distribución visual.</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="cn">NULL</span>, <span class="at">expand =</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Asigna colores a los MGE según el vector colc y oculta la leyenda (guide = "none").</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">values =</span> colc,</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">guide =</span> <span class="st">"none"</span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.line =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="dv">14</span>, <span class="fl">1.5</span>, <span class="dv">2</span>, <span class="fl">1.5</span>)</span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>rclass_mge_alluvial</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Figura2_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="768"></p>
+</div>
+</div>
+<p>Pero esto no se ve como el articulo, por lo que decidimos cambiar el estilo de los bloques de texto a blanco con bordes negros.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>rclass_mge_alluvial <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mge_solitary_rclass_p, <span class="fu">aes</span>(x, <span class="at">id =</span> id, <span class="at">split =</span> y, <span class="at">value =</span> count)) <span class="sc">+</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># x = categorias, id = identificador unico para cada flujo</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># split = y conexión entre las categorías (clases de recombinasas y tipos de MGE).</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># value = count: determina el ancho de los flujos según la cantidad de ocurrencias.</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Dibujar los flujos entre categorías, con un grosor proporcional a count.</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_parallel_sets</span>(<span class="fu">aes</span>(<span class="at">fill =</span> mge), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">lwd =</span> <span class="fl">0.2</span>, <span class="at">axis.width =</span> <span class="fl">0.26</span>) <span class="sc">+</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_parallel_sets_axes</span>(<span class="at">axis.width =</span> <span class="fl">0.22</span>, <span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span> <span class="co"># Dibuja los ejes de las categorías con un ancho de 0.22 y color blanco y borde negro</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_parallel_sets_labels</span>( <span class="co"># Añade etiquetas a los ejes con color negro, tamaño ajustado (12/.pt), y sin rotación (angle = 0).</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">'black'</span>,</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">12</span><span class="sc">/</span>.pt,</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">angle =</span> <span class="dv">0</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Configuración de Escalas</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="cn">NULL</span>,</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.12</span>)</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Elimina marcas en el eje y y ajusta la escala para mejor distribución visual.</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="cn">NULL</span>, <span class="at">expand =</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Asigna colores a los MGE según el vector colc y oculta la leyenda (guide = "none").</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">values =</span> colc,</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">guide =</span> <span class="st">"none"</span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.line =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="dv">14</span>, <span class="fl">1.5</span>, <span class="dv">2</span>, <span class="fl">1.5</span>)</span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Agregar titulos superiores</span></span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>rclass_mge_alluvial <span class="ot">&lt;-</span> rclass_mge_alluvial <span class="sc">+</span></span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="dv">1</span>, <span class="at">y =</span> <span class="fu">max</span>(mge_solitary_rclass_p<span class="sc">$</span>count) <span class="sc">*</span> <span class="fl">2.5</span>, <span class="at">label =</span> <span class="st">"recombinase </span><span class="sc">\n</span><span class="st">families"</span>, <span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a><span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="dv">2</span>, <span class="at">y =</span> <span class="fu">max</span>(mge_solitary_rclass_p<span class="sc">$</span>count) <span class="sc">*</span> <span class="fl">2.5</span>, <span class="at">label =</span> <span class="st">"MGEs"</span>, <span class="at">size =</span> <span class="dv">5</span>)</span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Figura 2A completa</span></span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>rclass_mge_alluvial</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Figura2_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="768"></p>
+</div>
+</div>
+</section>
 </section>
 <section id="figura-2b" class="level2">
 <h2 class="anchored" data-anchor-id="figura-2b">Figura 2B</h2>

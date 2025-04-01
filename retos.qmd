@@ -2,4 +2,15 @@
 title: "Retos y problemas con el código"
 ---
 
-## Ausencia de instrucciones
+## Carga de Archivos Comprimidos en R
+
+Notas clave:
+
+1.  **Uso de Archivos Comprimidos:** Cuando trabajen con archivos comprimidos (por ejemplo, con extensión .gz), no es necesario descomprimirlos manualmente antes de cargarlos en R.
+2.  **Código Correcto para Cargar Archivos Comprimidos:** Para cargar archivos comprimidos sin descomprimirlos previamente, utilicen el siguiente código:
+
+```{r, eval=FALSE}
+mge_pg <- read_tsv("data/processed_data/mge_bins_per_genome_final.txt.gz", col_names = TRUE)
+```
+
+3.  **Diferencia con el Código Original:** En el código original, el archivo estaba descomprimido. Sin embargo, con la extensión `.gz`, se puede leer directamente el archivo comprimido sin la necesidad de usar herramientas adicionales para descomprimirlo.
