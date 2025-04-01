@@ -8,9 +8,9 @@ A partir de la pagina web de Git [proMGE](https://git.embl.de/khedkar/promge) re
 
 > Modificado por Johana
 
-| Figura   | Script original                                                                            | Script modificado (en español) |  Input |
-|------------------|------------------|------------------|------------------|
-| Figura 2 | [`R/Figure2.R`](https://git.embl.de/khedkar/promge/-/blob/main/R/Figure2.R?ref_type=heads) |                                |        |
-| Figura 3 | [`R/Figure3.R`](https://git.embl.de/khedkar/promge/-/blob/main/R/Figure3.R?ref_type=heads) |                                |        |
-| Figura 4 | [`R/Figure4.R`](https://git.embl.de/khedkar/promge/-/blob/main/R/Figure4.R?ref_type=heads) |                                |        |
-| Figura 5 | [`R/Figure5.R`](https://git.embl.de/khedkar/promge/-/blob/main/R/Figure5.R?ref_type=heads) |                                |        |
+| Figura   | Script original                                                                            | Script modificado (en español) | Input |
+|----------|--------------------------------------------------------------------------------------------|--------------------------------|-------|
+| Figura 2 | [`R/Figure2.R`](https://git.embl.de/khedkar/promge/-/blob/main/R/Figure2.R?ref_type=heads) |                                |       |
+| Figura 3 | [`R/Figure3.R`](https://git.embl.de/khedkar/promge/-/blob/main/R/Figure3.R?ref_type=heads) |                                |       |
+| Figura 4 | [`R/Figure4.R`](https://git.embl.de/khedkar/promge/-/blob/main/R/Figure4.R?ref_type=heads) |                                |       |
+| Figura 5 | [`R/Figure5.R`](https://git.embl.de/khedkar/promge/-/blob/main/R/Figure5.R?ref_type=heads) |                                |       |

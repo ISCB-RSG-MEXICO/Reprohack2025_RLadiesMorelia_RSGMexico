@@ -13,17 +13,23 @@ title: "Figura 2"
 (C) Longitudes predichas de MGEs no anidados en pares de bases. Los bigotes representan el rango entre los percentiles 10 y 90.
 
 
-```{r, echo=FALSE, message=FALSE}
-library(growthrates) # fit_growthmodel(): Calcular la tasa de crecimiento a partir de datos de microplacas.
-library(lmerTest) # Pruebas estadisticas
-# Paquetes adicionales (no los mencionan pero son necesarios)
-library(readxl) # lectura de archivos de excel
+```{r paquetes, echo=FALSE, message=FALSE}
 library(tidyverse) # Manipulacion de datos
-library(reshape2) # melt(): reduccion de datos
+library(cowplot)
+library(ggpubr)
+library(ggforce)
 ```
 
-
 ## Figura 2A
+
+```{r}
+#getwd()
+mge_pg <- read_tsv("data/processed_data/mge_bins_per_genome_final.txt.gz", col_names = T)
+mge_solitary <- read_tsv("data/processed_data/solitary_mge_bins_final.txt.gz", col_names = F)
+rec_class <- read_tsv("data/raw_data/recombinase.list.gz", col_names = F)
+glist <- read_tsv("data/raw_data/genome_status_supplementary_tableS2.txt.gz", col_names = T)
+```
+
 
 
 ## Figura 2B
