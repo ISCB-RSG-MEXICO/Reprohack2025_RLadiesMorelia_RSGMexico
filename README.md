@@ -22,4 +22,4 @@ En el Github se encuentra el codigo accesible de las siguientes figuras:
 
 ------------------------------------------------------------------------
 
-Curso hecho con amor 💜
+Curso hecho con amor 💜.

@@ -8,3 +8,6 @@ format:
 ## Conceptos importantes del articulo
 
 Asignadas: Diana Barcelo y Marisol Navarro
+
+Hola, soy Sol
+Hola, soy johanna
