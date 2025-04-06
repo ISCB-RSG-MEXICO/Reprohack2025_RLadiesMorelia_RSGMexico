@@ -31,12 +31,30 @@ genomes](https://academic.oup.com/nar/article/50/6/3155/6552054)
 
 ## Integrantes
 
--   **Evelia Coss** - posdoctoral LIIGH-UNAM, RSG-México y RLadies
-    Morelia. Contacto: [correo](ecoss@liigh.unam.mx), [pagina
+-   **Evelia Coss** - posdoctoral LIIGH-UNAM. Miembro de
+    [LupusRGMX](https://lupusrgmx.liigh.unam.mx/quienes-somos.html),
+    [Project JAGUAR](https://jaguar.liigh.unam.mx/),
+    [RiaBio](https://twitter.com/RiaBioNet),
+    [CDSB-Mexico](https://twitter.com/CDSBMexico),
+    [RSG-México](https://comunidadbioinfo.github.io/es/#:~:text=%C2%A1Bienvenidos%20a%20la%20Comunidad%20de,la%20comunidad%20de%20software%20libre.)
+    y [RLadies Morelia](https://r-ladies-morelia.github.io/).
+    Coordinadora de los [VieRnes de Bioinformatica en el
+    LIIGH](https://viernesbioinformatica.github.io/). Instructora
+    Certificada de [The
+    Carpentries](https://carpentries.org/index.html). Contacto:
+    [correo](ecoss@liigh.unam.mx), [pagina
     web](https://eveliacoss.github.io/)
--   **Marisol Navarro** - RSG-México y RLadies Morelia
--   **Diana Barceló** -
--   **Johana Castelán** - RSG-México y RLadies Morelia
+-   **Marisol Navarro** -
+    [RSG-México](https://comunidadbioinfo.github.io/es/#:~:text=%C2%A1Bienvenidos%20a%20la%20Comunidad%20de,la%20comunidad%20de%20software%20libre.)
+    y [RLadies Morelia](https://r-ladies-morelia.github.io/).
+-   **Diana Barceló** - Profesor investigador de tiempo completo de la
+    Escuela de Medicina de la Universidad Quetzalcoatl. Editora en Jefe
+    de la revista INVESMED (Investigación y Educación Médica). Miembro
+    del cuerpo académico del AMFEM (Asociación Mexicana de Facultades y
+    Escuelas de Medicina, A.C.)
+-   **Johana Castelán** -
+    [RSG-México](https://comunidadbioinfo.github.io/es/#:~:text=%C2%A1Bienvenidos%20a%20la%20Comunidad%20de,la%20comunidad%20de%20software%20libre.)
+    y [RLadies Morelia](https://r-ladies-morelia.github.io/).
 
 ## **Citar y reutilizar el material del curso**
 
@@ -53,6 +71,8 @@ International (CC BY-NC-SA
 ![](icons/rladies_morelia.png){width="100"}
 ![](icons/rsgMexico.jpeg){width="100"}
 ![](icons/ViernesBioinfo_logo.png){width="100"}
+![](icons/NodoBioinfo.png){width="194"
+height="76"}![](icons/RedBioinfo.jpg){width="170" height="61"}
 :::
 
 ------------------------------------------------------------------------

@@ -14,7 +14,7 @@ Libro de [Quarto](https://iscb-rsg-mexico.github.io/Reprohack2025_RLadiesMorelia
 En el Github se encuentra el codigo accesible de las siguientes figuras:
 
 | Figura   | Script original                                                                            | Script modificado (en español) | Input |
-|-------------|---------------------------------|-------------|-------------|
+|----------|--------------------------------------------------------------------------------------------|--------------------------------|-------|
 | Figura 2 | [`R/Figure2.R`](https://git.embl.de/khedkar/promge/-/blob/main/R/Figure2.R?ref_type=heads) |                                |       |
 | Figura 3 | [`R/Figure3.R`](https://git.embl.de/khedkar/promge/-/blob/main/R/Figure3.R?ref_type=heads) |                                |       |
 | Figura 4 | [`R/Figure4.R`](https://git.embl.de/khedkar/promge/-/blob/main/R/Figure4.R?ref_type=heads) |                                |       |

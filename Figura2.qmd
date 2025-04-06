@@ -90,7 +90,7 @@ Almacenar variable
 write.table(mge_solitary_melted_dw,file="processed_data/mge_bins_final_solitary_collapsed.txt", sep = "\t", row.names = F, col.names = T, quote = F)
 ```
 
-### PASO 3: Clasificación y Conteo de MGE 
+### PASO 3: Clasificación y Conteo de MGE
 
 Distribución de diferentes clases de MGE y cuántas veces aparecen en el conjunto de datos.
 
@@ -153,7 +153,7 @@ order_mge <- c("IS_Tn", "Phage_like", "Phage", "CE", "MI", "Integron", "Cellular
 
 Define el orden en el que se mostrarán las clases (`order_class`) y los tipos de MGE (`order_mge`).
 
--    `order_class` organiza las familias de recombinasas.
+-   `order_class` organiza las familias de recombinasas.
 -   `order_mge` organiza los distintos tipos de elementos genéticos móviles.
 
 Transformación de Datos para Visualización
@@ -169,7 +169,7 @@ mge_solitary_rclass_p <- mge_solitary_rclass_p %>% add_column(col = colall[match
 
     -   `match(.$y, names(colall))` encuentra el color correspondiente a cada categoría en `colall`.
 
-    -    `add_column()` agrega esta información a `mge_solitary_rclass_p`.
+    -   `add_column()` agrega esta información a `mge_solitary_rclass_p`.
 
 ```{r}
 rclass_mge_alluvial <- ggplot(mge_solitary_rclass_p, aes(x, id = id, split = y, value = count)) +
