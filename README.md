@@ -13,12 +13,12 @@ Libro de [Quarto](https://iscb-rsg-mexico.github.io/Reprohack2025_RLadiesMorelia
 
 En el Github se encuentra el codigo accesible de las siguientes figuras:
 
-| Figura   | Script original                                                                            | Script modificado (en español) | Input |
-|----------|--------------------------------------------------------------------------------------------|--------------------------------|-------|
-| Figura 2 | [`R/Figure2.R`](https://git.embl.de/khedkar/promge/-/blob/main/R/Figure2.R?ref_type=heads) |                                |       |
-| Figura 3 | [`R/Figure3.R`](https://git.embl.de/khedkar/promge/-/blob/main/R/Figure3.R?ref_type=heads) |                                |       |
-| Figura 4 | [`R/Figure4.R`](https://git.embl.de/khedkar/promge/-/blob/main/R/Figure4.R?ref_type=heads) |                                |       |
-| Figura 5 | [`R/Figure5.R`](https://git.embl.de/khedkar/promge/-/blob/main/R/Figure5.R?ref_type=heads) |                                |       |
+| Figura   | Script original                                                                            | Script modificado (en español)                                                                                                              | Input                                                                                                                                                                                    |
+|------------|----------------|--------------------|---------------------|
+| Figura 2 | [`R/Figure2.R`](https://git.embl.de/khedkar/promge/-/blob/main/R/Figure2.R?ref_type=heads) |  [`Figura2_modificado.R`](https://github.com/ISCB-RSG-MEXICO/Reprohack2025_RLadiesMorelia_RSGMexico/blob/main/scripts/Figura2_modificado.R) | 1)processed_data/mge_bins_per_genome_final.txt.gz, 2)processed_data/solitary_mge_bins_final.txt.gz, 3)raw_data/recombinase.list.gz4)raw_data/genome_status_supplementary_tableS2.txt.gz  |
+| Figura 3 | [`R/Figure3.R`](https://git.embl.de/khedkar/promge/-/blob/main/R/Figure3.R?ref_type=heads) |                                                                                                                                             |                                                                                                                                                                                          |
+| Figura 4 | [`R/Figure4.R`](https://git.embl.de/khedkar/promge/-/blob/main/R/Figure4.R?ref_type=heads) |                                                                                                                                             |                                                                                                                                                                                          |
+| Figura 5 | [`R/Figure5.R`](https://git.embl.de/khedkar/promge/-/blob/main/R/Figure5.R?ref_type=heads) |                                                                                                                                             |                                                                                                                                                                                          |
 
 ------------------------------------------------------------------------
 

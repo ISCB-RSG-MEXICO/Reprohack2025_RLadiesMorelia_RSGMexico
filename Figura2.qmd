@@ -514,6 +514,6 @@ Figura2_final_plot <- plot_grid(
 Figura2_final_plot
 ```
 
-Puedes encontrar el script completo en Figura2_modificado.R.
+Puedes encontrar el script completo en [Figura2_modificado.R](https://github.com/ISCB-RSG-MEXICO/Reprohack2025_RLadiesMorelia_RSGMexico/blob/main/scripts/Figura2_modificado.R).
 
 ### Conclusiones
