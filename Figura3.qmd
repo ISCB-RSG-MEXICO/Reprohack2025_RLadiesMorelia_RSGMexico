@@ -6,8 +6,10 @@ title: "Figura 3"
 
 
 ![Figura 3. Distribución taxonómica de los MGEs](img/figure3.jpeg){width=80%}
-(A) Prevalencia de las categorías de MGEs y predominio de los elementos transponibles en distintas clases taxonómicas (con al menos 10 genomas), ordenadas según la filogenia basada en genes marcadores taxonómicos (38).
-(B) Asociación de las categorías de MGEs (promedio de MGEs por especie) con diferentes clases taxonómicas (prueba de rango de Wilcoxon, * indica un valor de P < 0.05 después de la corrección de Bonferroni).
+
+A. Prevalencia de las categorías de MGEs y predominio de los elementos transponibles en distintas clases taxonómicas (con al menos 10 genomas), ordenadas según la filogenia basada en genes marcadores taxonómicos (38).
+
+B. Asociación de las categorías de MGEs (promedio de MGEs por especie) con diferentes clases taxonómicas (prueba de rango de Wilcoxon, * indica un valor de P < 0.05 después de la corrección de Bonferroni).
 
 
 ```{r, echo=FALSE, message=FALSE}
@@ -19,8 +21,19 @@ library(tidyverse) # Manipulacion de datos
 library(reshape2) # melt(): reduccion de datos
 ```
 
-
 ## Figura 3A
 
 
+
+
+
 ## Figura 3B
+
+
+
+
+## Conclusiones
+
+
+
+
