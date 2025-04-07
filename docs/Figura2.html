@@ -216,12 +216,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./retos.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Retos y problemas con el código</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./Figura2.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Figura 2</span></a>
   </div>
@@ -242,6 +236,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./Figura5.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Figura 5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./retos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Retos y problemas con el código</span></a>
   </div>
 </li>
       </ul>
@@ -266,9 +266,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#paso-4-selección-de-las-familias-de-recombinasas" id="toc-paso-4-selección-de-las-familias-de-recombinasas" class="nav-link" data-scroll-target="#paso-4-selección-de-las-familias-de-recombinasas">PASO 4: Selección de las familias de recombinasas</a></li>
   </ul></li>
-  <li><a href="#figura-2b" id="toc-figura-2b" class="nav-link" data-scroll-target="#figura-2b">Figura 2B</a></li>
-  <li><a href="#figura-2c" id="toc-figura-2c" class="nav-link" data-scroll-target="#figura-2c">Figura 2C</a>
+  <li><a href="#figura-2b-distribucion-de-mges-por-categoría" id="toc-figura-2b-distribucion-de-mges-por-categoría" class="nav-link" data-scroll-target="#figura-2b-distribucion-de-mges-por-categoría">Figura 2B Distribucion de MGEs por categoría</a>
   <ul class="collapse">
+  <li><a href="#paso-5-calcular-el-total-de-mges-en-todos-los-genomas-sin-filtrar-por-calidad" id="toc-paso-5-calcular-el-total-de-mges-en-todos-los-genomas-sin-filtrar-por-calidad" class="nav-link" data-scroll-target="#paso-5-calcular-el-total-de-mges-en-todos-los-genomas-sin-filtrar-por-calidad">PASO 5: Calcular el total de MGEs en todos los genomas (sin filtrar por calidad)</a></li>
+  <li><a href="#paso-6-calcular-el-total-de-mges-pero-solo-para-genomas-de-alta-calidad" id="toc-paso-6-calcular-el-total-de-mges-pero-solo-para-genomas-de-alta-calidad" class="nav-link" data-scroll-target="#paso-6-calcular-el-total-de-mges-pero-solo-para-genomas-de-alta-calidad">PASO 6: Calcular el total de MGEs pero solo para genomas de alta calidad</a></li>
+  <li><a href="#paso-7-generar-un-gráfico-de-barras-para-visualizar-el-total-de-mges-en-genomas-de-alta-calidad" id="toc-paso-7-generar-un-gráfico-de-barras-para-visualizar-el-total-de-mges-en-genomas-de-alta-calidad" class="nav-link" data-scroll-target="#paso-7-generar-un-gráfico-de-barras-para-visualizar-el-total-de-mges-en-genomas-de-alta-calidad">PASO 7: Generar un gráfico de barras para visualizar el total de MGEs en genomas de alta calidad</a></li>
+  <li><a href="#paso-8-calcular-la-proporción-relativa-de-cada-mge-excluyendo-los-de-tipo-cellular-y-genera-etiquetas-para-graficar" id="toc-paso-8-calcular-la-proporción-relativa-de-cada-mge-excluyendo-los-de-tipo-cellular-y-genera-etiquetas-para-graficar" class="nav-link" data-scroll-target="#paso-8-calcular-la-proporción-relativa-de-cada-mge-excluyendo-los-de-tipo-cellular-y-genera-etiquetas-para-graficar">PASO 8: Calcular la proporción relativa de cada MGE (excluyendo los de tipo “Cellular”) y genera etiquetas para graficar</a></li>
+  <li><a href="#paso-9-generar-un-gráfico-de-dona-donut-chart-para-visualizar-proporciones-relativas-de-mges" id="toc-paso-9-generar-un-gráfico-de-dona-donut-chart-para-visualizar-proporciones-relativas-de-mges" class="nav-link" data-scroll-target="#paso-9-generar-un-gráfico-de-dona-donut-chart-para-visualizar-proporciones-relativas-de-mges">PASO 9: Generar un gráfico de dona (donut chart) para visualizar proporciones relativas de MGEs</a></li>
+  <li><a href="#paso-10-modificaciones-de-la-figura-2b" id="toc-paso-10-modificaciones-de-la-figura-2b" class="nav-link" data-scroll-target="#paso-10-modificaciones-de-la-figura-2b">PASO 10: Modificaciones de la Figura 2B</a></li>
+  </ul></li>
+  <li><a href="#figura-2c-análisis-de-longitudes-de-mge-solitarios" id="toc-figura-2c-análisis-de-longitudes-de-mge-solitarios" class="nav-link" data-scroll-target="#figura-2c-análisis-de-longitudes-de-mge-solitarios">Figura 2C Análisis de <strong>longitudes de MGE solitarios</strong></a>
+  <ul class="collapse">
+  <li><a href="#paso-11-obtener-las-longitudes-todos-los-genomas" id="toc-paso-11-obtener-las-longitudes-todos-los-genomas" class="nav-link" data-scroll-target="#paso-11-obtener-las-longitudes-todos-los-genomas">PASO 11: <strong>Obtener las longitudes (todos los genomas)</strong></a></li>
+  <li><a href="#paso-12-obtener-la-longitud-de-mges-de-los-genomas-de-alta-calidad" id="toc-paso-12-obtener-la-longitud-de-mges-de-los-genomas-de-alta-calidad" class="nav-link" data-scroll-target="#paso-12-obtener-la-longitud-de-mges-de-los-genomas-de-alta-calidad"><strong>PASO 12: Obtener la longitud de MGEs de los genomas de alta calidad</strong></a></li>
+  <li><a href="#paso-13-graficar-de-caja-de-las-longitudes-de-islas-por-tipo-de-mge" id="toc-paso-13-graficar-de-caja-de-las-longitudes-de-islas-por-tipo-de-mge" class="nav-link" data-scroll-target="#paso-13-graficar-de-caja-de-las-longitudes-de-islas-por-tipo-de-mge">PASO 13: Graficar de caja de las longitudes de islas por tipo de MGE</a></li>
+  <li><a href="#paso-14-unir-la-grafica-final" id="toc-paso-14-unir-la-grafica-final" class="nav-link" data-scroll-target="#paso-14-unir-la-grafica-final">PASO 14: Unir la grafica final</a></li>
   <li><a href="#conclusiones" id="toc-conclusiones" class="nav-link" data-scroll-target="#conclusiones">Conclusiones</a></li>
   </ul></li>
   </ul>
@@ -605,11 +617,324 @@ Note
 </div>
 </section>
 </section>
-<section id="figura-2b" class="level2">
-<h2 class="anchored" data-anchor-id="figura-2b">Figura 2B</h2>
+<section id="figura-2b-distribucion-de-mges-por-categoría" class="level2">
+<h2 class="anchored" data-anchor-id="figura-2b-distribucion-de-mges-por-categoría">Figura 2B Distribucion de MGEs por categoría</h2>
+<p>Número de MGEs por categoría (gráfico de barras) y porcentaje de cada categoría (gráfico de dona) en 76,000 genomas de 3,000 especies, utilizando el flujo de trabajo descrito en la Figura 1.</p>
+<section id="paso-5-calcular-el-total-de-mges-en-todos-los-genomas-sin-filtrar-por-calidad" class="level3">
+<h3 class="anchored" data-anchor-id="paso-5-calcular-el-total-de-mges-en-todos-los-genomas-sin-filtrar-por-calidad">PASO 5: Calcular el total de MGEs en todos los genomas (sin filtrar por calidad)</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>mge_pg_melt_all <span class="ot">&lt;-</span> mge_pg <span class="sc">%&gt;%</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Reestructura el data frame en formato largo (long format)</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  reshape2<span class="sc">::</span><span class="fu">melt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Selecciona columnas: columna 1 (genoma), 7 y 8 (variable y valor)</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span>,<span class="dv">7</span>,<span class="dv">8</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Agrupa por tipo de MGE (almacenado en 'variable')</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(variable) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Suma el total de ocurrencias por cada MGE</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total =</span> <span class="fu">sum</span>(value)) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Filtra para excluir los elementos anotados como "Hotspot"</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(., <span class="sc">!</span><span class="fu">grepl</span>(<span class="st">"Hotspot"</span>, variable))</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mge_pg_melt_all)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 2
+  variable     total
+  &lt;fct&gt;        &lt;dbl&gt;
+1 IS_Tn      1818135
+2 Phage       110316
+3 Phage_like  247907
+4 CE          101625
+5 Integron      8357
+6 MI          155857</code></pre>
+</div>
+</div>
 </section>
-<section id="figura-2c" class="level2">
-<h2 class="anchored" data-anchor-id="figura-2c">Figura 2C</h2>
+<section id="paso-6-calcular-el-total-de-mges-pero-solo-para-genomas-de-alta-calidad" class="level3">
+<h3 class="anchored" data-anchor-id="paso-6-calcular-el-total-de-mges-pero-solo-para-genomas-de-alta-calidad">PASO 6: Calcular el total de MGEs pero solo para genomas de alta calidad</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>mge_pg_melt <span class="ot">&lt;-</span> mge_pg <span class="sc">%&gt;%</span> </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Filtra para conservar solo los genomas presentes en la lista de alta calidad (glist_high)</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Genome <span class="sc">%in%</span> glist_high<span class="sc">$</span>genome) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Reestructura el data frame en formato largo</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  reshape2<span class="sc">::</span><span class="fu">melt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Selecciona columnas relevantes: genoma, tipo de MGE, valor</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span>,<span class="dv">7</span>,<span class="dv">8</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Agrupa por tipo de MGE</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(variable) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Suma el total de ocurrencias de cada MGE</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total =</span> <span class="fu">sum</span>(value)) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Excluye los elementos anotados como "Hotspot"</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(., <span class="sc">!</span><span class="fu">grepl</span>(<span class="st">"Hotspot"</span>, variable))</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mge_pg_melt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 2
+  variable     total
+  &lt;fct&gt;        &lt;dbl&gt;
+1 IS_Tn      1798076
+2 Phage       109456
+3 Phage_like  245051
+4 CE          100480
+5 Integron      8251
+6 MI          154239</code></pre>
+</div>
+</div>
+</section>
+<section id="paso-7-generar-un-gráfico-de-barras-para-visualizar-el-total-de-mges-en-genomas-de-alta-calidad" class="level3">
+<h3 class="anchored" data-anchor-id="paso-7-generar-un-gráfico-de-barras-para-visualizar-el-total-de-mges-en-genomas-de-alta-calidad">PASO 7: Generar un gráfico de barras para visualizar el total de MGEs en genomas de alta calidad</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>barplot_2b <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mge_pg_melt, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(variable, total, sum), <span class="at">y =</span> total, <span class="at">fill =</span> variable)) <span class="sc">+</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Crea barras con altura según el total</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">'identity'</span>) <span class="sc">+</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Añade etiquetas con el valor total encima de cada barra</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> total)) <span class="sc">+</span> </span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Invierte los ejes para una mejor visualización (barras horizontales)</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Aplica una paleta de colores personalizada (definida en 'colc') sin leyenda</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="st">"MGE"</span>, <span class="at">values =</span> colc, <span class="at">guide =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Aplica el tema de cowplot para estilo limpio</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_cowplot</span>() <span class="sc">+</span> </span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Añade etiquetas a los ejes</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">"Counts"</span>)</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Muestra el gráfico</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>barplot_2b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Figura2_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="768"></p>
+</div>
+</div>
+</section>
+<section id="paso-8-calcular-la-proporción-relativa-de-cada-mge-excluyendo-los-de-tipo-cellular-y-genera-etiquetas-para-graficar" class="level3">
+<h3 class="anchored" data-anchor-id="paso-8-calcular-la-proporción-relativa-de-cada-mge-excluyendo-los-de-tipo-cellular-y-genera-etiquetas-para-graficar">PASO 8: Calcular la proporción relativa de cada MGE (excluyendo los de tipo “Cellular”) y genera etiquetas para graficar</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>mge_pg_relative <span class="ot">&lt;-</span> mge_pg_melt <span class="sc">%&gt;%</span> </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Excluye las variables que contienen la palabra "Cellular"</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(., <span class="sc">!</span><span class="fu">grepl</span>(<span class="st">"Cellular"</span>, variable)) <span class="sc">%&gt;%</span> </span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calcula el porcentaje relativo de cada MGE respecto al total</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">rel =</span> <span class="fu">round</span>((total <span class="sc">/</span> <span class="fu">sum</span>(total)) <span class="sc">*</span> <span class="dv">100</span>, <span class="at">digits =</span> <span class="dv">2</span>),</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Crea etiquetas con el nombre del MGE y su porcentaje</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">labs =</span> <span class="fu">paste0</span>(variable, <span class="st">" ("</span>, rel, <span class="st">"%)"</span>)</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Ordena por total ascendente para mejor visualización en la gráfica</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(total)</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mge_pg_relative)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+  variable     total   rel labs               
+  &lt;fct&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;              
+1 Integron      8251  0.34 Integron (0.34%)   
+2 CE          100480  4.16 CE (4.16%)         
+3 Phage       109456  4.53 Phage (4.53%)      
+4 MI          154239  6.39 MI (6.39%)         
+5 Phage_like  245051 10.1  Phage_like (10.14%)
+6 IS_Tn      1798076 74.4  IS_Tn (74.44%)     </code></pre>
+</div>
+</div>
+</section>
+<section id="paso-9-generar-un-gráfico-de-dona-donut-chart-para-visualizar-proporciones-relativas-de-mges" class="level3">
+<h3 class="anchored" data-anchor-id="paso-9-generar-un-gráfico-de-dona-donut-chart-para-visualizar-proporciones-relativas-de-mges">PASO 9: Generar un gráfico de dona (donut chart) para visualizar proporciones relativas de MGEs</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>donutchart_2b <span class="ot">&lt;-</span> <span class="fu">ggdonutchart</span>(</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  mge_pg_relative,     <span class="co"># Data frame con los porcentajes</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"rel"</span>,               <span class="co"># Variable a usar como valor (porcentaje)</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"labs"</span>,      <span class="co"># Etiquetas que se mostrarán en la gráfica</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">lab.pos =</span> <span class="st">"in"</span>,      <span class="co"># Posición de etiquetas dentro del gráfico</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">fill =</span> <span class="st">"variable"</span>,   <span class="co"># Colores de relleno asignados por tipo de MGE</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">color =</span> <span class="st">"white"</span>,     <span class="co"># Color del borde de cada sección de la dona</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Paleta personalizada de colores para los MGEs</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"#D55E00"</span>, <span class="st">"#E69F00"</span>, <span class="st">"#F0E442"</span>, <span class="st">"#56B4E9"</span>, <span class="st">"#009E73"</span>, <span class="st">"#0072B2"</span>, <span class="st">"#CECCCC"</span>)</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Muestra el gráfico de dona</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>donutchart_2b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Figura2_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="768"></p>
+</div>
+</div>
+</section>
+<section id="paso-10-modificaciones-de-la-figura-2b" class="level3">
+<h3 class="anchored" data-anchor-id="paso-10-modificaciones-de-la-figura-2b">PASO 10: Modificaciones de la Figura 2B</h3>
+<p>En esta versión del gráfico de barras, se hicieron <strong>dos ajustes importantes</strong> para mejorar la <strong>legibilidad de los números</strong> que aparecen al lado de cada barra:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>barplot_2b <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mge_pg_melt, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(variable, total, sum), <span class="at">y =</span> total, <span class="at">fill =</span> variable)) <span class="sc">+</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Crea barras con altura según el total</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">'identity'</span>) <span class="sc">+</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Añade etiquetas con el valor total encima de cada barra</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> total), <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.05</span>) <span class="sc">+</span> </span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Invierte los ejes para una mejor visualización (barras horizontales)</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Aplica una paleta de colores personalizada (definida en 'colc') sin leyenda</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="st">"MGE"</span>, <span class="at">values =</span> colc, <span class="at">guide =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Aumentar el espacio extra a la derecha para que no se corten las etiquetas</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.2</span>))) <span class="sc">+</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Aplica el tema de cowplot para estilo limpio</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_cowplot</span>() <span class="sc">+</span> </span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Añade etiquetas a los ejes</span></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">"Counts"</span>)</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Muestra el gráfico</span></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>barplot_2b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Figura2_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="768"></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p>El parámetro <code>hjust = -0.05</code> <strong>mueve las etiquetas hacia la derecha</strong> del final de cada barra.</p></li>
+<li><p>Sin esta modificación, los números podrían quedar demasiado pegados a la barra, o incluso <strong>encimarse o cortarse</strong>.</p></li>
+<li><p>💡 <strong><code>hjust</code> controla la alineación horizontal</strong>:</p>
+<ul>
+<li><p><code>hjust = 1</code>: texto alineado al final de la barra.</p></li>
+<li><p><code>hjust = 0</code>: alineado al inicio de la barra.</p></li>
+<li><p><code>hjust &lt; 0</code>: mueve el texto <strong>más allá del final</strong>, hacia la derecha.</p></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<p>En esta versión del gráfico de donut plot, se hicieron <strong>ajusto el texto</strong> para mejorar la <strong>legibilidad de las proporciones</strong> que aparecen al lado del plot:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular proporciones y posiciones</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>mge_pg_relative <span class="ot">&lt;-</span> mge_pg_melt <span class="sc">%&gt;%</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">grepl</span>(<span class="st">"Cellular"</span>, variable)) <span class="sc">%&gt;%</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">rel =</span> <span class="fu">round</span>((total <span class="sc">/</span> <span class="fu">sum</span>(total)) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>),</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">labs =</span> <span class="fu">paste0</span>(variable, <span class="st">" ("</span>, rel, <span class="st">"%)"</span>)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(variable)) <span class="sc">%&gt;%</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">ymax =</span> <span class="fu">cumsum</span>(rel),</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">ymin =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">head</span>(ymax, <span class="at">n =</span> <span class="sc">-</span><span class="dv">1</span>)),</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">label_pos =</span> (ymin <span class="sc">+</span> ymax) <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Gráfico de dona con etiquetas visibles y repelentes</span></span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>donutchart_custom <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mge_pg_relative, <span class="fu">aes</span>(<span class="at">ymax =</span> ymax, <span class="at">ymin =</span> ymin, <span class="at">xmax =</span> <span class="fl">4.5</span>, <span class="at">xmin =</span> <span class="fl">2.8</span>, <span class="at">fill =</span> variable)) <span class="sc">+</span></span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rect</span>(<span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_polar</span>(<span class="at">theta =</span> <span class="st">"y"</span>) <span class="sc">+</span></span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="fl">2.5</span>, <span class="dv">5</span>)) <span class="sc">+</span>  <span class="co"># Aumentamos espacio a la derecha para las etiquetas</span></span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#D55E00"</span>, <span class="st">"#E69F00"</span>, <span class="st">"#F0E442"</span>, <span class="st">"#56B4E9"</span>, <span class="st">"#009E73"</span>, <span class="st">"#0072B2"</span>, <span class="st">"#CECCCC"</span>)) <span class="sc">+</span></span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(</span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> <span class="fl">4.5</span>, <span class="at">y =</span> label_pos, <span class="at">label =</span> labs),</span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">4</span>,</span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">nudge_x =</span> <span class="fl">0.5</span>,</span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">direction =</span> <span class="st">"y"</span>,</span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">segment.size =</span> <span class="fl">0.3</span>,</span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">show.legend =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">min.segment.length =</span> <span class="dv">0</span>,</span>
+<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">box.padding =</span> <span class="fl">0.3</span></span>
+<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
+<span id="cb26-33"><a href="#cb26-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-34"><a href="#cb26-34" aria-hidden="true" tabindex="-1"></a>donutchart_custom</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Figura2_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="768"></p>
+</div>
+</div>
+<p>Unir graficas</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Insertar el donut plot dentro del barplot</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>Fig2B_combined_plot <span class="ot">&lt;-</span> <span class="fu">ggdraw</span>() <span class="sc">+</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">draw_plot</span>(barplot_2b) <span class="sc">+</span>  <span class="co"># Gráfico base</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">draw_plot</span>(donutchart_custom, </span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">x =</span> <span class="fl">0.35</span>, <span class="at">y =</span> <span class="fl">0.05</span>,       <span class="co"># Posición dentro del lienzo (ajustable)</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">width =</span> <span class="fl">0.8</span>, <span class="at">height =</span> <span class="fl">0.8</span>)  <span class="co"># Tamaño del donut ployt (ajustable)</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>Fig2B_combined_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Figura2_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="768"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="figura-2c-análisis-de-longitudes-de-mge-solitarios" class="level2">
+<h2 class="anchored" data-anchor-id="figura-2c-análisis-de-longitudes-de-mge-solitarios">Figura 2C Análisis de <strong>longitudes de MGE solitarios</strong></h2>
+<section id="paso-11-obtener-las-longitudes-todos-los-genomas" class="level3">
+<h3 class="anchored" data-anchor-id="paso-11-obtener-las-longitudes-todos-los-genomas">PASO 11: <strong>Obtener las longitudes (todos los genomas)</strong></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>mge_solitary_length_all <span class="ot">&lt;-</span> mge_solitary <span class="sc">%&gt;%</span> </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>) <span class="sc">%&gt;%</span>  <span class="co"># Selecciona las primeras 11 columnas</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(mge, mge_pa, <span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>) <span class="sc">%&gt;%</span>  <span class="co"># Convierte las columnas 1 a 9 a formato largo</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(mge_pa <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span>  <span class="co"># Filtra solo las filas donde el MGE está presente</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(., <span class="sc">!</span><span class="fu">grepl</span>(<span class="st">"UC"</span>, mge)) <span class="sc">%&gt;%</span>  <span class="co"># Elimina filas con "UC" en el nombre del MGE</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(., <span class="sc">!</span><span class="fu">grepl</span>(<span class="st">"Hotspot"</span>, mge))  <span class="co"># Elimina filas con "Hotspot" en el nombre del MGE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="paso-12-obtener-la-longitud-de-mges-de-los-genomas-de-alta-calidad" class="level3">
+<h3 class="anchored" data-anchor-id="paso-12-obtener-la-longitud-de-mges-de-los-genomas-de-alta-calidad"><strong>PASO 12: Obtener la longitud de MGEs de los genomas de alta calidad</strong></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>mge_solitary_length <span class="ot">&lt;-</span> mge_solitary <span class="sc">%&gt;%</span> </span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>) <span class="sc">%&gt;%</span>  <span class="co"># Selecciona las primeras 11 columnas</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(mge, mge_pa, <span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>) <span class="sc">%&gt;%</span>  <span class="co"># Convierte las columnas 1 a 9 a formato largo</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(mge_pa <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span>  <span class="co"># Filtra solo las filas donde el MGE está presente</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(., <span class="sc">!</span><span class="fu">grepl</span>(<span class="st">"UC"</span>, mge)) <span class="sc">%&gt;%</span>  <span class="co"># Elimina filas con "UC" en el nombre del MGE</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(., <span class="sc">!</span><span class="fu">grepl</span>(<span class="st">"Hotspot"</span>, mge)) <span class="sc">%&gt;%</span>  <span class="co"># Elimina filas con "Hotspot" en el nombre del MGE</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(island, <span class="fu">c</span>(<span class="st">"g1"</span>, <span class="st">"g2"</span>, <span class="st">"g3"</span>)) <span class="sc">%&gt;%</span>  <span class="co"># Divide el nombre de la isla en tres partes</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">genome =</span> <span class="fu">paste</span>(g1, g2, <span class="at">sep =</span> <span class="st">"."</span>)) <span class="sc">%&gt;%</span>  <span class="co"># Re-crea el nombre del genoma usando g1 y g2</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>g1, <span class="sc">-</span>g2, <span class="sc">-</span>g3) <span class="sc">%&gt;%</span>  <span class="co"># Elimina las columnas g1, g2 y g3</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(genome <span class="sc">%in%</span> glist_high<span class="sc">$</span>genome)  <span class="co"># Filtra solo los genomas de alta calidad</span></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Eliminar filas con NA</span></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>mge_solitary_length_clean <span class="ot">&lt;-</span> mge_solitary_length <span class="sc">%&gt;%</span> <span class="fu">na.omit</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="paso-13-graficar-de-caja-de-las-longitudes-de-islas-por-tipo-de-mge" class="level3">
+<h3 class="anchored" data-anchor-id="paso-13-graficar-de-caja-de-las-longitudes-de-islas-por-tipo-de-mge">PASO 13: Graficar de caja de las longitudes de islas por tipo de MGE</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>mge_length_boxplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mge_solitary_length, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(mge, <span class="sc">-</span>island_size, median), <span class="at">y =</span> island_size, <span class="at">fill =</span> mge)) <span class="sc">+</span> </span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>, <span class="at">notch =</span> <span class="cn">FALSE</span>, <span class="at">lwd =</span> <span class="dv">1</span>) <span class="sc">+</span>  <span class="co"># Crea un gráfico de caja sin mostrar los valores atípicos</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="st">"MGE"</span>, <span class="at">values =</span> colc, <span class="at">guide =</span> <span class="cn">FALSE</span>) <span class="sc">+</span>  <span class="co"># Asigna colores personalizados para cada tipo de MGE</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">quantile</span>(mge_solitary_length<span class="sc">$</span>island_size, <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.9</span>))) <span class="sc">+</span>  <span class="co"># Limita el eje Y entre el percentil 10 y 90</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span>  <span class="co"># Rota el gráfico para que las categorías estén en el eje Y</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Length (bp)"</span>, <span class="at">x =</span> <span class="st">""</span>) <span class="sc">+</span>  <span class="co"># Añade etiquetas a los ejes</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_cowplot</span>(<span class="at">font_size =</span> <span class="dv">20</span>)  <span class="co"># Aplica un tema limpio y ajusta el tamaño de fuente</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostrar el gráfico</span></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>mge_length_boxplot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Figura2_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="768"></p>
+</div>
+</div>
+</section>
+<section id="paso-14-unir-la-grafica-final" class="level3">
+<h3 class="anchored" data-anchor-id="paso-14-unir-la-grafica-final">PASO 14: Unir la grafica final</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a> <span class="co"># Figura A en el lado izquierdo</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>izquierda_plot <span class="ot">&lt;-</span> <span class="fu">plot_grid</span>(rclass_mge_alluvial, </span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">labels =</span> <span class="st">'A'</span>, <span class="at">label_size =</span> <span class="dv">12</span>,</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">ncol =</span> <span class="dv">1</span>)<span class="co"># Establecer una sola columna para B y C</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Figura B y C en el lado derecho</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>derecha_plot <span class="ot">&lt;-</span> <span class="fu">plot_grid</span>(Fig2B_combined_plot, mge_length_boxplot, </span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>                            <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">'B'</span>, <span class="st">'C'</span>), <span class="at">label_size =</span> <span class="dv">12</span>,</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>                            <span class="at">ncol =</span> <span class="dv">1</span>)<span class="co"># Establecer una sola columna para B y C</span></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Unir los gráficos</span></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>Figura2_final_plot <span class="ot">&lt;-</span> <span class="fu">plot_grid</span>(</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>  izquierda_plot,                      <span class="co"># Figura A en el lado izquierdo</span></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>  derecha_plot,                    <span class="co"># Figura B y C en el lado derecho</span></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">ncol =</span> <span class="dv">2</span>,                         <span class="co"># Diseño en dos columnas</span></span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">rel_widths =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">1.5</span>)        <span class="co"># Ajustar las proporciones de los anchos (A es más pequeño)</span></span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostrar el gráfico final</span></span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>Figura2_final_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Figura2_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="768"></p>
+</div>
+</div>
+</section>
 <section id="conclusiones" class="level3">
 <h3 class="anchored" data-anchor-id="conclusiones">Conclusiones</h3>
 

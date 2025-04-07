@@ -35,11 +35,11 @@ website:
         contents:
           - tema3.qmd
           - tema4.qmd
-          - retos.qmd
           - Figura2.qmd
           - Figura3.qmd
           - Figura4.qmd
           - Figura5.qmd
+          - retos.qmd
           
 
 

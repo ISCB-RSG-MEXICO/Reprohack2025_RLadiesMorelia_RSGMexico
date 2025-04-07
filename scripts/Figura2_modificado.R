@@ -1,54 +1,34 @@
----
-title: "Figura 2"
----
+# Título del manuscrito: Paisaje de elementos genéticos móviles y su carga de resistencia
+# a antibióticos en genomas procariotas
+#
+# El siguiente código se puede utilizar para crear la Figura 2 en el manuscrito
 
-## Censo de Elementos Genéticos Móviles en Procariotas
+# Fecha de Creacion: 19-02-2021
+# Autor: supriya.khedkar@embl.de
 
-![Figura 2. Censo integral de elementos genéticos móviles (MGEs) en procariotas](img/figure2.jpeg){width="100%"}
 
-(A) Contribución de cada una de las cinco principales familias de recombinasas a las seis categorías de MGEs, así como a las recombinasas celulares.
-(B) Número de MGEs por categoría (gráfico de barras) y porcentaje de cada categoría (gráfico de dona) en 76,000 genomas de 3,000 especies, utilizando el flujo de trabajo descrito en la Figura 1.
-(C) Longitudes predichas de MGEs no anidados en pares de bases. Los bigotes representan el rango entre los percentiles 10 y 90.
+# Modificado por: Evelia Coss
+# Fechad de modificacion: 6 de abril 2025
 
-```{r paquetes, echo=FALSE, message=FALSE}
-library(tidyverse) # Manipulacion de datos y creación de gráficos
-library(cowplot) # Unir graficos y Para mejorar el estilo visual de los gráficos.
-library(ggpubr) # Extensión de ggplot2 para crear gráficos rápidos y personalizables de publicación.
-library(ggforce) # Extensión de ggplot2 para crear gráficos avanzados y complejos.
-library(ggrepel) # texto que no sobrelape
-```
+#---- Cargar paquetes ----- 
+library(tidyverse)
+library(cowplot)
+library(ggpubr)
+library(ggforce)
 
-### PASO 1: Importar datos
-
-1.  **Uso de Archivos Comprimidos:** Cuando trabajen con archivos comprimidos (por ejemplo, con extensión .gz), no es necesario descomprimirlos manualmente antes de cargarlos en R.
-
-2.  **Código Correcto para Cargar Archivos Comprimidos:** Para cargar archivos comprimidos sin descomprimirlos previamente, utilicen el siguiente código:
-
-```{r ImportData}
+#---- PASO 1: Importar datos ----- 
 mge_pg <- read_tsv("data/processed_data/mge_bins_per_genome_final.txt.gz", col_names = T)
 mge_solitary <- read_tsv("data/processed_data/solitary_mge_bins_final.txt.gz", col_names = F)
 rec_class <- read_tsv("data/raw_data/recombinase.list.gz", col_names = F)
 glist <- read_tsv("data/raw_data/genome_status_supplementary_tableS2.txt.gz", col_names = T)
-```
 
-::: {.callout-note icon="false"}
-## Diferencia con el Código Original
-
-En el código original, el archivo estaba descomprimido. Sin embargo, con la extensión `.gz`, se puede leer directamente el archivo comprimido sin la necesidad de usar herramientas adicionales para descomprimirlo.
-:::
-
-### PASO 2: Manipulación y Limpieza de los datos
-
-```{r LimpiezaData}
+#---- PASO 2: Manipulación y Limpieza de los datos  ----- 
 # Obtener los genomas con la mas alta calidad
 glist_high <- glist %>% 
   filter(genome_quality == "high")
 
 # Renombrar columnas en rec_class
-rec_class <- rec_class %>% 
-  # Cambiar X1 por class y X2 por mgeR
-  dplyr::rename(class = X1, mgeR = X2)
-
+rec_class <- rec_class %>% dplyr::rename(class = X1, mgeR = X2)
 # Renombrar columnas en mge_solitary
 mge_solitary <- mge_solitary %>% 
   dplyr::rename(IS_Tn = X1, Phage = X2, Phage_like = X3, CE = X4, Integron = X5, MI = X6,	Hotspot	= X7, UC = X8,	Cellular = X9, island = X10, island_size = X11, prot_count = X12,	phage_count = X13, CONJ_T4SS = X14,	mgeR = X15)
@@ -57,8 +37,8 @@ mge_solitary <- mge_solitary %>%
 mge_solitary_melted <- mge_solitary %>% 
   select(1:11,15) %>% # Seleccionar columnas de la 1 a la 11, y la 15
   # Convierte las columnas 1 a 9 de formato ancho a largo utilizando gather().
-    # - mge: Nombre de la nueva columna que contendrá los nombres originales de las variables.
-    # - mge_pa: Nueva columna que almacenará los valores de las celdas de las columnas originales.
+  # - mge: Nombre de la nueva columna que contendrá los nombres originales de las variables.
+  # - mge_pa: Nueva columna que almacenará los valores de las celdas de las columnas originales.
   gather(mge, mge_pa, 1:9) %>% 
   filter(mge_pa ==1) %>% # filtrar por valores igual a 1 en la columna mge_pa
   filter(.,!grepl("UC", mge)) %>% # Elimina las filas donde la columna mge contenga la cadena "UC", usando grepl() con ! (negación lógica).
@@ -68,11 +48,7 @@ mge_solitary_melted <- mge_solitary %>%
   select(-mgeRn) %>% # Elimina la columna mgeRn
   mutate(mgeR = str_replace_all(mgeR,"&","")) # Modifica mgeR, eliminando todos los caracteres &.
 
-# Visualizar datos
-head(mge_solitary_melted)
-```
 
-```{r GenomaBuenaCalidad}
 mge_solitary_melted_dw <- mge_solitary_melted %>% 
   select(-mgeR,-mge_pa) %>%  # Elimina las columnas mgeR y mge_pa
   mutate(island1 = island) %>% # Crea una nueva columna island1, duplicando el valor de la columna island.
@@ -82,20 +58,10 @@ mge_solitary_melted_dw <- mge_solitary_melted %>%
   filter(genome %in% glist_high$genome) %>% # Solo quedarse con genomas de alta calidad
   select(-genome) # Eliminar columna genoma
 
-head(mge_solitary_melted_dw)
-```
+# Almacenar variable
+#write.table(mge_solitary_melted_dw,file="processed_data/mge_bins_final_solitary_collapsed.txt", sep = "\t", row.names = F, col.names = T, quote = F)
 
-Almacenar variable
-
-```{r mge_solitary_melted_dw save, eval=FALSE}
-write.table(mge_solitary_melted_dw,file="processed_data/mge_bins_final_solitary_collapsed.txt", sep = "\t", row.names = F, col.names = T, quote = F)
-```
-
-### PASO 3: Clasificación y Conteo de MGE
-
-Distribución de diferentes clases de MGE y cuántas veces aparecen en el conjunto de datos.
-
-```{r}
+# ----- PASO 3: Clasificación y Conteo de MGE ----
 # Unir la informacion a traves de la columna mgeR
 mge_solitary_rclass_all <- left_join(mge_solitary_melted, rec_class, by = "mgeR") %>% 
   select(-island_size, -mge_pa, -mgeR) %>% # Elimina las columnas island_size, mge_pa y mgeR
@@ -106,11 +72,8 @@ mge_solitary_rclass_all <- left_join(mge_solitary_melted, rec_class, by = "mgeR"
   summarise(count = n()) # Cuenta cuántas veces aparece cada combinación de class y mge
 
 head(mge_solitary_rclass_all)
-```
 
-Distribución de diferentes clases de MGE en **genomas de alta calidad.**
-
-```{r}
+# Distribución de diferentes clases de MGE en genomas de alta calidad.
 # Unir la informacion a traves de la columna mgeR
 mge_solitary_rclass <- left_join(mge_solitary_melted,rec_class, by = "mgeR") %>% 
   select(-island_size, -mge_pa, -mgeR) %>% # Elimina las columnas island_size, mge_pa y mgeR
@@ -122,19 +85,9 @@ mge_solitary_rclass <- left_join(mge_solitary_melted,rec_class, by = "mgeR") %>%
   summarise(count = n()) # Cuenta cuántas veces aparece cada combinación de class y mge
 
 head(mge_solitary_rclass)
-```
 
-## Figura 2A: Contribución de las principales familias de recombinasas
-
-### PASO 4: Selección de las familias de recombinasas
-
-Definición de Colores para las Familias de Recombinasa (vector)
-
-::: callout-note
-Crea un vector `colclass` con códigos de color hexadecimales (en este caso, todos son `"CDCCCC"`).
-:::
-
-```{r pallette_recombinasas}
+# -----Figura 2A: Contribución de las principales familias de recombinasa ------
+## ---- PASO 4: Selección de las familias de recombinasas ------
 # Paleta general de colores
 colc <- c("#D55E00", "#E69F00", "#F0E442", "#56B4E9", "#009E73", "#0072B2","#CECCCC")
 names(colc) <- c("IS_Tn", "Phage", "Phage_like", "CE", "Integron", "MI", "Cellular") 
@@ -143,36 +96,17 @@ colclass <- c("CDCCCC", "CDCCCC", "CDCCCC", "CDCCCC", "CDCCCC")
 names(colclass) <- c("cas", "dde", "huh", "ser", "tyr")
 colall <- c(colclass, colc)
 colall
-```
 
-Ordenamiento de las Categorías
-
-```{r order_recombinasas}
+# Ordenamiento de las Categorías
 order_class <- c( "cas", "dde","huh", "ser", "tyr")
 order_mge <- c("IS_Tn", "Phage_like", "Phage", "CE", "MI", "Integron", "Cellular")
-```
-
-Define el orden en el que se mostrarán las clases (`order_class`) y los tipos de MGE (`order_mge`).
-
--   `order_class` organiza las familias de recombinasas.
--   `order_mge` organiza los distintos tipos de elementos genéticos móviles.
-
-Transformación de Datos para Visualización
-
-```{r}
+#Transformación de Datos para Visualización
 mge_solitary_rclass$mge <- factor(mge_solitary_rclass$mge, levels = order_mge) # Convierte la variable mge en un factor, asignándole el orden definido en order_mge
 mge_solitary_rclass_p <- gather_set_data(mge_solitary_rclass, 1:2) # Reestructura los datos con gather_set_data(), seleccionando las primeras dos columnas (1:2). NOTA: Se asume que esta función organiza los datos en un formato adecuado para un gráfico tipo "alluvial" o "sankey".
 mge_solitary_rclass_p$y <- factor(mge_solitary_rclass_p$y, levels = c(order_class, order_mge)) # Convierte la variable y en un factor con el orden de order_class y order_mge, asegurando que los datos se alineen correctamente en la visualización.
 mge_solitary_rclass_p <- mge_solitary_rclass_p %>% add_column(col = colall[match(.$y, names(colall))])
-```
 
--   Añade una columna `col` con **colores** según la correspondencia entre los valores de `y` y los nombres en `colall`.
-
-    -   `match(.$y, names(colall))` encuentra el color correspondiente a cada categoría en `colall`.
-
-    -   `add_column()` agrega esta información a `mge_solitary_rclass_p`.
-
-```{r}
+# Figura 2A - Dada por los autores
 rclass_mge_alluvial <- ggplot(mge_solitary_rclass_p, aes(x, id = id, split = y, value = count)) +
   # x = categorias, id = identificador unico para cada flujo
   # split = y conexión entre las categorías (clases de recombinasas y tipos de MGE).
@@ -194,7 +128,7 @@ rclass_mge_alluvial <- ggplot(mge_solitary_rclass_p, aes(x, id = id, split = y, 
   scale_y_continuous(breaks = NULL, expand = c(0.1, 0)) +
   # Asigna colores a los MGE según el vector colc y oculta la leyenda (guide = "none").
   scale_fill_manual(
-  values = colc,
+    values = colc,
     guide = "none"
   ) +
   labs(fill = "") +
@@ -205,12 +139,13 @@ rclass_mge_alluvial <- ggplot(mge_solitary_rclass_p, aes(x, id = id, split = y, 
     axis.ticks = element_blank(),
     plot.margin = margin(14, 1.5, 2, 1.5)
   )
+
 rclass_mge_alluvial
-```
 
-Pero esto no se ve como el articulo, por lo que decidimos cambiar el estilo de los bloques de texto a blanco con bordes negros.
+# Pero esto no se ve como el articulo, por lo que decidimos cambiar el estilo de los bloques 
+# de texto a blanco con bordes negros.
 
-```{r}
+# Figura 2A - Figura completa propuesta por Rladies-Morelia (parecida a la del articulo)
 rclass_mge_alluvial <- ggplot(mge_solitary_rclass_p, aes(x, id = id, split = y, value = count)) +
   # x = categorias, id = identificador unico para cada flujo
   # split = y conexión entre las categorías (clases de recombinasas y tipos de MGE).
@@ -232,7 +167,7 @@ rclass_mge_alluvial <- ggplot(mge_solitary_rclass_p, aes(x, id = id, split = y, 
   scale_y_continuous(breaks = NULL, expand = c(0.1, 0)) +
   # Asigna colores a los MGE según el vector colc y oculta la leyenda (guide = "none").
   scale_fill_manual(
-  values = colc,
+    values = colc,
     guide = "none"
   ) +
   labs(fill = "") +
@@ -247,19 +182,15 @@ rclass_mge_alluvial <- ggplot(mge_solitary_rclass_p, aes(x, id = id, split = y, 
 # Agregar titulos superiores
 rclass_mge_alluvial <- rclass_mge_alluvial +
   annotate("text", x = 1, y = max(mge_solitary_rclass_p$count) * 2.5, label = "recombinase \nfamilies", size = 5) +
-annotate("text", x = 2, y = max(mge_solitary_rclass_p$count) * 2.5, label = "MGEs", size = 5)
+  annotate("text", x = 2, y = max(mge_solitary_rclass_p$count) * 2.5, label = "MGEs", size = 5)
 
 # Figura 2A completa
 rclass_mge_alluvial
-```
 
-## Figura 2B Distribucion de MGEs por categoría 
 
-Número de MGEs por categoría (gráfico de barras) y porcentaje de cada categoría (gráfico de dona) en 76,000 genomas de 3,000 especies, utilizando el flujo de trabajo descrito en la Figura 1.
+# -----Figura 2B: barplot ------
 
-### PASO 5: Calcular el total de MGEs en todos los genomas (sin filtrar por calidad)
-
-```{r}
+# PASO 5: Calcular el total de MGEs en todos los genomas (sin filtrar por calidad)
 mge_pg_melt_all <- mge_pg %>% 
   # Reestructura el data frame en formato largo (long format)
   reshape2::melt() %>% 
@@ -272,12 +203,7 @@ mge_pg_melt_all <- mge_pg %>%
   # Filtra para excluir los elementos anotados como "Hotspot"
   filter(., !grepl("Hotspot", variable))
 
-head(mge_pg_melt_all)
-```
-
-### PASO 6: Calcular el total de MGEs pero solo para genomas de alta calidad
-
-```{r}
+#PASO 6: Calcular el total de MGEs pero solo para genomas de alta calidad
 mge_pg_melt <- mge_pg %>% 
   # Filtra para conservar solo los genomas presentes en la lista de alta calidad (glist_high)
   filter(Genome %in% glist_high$genome) %>% 
@@ -292,71 +218,7 @@ mge_pg_melt <- mge_pg %>%
   # Excluye los elementos anotados como "Hotspot"
   filter(., !grepl("Hotspot", variable))
 
-head(mge_pg_melt)
-```
-
-### PASO 7: Generar un gráfico de barras para visualizar el total de MGEs en genomas de alta calidad
-
-```{r}
-barplot_2b <- ggplot(mge_pg_melt, aes(x = reorder(variable, total, sum), y = total, fill = variable)) +
-  # Crea barras con altura según el total
-  geom_bar(stat = 'identity') +
-  # Añade etiquetas con el valor total encima de cada barra
-  geom_text(aes(label = total)) + 
-  # Invierte los ejes para una mejor visualización (barras horizontales)
-  coord_flip() +
-  # Aplica una paleta de colores personalizada (definida en 'colc') sin leyenda
-  scale_fill_manual("MGE", values = colc, guide = FALSE) +
-  # Aplica el tema de cowplot para estilo limpio
-  theme_cowplot() + 
-  # Añade etiquetas a los ejes
-  labs(x = "", y = "Counts")
-
-# Muestra el gráfico
-barplot_2b
-```
-
-### PASO 8: Calcular la proporción relativa de cada MGE (excluyendo los de tipo "Cellular") y genera etiquetas para graficar
-
-```{r}
-mge_pg_relative <- mge_pg_melt %>% 
-  # Excluye las variables que contienen la palabra "Cellular"
-  filter(., !grepl("Cellular", variable)) %>% 
-  # Calcula el porcentaje relativo de cada MGE respecto al total
-  mutate(
-    rel = round((total / sum(total)) * 100, digits = 2),
-    # Crea etiquetas con el nombre del MGE y su porcentaje
-    labs = paste0(variable, " (", rel, "%)")
-  ) %>%
-  # Ordena por total ascendente para mejor visualización en la gráfica
-  arrange(total)
-
-head(mge_pg_relative)
-```
-
-### PASO 9: Generar un gráfico de dona (donut chart) para visualizar proporciones relativas de MGEs
-
-```{r}
-donutchart_2b <- ggdonutchart(
-  mge_pg_relative,     # Data frame con los porcentajes
-  "rel",               # Variable a usar como valor (porcentaje)
-  label = "labs",      # Etiquetas que se mostrarán en la gráfica
-  lab.pos = "in",      # Posición de etiquetas dentro del gráfico
-  fill = "variable",   # Colores de relleno asignados por tipo de MGE
-  color = "white",     # Color del borde de cada sección de la dona
-  # Paleta personalizada de colores para los MGEs
-  palette = c("#D55E00", "#E69F00", "#F0E442", "#56B4E9", "#009E73", "#0072B2", "#CECCCC")
-)
-
-# Muestra el gráfico de dona
-donutchart_2b
-```
-
-### PASO 10: Modificaciones de la Figura 2B
-
-En esta versión del gráfico de barras, se hicieron **dos ajustes importantes** para mejorar la **legibilidad de los números** que aparecen al lado de cada barra:
-
-```{r}
+# Barplot
 barplot_2b <- ggplot(mge_pg_melt, aes(x = reorder(variable, total, sum), y = total, fill = variable)) +
   # Crea barras con altura según el total
   geom_bar(stat = 'identity') +
@@ -375,38 +237,20 @@ barplot_2b <- ggplot(mge_pg_melt, aes(x = reorder(variable, total, sum), y = tot
 
 # Muestra el gráfico
 barplot_2b
-```
 
-::: callout-note
--   El parámetro `hjust = -0.05` **mueve las etiquetas hacia la derecha** del final de cada barra.
-
--   Sin esta modificación, los números podrían quedar demasiado pegados a la barra, o incluso **encimarse o cortarse**.
-
--   💡 **`hjust` controla la alineación horizontal**:
-
-    -   `hjust = 1`: texto alineado al final de la barra.
-
-    -   `hjust = 0`: alineado al inicio de la barra.
-
-    -   `hjust < 0`: mueve el texto **más allá del final**, hacia la derecha.
-:::
-
-En esta versión del gráfico de donut plot, se hicieron **ajusto el texto** para mejorar la **legibilidad de las proporciones** que aparecen al lado del plot:
-
-```{r}
-# Calcular proporciones y posiciones
-mge_pg_relative <- mge_pg_melt %>%
-  filter(!grepl("Cellular", variable)) %>%
+# -----Figura 2B: donut chart ------
+# PASO 8: Calcular la proporción relativa de cada MGE (excluyendo los de tipo "Cellular") y genera etiquetas para graficar
+mge_pg_relative <- mge_pg_melt %>% 
+  # Excluye las variables que contienen la palabra "Cellular"
+  filter(., !grepl("Cellular", variable)) %>% 
+  # Calcula el porcentaje relativo de cada MGE respecto al total
   mutate(
-    rel = round((total / sum(total)) * 100, 2),
+    rel = round((total / sum(total)) * 100, digits = 2),
+    # Crea etiquetas con el nombre del MGE y su porcentaje
     labs = paste0(variable, " (", rel, "%)")
   ) %>%
-  arrange(desc(variable)) %>%
-  mutate(
-    ymax = cumsum(rel),
-    ymin = c(0, head(ymax, n = -1)),
-    label_pos = (ymin + ymax) / 2
-  )
+  # Ordena por total ascendente para mejor visualización en la gráfica
+  arrange(total)
 
 # Gráfico de dona con etiquetas visibles y repelentes
 donutchart_custom <- ggplot(mge_pg_relative, aes(ymax = ymax, ymin = ymin, xmax = 4.5, xmin = 2.8, fill = variable)) +
@@ -428,37 +272,17 @@ donutchart_custom <- ggplot(mge_pg_relative, aes(ymax = ymax, ymin = ymin, xmax 
   theme(legend.position = "none")
 
 donutchart_custom
-```
 
-Unir graficas
+# -----Figura 2C: boxplot ------
 
-```{r}
-# Insertar el donut plot dentro del barplot
-Fig2B_combined_plot <- ggdraw() +
-  draw_plot(barplot_2b) +  # Gráfico base
-  draw_plot(donutchart_custom, 
-            x = 0.35, y = 0.05,       # Posición dentro del lienzo (ajustable)
-            width = 0.8, height = 0.8)  # Tamaño del donut ployt (ajustable)
-
-Fig2B_combined_plot
-```
-
-## Figura 2C Análisis de **longitudes de MGE solitarios**
-
-### PASO 11: **Obtener las longitudes (todos los genomas)**
-
-```{r}
 mge_solitary_length_all <- mge_solitary %>% 
   select(1:11) %>%  # Selecciona las primeras 11 columnas
   gather(mge, mge_pa, 1:9) %>%  # Convierte las columnas 1 a 9 a formato largo
   filter(mge_pa == 1) %>%  # Filtra solo las filas donde el MGE está presente
   filter(., !grepl("UC", mge)) %>%  # Elimina filas con "UC" en el nombre del MGE
   filter(., !grepl("Hotspot", mge))  # Elimina filas con "Hotspot" en el nombre del MGE
-```
 
-### **PASO 12: Obtener la longitud de MGEs de los genomas de alta calidad**
-
-```{r}
+#high quality genomes
 mge_solitary_length <- mge_solitary %>% 
   select(1:11) %>%  # Selecciona las primeras 11 columnas
   gather(mge, mge_pa, 1:9) %>%  # Convierte las columnas 1 a 9 a formato largo
@@ -472,11 +296,7 @@ mge_solitary_length <- mge_solitary %>%
 
 # Eliminar filas con NA
 mge_solitary_length_clean <- mge_solitary_length %>% na.omit()
-```
-
-### PASO 13: Graficar de caja de las longitudes de islas por tipo de MGE
-
-```{r}
+  
 mge_length_boxplot <- ggplot(mge_solitary_length, aes(x = reorder(mge, -island_size, median), y = island_size, fill = mge)) + 
   geom_boxplot(outlier.shape = NA, notch = FALSE, lwd = 1) +  # Crea un gráfico de caja sin mostrar los valores atípicos
   scale_fill_manual("MGE", values = colc, guide = FALSE) +  # Asigna colores personalizados para cada tipo de MGE
@@ -487,20 +307,17 @@ mge_length_boxplot <- ggplot(mge_solitary_length, aes(x = reorder(mge, -island_s
 
 # Mostrar el gráfico
 mge_length_boxplot
-```
 
-### PASO 14: Unir la grafica final
-
-```{r, warning=FALSE}
- # Figura A en el lado izquierdo
+# ------- Figura 2 completa ----------
+# Figura A en el lado izquierdo
 izquierda_plot <- plot_grid(rclass_mge_alluvial, 
                             labels = 'A', label_size = 12,
                             ncol = 1)# Establecer una sola columna para B y C
 
 # Figura B y C en el lado derecho
 derecha_plot <- plot_grid(Fig2B_combined_plot, mge_length_boxplot, 
-                            labels = c('B', 'C'), label_size = 12,
-                            ncol = 1)# Establecer una sola columna para B y C
+                          labels = c('B', 'C'), label_size = 12,
+                          ncol = 1)# Establecer una sola columna para B y C
 
 # Unir los gráficos
 Figura2_final_plot <- plot_grid(
@@ -512,8 +329,3 @@ Figura2_final_plot <- plot_grid(
 
 # Mostrar el gráfico final
 Figura2_final_plot
-```
-
-Puedes encontrar el script completo en Figura2_modificado.R.
-
-### Conclusiones
