@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -222,9 +256,23 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#distribución-taxonómica-de-los-elementos-genéticos-móviles" id="toc-distribución-taxonómica-de-los-elementos-genéticos-móviles" class="nav-link active" data-scroll-target="#distribución-taxonómica-de-los-elementos-genéticos-móviles">Distribución Taxonómica de los Elementos Genéticos Móviles</a></li>
-  <li><a href="#figura-3a" id="toc-figura-3a" class="nav-link" data-scroll-target="#figura-3a">Figura 3A</a></li>
-  <li><a href="#figura-3b" id="toc-figura-3b" class="nav-link" data-scroll-target="#figura-3b">Figura 3B</a></li>
+  <li><a href="#distribución-taxonómica-de-los-elementos-genéticos-móviles" id="toc-distribución-taxonómica-de-los-elementos-genéticos-móviles" class="nav-link active" data-scroll-target="#distribución-taxonómica-de-los-elementos-genéticos-móviles">Distribución Taxonómica de los Elementos Genéticos Móviles</a>
+  <ul class="collapse">
+  <li><a href="#paso-1-importar-datos" id="toc-paso-1-importar-datos" class="nav-link" data-scroll-target="#paso-1-importar-datos">PASO 1: Importar datos</a></li>
+  <li><a href="#paso-2-manipulación-y-limpieza-de-los-datos" id="toc-paso-2-manipulación-y-limpieza-de-los-datos" class="nav-link" data-scroll-target="#paso-2-manipulación-y-limpieza-de-los-datos">PASO 2: Manipulación y Limpieza de los datos</a></li>
+  <li><a href="#paso-3-data.frame-con-combinaciones" id="toc-paso-3-data.frame-con-combinaciones" class="nav-link" data-scroll-target="#paso-3-data.frame-con-combinaciones">PASO 3: Data.frame con combinaciones</a></li>
+  <li><a href="#paso-4-contar-el-número-de-genomas-por-especie-y-clase-taxonómica" id="toc-paso-4-contar-el-número-de-genomas-por-especie-y-clase-taxonómica" class="nav-link" data-scroll-target="#paso-4-contar-el-número-de-genomas-por-especie-y-clase-taxonómica">PASO 4: Contar el número de genomas por especie y clase taxonómica</a></li>
+  <li><a href="#paso-5-agrupar-todos-los-genomas-por-especie-speci" id="toc-paso-5-agrupar-todos-los-genomas-por-especie-speci" class="nav-link" data-scroll-target="#paso-5-agrupar-todos-los-genomas-por-especie-speci">PASO 5: Agrupar todos los genomas por especie (specI)</a></li>
+  <li><a href="#paso-6-análisis-por-especie-speci-a-nivel-de-clase" id="toc-paso-6-análisis-por-especie-speci-a-nivel-de-clase" class="nav-link" data-scroll-target="#paso-6-análisis-por-especie-speci-a-nivel-de-clase">PASO 6: Análisis por especie (specI) a nivel de clase</a></li>
+  <li><a href="#paso-7-normalización-por-tamaño-de-genoma" id="toc-paso-7-normalización-por-tamaño-de-genoma" class="nav-link" data-scroll-target="#paso-7-normalización-por-tamaño-de-genoma">PASO 7: Normalización por tamaño de genoma</a></li>
+  <li><a href="#paso-8-tabla-con-pvalues-y-especies" id="toc-paso-8-tabla-con-pvalues-y-especies" class="nav-link" data-scroll-target="#paso-8-tabla-con-pvalues-y-especies">PASO 8: Tabla con pvalues y especies</a></li>
+  </ul></li>
+  <li><a href="#datos-para-mapa-de-colores-para-filogenia" id="toc-datos-para-mapa-de-colores-para-filogenia" class="nav-link" data-scroll-target="#datos-para-mapa-de-colores-para-filogenia">Datos para Mapa de colores para filogenia</a></li>
+  <li><a href="#paso-9-cargar-funciones" id="toc-paso-9-cargar-funciones" class="nav-link" data-scroll-target="#paso-9-cargar-funciones">PASO 9: Cargar funciones</a>
+  <ul class="collapse">
+  <li><a href="#paso-10-obtener-las-coordenadas" id="toc-paso-10-obtener-las-coordenadas" class="nav-link" data-scroll-target="#paso-10-obtener-las-coordenadas">PASO 10: Obtener las coordenadas</a></li>
+  </ul></li>
+  <li><a href="#figura-3a-barplot-de-abundancia-relativa-de-mges-por-clase-taxonómica" id="toc-figura-3a-barplot-de-abundancia-relativa-de-mges-por-clase-taxonómica" class="nav-link" data-scroll-target="#figura-3a-barplot-de-abundancia-relativa-de-mges-por-clase-taxonómica">Figura 3A Barplot de abundancia relativa de MGEs por clase taxonómica</a></li>
   </ul>
 </nav>
     </div>
@@ -250,13 +298,559 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="distribución-taxonómica-de-los-elementos-genéticos-móviles" class="level2">
 <h2 class="anchored" data-anchor-id="distribución-taxonómica-de-los-elementos-genéticos-móviles">Distribución Taxonómica de los Elementos Genéticos Móviles</h2>
-<p><img src="img/figure3.jpeg" class="img-fluid" style="width:80.0%" alt="Figura 3. Distribución taxonómica de los MGEs"> (A) Prevalencia de las categorías de MGEs y predominio de los elementos transponibles en distintas clases taxonómicas (con al menos 10 genomas), ordenadas según la filogenia basada en genes marcadores taxonómicos (38). (B) Asociación de las categorías de MGEs (promedio de MGEs por especie) con diferentes clases taxonómicas (prueba de rango de Wilcoxon, * indica un valor de P &lt; 0.05 después de la corrección de Bonferroni).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/figure3.jpeg" class="img-fluid figure-img" style="width:92.0%"></p>
+<figcaption class="figure-caption">Figura 3. Distribución taxonómica de los MGEs</figcaption>
+</figure>
+</div>
+<p>A. Prevalencia de las categorías de MGEs y predominio de los elementos transponibles en distintas clases taxonómicas (con al menos 10 genomas), ordenadas según la filogenia basada en genes marcadores taxonómicos (38).</p>
+<p>B. Asociación de las categorías de MGEs (promedio de MGEs por especie) con diferentes clases taxonómicas (prueba de rango de Wilcoxon, * indica un valor de P &lt; 0.05 después de la corrección de Bonferroni).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># Manipulacion de datos</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(phytools)  <span class="co"># Manipulacion de arboles filogeneticos</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(viridisLite)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(viridis)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cowplot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="paso-1-importar-datos" class="level3">
+<h3 class="anchored" data-anchor-id="paso-1-importar-datos">PASO 1: Importar datos</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>tax <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"data/raw_data/species_with_atleast_2genomes.list.gz"</span>, <span class="at">col_names=</span>F)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>db <span class="ot">&lt;-</span><span class="fu">read_tsv</span>(<span class="st">"data/processed_data/mge_bins_per_genome_final.txt.gz"</span>, <span class="at">col_names =</span> T)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>gs <span class="ot">&lt;-</span><span class="fu">read_tsv</span>(<span class="st">"data/raw_data/genome_size.txt.gz"</span>, <span class="at">col_names =</span> T)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>class_tree <span class="ot">&lt;-</span> <span class="fu">read.tree</span>(<span class="st">"data/raw_data/progenomes2_class_tree.nwk"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>glist <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"data/raw_data/genome_status_supplementary_tableS2.txt.gz"</span>, <span class="at">col_names =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Cargar paleta de colores</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Paleta general de colores</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>colc <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"#D55E00"</span>, <span class="st">"#E69F00"</span>, <span class="st">"#F0E442"</span>, <span class="st">"#56B4E9"</span>, <span class="st">"#009E73"</span>, <span class="st">"#0072B2"</span>,<span class="st">"#CECCCC"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(colc) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"IS_Tn"</span>, <span class="st">"Phage"</span>, <span class="st">"Phage_like"</span>, <span class="st">"CE"</span>, <span class="st">"Integron"</span>, <span class="st">"MI"</span>, <span class="st">"Cellular"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
-<section id="figura-3a" class="level2">
-<h2 class="anchored" data-anchor-id="figura-3a">Figura 3A</h2>
+<section id="paso-2-manipulación-y-limpieza-de-los-datos" class="level3">
+<h3 class="anchored" data-anchor-id="paso-2-manipulación-y-limpieza-de-los-datos">PASO 2: Manipulación y Limpieza de los datos</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtener los genomas con la mas alta calidad</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>glist_high <span class="ot">&lt;-</span> glist <span class="sc">%&gt;%</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(genome_quality <span class="sc">==</span> <span class="st">"high"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Renombra las columnas del dataframe tax para un nombre más legible</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(tax) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"specI"</span>, <span class="st">"genomeID"</span>, <span class="st">"kingdom"</span>, <span class="st">"phylum"</span>, <span class="st">"class"</span>, <span class="st">"genus"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Reestructura la base de datos 'db' de formato ancho a largo usando reshape2::melt</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>mdb <span class="ot">&lt;-</span> db <span class="sc">%&gt;%</span> reshape2<span class="sc">::</span><span class="fu">melt</span>() </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Renombra las columnas de la base de datos reestructurada para claridad</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>mdb <span class="ot">&lt;-</span> mdb <span class="sc">%&gt;%</span> </span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">mge =</span> variable, <span class="at">count =</span> value, <span class="at">genomeID =</span> <span class="st">'Genome'</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Filtra para incluir solo los genomas de alta calidad (genomas en glist_high$genome)</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(genomeID <span class="sc">%in%</span> glist_high<span class="sc">$</span>genome)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
-<section id="figura-3b" class="level2">
-<h2 class="anchored" data-anchor-id="figura-3b">Figura 3B</h2>
+<section id="paso-3-data.frame-con-combinaciones" class="level3">
+<h3 class="anchored" data-anchor-id="paso-3-data.frame-con-combinaciones">PASO 3: Data.frame con combinaciones</h3>
+<section id="datos-de-formato" class="level4">
+<h4 class="anchored" data-anchor-id="datos-de-formato">Datos de formato</h4>
+<p>Crear un data.frame que contenga para cada specI para cada MGE: recuentos genómicos (genomeCnt),</p>
+<ul>
+<li>conteos totales (cnt_tot),</li>
+<li>promedio de recuentos entre genomas (avg_cnt),</li>
+<li>número de genomas en los que estaba presente el MGE (pa),</li>
+<li>la fracción de genomas con el MGE presente (frac) más información taxonómica</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Selecciona las columnas necesarias para trabajar con los datos</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>mdb_cnt <span class="ot">&lt;-</span> mdb <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="dv">1</span>, <span class="dv">7</span>, <span class="dv">8</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtiene los valores únicos de MGE</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>all_mge <span class="ot">&lt;-</span> <span class="fu">unique</span>(mdb<span class="sc">$</span>mge)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Inicializa un data.frame vacío donde se almacenarán las combinaciones</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>db_tax <span class="ot">&lt;-</span> <span class="cn">NULL</span>       </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Itera sobre todos los valores únicos de MGE</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(all_mge)){</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Para cada MGE, se agrega una nueva columna 'mge' con el valor del MGE actual</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  db_tax_sing <span class="ot">&lt;-</span> tax <span class="sc">%&gt;%</span> <span class="fu">add_column</span>(<span class="at">mge =</span> all_mge[i])</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Une el data.frame actual con el anterior (rbind), creando una tabla con todas las combinaciones</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  db_tax <span class="ot">&lt;-</span> <span class="fu">rbind</span>(db_tax, db_tax_sing)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Muestra las primeras filas del data.frame resultante</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(db_tax)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 7
+  specI               genomeID             kingdom  phylum         class               genus            mge  
+  &lt;chr&gt;               &lt;chr&gt;                &lt;chr&gt;    &lt;chr&gt;          &lt;chr&gt;               &lt;chr&gt;            &lt;fct&gt;
+1 specI_v3_Cluster1   100053.SAMN02947772  Bacteria Spirochaetes   Spirochaetia        Leptospirales    IS_Tn
+2 specI_v3_Cluster201 1000561.SAMN02471202 Bacteria Proteobacteria Gammaproteobacteria Pseudomonadales  IS_Tn
+3 specI_v3_Cluster361 1000562.SAMN03114893 Bacteria Firmicutes     Bacilli             Lactobacillales  IS_Tn
+4 specI_v3_Cluster371 1000565.SAMN02471991 Bacteria Proteobacteria Betaproteobacteria  Nitrosomonadales IS_Tn
+5 specI_v3_Cluster564 1000568.SAMN00255229 Bacteria Firmicutes     Negativicutes       Veillonellales   IS_Tn
+6 specI_v3_Cluster565 1000569.SAMN00255226 Bacteria Firmicutes     Negativicutes       Veillonellales   IS_Tn</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="paso-4-contar-el-número-de-genomas-por-especie-y-clase-taxonómica" class="level3">
+<h3 class="anchored" data-anchor-id="paso-4-contar-el-número-de-genomas-por-especie-y-clase-taxonómica">PASO 4: Contar el número de genomas por especie y clase taxonómica</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtra los genomas que están en 'glist_high$genome' y los combina con los recuentos de MGE</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>db_cnt_all <span class="ot">&lt;-</span> db_tax <span class="sc">%&gt;%</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(genomeID <span class="sc">%in%</span> glist_high<span class="sc">$</span>genome) <span class="sc">%&gt;%</span>   <span class="co"># Filtra para obtener solo los genomas que están en 'glist_high$genome'</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(., mdb_cnt, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"genomeID"</span>, <span class="st">"mge"</span>))  <span class="co"># Realiza una unión de izquierda con 'mdb_cnt' usando 'genomeID' y 'mge'</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Reemplaza todos los valores NA en el data.frame por 0</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>db_cnt_all[<span class="fu">is.na</span>(db_cnt_all)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Contar el número de genomas por especie y clase taxonómica</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>db_cnt_all <span class="sc">%&gt;%</span> </span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Selecciona las columnas relevantes: 'specI', 'genomeID', y 'class'</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(specI, genomeID, class) <span class="sc">%&gt;%</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Elimina duplicados, dejando solo combinaciones únicas de especie, genoma y clase</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>() <span class="sc">%&gt;%</span>    </span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Agrupa los datos por clase taxonómica ('class')</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(class) <span class="sc">%&gt;%</span>   </span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Cuenta el número de genomas por cada clase</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span>       </span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Filtra para solo mostrar las clases que tienen más de 9 genomas</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(count <span class="sc">&gt;</span> <span class="dv">9</span>) <span class="sc">%&gt;%</span>                  </span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 2
+  class               count
+  &lt;chr&gt;               &lt;int&gt;
+1 Acidithiobacillia      18
+2 Actinobacteria       9859
+3 Alphaproteobacteria  2001
+4 Bacilli             25644
+5 Bacteroidia           570
+6 Betaproteobacteria   3998</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear un data.frame de presencia y ausencia</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Agregar información de presencia y ausencia</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>db_pa_all <span class="ot">&lt;-</span> db_cnt_all <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">presAbs =</span> <span class="fu">ifelse</span>(count <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(db_pa_all)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 9
+  specI               genomeID             kingdom  phylum         class               genus         mge   count presAbs
+  &lt;chr&gt;               &lt;chr&gt;                &lt;chr&gt;    &lt;chr&gt;          &lt;chr&gt;               &lt;chr&gt;         &lt;fct&gt; &lt;dbl&gt;   &lt;dbl&gt;
+1 specI_v3_Cluster1   100053.SAMN02947772  Bacteria Spirochaetes   Spirochaetia        Leptospirales IS_Tn    22       1
+2 specI_v3_Cluster201 1000561.SAMN02471202 Bacteria Proteobacteria Gammaproteobacteria Pseudomonada… IS_Tn     5       1
+3 specI_v3_Cluster361 1000562.SAMN03114893 Bacteria Firmicutes     Bacilli             Lactobacilla… IS_Tn     5       1
+4 specI_v3_Cluster371 1000565.SAMN02471991 Bacteria Proteobacteria Betaproteobacteria  Nitrosomonad… IS_Tn    24       1
+5 specI_v3_Cluster564 1000568.SAMN00255229 Bacteria Firmicutes     Negativicutes       Veillonellal… IS_Tn     3       1
+6 specI_v3_Cluster565 1000569.SAMN00255226 Bacteria Firmicutes     Negativicutes       Veillonellal… IS_Tn     2       1</code></pre>
+</div>
+</div>
+</section>
+<section id="paso-5-agrupar-todos-los-genomas-por-especie-speci" class="level3">
+<h3 class="anchored" data-anchor-id="paso-5-agrupar-todos-los-genomas-por-especie-speci">PASO 5: Agrupar todos los genomas por especie (specI)</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Resumir: avg_cnt = promedio de recuento por MGE por especie (specI), frac = fracción de genomas por especie con cada MGE</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>db_specI <span class="ot">&lt;-</span> db_pa_all <span class="sc">%&gt;%</span> </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Agrupar los datos por especie (specI) y MGE</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(specI, mge) <span class="sc">%&gt;%</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Contar el número de genomas por combinación de 'specI' y 'mge'</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">genomeCnt =</span> <span class="fu">n</span>(),   </span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Calcular el promedio de recuento por MGE por especie</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">avg_cnt =</span> <span class="fu">mean</span>(count),      </span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Calcular la presencia (1) total para cada MGE por especie</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">pa =</span> <span class="fu">sum</span>(presAbs),    </span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Calcular el total de recuentos para cada MGE por especie</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">cnt_tot =</span> <span class="fu">sum</span>(count)) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Calcular la fracción de genomas por especie que tienen el MGE</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">frac =</span> pa <span class="sc">/</span> genomeCnt) <span class="sc">%&gt;%</span>        </span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Unir los datos con la información taxonómica de 'tax' utilizando 'specI'</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(., tax, <span class="at">by =</span> <span class="st">"specI"</span>) <span class="sc">%&gt;%</span>  </span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Eliminar la columna 'genomeID' que no es necesaria</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>genomeID) <span class="sc">%&gt;%</span>         </span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Eliminar filas duplicadas</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>(.)                                 </span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="do">## Resumir: avg_cnt = promedio de recuento por MGE por genoma, frac = fracción de genomas con cada MGE</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>db_genome <span class="ot">&lt;-</span> db_pa_all <span class="sc">%&gt;%</span> </span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Agrupar los datos por genoma (genomeID) y MGE</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(genomeID, mge) <span class="sc">%&gt;%</span>       </span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Contar el número de combinaciones de genoma y MGE</span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">genomeCnt =</span> <span class="fu">n</span>(),   </span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Calcular el promedio de recuento de cada MGE por genoma</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>            <span class="at">avg_cnt =</span> <span class="fu">mean</span>(count),  </span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Calcular la presencia total de MGE en cada genoma</span></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>            <span class="at">pa =</span> <span class="fu">sum</span>(presAbs),         </span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Calcular el total de recuentos de MGE por genoma</span></span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>            <span class="at">cnt_tot =</span> <span class="fu">sum</span>(count)) <span class="sc">%&gt;%</span>  </span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calcular la fracción de genomas con el MGE</span></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">frac =</span> pa <span class="sc">/</span> genomeCnt) <span class="sc">%&gt;%</span>       </span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Unir los datos con la información taxonómica utilizando 'genomeID'</span></span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(., tax, <span class="at">by =</span> <span class="st">"genomeID"</span>) <span class="sc">%&gt;%</span>     </span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Eliminar filas duplicadas</span></span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>(.)                                  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Crear data frames separados para los recuentos de MGE y las fracciones de MGE.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Promedio de recuentos de cada MGE por especie (specI), donde los MGEs son las columnas y las especies (specI) las filas</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>all_cnt_specI <span class="ot">&lt;-</span> db_specI <span class="sc">%&gt;%</span> </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(specI, mge, avg_cnt)   <span class="co"># Selecciona las columnas 'specI' (especie), 'mge' (MGE), y 'avg_cnt' (promedio de recuentos)</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>all_frac_specI <span class="ot">&lt;-</span> db_specI <span class="sc">%&gt;%</span> </span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(specI, mge, frac)      <span class="co"># Selecciona las columnas 'specI' (especie), 'mge' (MGE), y 'frac' (fracción de genomas con el MGE)</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>all_cnt_genome <span class="ot">&lt;-</span> db_genome <span class="sc">%&gt;%</span> </span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(genomeID, mge, avg_cnt) <span class="co"># Selecciona las columnas 'genomeID' (ID de genoma), 'mge' (MGE), y 'avg_cnt' (promedio de recuentos)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="paso-6-análisis-por-especie-speci-a-nivel-de-clase" class="level3">
+<h3 class="anchored" data-anchor-id="paso-6-análisis-por-especie-speci-a-nivel-de-clase">PASO 6: Análisis por especie (specI) a nivel de clase</h3>
+<p>Se utiliza la prueba de <strong>Mann-Whitney</strong> para analizar asociaciones de los MGEs a nivel de clase. El análisis se basa en la fracción de genomas por especiación (SpecI) que contiene el MGE para evitar sesgos de muestreo.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># entrada de datos</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>all_avg_cnt_tax_class <span class="ot">&lt;-</span>  db_specI <span class="sc">%&gt;%</span> </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(specI, mge, avg_cnt, class) <span class="sc">%&gt;%</span>   <span class="co"># Selecciona las columnas: 'specI', 'mge', 'avg_cnt' y 'class'</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(., <span class="sc">!</span><span class="fu">grepl</span>(<span class="st">"Hotspot"</span>, mge)) <span class="sc">%&gt;%</span>    <span class="co"># Filtra para excluir los MGEs que contienen "Hotspot" en su nombre</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(., <span class="sc">!</span><span class="fu">grepl</span>(<span class="st">"Cellular"</span>, mge))       <span class="co"># Filtra para excluir los MGEs que contienen "Cellular" en su nombre</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>allMges <span class="ot">&lt;-</span> <span class="fu">unique</span>(all_avg_cnt_tax_class<span class="sc">$</span>mge)  <span class="co"># Extrae los valores únicos de MGEs</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtrar para clases con al menos 10 genomas</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>allClasses <span class="ot">&lt;-</span> all_avg_cnt_tax_class <span class="sc">%&gt;%</span> </span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(mge <span class="sc">==</span> all_avg_cnt_tax_class<span class="sc">$</span>mge[<span class="dv">1</span>]) <span class="sc">%&gt;%</span>  <span class="co"># Filtra para mantener solo el primer MGE</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(class) <span class="sc">%&gt;%</span>   <span class="co"># Agrupa los datos por clase</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">cntClass =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span>  <span class="co"># Cuenta cuántos genomas existen por clase</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(cntClass <span class="sc">&gt;</span> <span class="dv">9</span>)   <span class="co"># Filtra las clases con más de 9 genomas</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Selección final de datos para el análisis</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>all_avg_cnt_tax_class_sel_pre <span class="ot">&lt;-</span> all_avg_cnt_tax_class <span class="sc">%&gt;%</span> </span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(class <span class="sc">%in%</span> allClasses<span class="sc">$</span>class)   <span class="co"># Filtra las especies para incluir solo aquellas pertenecientes a clases con al menos 10 genomas</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="paso-7-normalización-por-tamaño-de-genoma" class="level3">
+<h3 class="anchored" data-anchor-id="paso-7-normalización-por-tamaño-de-genoma">PASO 7: Normalización por tamaño de genoma</h3>
+<p>Se calcula el tamaño promedio del genoma por cada especie (SpecI) y se normaliza el recuento de MGEs por el tamaño del genoma.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Promedio de tamaño de genoma por especie (SpecI)</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>gs_int <span class="ot">&lt;-</span> gs <span class="sc">%&gt;%</span> </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(SpecI_id_v3) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_gs =</span> <span class="fu">mean</span>(ProteinGeneCounts)) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">specI =</span> SpecI_id_v3)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Unir la información de tamaño de genoma con el promedio de recuentos de MGEs por especie y normalizar los recuentos por tamaño de genoma</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>all_avg_cnt_tax_class_sel <span class="ot">&lt;-</span> <span class="fu">left_join</span>(all_avg_cnt_tax_class_sel_pre, gs_int, <span class="at">by =</span> <span class="st">"specI"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">norm_count =</span> avg_cnt <span class="sc">/</span> avg_gs) <span class="sc">%&gt;%</span>  <span class="co"># Normalización: se divide el recuento promedio por el tamaño del genoma</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">count =</span> avg_cnt, <span class="at">avg_cnt =</span> norm_count)  <span class="co"># Renombrar las columnas para mayor claridad</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Realizar la prueba de <strong>Mann-Whitney</strong> para comparar recuentos de MGE entre clases.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>MW_all <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(allMges)){  <span class="co"># Iterar sobre todos los MGEs</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  mgeX <span class="ot">&lt;-</span> allMges[i]  <span class="co"># Seleccionar el MGE actual</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  mgeDat <span class="ot">&lt;-</span> all_avg_cnt_tax_class_sel <span class="sc">%&gt;%</span> <span class="fu">filter</span>(mge <span class="sc">==</span> mgeX)  <span class="co"># Filtrar los datos para el MGE seleccionado</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  MW <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">seq_along</span>(allClasses<span class="sc">$</span>class), <span class="cf">function</span>(j){</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    class_sel <span class="ot">&lt;-</span> allClasses<span class="sc">$</span>class[j]  <span class="co"># Seleccionar la clase actual</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    ingroup <span class="ot">&lt;-</span> mgeDat <span class="sc">%&gt;%</span> <span class="fu">filter</span>(class <span class="sc">==</span> class_sel)  <span class="co"># Filtrar datos de la clase seleccionada (ingroup)</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    outgroup <span class="ot">&lt;-</span> mgeDat <span class="sc">%&gt;%</span> <span class="fu">filter</span>(class <span class="sc">!=</span> class_sel)  <span class="co"># Filtrar datos de las clases no seleccionadas (outgroup)</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Realizar la prueba de Mann-Whitney para comparar los recuentos promedio de MGE entre las clases</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    MWout <span class="ot">&lt;-</span> <span class="fu">wilcox.test</span>(ingroup<span class="sc">$</span>avg_cnt, outgroup<span class="sc">$</span>avg_cnt, <span class="at">alternative =</span> <span class="st">"greater"</span>)</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    out <span class="ot">&lt;-</span> <span class="fu">c</span>(class_sel, MWout<span class="sc">$</span>p.value)  <span class="co"># Guardar el resultado de la prueba (clase y p-value)</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(out)</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  MWOut <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">t</span>(MW[<span class="dv">2</span>,]))  <span class="co"># Convertir los resultados de la prueba en un data frame</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(MWOut) <span class="ot">&lt;-</span> MW[<span class="dv">1</span>,]  <span class="co"># Asignar los nombres de las clases como nombres de columna</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(MWOut) <span class="ot">&lt;-</span> mgeX  <span class="co"># Asignar el nombre del MGE como nombre de fila</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>  MW_all <span class="ot">&lt;-</span> <span class="fu">rbind</span>(MW_all, MWOut)  <span class="co"># Unir los resultados de la prueba para todos los MGEs</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Transponer los resultados finales de la prueba</span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>MW_all_mod <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">t</span>(MW_all))</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(MW_all_mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                   IS_Tn                Phage           Phage_like                   CE
+Actinobacteria         0.999999917916124                    1                    1                    1
+Alphaproteobacteria   0.0178414060867117   0.0001231858382891   0.0588004481841716 8.61021742019938e-11
+Bacilli             1.98748444995478e-06 8.27765421556004e-16 7.42579596027798e-13    0.854734318526737
+Bacteroidia          0.00833722978655579                    1    0.902740265915529 1.19966727801307e-41
+Betaproteobacteria     0.107452414634065 2.00283676907074e-05    0.746214226095515    0.999999817280502
+Chlamydiia             0.997521561347641     0.99991406834231    0.988672166822885    0.999936175938603
+                                Integron                   MI
+Actinobacteria                         1    0.999999678245156
+Alphaproteobacteria  0.00014653261414839    0.999997587920911
+Bacilli                                1 2.06109350055861e-10
+Bacteroidia         9.34842687990597e-06 9.19715441949629e-44
+Betaproteobacteria  0.000506083290088997    0.788218472081803
+Chlamydiia             0.962626875393123    0.999998724073782</code></pre>
+</div>
+</div>
+<p>Ajuste de <strong>valores p</strong> para múltiples comparaciones.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>MW_all_adj <span class="ot">&lt;-</span> <span class="cn">NULL</span>  <span class="co"># Inicializar un objeto vacío para almacenar los resultados ajustados</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Iterar sobre cada columna de los resultados de la prueba de Mann-Whitney</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(MW_all_mod)){</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  MW_all_mod2 <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(MW_all_mod)  <span class="co"># Convertir el data frame en una matriz para facilitar el acceso a las columnas</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  pVec <span class="ot">&lt;-</span> <span class="fu">c</span>(MW_all_mod2[,k])  <span class="co"># Extraer la columna k, que contiene los valores p de la prueba de Mann-Whitney</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  adjP <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(pVec, <span class="st">"BH"</span>)  <span class="co"># Ajustar los valores p utilizando el método de Benjamini-Hochberg ("BH")</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  MW_all_adj <span class="ot">&lt;-</span> <span class="fu">cbind</span>(MW_all_adj, adjP)  <span class="co"># Unir los valores p ajustados a la matriz final</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Asignar los nombres de las columnas originales a los resultados ajustados</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(MW_all_adj) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(MW_all_mod)</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Convertir el resultado final en un data frame</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>MW_all_fin <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(MW_all_adj)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Crear una tabla binaria con valores p &lt; 0.1 --&gt; 1, de lo contrario 0</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>MW_all_stat <span class="ot">&lt;-</span> <span class="cn">NULL</span>  <span class="co"># Inicializar un objeto vacío para almacenar los resultados binarios</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Iterar sobre cada columna de los resultados ajustados (MW_all_fin)</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(l <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(MW_all_fin)){</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Crear una columna "signP" con valor 1 si el valor p es menor a 0.1, y 0 en caso contrario</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  MW_test <span class="ot">&lt;-</span> MW_all_fin <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">signP=</span><span class="fu">ifelse</span>(MW_all_fin[,l]<span class="sc">&gt;</span><span class="fl">0.1</span>,<span class="dv">0</span>,<span class="dv">1</span>))  </span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  MW_all_stat <span class="ot">&lt;-</span> <span class="fu">cbind</span>(MW_all_stat, MW_test<span class="sc">$</span>signP)  <span class="co"># Unir los resultados binarios</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Convertir la matriz a un data frame</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>MW_all_stat <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(MW_all_stat)</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Asignar los nombres de las columnas y filas a la tabla binaria</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(MW_all_stat) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(MW_all_fin)</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(MW_all_stat) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(MW_all_fin)</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Sumar los valores de "signP" por fila para obtener el número total de pruebas significativas por MGE</span></span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>MW_all_stat_sum <span class="ot">&lt;-</span> MW_all_stat <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">sumSign=</span><span class="fu">rowSums</span>(.))</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Agregar los nombres de las filas a la tabla para obtener un formato adecuado</span></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>MW_all_stat2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">rownames</span>(MW_all_stat), MW_all_stat)</span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(MW_all_stat2)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">"class"</span>  <span class="co"># Renombrar la primera columna como "class"</span></span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>MW_all_fin2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">rownames</span>(MW_all_fin), MW_all_fin)</span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(MW_all_fin2)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">"class"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="paso-8-tabla-con-pvalues-y-especies" class="level3">
+<h3 class="anchored" data-anchor-id="paso-8-tabla-con-pvalues-y-especies">PASO 8: Tabla con pvalues y especies</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Reorganizar el dataframe 'MW_all_fin2' de formato ancho a largo (long format).</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Esto es útil para preparar los datos para ggplot o análisis por variable.</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>melted_specI_class <span class="ot">&lt;-</span> reshape2<span class="sc">::</span><span class="fu">melt</span>(MW_all_fin2)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Añadir una columna 'signP' que marque con "*" si el valor (p-valor) es significativo (menor o igual a 0.05).</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Si el valor es mayor a 0.05, deja la celda vacía.</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>melted_specI_class1 <span class="ot">&lt;-</span> melted_specI_class <span class="sc">%&gt;%</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">signP =</span> <span class="fu">ifelse</span>(value <span class="sc">&gt;</span> <span class="fl">0.05</span>, <span class="st">""</span>, <span class="st">"*"</span>))</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Calcular el promedio de 'count' por combinación de clase taxonómica ('class') y elemento genético móvil ('mge'),</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co"># y renombrar la columna 'mge' como 'variable' para que coincida con el dataframe anterior.</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>all_avg_cnt_tax_class_sel1 <span class="ot">&lt;-</span> all_avg_cnt_tax_class_sel <span class="sc">%&gt;%</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(class, mge) <span class="sc">%&gt;%</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_class =</span> <span class="fu">mean</span>(count), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">variable =</span> mge)</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Unir los datos con los valores derretidos y la información de significancia.</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="co"># La unión se hace por las columnas 'class' y 'variable'.</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>plot_table_w_g9 <span class="ot">&lt;-</span> <span class="fu">left_join</span>(melted_specI_class1, all_avg_cnt_tax_class_sel1, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"class"</span>, <span class="st">"variable"</span>))</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. (Redundante) Se repite la unión anterior. Puedes eliminar esta línea si no necesitas tener dos versiones del mismo objeto.</span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>plot_table <span class="ot">&lt;-</span> <span class="fu">left_join</span>(melted_specI_class1, all_avg_cnt_tax_class_sel1, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"class"</span>, <span class="st">"variable"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="datos-para-mapa-de-colores-para-filogenia" class="level2">
+<h2 class="anchored" data-anchor-id="datos-para-mapa-de-colores-para-filogenia">Datos para Mapa de colores para filogenia</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Crear el mapa de calor filogenético con normalización de los valores</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>normalize <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {  <span class="co"># Función para normalizar los valores entre 0 y 1</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  x<span class="sc">/</span><span class="fu">max</span>(x)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear la matriz de datos para el mapa de calor filogenético</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>phylo_heatmap_mat <span class="ot">&lt;-</span> all_avg_cnt_tax_class_sel1 <span class="sc">%&gt;%</span> </span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Filtrar clases que no contienen "NA"</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">grepl</span>(<span class="st">"NA "</span>, class)) <span class="sc">%&gt;%</span>  </span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Convertir los datos en formato ancho (cada variable como columna)</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">spread</span>(variable, avg_class) <span class="sc">%&gt;%</span>  </span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Seleccionar las variables de interés</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(class, IS_Tn, Phage, Phage_like, CE, Integron, MI) <span class="sc">%&gt;%</span>  </span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Establecer las clases como nombres de fila</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_to_rownames</span>(<span class="at">var =</span> <span class="st">"class"</span>)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear el árbol filogenético manteniendo solo las especies que están en la matriz de datos del mapa de calor</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>class_tree_w_g9 <span class="ot">&lt;-</span> <span class="fu">keep.tip</span>(class_tree, <span class="at">tip =</span> <span class="fu">rownames</span>(phylo_heatmap_mat))</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Ajuste de colores para el mapa de calor filogenético para datos sesgados</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>small_value <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">sort</span>(<span class="fu">unlist</span>(phylo_heatmap_mat)))[<span class="dv">2</span>]  <span class="co"># Encuentra el segundo valor más pequeño en la matriz de datos para establecer un umbral</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>small_value <span class="ot">&lt;-</span> small_value <span class="sc">-</span> small_value <span class="sc">%%</span> <span class="fl">0.001</span>  <span class="co"># Redondea el valor a 3 decimales para crear un valor pequeño ajustado</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Definir los puntos de corte para el mapa de calor según la distribución de los datos</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>heatmap_breaks <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, small_value, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="fu">seq</span>(<span class="dv">5</span>, <span class="dv">55</span>, <span class="dv">10</span>))</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Definir una paleta de colores basada en viridis, con un sesgo hacia valores más bajos</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>plot_colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"white"</span>, <span class="fu">colorRampPalette</span>((<span class="fu">viridis</span>(<span class="dv">10</span>)), <span class="at">bias =</span> <span class="dv">5</span>)(<span class="fu">length</span>(heatmap_breaks) <span class="sc">-</span> <span class="dv">2</span>))</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear una matriz de significancia (signP) para etiquetar el mapa de calor</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>sig_mat <span class="ot">&lt;-</span> plot_table_w_g9 <span class="sc">%&gt;%</span> </span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(class, variable, signP)  <span class="co"># Selecciona las columnas relevantes de los datos</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtra las filas que contienen "NA" en la columna "class" y transforma los datos a formato ancho</span></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>sig_mat <span class="ot">&lt;-</span> sig_mat <span class="sc">%&gt;%</span> </span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">grepl</span>(<span class="st">"NA "</span>, class)) <span class="sc">%&gt;%</span></span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">spread</span>(variable, signP) <span class="sc">%&gt;%</span>  <span class="co"># Transforma los datos para que las variables sean columnas</span></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_to_rownames</span>(<span class="at">var =</span> <span class="st">"class"</span>)  <span class="co"># Establece la columna "class" como nombres de fila</span></span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Alinea la matriz de significancia con el árbol filogenético</span></span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>sig_mat <span class="ot">&lt;-</span> sig_mat[class_tree_w_g9<span class="sc">$</span>tip.label, <span class="fu">colnames</span>(phylo_heatmap_mat)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="paso-9-cargar-funciones" class="level2">
+<h2 class="anchored" data-anchor-id="paso-9-cargar-funciones">PASO 9: Cargar funciones</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"scripts/phylo_function.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="paso-10-obtener-las-coordenadas" class="level3">
+<h3 class="anchored" data-anchor-id="paso-10-obtener-las-coordenadas">PASO 10: Obtener las coordenadas</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Extraer coordenadas del heatmap filogenético para añadir anotaciones manuales posteriormente</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>xx_yy <span class="ot">&lt;-</span> <span class="fu">phylo.heatmap.coords</span>(</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  class_tree_w_g9,           <span class="co"># árbol filogenético de clases</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  phylo_heatmap_mat,         <span class="co"># matriz de abundancias promedio por clase y MGE</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">fsize =</span> <span class="fu">c</span>(<span class="fl">0.8</span>, <span class="fl">0.9</span>, <span class="fl">0.7</span>),  <span class="co"># tamaños de fuente (árbol, heatmap, leyenda)</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">colors =</span> plot_colors,      <span class="co"># colores personalizados para el heatmap</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">grid =</span> <span class="cn">TRUE</span>,               <span class="co"># mostrar rejilla en el heatmap</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">split =</span> <span class="fu">c</span>(<span class="fl">0.7</span>, <span class="fl">0.3</span>),       <span class="co"># proporción de espacio entre árbol y heatmap</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="dv">1</span>,                   <span class="co"># grosor de líneas</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">breaks =</span> heatmap_breaks,   <span class="co"># puntos de corte para los colores</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">mar =</span> <span class="fu">c</span>(<span class="fl">1.2</span>,<span class="fl">1.2</span>,<span class="fl">1.2</span>,<span class="fl">1.2</span>)   <span class="co"># márgenes</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 2. Generar el heatmap con leyenda incluida, usando los mismos parámetros que el paso anterior</span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="fu">phylo.heatmap.legendmod</span>(</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>  class_tree_w_g9,</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>  phylo_heatmap_mat,</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">fsize =</span> <span class="fu">c</span>(<span class="fl">0.8</span>, <span class="fl">0.9</span>, <span class="fl">0.7</span>),</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">colors =</span> plot_colors,</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">grid =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">split =</span> <span class="fu">c</span>(<span class="fl">0.7</span>, <span class="fl">0.3</span>),</span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="dv">1</span>,</span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">breaks =</span> heatmap_breaks,</span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">mar =</span> <span class="fu">c</span>(<span class="fl">1.2</span>,<span class="fl">1.2</span>,<span class="fl">1.2</span>,<span class="fl">1.2</span>)</span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a><span class="do">## 3. Añadir símbolos de significancia ("*") en cada celda de la matriz que lo indique (en 'sig_mat')</span></span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(sig_mat)) {</span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(sig_mat)) {</span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(sig_mat[i,j] <span class="sc">==</span> <span class="st">"*"</span>) {</span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>      rnm <span class="ot">&lt;-</span> <span class="fu">rownames</span>(sig_mat)[i]  <span class="co"># nombre de la fila (clase taxonómica)</span></span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a>      cnm <span class="ot">&lt;-</span> <span class="fu">colnames</span>(sig_mat)[j]  <span class="co"># nombre de la columna (MGE)</span></span>
+<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Añadir el símbolo "*" en la posición correspondiente del heatmap</span></span>
+<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a>      <span class="fu">points</span>(</span>
+<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a>        xx_yy<span class="sc">$</span>xx[j], xx_yy<span class="sc">$</span>yy[i],   <span class="co"># coordenadas x, y para esa celda</span></span>
+<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a>        <span class="at">cex =</span> <span class="fl">1.5</span>,                  <span class="co"># tamaño del símbolo</span></span>
+<span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="cf">if</span> (phylo_heatmap_mat[rnm, cnm] <span class="sc">&lt;</span> heatmap_breaks[<span class="dv">3</span>]) <span class="st">"white"</span> <span class="cf">else</span> <span class="st">"black"</span>, </span>
+<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a>        <span class="at">pch =</span> <span class="st">"*"</span>                   <span class="co"># símbolo a dibujar</span></span>
+<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb24-41"><a href="#cb24-41" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb24-42"><a href="#cb24-42" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb24-43"><a href="#cb24-43" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Figura3_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="768"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="figura-3a-barplot-de-abundancia-relativa-de-mges-por-clase-taxonómica" class="level2">
+<h2 class="anchored" data-anchor-id="figura-3a-barplot-de-abundancia-relativa-de-mges-por-clase-taxonómica">Figura 3A Barplot de abundancia relativa de MGEs por clase taxonómica</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Seleccionar clases que aparecen al menos 10 veces para asegurar una representación confiable.</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>allclass_all <span class="ot">&lt;-</span> all_avg_cnt_tax_class <span class="sc">%&gt;%</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Usar una sola MGE como referencia para el conteo por clase</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(mge <span class="sc">==</span> all_avg_cnt_tax_class<span class="sc">$</span>mge[<span class="dv">1</span>]) <span class="sc">%&gt;%</span>          </span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(class) <span class="sc">%&gt;%</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">cntclass =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Incluir solo clases con al menos 10 ocurrencias</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(cntclass <span class="sc">&gt;</span> <span class="dv">9</span>)                                     </span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Filtrar datos: eliminar MGEs de tipo "Cellular" o "Hotspot" y mantener solo las clases seleccionadas previamente.</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>all_avg_cnt_tax_class_sel_all <span class="ot">&lt;-</span> all_avg_cnt_tax_class <span class="sc">%&gt;%</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">grepl</span>(<span class="st">"Cellular"</span>, mge)) <span class="sc">%&gt;%</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">grepl</span>(<span class="st">"Hotspot"</span>, mge)) <span class="sc">%&gt;%</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(class <span class="sc">%in%</span> allclass_all<span class="sc">$</span>class) <span class="sc">%&gt;%</span></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(mge, class) <span class="sc">%&gt;%</span></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Promediar por combinación de clase y MGE</span></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_class =</span> <span class="fu">mean</span>(avg_cnt), <span class="at">.groups =</span> <span class="st">"drop"</span>)   </span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Calcular la suma total de abundancia de MGEs por clase (para obtener proporciones después)</span></span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>all_avg_cnt_tax_class_sel_all_mge_all <span class="ot">&lt;-</span> all_avg_cnt_tax_class_sel_all <span class="sc">%&gt;%</span></span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(class) <span class="sc">%&gt;%</span></span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_mge =</span> <span class="fu">sum</span>(avg_class), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Combinar abundancia promedio por clase y MGE con el total por clase</span></span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a><span class="co">#    Calcular la fracción relativa de cada MGE dentro de cada clase</span></span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>all_avg_cnt_tax_class_sel_4bar_all <span class="ot">&lt;-</span> <span class="fu">left_join</span>(</span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a>  all_avg_cnt_tax_class_sel_all,</span>
+<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a>  all_avg_cnt_tax_class_sel_all_mge_all,</span>
+<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="st">"class"</span></span>
+<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(class, mge, total_mge) <span class="sc">%&gt;%</span></span>
+<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">frac =</span> avg_class <span class="sc">/</span> total_mge, <span class="at">.groups =</span> <span class="st">"drop"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Limpiar datos y ordenar clases según el orden filogenético del árbol</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>barplot_mat <span class="ot">&lt;-</span> all_avg_cnt_tax_class_sel_4bar_all <span class="sc">%&gt;%</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">grepl</span>(<span class="st">"NA "</span>, class))                            <span class="co"># Eliminar clases no identificadas</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>barplot_mat<span class="sc">$</span>class <span class="ot">&lt;-</span> <span class="fu">factor</span>(barplot_mat<span class="sc">$</span>class,</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">levels =</span> class_tree_w_g9<span class="sc">$</span>tip.label)  <span class="co"># Mantener orden del árbol filogenético</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 6. Preparar datos auxiliares para anotaciones en el barplot (por ejemplo, totales por clase)</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>barplot_mat_for_n <span class="ot">&lt;-</span> all_avg_cnt_tax_class_sel_all_mge_all <span class="sc">%&gt;%</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">grepl</span>(<span class="st">"NA "</span>, class))</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>barplot_mat_for_n<span class="sc">$</span>class <span class="ot">&lt;-</span> <span class="fu">factor</span>(barplot_mat_for_n<span class="sc">$</span>class,</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">levels =</span> class_tree_w_g9<span class="sc">$</span>tip.label)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Crear barplot apilado (horizontal) de la proporción relativa de MGEs por clase taxonómica</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>barplot_specI_class_count_all <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(barplot_mat, <span class="fu">aes</span>(<span class="at">y =</span> class, <span class="at">x =</span> frac, <span class="at">fill =</span> mge)) <span class="sc">+</span>  </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Barras horizontales, borde gris</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">color =</span> <span class="st">"grey60"</span>) <span class="sc">+</span>                         </span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Colores personalizados para los MGEs</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="st">"MGE"</span>, <span class="at">values =</span> colc)                                   </span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Añadir detalles estéticos y anotaciones</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>barplot_specI_class_count_all <span class="sc">+</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Límite extendido para espacio de anotaciones</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">1.0</span>),</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">1.1</span>)                                                     </span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> barplot_mat_for_n,</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Mostrar suma total de MGEs por clase</span></span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> class, <span class="at">x =</span> <span class="fl">1.05</span>, <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">""</span>, <span class="fu">round</span>(total_mge))), </span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">col =</span> <span class="st">"black"</span>,</span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">6</span>) <span class="sc">+</span></span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">""</span>,  <span class="at">x =</span> <span class="st">"Relative proportion"</span>) <span class="sc">+</span></span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Estética limpia estilo Cowplot</span></span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_cowplot</span>(<span class="at">font_size =</span> <span class="dv">20</span>) <span class="sc">+</span>     </span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Etiquetas del eje X horizontales</span></span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">0</span>),   </span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span>,  <span class="co"># Leyenda abajo                                  </span></span>
+<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>))  <span class="co"># Alinear texto del eje Y</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Figura3_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="768"></p>
+</div>
+</div>
 
 
 </section>

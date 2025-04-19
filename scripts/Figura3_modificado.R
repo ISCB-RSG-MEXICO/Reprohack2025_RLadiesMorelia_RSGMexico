@@ -667,7 +667,7 @@ barplot_mat_for_n$class <- factor(barplot_mat_for_n$class, levels = class_tree_w
 # Usamos 'ggplot' para crear una gráfica de barras horizontales ('geom_barh'), mostrando la proporción relativa 
 # de cada clase y coloreando según el tipo de MGE.
 barplot_specI_class_count_all <- ggplot(barplot_mat, aes(y = class, x = frac, fill = mge)) +  
-  geom_barh(stat = "identity", color = "grey60") +  # Graficar barras horizontales con borde gris
+  geom_bar(stat = "identity", color = "grey60") +  # Graficar barras horizontales con borde gris
   scale_fill_manual("MGE", values = colc)           # Asignar colores personalizados a cada tipo de MGE
 
 # Personalizar el gráfico: definir límites y etiquetas para el eje x, agregar etiquetas con los totales de MGE por clase,

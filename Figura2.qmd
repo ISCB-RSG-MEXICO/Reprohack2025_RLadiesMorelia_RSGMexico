@@ -253,7 +253,7 @@ annotate("text", x = 2, y = max(mge_solitary_rclass_p$count) * 2.5, label = "MGE
 rclass_mge_alluvial
 ```
 
-## Figura 2B Distribucion de MGEs por categoría 
+## Figura 2B Distribucion de MGEs por categoría
 
 Número de MGEs por categoría (gráfico de barras) y porcentaje de cada categoría (gráfico de dona) en 76,000 genomas de 3,000 especies, utilizando el flujo de trabajo descrito en la Figura 1.
 
@@ -515,5 +515,3 @@ Figura2_final_plot
 ```
 
 Puedes encontrar el script completo en [Figura2_modificado.R](https://github.com/ISCB-RSG-MEXICO/Reprohack2025_RLadiesMorelia_RSGMexico/blob/main/scripts/Figura2_modificado.R).
-
-### Conclusiones
