@@ -14,13 +14,14 @@ B. Asociación de las categorías de MGEs (promedio de MGEs por especie) con dif
 library(tidyverse) # Manipulacion de datos
 library(reshape2)
 library(phytools)  # Manipulacion de arboles filogeneticos
+library(ape)
 library(viridisLite)
 library(viridis)
 library(scales)
 library(cowplot)
 ```
 
-### PASO 1: Importar datos
+## PASO 1: Importar datos
 
 ```{r Data, warning=FALSE, message=FALSE}
 tax <- read_tsv("data/raw_data/species_with_atleast_2genomes.list.gz", col_names=F)
@@ -38,7 +39,7 @@ colc <- c("#D55E00", "#E69F00", "#F0E442", "#56B4E9", "#009E73", "#0072B2","#CEC
 names(colc) <- c("IS_Tn", "Phage", "Phage_like", "CE", "Integron", "MI", "Cellular") 
 ```
 
-### PASO 2: Manipulación y Limpieza de los datos
+## PASO 2: Manipulación y Limpieza de los datos
 
 ```{r}
 # Obtener los genomas con la mas alta calidad
@@ -60,9 +61,9 @@ mdb <- mdb %>%
   filter(genomeID %in% glist_high$genome)
 ```
 
-### PASO 3: Data.frame con combinaciones
+## PASO 3: Data.frame con combinaciones
 
-#### Datos de formato
+### Datos de formato
 
 Crear un data.frame que contenga para cada specI para cada MGE: recuentos genómicos (genomeCnt),
 
@@ -91,7 +92,7 @@ for(i in 1:length(all_mge)){
 head(db_tax)
 ```
 
-### PASO 4: Contar el número de genomas por especie y clase taxonómica
+## PASO 4: Contar el número de genomas por especie y clase taxonómica
 
 ```{r}
 # Filtra los genomas que están en 'glist_high$genome' y los combina con los recuentos de MGE
@@ -123,7 +124,7 @@ db_pa_all <- db_cnt_all %>% mutate(presAbs = ifelse(count > 0, 1, 0))
 head(db_pa_all)
 ```
 
-### PASO 5: Agrupar todos los genomas por especie (specI)
+## PASO 5: Agrupar todos los genomas por especie (specI)
 
 ```{r}
 ## Resumir: avg_cnt = promedio de recuento por MGE por especie (specI), frac = fracción de genomas por especie con cada MGE
@@ -182,7 +183,7 @@ all_cnt_genome <- db_genome %>%
   select(genomeID, mge, avg_cnt) # Selecciona las columnas 'genomeID' (ID de genoma), 'mge' (MGE), y 'avg_cnt' (promedio de recuentos)
 ```
 
-### PASO 6: Análisis por especie (specI) a nivel de clase
+## PASO 6: Análisis por especie (specI) a nivel de clase
 
 Se utiliza la prueba de **Mann-Whitney** para analizar asociaciones de los MGEs a nivel de clase. El análisis se basa en la fracción de genomas por especiación (SpecI) que contiene el MGE para evitar sesgos de muestreo.
 
@@ -207,7 +208,7 @@ all_avg_cnt_tax_class_sel_pre <- all_avg_cnt_tax_class %>%
   filter(class %in% allClasses$class)   # Filtra las especies para incluir solo aquellas pertenecientes a clases con al menos 10 genomas
 ```
 
-### PASO 7: Normalización por tamaño de genoma
+## PASO 7: Normalización por tamaño de genoma
 
 Se calcula el tamaño promedio del genoma por cada especie (SpecI) y se normaliza el recuento de MGEs por el tamaño del genoma.
 
@@ -305,10 +306,10 @@ MW_all_fin2 <- cbind(rownames(MW_all_fin), MW_all_fin)
 colnames(MW_all_fin2)[1] <- "class"
 ```
 
-### PASO 8: Tabla con pvalues y especies
+## PASO 8: Tabla con pvalues y especies
 
 ```{r}
-# 1. Reorganizar el dataframe 'MW_all_fin2' de formato ancho a largo (long format).
+#  1. Reorganizar el dataframe 'MW_all_fin2' de formato ancho a largo (long format).
 # Esto es útil para preparar los datos para ggplot o análisis por variable.
 melted_specI_class <- reshape2::melt(MW_all_fin2)
 
@@ -332,10 +333,11 @@ plot_table_w_g9 <- left_join(melted_specI_class1, all_avg_cnt_tax_class_sel1, by
 plot_table <- left_join(melted_specI_class1, all_avg_cnt_tax_class_sel1, by = c("class", "variable"))
 ```
 
-## Datos para Mapa de colores para filogenia
+## PASO 9: Datos para Mapa de colores para filogenia
+
+Crear el mapa de calor filogenético con normalización de los valores
 
 ```{r}
-## Crear el mapa de calor filogenético con normalización de los valores
 normalize <- function(x) {  # Función para normalizar los valores entre 0 y 1
   x/max(x)
 }
@@ -380,13 +382,13 @@ sig_mat <- sig_mat %>%
 sig_mat <- sig_mat[class_tree_w_g9$tip.label, colnames(phylo_heatmap_mat)]
 ```
 
-## PASO 9: Cargar funciones
+## PASO 10: Cargar funciones
 
 ```{r Load_funciones}
 source("scripts/phylo_function.R")
 ```
 
-### PASO 10: Obtener las coordenadas
+## PASO 11: Obtener las coordenadas
 
 ```{r}
 # 1. Extraer coordenadas del heatmap filogenético para añadir anotaciones manuales posteriormente
@@ -435,6 +437,88 @@ for(i in 1:nrow(sig_mat)) {
 
 ```
 
+## Figura 3A: Filogenia
+
+Obtener el numero de genomas por Class:
+
+```{r}
+genomes_per_class <- db_genome %>%
+  distinct(genomeID, class) %>%  # eliminar duplicados por genomeID y class
+  group_by(class) %>%
+  summarise(n_genomes = n()) %>%
+  arrange(desc(n_genomes))
+
+genomes_per_class
+```
+
+Modificar los nombres en el árbol:
+
+```{r}
+# -------------- Modificaciones de las etiquetas de las especies (numero de geneomas) -------------
+
+species_labels <- class_tree_w_g9$tip.label
+# Crear nombres con el número de genomas
+new_labels <- paste0(genomes_per_class$class, " (", genomes_per_class$n_genomes, ")")
+
+# Cambiar nombres en el árbol
+match_idx <- match(class_tree_w_g9$tip.label, genomes_per_class$class)
+
+# Asegúrate que no hay NA antes de continuar
+class_tree_w_g9$tip.label <- ifelse(
+  !is.na(match_idx),
+  new_labels[match_idx],
+  class_tree_w_g9$tip.label
+)
+
+# -------------- Obtener el nodo más reciente común (MRCA) para cada grupo -------------------------
+
+# > Obtener el numero del nodo Archaea
+node_archaea <- getMRCA(class_tree_w_g9, c("Halobacteria (95)", "Methanomicrobia (89)"))
+
+# > Obtener el numero del nodo Bacterias
+# Obtener todos los nodos
+all_classes <- class_tree_w_g9$tip.label
+
+# 2. Excluir los que no quieres
+excluded <- c("Halobacteria (95)", "Methanomicrobia (89)")
+included_classes <- setdiff(all_classes, excluded)
+
+# 3. Obtener el nodo común para los restantes
+node_bacteria <- getMRCA(class_tree_w_g9, included_classes)
+```
+
+Extraer coordenadas del heatmap filogenético para añadir anotaciones manuales posteriormente:
+
+```{r}
+# Guardar la figura como archivo temporal
+tmp_file <- tempfile(fileext = ".png")
+
+# Crear la imagen del árbol + heatmap
+png(tmp_file, width = 1000, height = 1500, res = 150)  
+
+# Filogenia
+xx_yy <- phylo.heatmap.coords(
+  class_tree_w_g9,
+  phylo_heatmap_mat,
+  fsize = c(0.8, 0.9, 0.7),
+  colors = plot_colors,
+  grid = TRUE,
+  split = c(0.7, 0.3),
+  lwd = 1,
+  breaks = heatmap_breaks,
+  mar = c(1.2,1.2,1.2,1.2)
+)
+# Agregar titulos de los nodos
+nodelabels("Bacteria", node = node_bacteria, frame = "none", adj = c(1.1, -0.1), font = 2, cex = 1)
+nodelabels("Archaea", node = node_archaea, frame = "none", adj = c(1.1, -0.1), font = 2, cex = 1)
+
+dev.off()
+
+# Leer imagen y convertirla en un objeto ggdraw
+p_phylo_heatmap <- ggdraw() + draw_image(tmp_file)
+p_phylo_heatmap
+```
+
 ## Figura 3A Barplot de abundancia relativa de MGEs por clase taxonómica
 
 ```{r}
@@ -470,28 +554,32 @@ all_avg_cnt_tax_class_sel_4bar_all <- left_join(
 ) %>%
   group_by(class, mge, total_mge) %>%
   summarise(frac = avg_class / total_mge, .groups = "drop")
-```
 
-```{r}
 # 5. Limpiar datos y ordenar clases según el orden filogenético del árbol
 barplot_mat <- all_avg_cnt_tax_class_sel_4bar_all %>%
   # Eliminar clases no identificadas
-  filter(!grepl("NA ", class))         
+  filter(!grepl("NA ", class))  
+
 # Mantener orden del árbol filogenético
 barplot_mat$class <- factor(barplot_mat$class,
-                            levels = class_tree_w_g9$tip.label)  
+                            levels = species_labels)  
 
 # 6. Preparar datos auxiliares para anotaciones en el barplot (por ejemplo, totales por clase)
 barplot_mat_for_n <- all_avg_cnt_tax_class_sel_all_mge_all %>%
   filter(!grepl("NA ", class))
 barplot_mat_for_n$class <- factor(barplot_mat_for_n$class,
-                                  levels = class_tree_w_g9$tip.label)
-
+                                  levels = species_labels)
 ```
+
+
 
 Crear barplot apilado (horizontal) de la proporción relativa de MGEs por clase taxonómica
 
 ```{r}
+# Define el orden deseado de las categorías en la leyenda (de MI a IS_Tn)
+category_order <- c("MI", "Integron", "CE", "Phage_like", "Phage", "IS_Tn")
+
+# Generar la grafica base
 barplot_specI_class_count_all <- ggplot(barplot_mat, aes(y = class, x = frac, fill = mge)) +  
    # Barras horizontales, borde gris
   geom_bar(stat = "identity", color = "grey60") +                         
@@ -499,7 +587,7 @@ barplot_specI_class_count_all <- ggplot(barplot_mat, aes(y = class, x = frac, fi
   scale_fill_manual("MGE", values = colc)                                   
 
 ## Añadir detalles estéticos y anotaciones
-barplot_specI_class_count_all +
+Fig3A_barplot <- barplot_specI_class_count_all +
   # Límite extendido para espacio de anotaciones
   scale_x_continuous(
     breaks = c(0, 0.25, 0.5, 0.75, 1.0),
@@ -512,33 +600,34 @@ barplot_specI_class_count_all +
     inherit.aes = FALSE,
     col = "black",
     size = 6) +
-  labs(y = "",  x = "Relative proportion") +
+  # Agregar un título en una posición personalizada
+  annotate("text", x = 1.05, y = 23.5, label = "Avg. MGE", size = 6, fontface = "bold", color = "black") +
+  # etiquetas
+  labs(title = "Relative proportion",y = "",  x = "") +
    # Estética limpia estilo Cowplot
-  theme_cowplot(font_size = 20) +     
+  theme_cowplot(font_size = 20) + 
   # Etiquetas del eje X horizontales
   theme(
+    axis.text.y = element_blank(), #  axis.text.y = element_text(hjust = 0, vjust = 0.5) # Alinear texto del eje Y
     axis.text.x = element_text(angle = 0),   
-    legend.position = "bottom",  # Leyenda abajo                                  
-    axis.text.y = element_text(hjust = 0, vjust = 0.5))  # Alinear texto del eje Y
-  
+    legend.position = "bottom",       # Leyenda abajo 
+    legend.direction = "horizontal",  # Disposición horizontal de la leyenda
+    plot.title = element_text(hjust = 0.5, size = 24)  # Centrar y estilizar el título
+    ) +  
+  # Asegura que las categorías estén en una sola fila
+ guides(fill = guide_legend(ncol = length(category_order)))  
 
+Fig3A_barplot
 ```
 
-## Figura 3A 
+### Unir figura
 
 ```{r}
-# 1. Extraer coordenadas del heatmap filogenético para añadir anotaciones manuales posteriormente
-xx_yy <- phylo.heatmap.coords(
-  class_tree_w_g9,           # árbol filogenético de clases
-  phylo_heatmap_mat,         # matriz de abundancias promedio por clase y MGE
-  fsize = c(0.8, 0.9, 0.7),  # tamaños de fuente (árbol, heatmap, leyenda)
-  colors = plot_colors,      # colores personalizados para el heatmap
-  grid = TRUE,               # mostrar rejilla en el heatmap
-  split = c(0.7, 0.3),       # proporción de espacio entre árbol y heatmap
-  lwd = 1,                   # grosor de líneas
-  breaks = heatmap_breaks,   # puntos de corte para los colores
-  mar = c(1.2,1.2,1.2,1.2)   # márgenes
-)
-
-
+Fig3A_final_plot <- plot_grid(p_phylo_heatmap, Fig3A_barplot, ncol = 2, align = "v", rel_widths = c(1.5, 1))
+Fig3A_final_plot
 ```
+
+
+
+
+
