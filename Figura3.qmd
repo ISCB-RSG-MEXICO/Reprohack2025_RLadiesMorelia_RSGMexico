@@ -388,7 +388,7 @@ sig_mat <- sig_mat[class_tree_w_g9$tip.label, colnames(phylo_heatmap_mat)]
 source("scripts/phylo_function.R")
 ```
 
-## PASO 11: Obtener las coordenadas
+## Figura 3B. Mapa de colores
 
 ```{r}
 # 1. Extraer coordenadas del heatmap filogenético para añadir anotaciones manuales posteriormente
@@ -571,8 +571,6 @@ barplot_mat_for_n$class <- factor(barplot_mat_for_n$class,
                                   levels = species_labels)
 ```
 
-
-
 Crear barplot apilado (horizontal) de la proporción relativa de MGEs por clase taxonómica
 
 ```{r}
@@ -627,7 +625,4 @@ Fig3A_final_plot <- plot_grid(p_phylo_heatmap, Fig3A_barplot, ncol = 2, align = 
 Fig3A_final_plot
 ```
 
-
-
-
-
+Puedes encontrar el script completo en [Figura3_modificado.R](https://github.com/ISCB-RSG-MEXICO/Reprohack2025_RLadiesMorelia_RSGMexico/blob/main/scripts/Figura3_modificado.R).
