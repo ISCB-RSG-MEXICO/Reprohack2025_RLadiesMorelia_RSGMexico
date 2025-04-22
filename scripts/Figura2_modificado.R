@@ -6,7 +6,6 @@
 # Fecha de Creacion: 19-02-2021
 # Autor: supriya.khedkar@embl.de
 
-
 # Modificado por: Evelia Coss
 # Fechad de modificacion: 6 de abril 2025
 

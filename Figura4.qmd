@@ -4,19 +4,1378 @@ title: "Figura 4"
 
 ## Transferencia Horizontal de Genes Mediado por MGEs (HGT)
 
-
-![Figura 4. Transferencia horizontal de genes mediada por MGEs (HGT)](img/figure4.jpeg){width=100%}
-
+![Figura 4. Transferencia horizontal de genes mediada por MGEs (HGT)](img/figure4.jpeg){width="100%"}
 
 (A) La ocurrencia de eventos recientes de HGT mediada por MGEs disminuye considerablemente con la distancia taxonómica.
 (B) Resumen de los eventos de HGT mediada por MGEs a través de un árbol filogenético (basado en genes marcadores filogenéticos) de clases taxonómicas. El mapa de calor cuantifica los eventos de HGT (coloreados según la leyenda en la parte inferior) entre las clases taxonómicas y los arcos indican la contribución de los elementos transponibles (en rojo) sobre otras categorías de MGEs (en gris).
 (C) Análisis de anidamiento de integrones con diferentes categorías de MGEs muestra su anidamiento significativo con CE-Elementos conjugativos (razón de probabilidades de Fisher 4.3, valor P = 2.9e−86) en el subconjunto de HGT en comparación con todas las ocurrencias anidadas.
 (D) Mapas de calor que ilustran la transferencia horizontal promiscuosa de elementos transponibles a través de hábitats en comparación con otras categorías de MGEs. Todas las categorías de MGEs muestran una alta dinámica de MGE
 
-## Figura 4A
+```{r Cargar_paquetes, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(cowplot)
+library(reshape)
+library(RColorBrewer)
+library(phytools) 
+library(viridis)
+```
 
-## Figura 4B
+## PASO 1: Importar datos
 
-## Figura 4C
+```{r Data, warning=FALSE, message=FALSE}
+data_mf <- read_tsv("data/raw_data/recombinase_hgt_cluster_master_file.txt.gz", col_names = F)
+mge_bins <- read_tsv("data/raw_data/mge_bins_final.txt.gz",col_names = T)
+tax <- read_tsv("data/raw_data/hgt_species.list.gz", col_names = F)
+class_tree <- read.tree("data/raw_data/progenomes2_class_tree.nwk")
+glist <- read_tsv("data/raw_data/genome_status_supplementary_tableS2.txt.gz", col_names = T)
+# datos anotados sobre elementos genéticos móviles (MGE)
+dat_mge <- read_tsv("data/processed_data/resolved_MGE_hgt_top_tax_final.txt.gz", col_names = F)
+# recombinasas asociadas a distintos tipos de MGE
+data_mge_class <- read_tsv("data/processed_data/resolved_MGE_hgt_class_level_final.txt.gz", col_names = F)
+# Datos para la Figura 4C
+datacl <- read_tsv("data/raw_data/all_recombinase_clusters_mge_resolved.txt.gz", col_names = F)
+```
 
-## Figura 4D
+Cargar paleta de colores
+
+```{r pallette_recombinasas}
+# Paleta general de colores
+colc <- c("#D55E00", "#E69F00", "#F0E442", "#56B4E9", "#009E73", "#0072B2","#CECCCC")
+names(colc) <- c("IS_Tn", "Phage", "Phage_like", "CE", "Integron", "MI", "Cellular") 
+```
+
+Preparación de variables para exportar datasets de conexiones (arcos) a iTOL
+
+```{r}
+mges <- c("IS_Tn", "Phage", "Phage_like", "CE", "Integron", "MI")
+colc_grey <- c("#D55E00", "#808080", "#808080", "#808080", "#808080", "#808080")
+names(colc_grey) <- c("IS_Tn", "Phage", "Phage_like", "CE", "Integron", "MI")
+```
+
+Cargar funciones
+
+```{r Load_funciones}
+source("scripts/phylo_heatmap_function.R")
+```
+
+## PASO 2: Seleccion de genomas de alta calidad
+
+```{r}
+# Obtener los genomas con la mas alta calidad
+glist_high <- glist %>% 
+  filter(genome_quality == "high")
+
+# Cambio de formato y limpieza de datos
+mge_bins_melted <- mge_bins %>% 
+  select(1:6,9,10) %>% 
+  # Reestructuramos el dataframe de formato ancho a largo
+  gather("mge","count",1:7) %>% # Convertimos las columnas 1 a 7 en dos columnas: 'mge' (nombre original de la columna) y 'count' (su valor)
+  filter(count > 0) %>% 
+  mutate(island1 = island) %>% 
+  separate(island1, c("g1","g2","g3")) %>% # Separamos 'island1' en tres componentes
+  # Unimos las dos primeras partes para crear un identificador único de genoma (e.g., "gen1.gen2")
+  mutate(genome = paste(g1, g2, sep = ".")) %>%  
+   # Eliminamos las columnas auxiliares g1, g2 y g3
+  select(-g1,-g2,-g3) %>% 
+  # Filtramos solo los genomas que están presentes en la lista `glist_high$genome`
+  filter(genome %in% glist_high$genome) %>% 
+  select(-genome)
+```
+
+Guardar datos
+
+```{r mge_bins_final_collapsed, eval=FALSE}
+write.table(mge_bins_melted,file = "data/processed_data/mge_bins_final_collapsed.txt", sep = "\t", row.names = F, col.names = T, quote = F)
+```
+
+## PASO 3: Manipulación y Limpieza de los datos
+
+```{r}
+# Renombramos las columnas de `data_mf` con nombres significativos
+data_mf_rename <- data_mf %>% 
+  dplyr::rename(rec_cluster = X1, prot = X2, specI = X3, kingdom = X4, phylum = X5, class = X6, order = X7, family = X8, genus = X9) 
+
+# Renombramos las columnas de `tax` para que tengan nombres descriptivos.
+# Luego seleccionamos solo la columna 'genome' y filtramos los que están presentes en `glist_high`.
+tax <- tax %>% 
+  dplyr::rename(specI = X1, genome = X2, kingdom = X3, phylum = X4, class = X5, family = X6) %>% 
+  select(genome) %>% 
+  filter(genome %in% glist_high$genome) 
+
+# Renombramos las columnas para hacerlas más interpretables
+data_mge_class_rename <- data_mge_class %>% 
+  dplyr::rename(cor_mge = X1, island = X2, mge = X3, rec = X4, rec_cluster = X5, family = X6, class = X7, prot = X8)
+```
+
+## PASO 4: Asignar información taxonómica y filtrar genomas de interés
+
+```{r}
+# Extraemos el ID del genoma a partir del identificador de proteína
+# (se asume que 'prot' tiene formato como "X.Y.Z" donde X.Y es el ID de genoma)
+datar_phy <- data_mf_rename %>% 
+  mutate(prot1 = prot) %>%
+  separate(prot1, c("one","two","three"), sep = "\\.", extra = "merge") %>% 
+  unite(.,genome, c("one","two"), sep = ".") %>% 
+  select(-three) %>% 
+  filter(genome %in% glist_high$genome) 
+
+## Unimos información taxonómica con los datos de proteínas ##
+datar <- left_join(tax,datar_phy, by = "genome") %>% 
+  drop_na()  # eliminamos filas con valores NA después del join
+```
+
+## PASO 5: Identificar HGT a cada nivel taxonómico
+
+Filtramos los clusters de recombinación (`rec_cluster`) que contienen más de una entrada, y que tienen variación en el nivel taxonómico "family".
+
+Esto sugiere la presencia de transferencia horizontal entre diferentes familias.
+
+```{r}
+datar_melt <- datar %>% 
+  select(-genus) %>%         # Eliminamos columna de genus (no se usa aquí)
+  group_by(rec_cluster) %>%  # Agrupamos por cluster de recombinación
+  filter(n() > 1) %>%        # Nos quedamos solo con clusters que tienen más de una entrada
+  filter_at(vars(family), any_vars(length(unique(.)) > 1)) %>% # Que haya al menos dos familias distintas
+  ungroup() 
+
+# Contamos el número de taxones distintos por nivel (kingdom a family) por cada cluster
+datar_tax <- datar_melt %>% 
+  group_by(rec_cluster) %>% 
+  summarise_at(vars(kingdom:family), n_distinct) # Cuenta cuántos taxones distintos hay en cada nivel
+
+# Preparamos un resumen del nivel taxonómico más alto en el que ocurre variación
+datar_top <- datar_tax %>% 
+  mutate_at(vars(kingdom:family), ~ . - 1) %>%  # Restamos 1 (para que 0 indique sin variación)
+  mutate(cumul = rowSums(.[2:6])) %>%           # Suma total de variación en niveles taxonómicos
+  pivot_longer(kingdom:family, names_to = "key", values_to = "value") %>% # Reorganiza a formato largo
+  group_by(rec_cluster) %>% 
+  mutate(top_tax = key[which(value > 0)[1]]) %>% # Identifica el primer nivel donde hay variación
+  ungroup() %>% 
+  pivot_wider(names_from = key, values_from = value) # Regresa a formato ancho
+
+# Combinamos con información de proteínas para cada cluster
+sub_datar <- datar %>% select(rec_cluster,prot)
+combine_mge <- left_join(datar_top,sub_datar, by = "rec_cluster")
+```
+
+Guardar datos
+
+```{r pre_MGE_top_tax_file_final, eval=FALSE}
+write.table(combine_mge,file= "data/processed_data/pre_MGE_top_tax_file_final.txt", sep = "\t", quote = F, col.names = T, row.names = F)
+```
+
+## PASO 6: Estratificación basada en MGEs de los clusters de recombinasas
+
+Limpiamos y formateamos el archivo: - Quitamos el encabezado repetido - Renombramos columnas para claridad - Extraemos el nombre del genoma a partir del identificador de proteína - Filtramos los genomas de interés y descartamos islas no definidas
+
+```{r}
+dat_mge_f <- dat_mge %>% 
+  filter(!X5 == "rec_cluster") %>% 
+  dplyr::rename(MGE = X1, ISLAND = X2, MGE_ND = X3, rec = X4, rec_cluster = X5,	cumul = X6,	top_tax = X7,	kingdom = X8,	phylum = X9, class = X10,	order = X11, family = X12, prot = X13) %>% 
+  mutate(prot1 = prot) %>%
+  separate(prot1, c("one","two","three"), sep = "\\.", extra = "merge") %>% 
+  unite(.,genome, c("one","two"), sep = ".") %>% 
+  select(-three) %>% 
+  filter(genome %in% glist_high$genome) %>% 
+  filter(ISLAND != "ISLAND_ND") # Excluye islas no definidas
+```
+
+Preparamos una versión más restringida del conjunto de datos, conservando solo genomas que están también en `datar`.
+
+```{r}
+dat_mge_pref <- dat_mge_f %>%
+  mutate(prot1 = prot) %>%
+  separate(prot1, c("one","two","three"), sep = "\\.", extra = "merge") %>% 
+  unite(.,genome, c("one","two"), sep = ".") %>% 
+  select(-three) %>%
+  filter(genome %in% datar$genome)
+
+# Quitamos las columnas taxonómicas redundantes para fusionar luego con datos actualizados
+dat_mge_f1 <- dat_mge_pref %>% select(-kingdom,-phylum,-class,-order,-family)
+
+# Fusionamos los datos de MGE con la anotación taxonómica por proteína y cluster
+# Luego, reorganizamos los datos en formato largo para obtener el valor en el nivel taxonómico más informativo
+dat_with_tax <- left_join(dat_mge_f1,datar, by = c("rec_cluster","prot")) %>%
+  select(MGE, rec_cluster, top_tax,prot, kingdom:family) %>%
+  reshape2::melt(id = c("MGE", "rec_cluster", "top_tax","prot")) %>%
+  # Filtramos solo el nivel taxonómico que fue identificado como el más informativo
+  filter(variable == top_tax) 
+```
+
+## PASO 7: Generación de datos para las figuras 4C y 5
+
+```{r}
+# Fusionamos datos de recombinasas y MGEs con anotación taxonómica
+# Luego transformamos a formato largo, conservando solo el nivel taxonómico más informativo
+dat_with_tax2n <- left_join(dat_mge_f1,datar, by = c("rec_cluster","prot")) %>%
+  select(MGE, MGE_ND, ISLAND, rec_cluster, top_tax,prot, kingdom:family) %>%
+  reshape2::melt(id = c("MGE", "MGE_ND","rec_cluster", "ISLAND", "top_tax","prot")) %>%
+  filter(variable == top_tax) #  Solo nos quedamos con la categoría taxonómica más relevante
+
+# Preparamos subconjunto con información de familia para cada recombinasa
+temp_datar <- datar %>% select(rec_cluster,prot,family)
+# Añadimos la información de familia a los datos largos con MGEs
+temp_data_with_tax2n <- left_join(dat_with_tax2n,temp_datar, by = c("rec_cluster","prot")) 
+
+# Filtramos clusters de recombinasas asociadas a MGEs móviles (excluyendo "Cellular" y "nested")
+# Luego, identificamos clusters que presentan diversidad en el nivel taxonómico relevante
+dat_with_tax3_testn <- temp_data_with_tax2n %>%
+  filter(MGE != "Cellular" & MGE != "nested") %>%              # Nos centramos en MGEs no celulares
+  group_by(rec_cluster, MGE) %>%                               # Agrupamos por cluster y tipo de MGE
+  mutate(val = n_distinct(value) > 1) %>%                      # Evaluamos si hay más de un taxón distinto
+  filter(val == "TRUE") %>%                                    # Conservamos solo aquellos con diversidad taxonómica
+  ungroup()
+```
+
+Guardar datos.
+
+```{r all_hgt_data_family_expanded_redundant_final, eval=FALSE}
+# Guardar datos
+write.table(dat_with_tax3_testn,file="processed_data/all_hgt_data_family_expanded_redundant_final.txt", sep = "\t", col.names = T, row.names = F, quote = F)
+```
+
+## PASO 8: Preparación de datos para cuantificar HGT según el tipo de MGE y el nivel taxonómico afectado
+
+```{r}
+# Extraemos información relevante (cluster, proteína, familia) desde los datos anotados
+temp_datar <- datar %>% select(rec_cluster,prot,family)
+# Unimos esta información a los datos previos con anotación taxonómica
+temp_data_with_tax <- left_join(dat_with_tax,temp_datar, by = c("rec_cluster","prot")) 
+
+# Filtramos MGEs móviles (excluyendo los de origen celular o sin clasificar),
+# luego identificamos recombinasas que están distribuidas en más de un taxón distinto
+dat_with_tax_mge <- temp_data_with_tax %>%
+  filter(MGE != "Cellular" & MGE != "nested") %>%        # Solo MGEs móviles
+  group_by(rec_cluster, MGE) %>%                         # Agrupamos por cluster y tipo de MGE
+  mutate(val = n_distinct(value) > 1) %>%                # Evaluamos si hay diversidad taxonómica
+  filter(val == "TRUE") %>%                              # Conservamos solo los casos con diversidad
+  summarise(top_tax_new = unique(top_tax)) %>%           # Extraemos el nivel taxonómico más informativo
+  ungroup() %>%
+  group_by(MGE, top_tax_new) %>%                         # Agrupamos por tipo de MGE y nivel taxonómico
+  summarise(final = n()) %>%                             # Contamos número de clusters con diversidad
+  mutate(tot = sum(final)) %>%                           # Calculamos total por MGE
+  ungroup()
+
+## Ajuste manual: Forzamos a que haya al menos 3 eventos a nivel de reino (kingdom)
+## para reflejar transferencias entre arqueas y bacterias aunque sean pocas pero significativas
+dat_with_tax_mge <- dat_with_tax_mge %>%
+  mutate(final = if_else(top_tax_new == "kingdom",3,as.numeric(final))) 
+
+# Ordenamos niveles de factores para visualización ordenada
+dat_with_tax_mge$top_tax_new <- factor(dat_with_tax_mge$top_tax_new, levels = rev(c("kingdom","phylum","class","order","family")))
+dat_with_tax_mge$MGE <- factor(dat_with_tax_mge$MGE,levels = c("IS_Tn","CE","MI","Phage","Phage_like","Integron"))
+```
+
+### Figure 4A - HGT line plot
+
+Generamos un gráfico de línea con puntos para visualizar los eventos de HGT por nivel taxonómico (kingdom, phylum, etc.) estratificados por tipo de MGE.
+
+```{r}
+mge_tax_log <- ggplot(dat_with_tax_mge, aes(x = top_tax_new, y = final, color = MGE)) + 
+  geom_point(aes(group = MGE), size = 3) +   # Puntos grandes para cada tipo de MGE
+  geom_line(aes(group = MGE), size = 1) +    # Conectamos puntos con líneas para cada tipo de MGE
+  scale_colour_manual(values = colc) +       # Usamos una paleta de colores personalizada
+  scale_y_log10()                            # Escala logarítmica para visualizar mejor las diferencias
+
+# Personalizamos el gráfico con un tema limpio y rotación de etiquetas
+mge_tax_log + 
+  theme_cowplot(font_size = 15) +            # Estilo claro y moderno
+  theme(legend.position = "bottom",
+    axis.text.x = element_text(angle = 90,hjust = 1,vjust = 0.5)) + # Rotamos etiquetas del eje X
+  labs(y = "#HGT events", x = "")            # Etiquetas de los ejes
+```
+
+## PASO 9: Generación de datos para las figuras 4B
+
+```{r}
+# Preprocesamiento de la tabla con información de clases taxonómicas y MGEs
+data_mge_class_phy <- data_mge_class_rename %>% 
+  mutate(prot1 = prot) %>%  # Guardamos la columna original de proteínas en una nueva columna
+  separate(prot1, c("one","two","three"), sep = "\\.", extra = "merge") %>% 
+  unite(.,genome, c("one","two"), sep = ".") %>%  # Reunimos los dos primeros fragmentos para identificar el genoma
+  select(-three) %>%  # Eliminamos el componente restante de la separación
+  filter(genome %in% tax$genome) %>%  # Filtramos solo los genomas presentes en la lista filtrada de taxonomía
+  filter(.,!grepl("Cellular",cor_mge))  # Excluimos elementos que no son MGEs móviles ("Cellular")
+
+## Identificación de recombinasas compartidas entre genomas (potenciales eventos de HGT) ##
+data_mge_class_hgt <- data_mge_class_phy %>% 
+  group_by(rec_cluster) %>%  # Agrupamos por clúster de recombinasa
+  summarise(count = n()) %>%  # Contamos cuántos genomas comparten ese clúster
+  filter(., count > 1)  # Nos quedamos solo con aquellos compartidos por más de un genoma (indicador de HGT)
+
+# Filtramos la tabla original para quedarnos solo con los clústeres que muestran posible HGT
+data_hgt <- left_join(data_mge_class_hgt, data_mge_class_phy, by = "rec_cluster")
+```
+
+## PASO 10: Contar combinaciones de familias por recombinasa
+
+```{r}
+# Numero de cluster por recombinadas
+pre_hgt <- data_hgt %>% 
+  group_by(rec_cluster) %>% 
+  summarise(family = paste(family, collapse = ":")) %>% 
+  group_by(rec_cluster,family) %>% 
+  summarise(count = n()) 
+
+# Normalizar combinaciones de familias (A:B ≡ B:A)
+pre_hgt_decoupled <- pre_hgt %>% 
+  group_by(family) %>% 
+  mutate(nfamily = duo_maker(family)) %>% 
+  ungroup() %>% 
+  separate_rows(nfamily, sep = ";") %>% group_by(rec_cluster,nfamily) %>% summarise(ncount = sum(count)) %>% 
+  mutate(nfamily = map_chr(nfamily,~toString(sort(str_split(.x, ":")[[1]]))))  %>% 
+  group_by(nfamily, rec_cluster)  %>% 
+  summarise(final_count = sum(ncount)) %>%
+  ungroup() %>%
+  filter(.,!grepl("NA ",nfamily))
+
+# Extrae las combinaciones únicas de familia y clase de los genomas involucrados en HGT
+rel_family_class <- data_hgt %>% 
+  select(family, class) %>% 
+  unique(.) %>% 
+  mutate(family1 = family, family2 = family) %>%  # Duplica la columna 'family' para facilitar joins posteriores
+  select(-family)  # Elimina la columna original 'family'
+
+# Separa las combinaciones de familias (tipo "famA, famB") en dos columnas distintas
+pre_hgt_decoupled_family <- pre_hgt_decoupled %>% 
+  separate(nfamily, c("family1", "family2"), sep = ", ", extra = "merge")
+
+# Asocia 'family1' con su clase taxonómica (class.x)
+pre_hgt_class1 <- left_join(pre_hgt_decoupled_family, rel_family_class, by = "family1") %>% 
+  select(-family1) %>%  # Elimina columna original family1 tras el join
+  dplyr::rename(family2 = family2.x)  # Renombra para mantener consistencia
+
+# Asocia 'family2' con su clase taxonómica (class.y), filtra pares con clases distintas,
+# agrupa por pares de clases y suma los eventos HGT
+pre_hgt_class2 <- left_join(pre_hgt_class1, rel_family_class, by = "family2") %>% 
+  select(-family2, -family2.y, -family1) %>%  # Limpia columnas intermedias no necesarias
+  filter(., class.x != class.y) %>%  # Conserva solo los pares donde hay diferencia de clase (potencial HGT entre clases)
+  group_by(class.x, class.y) %>% 
+  summarise(hgt_count = sum(final_count)) %>%
+  
+  # Combina las clases en un nombre de par (ej. "Gammaproteobacteria:Bacilli")
+  unite(name_new, class.x:class.y, sep = ":") %>%
+  
+  # Ordena alfabéticamente las clases en cada par (para que "A:B" y "B:A" cuenten como uno solo)
+  mutate(name_new = map_chr(name_new, ~toString(sort(str_split(.x, ":")[[1]])))) %>% 
+  
+  # Agrupa por el par único ordenado y suma los eventos HGT redundantes
+  group_by(name_new) %>% 
+  summarise(final_count = sum(hgt_count)) %>% 
+  ungroup()
+
+# Muestra el total de eventos HGT entre clases
+pre_hgt_class2 %>% mutate(tot = sum(final_count)) %>% head() # Resultado esperado: 2823 eventos para genomas de alta calidad
+```
+
+## PASO 11: Cálculo de HGT basado en MGE para obtener arcos de mapas térmicos
+
+```{r}
+# Procesa el archivo renombrado para extraer el genoma y filtrar MGEs válidos (excluye "Cellular" y "MGE_ND")
+data_mge_class_phy_MGE <- data_mge_class_rename %>% 
+  mutate(prot1 = prot) %>%  # Crea una columna auxiliar para separar la proteína
+  separate(prot1, c("one", "two", "three"), sep = "\\.", extra = "merge") %>%  # Separa ID de proteína por puntos
+  unite(., genome, c("one", "two"), sep = ".") %>%  # Une las dos primeras partes como identificador del genoma
+  select(-three) %>%  # Elimina el fragmento sobrante
+  filter(genome %in% tax$genome) %>%  # Filtra por genomas de alta calidad definidos previamente
+  filter(!grepl("Cellular", cor_mge) & !grepl("MGE_ND", cor_mge))  # Excluye MGEs no definidos o de origen celular
+
+# Identifica recombinasas asociadas a MGEs que están presentes en múltiples genomas → potencial HGT
+data_mge_class_hgt_MGE <- data_mge_class_phy_MGE %>% 
+  group_by(rec_cluster) %>% 
+  summarise(count = n()) %>%  
+  filter(count > 1)  # Se quedan solo las recombinasas compartidas por más de un genoma
+
+# Extrae los datos completos de esas recombinasas compartidas
+data_hgt_MGE <- left_join(data_mge_class_hgt_MGE, data_mge_class_phy_MGE, by = "rec_cluster")
+
+# Agrupa por recombinasa y MGE, colapsando las familias taxonómicas en texto separado por ":"
+pre_hgt_MGE <- data_hgt %>% 
+  group_by(rec_cluster, cor_mge) %>% 
+  summarise(family = paste(family, collapse = ":")) %>% 
+  group_by(rec_cluster, cor_mge, family) %>% 
+  summarise(count = n())  # Cuenta cuántas veces se da esa combinación
+
+# Descompone combinaciones de ≥3 familias en pares, elimina redundancias (A:B ≡ B:A)
+pre_hgt_decoupled_MGE <- pre_hgt_MGE %>% 
+  group_by(family) %>% 
+  mutate(nfamily = duo_maker(family)) %>%  # Aplica función para generar pares de familias
+  ungroup() %>% 
+  separate_rows(nfamily, sep = ";") %>%  # Separa cada par generado
+  group_by(cor_mge, nfamily) %>% 
+  summarise(ncount = sum(count)) %>%  # Suma ocurrencias por par y MGE
+  mutate(nfamily = map_chr(nfamily, ~toString(sort(str_split(.x, ":")[[1]])))) %>%  # Ordena alfabéticamente para unificar A:B y B:A
+  group_by(nfamily, cor_mge) %>% 
+  summarise(final_count = sum(ncount)) %>% 
+  ungroup() %>% 
+  filter(!grepl("NA ", nfamily))  # Elimina combinaciones que incluyan NA
+
+head(pre_hgt_decoupled_MGE)
+```
+
+## PASO 12: Cálculo de eventos de transferencia horizontal (HGT) mediados por MGE entre clases taxonómicas
+
+```{r}
+# Crea una tabla única de relación entre familia y clase para asignar clases taxonómicas a pares de familias
+rel_family_class_MGE <- data_hgt %>% 
+  select(family, class) %>% 
+  unique(.) %>% 
+  mutate(family1 = family, family2 = family) %>%  # Prepara columnas duplicadas para unir por ambos lados del par
+  select(-family)
+
+# Separa las combinaciones de familias en pares individuales: columna "family1" y "family2"
+pre_hgt_decoupled_family_MGE <- pre_hgt_decoupled_MGE %>% 
+  separate(nfamily, c("family1", "family2"), sep = ", ", extra = "merge")
+
+# Une cada "family1" con su clase correspondiente
+pre_hgt_class1_MGE <- left_join(pre_hgt_decoupled_family_MGE, rel_family_class_MGE, by = "family1") %>% 
+  select(-family1) %>% 
+  dplyr::rename(family2 = family2.x)  # Ajuste de nombres para evitar duplicados
+
+# Une cada "family2" con su clase correspondiente, y filtra las que pertenecen a clases distintas
+pre_hgt_class2_MGE <- left_join(pre_hgt_class1_MGE, rel_family_class_MGE, by = "family2") %>% 
+  select(-family2, -family2.y, -family1) %>% 
+  filter(class.x != class.y) %>%  # Solo eventos entre clases diferentes
+  group_by(class.x, class.y, cor_mge) %>% 
+  summarise(hgt_count = sum(final_count))  # Cuenta total de eventos entre cada par de clases por tipo de MGE
+
+# Une los nombres de clase para formar un identificador de par, agrupa, y descompone combinaciones A:B y B:A
+pre_hgt_decoupled_class_MGE <- pre_hgt_class2_MGE %>% 
+  unite(new, class.x:class.y, sep = ":") %>%  # Combina el nombre de ambas clases
+  group_by(new, cor_mge) %>% 
+  mutate(name_new = duo_maker(new)) %>%  # Genera pares únicos (A:B = B:A)
+  ungroup() %>% 
+  separate_rows(name_new, sep = ";") %>%  # Separa múltiples combinaciones si hay
+  group_by(name_new, cor_mge) %>%
+  summarize(hgt_count = sum(hgt_count)) %>%  # Suma los eventos para cada combinación de clases por MGE
+  ungroup() %>%
+  mutate(name_new = map_chr(name_new, ~toString(sort(str_split(.x, ":")[[1]])))) %>%  # Ordena los nombres de clase alfabéticamente
+  group_by(name_new, cor_mge) %>% 
+  summarise(final_count = sum(hgt_count)) %>%  # Suma eventos redundantes unificados
+  ungroup() %>%
+  separate(name_new, c("class.x", "class.y"))  # Vuelve a separar en columnas para posterior análisis o visualización
+
+head(pre_hgt_decoupled_class_MGE)
+```
+
+## PASO 13: Arcos HGT Figura 4B para iTOL
+
+```{r}
+# Construcción de la tabla de clases HGT por MGE
+class_tab <- pre_hgt_decoupled_class_MGE %>% 
+  unite(new, class.x:class.y, sep = ":") %>%
+  group_by(new,cor_mge) %>% 
+  mutate(name_new = duo_maker(new)) %>% 
+  ungroup() %>% 
+  separate_rows(name_new, sep = ";") %>% 
+  group_by(name_new,cor_mge) %>%
+  summarize(hgt_count = sum(final_count)) %>%
+  select(name_new,cor_mge, hgt_count) %>%
+  ungroup() %>% 
+  separate(name_new, c("class.x","class.y"))
+
+# Cálculo del porcentaje de eventos HGT por categoría de MGE
+class_tab %>% 
+  group_by(cor_mge) %>% 
+  summarise(f = sum(hgt_count)) %>% 
+  mutate(frac = (f/sum(f))*100)
+```
+
+Descripción paso a paso:
+
+1.  Agrupa los datos por categoría MGE (`cor_mge`).
+
+2.  Suma el número total de eventos HGT (`hgt_count`) por MGE (`f`).
+
+3.  Calcula el porcentaje que representa cada MGE respecto al total de eventos `(frac`).
+
+```{r}
+# Resumen para gráficas
+class_tab_plot <- class_tab %>% 
+  group_by(cor_mge) %>% 
+  summarise(count = sum(hgt_count)) 
+```
+
+Se crea un resumen del número total de eventos HGT (`count`) por cada categoría de MGE (`cor_mge`), útil para graficar.
+
+Guardar archivos 
+
+```{r}
+# Asignación de ángulos personalizados para los arcos
+angles <- seq(32,80,12)
+# Generación de archivos para cada categoría de MGE
+for(i in 1:length(mges)) {
+  separator <- c("DATASET_CONNECTION","SEPARATOR COMMA")
+  dataset_label <- paste0("DATASET_LABEL,",mges[i])
+  # Asignar un color a cada conjunto de datos, usando el valor correspondiente de 'colc'
+  dcolor <- paste0("COLOR,",colc_grey[mges[i]])
+  optional <- c("DRAW_ARROWS,0",paste0("CURVE_ANGLE,",angles[i]),"CENTER_CURVES,1","ALIGN_TO_LABELS,1")
+# Descripción: Opciones adicionales de formato para iTOL:
+# - DRAW_ARROWS,0: No dibujar flechas.
+# - CURVE_ANGLE: Define el ángulo del arco.
+# - CENTER_CURVES,1: Centra los arcos.
+# - ALIGN_TO_LABELS,1: Alinea los extremos a las etiquetas del árbol.
+  data_lines <- c("DATA")
+  data_oi <- class_tab %>% filter(cor_mge==mges[i])
+  # Inicializar las líneas de salida con los parámetros de encabezado y configuración
+  out_lines <- c(separator, dataset_label, dcolor, optional, data_lines)
+  for(j in 1:nrow(data_oi)){
+    line_oi <- paste(data_oi[j,1],data_oi[j,2],"2",colc_grey[mges[i]],"normal",sep = ",")
+     # Añadir la línea de conexión a las líneas de salida
+    out_lines <- c(out_lines,line_oi)
+  }
+  # Guardar archivos - Salida de los archivos
+  writeLines(out_lines, paste0(mges[i],"_class_sub_grey_itol_connections_fig4B.txt"))
+}
+```
+
+## PASO 14: Preparación de los datos para el gráfico de calor (heatmap) de HGT (Transferencia Horizontal de Genes)
+
+```{r}
+# Separar la columna 'name_new' en dos nuevas columnas: 'class1' y 'class2'
+hgt_class_level <- pre_hgt_class2 %>% 
+  separate(name_new, into = c("class1", "class2"), sep = ", ") 
+# La función 'separate' divide la columna 'name_new' en dos nuevas columnas 'class1' y 'class2' usando la coma y el espacio como delimitador.
+
+# Filtrar los datos para excluir filas con valores "NA" en las columnas 'class1', 'class2' y 'final_count'
+hgt_class_level_spread <- hgt_class_level %>%
+  filter(!grepl("NA", class1)) %>%  # Excluir filas donde 'class1' contiene "NA"
+  filter(!grepl("NA", class2)) %>%  # Excluir filas donde 'class2' contiene "NA"
+  filter(!grepl("NA", final_count)) %>%  # Excluir filas donde 'final_count' contiene "NA"
+  # Pivotar los datos para que 'class1' sea la columna identificadora y las combinaciones de 'class2' sean las nuevas columnas
+  pivot_wider(id_cols = class1, names_from = class2, values_from = final_count) %>%
+  # Convertir 'class1' en las filas del dataframe
+  column_to_rownames(var = "class1") %>%
+  # Reemplazar los valores NA por 0
+  replace(is.na(.), 0)
+
+# Crear una lista con todas las clases únicas en 'class1' y 'class2'
+allClasses <- unique(c(hgt_class_level$class1, hgt_class_level$class2)) 
+# 'unique' se usa para obtener las clases únicas en ambas columnas, 'class1' y 'class2'
+
+# Eliminar cualquier "NA" de la lista de clases
+allClasses <- allClasses[!grepl("NA", allClasses)] 
+
+# Mantener solo las clases presentes en el árbol filogenético 'class_tree'
+class_tree_rooted <- keep.tip(class_tree, as.vector(allClasses)) 
+# 'keep.tip' selecciona solo los elementos de 'class_tree' que están en la lista 'allClasses'
+```
+
+Guadar archivo de filogenia
+
+```{r class_tree_rooted, eval=FALSE}
+write.tree(class_tree_rooted,file="data/processed_data/hgt_tree.nwk")
+```
+
+### Figura 4B: Matriz Simétrica para Visualización de HGT en un Árbol Filogenético
+
+Crear una nueva matriz con ceros, donde las filas y las columnas son las etiquetas de las puntas del árbol filogenético 'class_tree_rooted'
+
+```{r}
+# Nueva matriz
+new_matrix <- matrix(0, nrow = Ntip(class_tree_rooted), ncol = Ntip(class_tree_rooted), 
+                     dimnames = list(class_tree_rooted$tip.label, rev(class_tree_rooted$tip.label)))
+# 'Ntip(class_tree_rooted)' devuelve el número de puntas (tips) en el árbol filogenético 'class_tree_rooted'
+# La matriz tiene el mismo número de filas y columnas, con las etiquetas de las puntas en ambas dimensiones.
+# 'rev' invierte el orden de las etiquetas de las puntas para las columnas.
+
+# Bucle para iterar sobre cada fila (i) y columna (j) de la matriz de datos 'hgt_class_level_spread'
+for(i in rownames(hgt_class_level_spread )) {
+  for(j in colnames(hgt_class_level_spread )) {
+    
+    # Obtener el valor de 'final_count' en la intersección de la fila 'i' y la columna 'j'
+    value <- hgt_class_level_spread[i,j]
+    
+    # Si el valor es mayor que 0, actualizar la matriz nueva
+    if(value > 0) {
+      new_matrix[i,j] <- (value)  # Asignar el valor en la posición (i, j)
+      new_matrix[j,i] <- (value)  # Asignar el mismo valor en la posición (j, i) (simetría)
+    }
+  }
+}
+
+# Establecer un pequeño valor para mejorar la visualización en el gráfico de calor
+small_value <- unique(sort(unlist(new_matrix)))[2]
+# 'unlist' convierte la matriz en un vector, 'sort' ordena los valores, 'unique' elimina duplicados
+# El segundo valor más pequeño se asigna a 'small_value' para usarlo como referencia visual en el gráfico.
+
+small_value <- small_value - small_value %% 0.001
+# Ajustar 'small_value' a un valor redondeado a tres decimales (eliminando el residuo de la división por 0.001)
+# Esto es útil para establecer un umbral mínimo visual en el gráfico.
+
+# Definir los puntos de corte (breaks) para el gráfico de calor
+heatmap_breaks <- c(0, small_value, lseq(1, max(new_matrix), length.out = 18))
+# El primer valor es 0, el segundo es 'small_value' (valor pequeño para mejorar la visualización), 
+# y el tercero es una secuencia logarítmica entre 1 y el valor máximo de 'new_matrix', dividida en 18 puntos.
+
+# Definir la paleta de colores para el gráfico de calor
+plot_colors <- c("white", colorRampPalette((viridis(10)), bias = 5)(length(heatmap_breaks) - 2))
+# 'viridis(10)' genera una paleta de 10 colores usando la paleta 'viridis'.
+# 'colorRampPalette' expande esta paleta según la longitud de 'heatmap_breaks' menos 2 (porque ya se definen 0 y 'small_value').
+# 'bias = 5' ajusta la distribución de los colores, dándole más énfasis a los valores más altos.
+```
+
+Visualizacion grafica
+
+```{r}
+phylo.heatmap.orient(class_tree_rooted, 
+                     new_matrix, fsize = c(0.9, 0.9, 1), 
+                     colors = plot_colors, grid = T, split = c(0.6, 0.4), breaks = heatmap_breaks, lwd = 1)
+```
+
+## PASO 15: Preparación de los datos la figura 4C
+
+```{r}
+# Parsear datos anidados de transferencia horizontal de genes (HGT)
+dat_with_tax_nested <- left_join(dat_mge_f1, datar, by = c("rec_cluster", "prot")) %>%
+  # Unir dos data frames por los campos 'rec_cluster' y 'prot'
+  
+  select(MGE, MGE_ND, ISLAND, rec_cluster, top_tax, prot, kingdom:family) %>%
+  # Seleccionar columnas clave para el análisis
+
+  reshape2::melt(id = c("MGE", "MGE_ND", "rec_cluster", "ISLAND", "top_tax", "prot")) %>%
+  # Reestructurar el data frame a formato largo, manteniendo como ID las columnas especificadas
+
+  filter(variable == top_tax)
+  # Filtrar filas donde la columna 'variable' coincide con 'top_tax' (nivel taxonómico dominante)
+
+# Filtrar y agrupar los datos para identificar casos de anidamiento significativo
+hgt1.1 <- left_join(dat_with_tax_nested, temp_datar, by = c("rec_cluster", "prot")) %>%
+  # Unir datos con anotaciones adicionales de taxonomía o contexto genómico
+
+  filter(MGE != "Cellular" & MGE != "nested") %>%
+  # Excluir MGEs que son celulares o ya clasificados como anidados, nos enfocamos en casos de interés
+
+  group_by(rec_cluster, MGE) %>%
+  # Agrupar por clúster de recombinasa y tipo de MGE
+
+  mutate(val = n_distinct(value) > 1) %>%
+  # Crear una columna lógica que indica si hay más de una taxonomía distinta dentro del grupo
+
+  filter(val == "TRUE") %>%
+  # Conservar solo los casos con diversidad taxonómica (indicador de transferencia horizontal)
+
+  ungroup()
+  # Eliminar agrupamiento para futuras operaciones
+```
+
+
+## PASO 16: Determinar la fracción general de recombinasas IS_Tn anidadas con otros MGEs
+
+```{r}
+# Filtrar y renombrar columnas del conjunto de datos general para enfocarse en IS_Tn
+hgt_tn1.1 <- hgt1.1 %>%
+  dplyr::rename(cor_mge = MGE, mge = MGE_ND) %>% 
+  select(1, 2, 3, 4, 6, 9) %>%
+  filter(cor_mge == "IS_Tn")
+# 'cor_mge' es el tipo de MGE (aquí, IS_Tn)
+# 'mge' contiene información sobre elementos genéticos anidados (MGE_ND)
+# Se seleccionan las columnas clave y se filtran solo los que son IS_Tn
+
+# Explorar si en la columna 'mge' hay elementos que están anidados (separados por "&")
+hgt_tn1.1 %>%
+  mutate(new = (grepl("(\\d+)&", mge))) %>% 
+  filter(new == "TRUE")
+# 'grepl' detecta si hay un número seguido por '&' → esto sugiere anidamiento
+# Se filtran solo los elementos que cumplen esta condición
+
+# Preparar datos para cuantificar IS_Tn anidados por genoma
+hgt_tn1.1_check <- hgt_tn1.1 %>% 
+  mutate(prot1 = prot) %>% 
+  # Duplicar columna de proteína para procesarla
+
+  separate(prot1, c("one", "two", "three"), sep = "\\.", extra = "merge") %>% 
+  # Separar el identificador de la proteína en partes por los puntos
+
+  unite(., genome, c("one", "two"), sep = ".") %>% 
+  # Unir las dos primeras partes para obtener el identificador del genoma
+
+  select(-three) %>%
+  # Eliminar la tercera parte, que no se necesita
+
+  group_by(rec_cluster, genome) %>% 
+  # Agrupar por clúster de recombinasa y genoma
+
+  mutate(atleast_1_nested = if_else((grepl("(\\d+)&", mge)), 1, 0)) %>% 
+  # Marcar si al menos una ocurrencia en ese grupo contiene un MGE anidado
+
+  ungroup() %>% 
+  group_by(rec_cluster, cor_mge, genome) %>% 
+  # Agrupar nuevamente para determinar el estado de anidamiento por genoma
+
+  summarise(val = if_else(sum(atleast_1_nested) > 0, "nested", "non_nested")) %>% 
+  # Si hay al menos una ocurrencia anidada → clasificar como "nested"
+
+  ungroup() %>%
+  group_by(cor_mge, val) %>% 
+  summarise(n = n())
+  # Contar cuántos genomas contienen IS_Tn anidados y no anidados
+```
+
+Verificar cuántas proteínas distintas hay por clúster de recombinasa y por isla
+ 
+```{r}
+# Control: muestra cuántas recombinasas únicas hay por isla y por clúster
+hgt_tn1.1 %>% 
+  group_by(rec_cluster, ISLAND) %>% 
+  summarise(n = n_distinct(prot)) 
+```
+ 
+Preparar un resumen de IS_Tn anidados por isla
+
+```{r}
+hgt_tn1.2_check <- hgt_tn1.1 %>% 
+  mutate(prot1 = prot) %>%
+  # Duplicar la columna 'prot' para procesarla sin perder datos
+
+  separate(prot1, c("one", "two", "three"), sep = "\\.", extra = "merge") %>% 
+  # Separar la identificación de la proteína por puntos (e.g. NC_000001.1.345)
+
+  unite(., genome, c("one", "two"), sep = ".") %>% 
+  # Reunir las dos primeras partes para obtener el ID del genoma (e.g. NC_000001.1)
+
+  select(-three) %>% 
+  # Eliminar la tercera parte (posición o subidentificador), que no se necesita aquí
+
+  group_by(rec_cluster, ISLAND) %>% 
+  # Agrupar por clúster y por isla genómica
+
+  summarise(
+    nested_n = sum(grepl("(\\d+)&", mge)),  # contar cuántas veces hay MGEs anidados
+    all_n = n_distinct(prot)                # número total de proteínas únicas por grupo
+  ) %>% 
+  ungroup()
+# Resultado: para cada clúster en cada isla, se indica cuántas recombinasas están anidadas (nested_n)
+# y cuántas hay en total (all_n)
+
+# Calcular el número de MGEs por isla en todo el dataset (para contexto general)
+data_find_nested <- mge_bins_melted %>% 
+  group_by(island) %>%
+  mutate(n_mge = n_distinct(mge))
+```
+
+Este paso identifica cuántos tipos de MGEs distintos hay por isla genómica. Esto puede usarse para correlacionar complejidad de la isla con probabilidad de anidamiento.
+
+### A) Filtrar islas genómicas que contienen más de un tipo de MGE (n_mge > 1)
+
+```{r}
+data_find_nested %>% 
+  filter(n_mge > 1) %>% 
+  # Agrupar por tipo de MGE para contar cuántas veces aparece anidado en esas islas
+  group_by(mge) %>%  
+  # Sumar los conteos (column 'count') por cada MGE → total de ocurrencias anidadas
+  summarise(t = sum(count)) %>% 
+  ungroup() %>% 
+  # Calcular el total general de todos los MGEs anidados (suma de todas las t)
+  mutate(f = sum(t))
+```
+
+### B) Filtrar islas genómicas que contienen solo un tipo de MGE (n_mge == 1)
+
+```{r}
+data_find_nested %>% 
+  filter(n_mge == 1) %>% 
+  # Agrupar por tipo de MGE
+  group_by(mge) %>%  
+  # Sumar los conteos (columna 'count') → total de ocurrencias no anidadas
+  summarise(t = sum(count)) %>% 
+  ungroup() %>% 
+  # Calcular el total global de todos los MGEs no anidados
+  mutate(f = sum(t))
+```
+
+### C) Filtrar islas que contienen más de una copia de IS_Tn, pero **ningún otro tipo de MGE**
+
+- `count > 1` → hay múltiples ocurrencias de IS_Tn
+- `n_mge == 1` → solo hay un tipo de MGE en la isla (IS_Tn)
+
+```{r}
+data_find_nested %>%
+  filter(mge == "IS_Tn") %>% 
+  # Seleccionar solo registros del MGE tipo "IS_Tn"
+  filter(count > 1 & n_mge == 1) %>% 
+  unique() %>% 
+  # Eliminar duplicados si existen
+  group_by(mge) %>% 
+  # Agrupar por tipo de MGE (aquí solo "IS_Tn")
+  summarise(total = sum(count)) 
+  # Sumar todas las ocurrencias de IS_Tn que cumplen con los criterios anteriores
+```
+
+### D) total de elementos IS_Tn no anidados
+
+```{r}
+data_find_nested %>%
+  filter(mge == "IS_Tn") %>% 
+  # Selecciona solo las entradas correspondientes al MGE tipo "IS_Tn"
+  filter(n_mge == 1) %>% 
+  # Se queda solo con las islas que tienen exactamente un tipo de MGE (solo IS_Tn)
+  unique() %>% 
+  # Elimina duplicados si es que los hay
+  group_by(mge) %>% 
+  # Agrupa por tipo de MGE (aquí, solo "IS_Tn")
+  summarise(total = sum(count)) 
+  # Suma todas las ocurrencias de IS_Tn en estas condiciones
+```
+
+### E) Integrones están anidados
+
+```{r}
+data_find_nested %>%
+  filter(mge == "Integron") %>% 
+  # Filtra solo los MGEs que son "Integron"
+  filter(n_mge > 1) %>% 
+  # Se queda solo con las islas que tienen más de un tipo de MGE → posibilidad de anidamiento
+  group_by(mge) %>% 
+  # Agrupa por tipo de MGE (aquí, solo "Integron")
+  summarise(total = sum(count)) 
+  # Suma cuántos Integrones hay en estas condiciones (nested)
+```
+
+### F) Elementos IS_Tn anidados con otros MGEs
+
+```{r}
+data_find_nested %>%
+  filter(mge == "IS_Tn") %>% 
+  # Selecciona solo registros correspondientes al MGE "IS_Tn"
+  filter(n_mge > 1) %>% 
+  # Filtra solo islas con más de un tipo de MGE → posibles eventos de anidamiento heterotípico
+  unique() %>% 
+  # Elimina duplicados si existen
+  group_by(mge) %>% 
+  # Agrupa por tipo de MGE
+  summarise(total = sum(count)) 
+  # Suma el número total de IS_Tn en esas islas (posiblemente anidados con otros MGEs)
+```
+
+### G) Identificar islas genómicas que contienen más de un tipo de MGE 
+
+```{r}
+## islas con más de un tipo de MGE
+data_onlyN <- mge_bins_melted %>% 
+  group_by(island) %>%
+  mutate(n_mge = n_distinct(mge)) %>%
+  # Cuenta cuántos tipos distintos de MGE hay por isla
+  filter(n_mge > 1)
+  # Se queda solo con las islas que tienen más de un tipo de MGE (potencial anidamiento heterotípico)
+
+data_onlyN_wider <- data_onlyN %>% 
+  pivot_wider(names_from = mge, values_from = count) %>%
+  # Transforma a formato ancho, con una columna por tipo de MGE y los valores como el conteo
+  mutate_at(vars(IS_Tn:Cellular), replace_na, 0)
+  # Reemplaza NA por 0 en todas las columnas de MGEs (esto es útil para análisis cuantitativos)
+```
+
+
+## PASO 17: Analizar el archivo maestro de todos los grupos de recombinasas
+
+```{r}
+datacl <- datacl %>% 
+  # Renombrar columnas para facilitar la interpretación
+  dplyr::rename(MGE_ND = X1, island = X2, MGE_ND_1 = X3, rec = X4, rec_cluster = X5, prot = X6)
+
+# Crear una nueva columna 'prot1' con los mismos valores que 'prot'
+datacl1 <- datacl %>% 
+  mutate(prot1 = prot) %>%
+  # Separar la columna 'prot1' en tres nuevas columnas: 'one', 'two', 'three', usando el punto como separador
+  separate(prot1, c("one","two","three"), sep = "\\.", extra = "merge") %>% 
+  # Unir las columnas 'one' y 'two' en una nueva columna 'genome', usando el punto como separador
+  unite(.,genome, c("one","two"), sep = ".") %>% 
+  # Eliminar la columna 'three' ya que no es necesaria
+  select(-three) %>% 
+  # Filtrar solo aquellos registros cuyo 'genome' esté presente en la lista 'glist_high'
+  filter(genome %in% glist_high$genome) %>% 
+  # Eliminar la columna 'genome' ya que solo se necesitaba para el filtro
+  select(-genome) %>% 
+  # Agrupar los datos por 'island'
+  group_by(island) %>%
+  # Calcular el número de 'MGE_ND' distintos por cada 'island' y guardarlo en la nueva columna 'n_mge'
+  mutate(n_mge = n_distinct(MGE_ND))
+
+# Filtrar los datos para incluir solo aquellos registros donde 'n_mge' es mayor que 1
+data_onlyN_cluster <- datacl1 %>% 
+  filter(n_mge > 1)
+```
+
+## PASO 18: Calcular el porcentaje de IS_Tn anidado en el conjunto de datos 'mge_bins' completo
+
+```{r}
+is_tn_non_hgt_nested_perc <- datacl %>% 
+  # Filtrar datos excluyendo 'nested' y 'Cellular' en la columna 'MGE_ND'
+  filter(MGE_ND != "nested", MGE_ND != "Cellular") %>% 
+  # Agrupar los datos por 'island'
+  group_by(island) %>% 
+  # Filtrar aquellos grupos que contienen al menos un 'MGE_ND' igual a "IS_Tn"
+  filter(any(MGE_ND == "IS_Tn")) %>% 
+  # Filtrar para mantener solo aquellos grupos con más de un 'MGE_ND' y más de un 'rec_cluster'
+  filter(n_distinct(MGE_ND) > 1, n_distinct(rec_cluster) > 1) %>%
+  # Agrupar por 'island', 'MGE_ND' y 'rec_cluster' para contar el número de ocurrencias
+  group_by(island, MGE_ND, rec_cluster) %>% 
+  summarise(counts = n()) %>%
+  # Desagrupar los datos para continuar con el siguiente cálculo
+  ungroup() %>% 
+  # Agrupar por 'island' y 'MGE_ND' para sumar los valores de 'counts'
+  group_by(island, MGE_ND) %>% 
+  summarise(new_counts = sum(counts)) %>% 
+  # Crear una nueva columna 'corrected_counts' para ajustar los valores según si 'MGE_ND' es "IS_Tn" o "Integron"
+  mutate(corrected_counts = if_else(MGE_ND %in% c("IS_Tn", "Integron"), new_counts, new_counts[MGE_ND == "IS_Tn"])) %>% 
+  # Agrupar por 'MGE_ND' para calcular la suma de los 'corrected_counts' por cada tipo
+  group_by(MGE_ND) %>% 
+  summarise(total = sum(corrected_counts)) %>% 
+  # Desagrupar los datos para continuar con el cálculo final
+  ungroup() %>% 
+  # Calcular el porcentaje para cada 'MGE_ND', excluyendo 'IS_Tn' de la suma total
+  mutate(perc = (total/(sum(total) - total[MGE_ND == "IS_Tn"]))*100) %>% 
+  # Si 'MGE_ND' es "IS_Tn", asignar un 0 en la columna 'perc'
+  mutate(perc = if_else(MGE_ND == "IS_Tn", 0, perc))
+
+```
+
+Calcular IS_Tn anidado en datos de HGT
+
+```{r}
+mge_rec_map <- hgt1.1 %>% 
+  # Seleccionar las columnas 'ISLAND', 'MGE' y 'rec_cluster' del conjunto de datos 'hgt1.1'
+  select(ISLAND, MGE, rec_cluster) %>% 
+  # Eliminar filas duplicadas para obtener una lista única de combinaciones de 'ISLAND', 'MGE' y 'rec_cluster'
+  unique()
+```
+
+Obtener lista de clusters IS_Tn anidados
+
+```{r}
+nested_is_tn_cluster_2r <- hgt1.1 %>% 
+  # Agrupar por la columna 'ISLAND'
+  group_by(ISLAND) %>% 
+  # Filtrar aquellos grupos donde el número de MGE distintos y 'rec_cluster' distintos sea mayor a 1
+  filter(n_distinct(MGE) > 1, n_distinct(rec_cluster) > 1) %>% 
+  # Crear resúmenes con listas de valores únicos de 'MGE', 'rec_cluster', 'family' y 'rec_cluster' específicos para 'IS_Tn'
+  summarise(all_mges = list(MGE), all_recs = list(rec_cluster), all_families = unique(family), is_tn_cluster = list(unique(rec_cluster[MGE == "IS_Tn"]))) %>% 
+  # Desagrupar los datos para continuar el análisis
+  ungroup() %>% 
+  # Desanidar la columna 'is_tn_cluster' para convertirla en un formato adecuado para el análisis posterior
+  unnest(cols = "is_tn_cluster") %>% 
+  # Agrupar nuevamente por 'is_tn_cluster' para trabajar sobre cada cluster IS_Tn
+  group_by(is_tn_cluster) %>% 
+  do({
+    # Crear una tabla de subdatos para el cluster actual
+    sub_tbl <- .
+    # Convertir la lista de 'rec_cluster' en un vector
+    rec_list <- unlist(sub_tbl$all_recs)
+    # Crear una tabla de frecuencias para los valores de 'rec_list'
+    table_rec <- table(rec_list)
+    # Convertir la lista de 'family' en un vector
+    family_list <- unlist(sub_tbl$all_families)
+    # Obtener el valor único del 'is_tn_cluster' actual
+    is_tn_oi <- unique(sub_tbl$is_tn_cluster)
+    # Convertir la lista de 'MGE' en un vector
+    mge_list <- unlist(sub_tbl$all_mges)
+    # Obtener los valores de 'rec_list' donde 'MGE' es igual a "IS_Tn"
+    is_tn_all <- unique(rec_list[mge_list == "IS_Tn"])
+    # Filtrar los clusters HGT (Phage, CE, MI, Integron, Phage_like)
+    hgt_clusters <- rec_list[mge_list %in% c("Phage", "CE", "MI", "Integron", "Phage_like")]
+    
+    # Evaluar las condiciones para determinar si es un cluster anidado HGT
+    if (table_rec[is_tn_oi] > 1 & any(table_rec[(!names(table_rec) %in% is_tn_all) & (names(table_rec) %in% hgt_clusters)] > 1) & length(unique(family_list)) > 1) {
+      # Si cumple las condiciones, etiquetar como 'nested_hgt'
+      outcome <- "nested_hgt"
+    } else {
+      # De lo contrario, etiquetar como 'unnested'
+      outcome <- "unnested"
+    }
+    # Devolver un dataframe con el resultado para cada cluster IS_Tn
+    data.frame(is_tn_cluster = is_tn_oi, outcome = outcome)
+  }) %>% 
+  # Filtrar solo aquellos resultados que son 'nested_hgt'
+  filter(outcome == "nested_hgt") %>% 
+  # Extraer la columna 'is_tn_cluster' con los resultados
+  pull(is_tn_cluster) %>% 
+  # Eliminar valores duplicados
+  unique()
+```
+
+Calcular la fracción de IS_Tn anidados con otros MGEs
+
+```{r}
+is_tn_hgt_nested_2rec_perc <- hgt1.1 %>% 
+  # Agrupar por 'ISLAND' para analizar los datos por isla
+  group_by(ISLAND) %>% 
+  # Filtrar aquellos grupos donde el número de MGE y 'rec_cluster' distintos sea mayor que 1
+  filter(n_distinct(MGE) > 1, n_distinct(rec_cluster) > 1) %>% 
+  # Resumir los datos creando listas de 'MGE', 'rec_cluster', 'family', y los clusters de 'IS_Tn'
+  summarise(all_mges = list(MGE), all_recs = list(rec_cluster), all_families = unique(family), is_tn_cluster = list(unique(rec_cluster[MGE == "IS_Tn"]))) %>% 
+  # Desagrupar los datos para continuar el análisis
+  ungroup() %>% 
+  # Desanidar la columna 'is_tn_cluster' para analizar cada uno de los clusters IS_Tn individualmente
+  unnest(cols = "is_tn_cluster") %>% 
+  # Filtrar los clusters IS_Tn que estén presentes en la lista de clusters IS_Tn anidados
+  filter(is_tn_cluster %in% nested_is_tn_cluster_2r) %>% 
+  # Agrupar nuevamente por 'is_tn_cluster' para evaluar cada cluster IS_Tn
+  group_by(is_tn_cluster) %>%
+  # Filtrar para mantener solo aquellos con más de una familia distinta
+  filter(n_distinct(all_families) > 1) %>%
+  # Desanidar las columnas 'all_recs' y 'all_mges' para poder trabajar con ellas individualmente
+  unnest(cols = c("all_recs", "all_mges")) %>% 
+  # Desagrupar los datos para continuar el análisis
+  ungroup() %>%
+  # Agrupar por 'ISLAND' y 'all_families' para analizar las combinaciones de rec_cluster por isla y familia
+  group_by(ISLAND, all_families) %>% 
+  # Crear combinaciones de dos 'rec_cluster' diferentes por cada grupo de 'ISLAND' y 'all_families'
+  summarise(rec_comb = list(t(combn(all_recs, 2)) %>% as_tibble() %>% 
+    # Filtrar las combinaciones para excluir aquellas que contienen solo "IS_Tn" o solo otros MGE
+    filter(!(V1 %in% all_recs[all_mges == "IS_Tn"] & V2 %in% all_recs[all_mges == "IS_Tn"])) %>% 
+    filter(!(V1 %in% all_recs[all_mges != "IS_Tn"] & V2 %in% all_recs[all_mges != "IS_Tn"])))) %>% 
+  # Desanidar la columna 'rec_comb' para trabajar con cada combinación de 'rec_cluster'
+  unnest(cols = "rec_comb") %>%
+  # Eliminar duplicados para asegurarse de que las combinaciones sean únicas
+  unique() %>% 
+  # Agrupar por las combinaciones de 'rec_cluster1' y 'rec_cluster2' para contar las ocurrencias
+  group_by(V1, V2) %>% 
+  # Filtrar para mantener solo aquellas combinaciones que tienen más de una familia distinta
+  filter(n_distinct(all_families) > 1) %>% 
+  # Desagrupar para continuar con la fusión de los datos
+  ungroup() %>%
+  # Renombrar las columnas 'V1' y 'V2' para que representen correctamente 'rec_cluster1' y 'rec_cluster2'
+  dplyr::rename(rec_cluster1 = V1, rec_cluster2 = V2) %>% 
+  # Hacer una unión con el mge_rec_map para obtener información sobre los MGE asociados con 'rec_cluster1'
+  left_join(mge_rec_map %>% dplyr::rename(rec_cluster1 = rec_cluster), by = c("ISLAND", "rec_cluster1")) %>% 
+  # Renombrar la columna 'MGE' como 'mge1' para reflejar que es el MGE asociado con 'rec_cluster1'
+  dplyr::rename(mge1 = MGE) %>% 
+  # Hacer una segunda unión con el mge_rec_map para obtener información sobre los MGE asociados con 'rec_cluster2'
+  left_join(mge_rec_map %>% dplyr::rename(rec_cluster2 = rec_cluster), by = c("ISLAND", "rec_cluster2")) %>% 
+  # Renombrar la columna 'MGE' como 'mge2' para reflejar que es el MGE asociado con 'rec_cluster2'
+  dplyr::rename(mge2 = MGE) %>% 
+  # Crear una nueva columna 'nesting_partner' que asigna el valor del MGE que no es "IS_Tn" como el socio de anidación
+  mutate(nesting_partner = if_else(mge1 == "IS_Tn", mge2, mge1)) %>% 
+  # Agrupar por 'ISLAND' y 'nesting_partner' para contar las ocurrencias de combinaciones de MGE
+  group_by(ISLAND, nesting_partner) %>% 
+  # Contar las ocurrencias de cada combinación de 'nesting_partner'
+  summarise(count = n()) %>% 
+  # Desagrupar para continuar con el cálculo final
+  ungroup() %>% 
+  # Ajustar la columna 'count' para que se marque como 1 si el 'nesting_partner' no es "IS_Tn"
+  mutate(count = if_else(nesting_partner %in% c("IS_Tn"), count, as.integer(1))) %>% 
+  # Agrupar por 'nesting_partner' para calcular la suma total de ocurrencias
+  group_by(nesting_partner) %>% 
+  # Sumar el total de ocurrencias por cada 'nesting_partner'
+  summarise(n = sum(count)) %>% 
+  # Desagrupar para continuar con el cálculo final
+  ungroup() %>% 
+  # Calcular el porcentaje de ocurrencias para cada 'nesting_partner'
+  mutate(perc = (n/sum(n))*100)
+```
+
+Crear un dataframe que combine las fracciones de IS_Tn anidados con otros MGEs de los datos HGT y no-HGT
+
+```{r}
+is_tn_hgt_clusterF <- is_tn_hgt_nested_2rec_perc %>% 
+  # Renombrar las columnas 'n' y 'perc' para hacerlas más comprensibles
+  dplyr::rename(hgt_total = n, hgt_perc = perc, MGE = nesting_partner)
+
+is_tn_non_hgt_clusterF <- is_tn_non_hgt_nested_perc %>%  
+  # Renombrar las columnas 'total' y 'perc' para hacerlas más comprensibles
+  dplyr::rename(non_hgt_total = total, all_perc = perc, MGE = MGE_ND)
+
+# Combinar los datos de HGT y no-HGT usando un 'left join' por la columna 'MGE'
+final_is_tn <- left_join(is_tn_non_hgt_clusterF, is_tn_hgt_clusterF, by = "MGE") %>%
+  # Derretir el dataframe para convertir las columnas en filas, haciendo los datos más fáciles de manipular
+  reshape2::melt() %>%
+  # Filtrar los datos para eliminar el MGE 'IS_Tn' de los resultados
+  filter(MGE != "IS_Tn") %>%
+  # Reemplazar los valores NA por 0 en todo el dataframe
+  replace(is.na(.), 0) 
+
+# Convertir el dataframe "final_is_tn" en un formato más ancho (wide) para que las columnas sean las variables
+combined_is_tn_nested <- final_is_tn %>% 
+  pivot_wider(names_from = variable) %>% 
+  # Eliminar las columnas 'all_perc' y 'hgt_perc' ya que no son necesarias para el análisis final
+  select(-all_perc, -hgt_perc)
+
+# Convertir el dataframe a una forma de tabla más útil y asignar las clases y MGEs a nuevas variables
+n_hgt <- as.data.frame(combined_is_tn_nested)
+
+# Obtener todas las clases de las columnas, excluyendo la columna 'MGE'
+allRClasses <- subset(colnames(n_hgt), colnames(n_hgt) != "MGE") 
+
+# Obtener todos los MGEs como un vector para ser utilizados más adelante
+allMges <- as.vector(n_hgt$MGE)
+
+# Establecer los nombres de las filas del dataframe como los valores de la columna 'MGE'
+rownames(n_hgt) <- as.vector(n_hgt$MGE)
+
+# Eliminar la columna 'MGE' del dataframe, ya que ahora está representada como los nombres de las filas
+n_hgt <- n_hgt %>% select(-MGE)
+```
+
+## PASO 19: Pruebas estadisticas
+
+Crear una matriz vacía para almacenar los valores de p (p-value) de la prueba de Fisher para cada combinación de MGE y clase
+
+```{r}
+FE_n_hgt <- matrix(NA, nrow = length(allMges), ncol = length(allRClasses), dimnames = list(allMges, allRClasses))
+
+# Recorrer todos los MGEs (allMges) y las clases de reacción (allRClasses) para realizar el análisis de enriquecimiento
+for (i in allMges) {
+  for (j in allRClasses) {
+    # Imprimir el par de MGE y clase actual para el seguimiento del análisis
+    print(paste0(i, "_", j))
+    
+    # Obtener el valor correspondiente para la combinación actual de MGE y clase
+    in_n_hgt <- n_hgt[i,j]
+    
+    # Calcular los valores para los elementos fuera del MGE, fuera de la clase y el resto de los datos
+    not_mge <- sum(n_hgt[,j]) - in_n_hgt
+    out_n_hgt <- sum(n_hgt[i,]) - in_n_hgt
+    out_n_hgt_outmge <- sum(n_hgt) - in_n_hgt - out_n_hgt - not_mge
+    
+    # Crear una matriz 2x2 con los datos obtenidos, que será utilizada para la prueba de Fisher
+    m <- matrix(data = c(in_n_hgt, not_mge, out_n_hgt, out_n_hgt_outmge), ncol = 2)
+    
+    # Realizar la prueba de Fisher para comprobar la significancia estadística de la relación
+    test <- fisher.test(m, alternative = "greater")
+    
+    # Almacenar el valor p de la prueba de Fisher en la matriz de enriquecimiento
+    FE_n_hgt[i,j] <- test$p.value
+  }
+}
+
+# Ajustar los valores p obtenidos utilizando el método de Bonferroni para controlar el error de tipo I
+FE_n_hgt_adj <- matrix(p.adjust(p = FE_n_hgt, method = "bonferroni"), ncol = ncol(FE_n_hgt), nrow = nrow(FE_n_hgt), dimnames = list(rownames(FE_n_hgt), colnames(FE_n_hgt)))
+```
+
+Convertir la matriz de p ajustados (FE_n_hgt_adj) a un tibble y agregar la columna con los nombres de las filas ('mge')
+
+```{r}
+FE_n_hgt_adj_t <- as.tibble(FE_n_hgt_adj) %>% mutate(mge = rownames(FE_n_hgt_adj))
+
+# Convertir la matriz a un formato largo y agregar una columna 'signP' para indicar las combinaciones significativas
+m_FE_n_hgt_adj_t <- FE_n_hgt_adj_t %>% 
+  reshape2::melt(value.name = "p_adj") %>%  # Convertir a formato largo (long format)
+  mutate(signP = ifelse(p_adj > 0.05, "", "*")) %>% # Añadir '*' para valores p < 0.05
+  dplyr::rename(MGE = mge) # Renombrar columna 'mge' a 'MGE'
+
+# Filtrar el dataframe final_is_tn para eliminar las variables con "_perc"
+final_is_tn_nested <- final_is_tn %>% filter(!grepl("_perc", variable))
+
+# Combinar los datos de 'final_is_tn_nested' y 'm_FE_n_hgt_adj_t' por la columna 'MGE' y 'variable'
+nested_is_tn_fig <- left_join(final_is_tn_nested, m_FE_n_hgt_adj_t, by = c("MGE", "variable")) %>% 
+  # Calcular la fracción de cada valor en relación al total de la columna
+  group_by(variable) %>%
+  mutate(frac = (value / sum(value)) * 100) %>% 
+  ungroup() %>%
+  # Modificar la columna 'signP' para eliminar los '*' de las variables 'non_HGT'
+  mutate(signP = if_else(variable == "non_HGT" & signP == "*", "", signP))
+
+# Crear el gráfico de barras utilizando ggplot2
+ggplot(nested_is_tn_fig, aes(x = reorder(MGE, value, sum), y = frac, fill = variable)) +
+  # Añadir las barras
+  geom_bar(stat = "identity", colour = "grey20", width = 0.5, position = position_dodge()) +
+  # Añadir los asteriscos para indicar significancia
+  geom_text(data = nested_is_tn_fig, label = nested_is_tn_fig$signP) + 
+  # Configuración de colores personalizados para las barras
+  scale_fill_manual(values = c("grey80", "black")) + 
+  # Estilo y temas para mejorar la visualización
+  theme_cowplot() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) + 
+  # Etiquetas y leyenda
+  labs(y = "Percentage of nested IS_Tn", x = "", fill = "")
+
+```
+
+## PASO 20: Analisis de datos de Integron
+
+```{r}
+# Filtrar los datos para mantener solo las filas donde MGE es 'Integron'
+hgt_int1.1 <- hgt1.1 %>%
+  dplyr::rename(cor_mge = MGE, mge = MGE_ND) %>%  # Renombrar las columnas MGE y MGE_ND
+  select(1, 2, 3, 4, 6, 9) %>%  # Seleccionar columnas relevantes
+  filter(cor_mge == "Integron")  # Filtrar solo las filas con 'Integron'
+
+# Filtrar las filas que contienen el patrón "(\\d+)&" en la columna mge
+hgt_int1.1 %>%
+  mutate(new = (grepl("(\\d+)&", mge))) %>%  # Crear nueva columna 'new' que indica si 'mge' contiene el patrón
+  filter(new == "TRUE")  # Filtrar solo las filas donde el patrón se encuentra
+
+# Verificar la presencia de IS_Tn anidados en los integrones
+hgt_int1.1_check <- hgt_int1.1 %>% 
+  mutate(prot1 = prot) %>%  # Copiar la columna 'prot' a 'prot1'
+  separate(prot1, c("one", "two", "three"), sep = "\\.", extra = "merge") %>%  # Separar la columna 'prot1' en tres partes
+  unite(., genome, c("one", "two"), sep = ".") %>%  # Unir 'one' y 'two' en una columna 'genome'
+  select(-three) %>%  # Eliminar la columna 'three'
+  group_by(rec_cluster, genome) %>%  # Agrupar por 'rec_cluster' y 'genome'
+  mutate(atleast_1_nested = if_else((grepl("(\\d+)&", mge)), 1, 0)) %>%  # Crear la columna 'atleast_1_nested' indicando si 'mge' contiene el patrón
+  ungroup() %>%  # Eliminar agrupación temporal
+  group_by(rec_cluster, cor_mge, genome) %>%  # Agrupar nuevamente por 'rec_cluster', 'cor_mge' y 'genome'
+  summarise(val = if_else(sum(atleast_1_nested) > 0, "nested", "non_nested")) %>%  # Resumir si al menos uno es "nested" o "non_nested"
+  ungroup() %>%  # Eliminar la agrupación
+  group_by(cor_mge, val) %>%  # Agrupar por 'cor_mge' y 'val'
+  summarise(n = n())  # Contar cuántas filas corresponden a cada grupo
+
+# Calcular el número total de anidados e integrar los datos con el recuento de genes
+hgt_int1.2_check <- hgt_int1.1 %>% 
+  mutate(prot1 = prot) %>%  # Copiar la columna 'prot' a 'prot1'
+  separate(prot1, c("one", "two", "three"), sep = "\\.", extra = "merge") %>%  # Separar la columna 'prot1' en tres partes
+  unite(., genome, c("one", "two"), sep = ".") %>%  # Unir 'one' y 'two' en la columna 'genome'
+  select(-three) %>%  # Eliminar la columna 'three'
+  group_by(rec_cluster, ISLAND) %>%  # Agrupar por 'rec_cluster' y 'ISLAND'
+  summarise(nested_n = sum(grepl("(\\d+)&", mge)), all_n = n_distinct(prot)) %>%  # Calcular el número de anidados y el número de proteínas distintas
+  ungroup()  # Eliminar la agrupación
+```
+
+Cálculo del porcentaje de Integron no anidados en los datos no-HGT (int_non_hgt_nested_perc):
+
+```{r}
+# Filtrar los datos excluyendo elementos 'nested' y 'Cellular', y asegurando que hay al menos un Integron en el dataset
+int_non_hgt_nested_perc <- datacl %>% 
+  filter(MGE_ND != "nested", MGE_ND != "Cellular") %>%  # Excluye las categorías 'nested' y 'Cellular'
+  group_by(island) %>%  # Agrupar por isla
+  filter(any(MGE_ND == "Integron")) %>%  # Asegura que haya al menos un 'Integron'
+  filter(n_distinct(MGE_ND) > 1, n_distinct(rec_cluster) > 1) %>%  # Asegura que haya más de un tipo de MGE y de rec_clusters
+  group_by(island, MGE_ND, rec_cluster) %>%  # Agrupar por isla, tipo de MGE y cluster de recombinación
+  summarise(counts = n()) %>%  # Cuenta las observaciones dentro de cada grupo
+  ungroup() %>% 
+  group_by(island, MGE_ND) %>%  # Agrupar por isla y tipo de MGE
+  summarise(new_counts = sum(counts)) %>%  # Sumar los recuentos por isla y tipo de MGE
+  mutate(corrected_counts = if_else(MGE_ND %in% c("IS_Tn", "Integron"), new_counts, new_counts[MGE_ND == "Integron"])) %>%  # Corrección de los recuentos
+  group_by(MGE_ND) %>%  # Agrupar por tipo de MGE
+  summarise(total = sum(corrected_counts)) %>%  # Sumar los recuentos corregidos por tipo de MGE
+  ungroup() %>% 
+  mutate(perc = (total/(sum(total) - total[MGE_ND == "Integron"]))*100) %>%  # Calcular el porcentaje de cada MGE
+  mutate(perc = if_else(MGE_ND == "Integron", 0, perc))  # Asignar 0 al porcentaje de Integron, ya que es la base de comparación
+```
+
+Cálculo de IS_Tn y MGE en los datos de HGT (mge_rec_map):
+
+```{r}
+# Crear un mapa único entre ISLAND, MGE y rec_cluster en los datos de HGT
+mge_rec_map <- hgt1.1 %>% 
+  select(ISLAND, MGE, rec_cluster) %>%  # Seleccionar las columnas relevantes
+  unique()  # Asegurarse de que las combinaciones sean únicas
+```
+
+## PASO 21: Filtrado por ISLAND, MGE, y rec_cluster
+
+```{r}
+nested_int_cluster_2r <- hgt1.1 %>% 
+  group_by(ISLAND) %>% 
+  filter(n_distinct(MGE) > 1, n_distinct(rec_cluster) > 1) %>%  # Filtra islas con al menos dos tipos de MGE y dos clusters de recombinación
+  summarise(all_mges = list(MGE), all_recs = list(rec_cluster), all_families = unique(family), int_cluster = list(unique(rec_cluster[MGE=="Integron"]))) %>%  # Resumir los datos
+  ungroup() %>% 
+  unnest(cols = "int_cluster") %>%  # Expandir los clusters de Integron
+  # Identificación de clusters anidados:
+  group_by(int_cluster) %>% 
+  do({
+    sub_tbl <- .  # Guardar el conjunto de datos actual en una variable temporal
+    rec_list <- unlist(sub_tbl$all_recs)  # Convertir la lista de clusters de recombinación en un vector
+    table_rec <- table(rec_list)  # Crear una tabla de frecuencia de los clusters de recombinación
+    family_list <- unlist(sub_tbl$all_families)  # Lista de familias asociadas
+    int_oi <- unique(sub_tbl$int_cluster)  # Identificar el cluster de Integron en cuestión
+    mge_list <- unlist(sub_tbl$all_mges)  # Lista de MGEs
+    int_all <- unique(rec_list[mge_list == "Integron"])  # Identificar los clusters de Integron
+    hgt_clusters <- rec_list[mge_list %in% c("Phage", "CE", "MI", "IS_Tn", "Phage_like")]  # Identificar otros clusters relacionados con HGT
+    # Lógica de clasificación (Anidado vs. no Anidado):
+        if(table_rec[int_oi] > 1 & any(table_rec[(!names(table_rec) %in% int_all) & (names(table_rec) %in% hgt_clusters)] > 1) & length(unique(family_list)) > 1) {
+      outcome <- "nested_hgt"
+    } else {
+      outcome <- "unnested"
+    }
+    data.frame(int_cluster = int_oi, outcome = outcome)
+  }) %>% 
+  # Filtrado de resultados anidados:
+    filter(outcome == "nested_hgt") %>% 
+  pull(int_cluster) %>%  # Extraer solo los clusters de Integron "anidados"
+  unique()
+```
+
+## PASO 22:
+
+```{r}
+# Filtrado inicial y extracción de clusters de integrones
+int_hgt_nested_2rec_perc <- hgt1.1 %>% 
+  group_by(ISLAND) %>% 
+  filter(n_distinct(MGE) > 1, n_distinct(rec_cluster) > 1) %>% 
+  summarise(all_mges = list(MGE), all_recs = list(rec_cluster), all_families = unique(family), int_cluster = list(unique(rec_cluster[MGE=="Integron"]))) %>% 
+  ungroup() %>% 
+  unnest(cols = "int_cluster") %>% 
+  filter(int_cluster %in% nested_int_cluster_2r) %>% 
+  # Filtrado por familias y desanidado:
+  group_by(int_cluster) %>%
+  filter(n_distinct(all_families) > 1) %>%
+  unnest(cols = c("all_recs", "all_mges")) %>% 
+  ungroup() %>%
+  # Combinación de pares de clusters:
+  group_by(ISLAND, all_families) %>% 
+  summarise(rec_comb = list(t(combn(all_recs, 2)) %>% as_tibble() %>% filter(!(V1 %in% all_recs[all_mges == "Integron"] & V2 %in% all_recs[all_mges == "Integron"])) %>% filter(!(V1 %in% all_recs[all_mges != "Integron"] & V2 %in% all_recs[all_mges != "Integron"])))) %>% 
+  unnest(cols = "rec_comb") %>%
+  unique() %>% 
+  # Filtrado adicional y renombrado de columnas:
+  group_by(V1, V2) %>% 
+  filter(n_distinct(all_families) > 1) %>% 
+  ungroup() %>%
+  dplyr::rename(rec_cluster1 = V1, rec_cluster2 = V2) %>% 
+  left_join(mge_rec_map %>% dplyr::rename(rec_cluster1 = rec_cluster), by = c("ISLAND", "rec_cluster1")) %>% 
+  dplyr::rename(mge1 = MGE) %>% 
+  left_join(mge_rec_map %>% dplyr::rename(rec_cluster2 = rec_cluster), by = c("ISLAND", "rec_cluster2")) %>% 
+  dplyr::rename(mge2 = MGE) %>% 
+  # Cálculo de las fracciones de elementos anidados:
+  mutate(nesting_partner = if_else(mge1 == "Integron", mge2, mge1)) %>% 
+  group_by(ISLAND, nesting_partner) %>% 
+  summarise(count = n()) %>% 
+  ungroup() %>% 
+  mutate(count = if_else(nesting_partner %in% c("Integron"), count, as.integer(1))) %>% 
+  group_by(nesting_partner) %>% 
+  summarise(n = sum(count)) %>% 
+  ungroup() %>% 
+  mutate(perc = (n/sum(n))*100)
+```
+
+## PASO 23: Integrones anidados con otros MGEs de los datos de HGT y no-HGT 
+
+```{r}
+# 1. Preparación de los datos de HGT:
+int_hgt_clusterF <- int_hgt_nested_2rec_perc %>% 
+  dplyr::rename(hgt_total = n, hgt_perc = perc, MGE = nesting_partner)
+
+# 2. Preparación de los datos de no-HGT:
+int_non_hgt_clusterF <- int_non_hgt_nested_perc %>%  
+  dplyr::rename(non_hgt_total = total, all_perc = perc, MGE = MGE_ND)
+
+# 3. Unión de los datos de HGT y no-HGT:
+final_int <- left_join(int_non_hgt_clusterF,int_hgt_clusterF, by = "MGE") %>%
+  reshape2::melt() %>%
+  filter(MGE != "Integron") %>%
+  replace(is.na(.), 0) 
+
+# 4. Transformación del dataframe a formato ancho:
+combined_int_nested <- final_int %>% 
+  pivot_wider(names_from = variable) %>% 
+  select(-all_perc,-hgt_perc)
+
+# 5. Preparación final de los datos:
+n_hgt <- as.data.frame(combined_int_nested)
+allRClasses <- subset(colnames(n_hgt), colnames(n_hgt)!="MGE") 
+allMges <- as.vector(n_hgt$MGE)
+rownames(n_hgt) <- as.vector(n_hgt$MGE)
+n_hgt <- n_hgt %>% select(-MGE)
+```
+
+
+
+
+### Figure 4C: Barplot del enriquecimiento de elementos IS_Tn/Integron anidados con otros MGEs
+
+```{r}
+
+```
+
+
+
+
+
+
+
+
+
+
+
+

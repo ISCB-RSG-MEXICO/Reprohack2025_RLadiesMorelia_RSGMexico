@@ -1,0 +1,15 @@
+DATASET_CONNECTION
+SEPARATOR COMMA
+DATASET_LABEL,Phage
+COLOR,#808080
+DRAW_ARROWS,0
+CURVE_ANGLE,44
+CENTER_CURVES,1
+ALIGN_TO_LABELS,1
+DATA
+Actinobacteria,Clostridia,2,#808080,normal
+Actinobacteria,Coriobacteriia,2,#808080,normal
+Actinobacteria,Gammaproteobacteria,2,#808080,normal
+Bacilli,Clostridia,2,#808080,normal
+Clostridia,Thermotogae,2,#808080,normal
+Deltaproteobacteria,Gammaproteobacteria,2,#808080,normal

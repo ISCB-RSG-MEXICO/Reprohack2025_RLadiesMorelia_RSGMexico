@@ -1,0 +1,17 @@
+DATASET_CONNECTION
+SEPARATOR COMMA
+DATASET_LABEL,Integron
+COLOR,#808080
+DRAW_ARROWS,0
+CURVE_ANGLE,80
+CENTER_CURVES,1
+ALIGN_TO_LABELS,1
+DATA
+Actinobacteria,Alphaproteobacteria,2,#808080,normal
+Actinobacteria,Betaproteobacteria,2,#808080,normal
+Actinobacteria,Gammaproteobacteria,2,#808080,normal
+Alphaproteobacteria,Betaproteobacteria,2,#808080,normal
+Alphaproteobacteria,Gammaproteobacteria,2,#808080,normal
+Bacilli,Clostridia,2,#808080,normal
+Bacteroidia,Flavobacteriia,2,#808080,normal
+Betaproteobacteria,Gammaproteobacteria,2,#808080,normal

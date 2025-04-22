@@ -1,0 +1,24 @@
+DATASET_CONNECTION
+SEPARATOR COMMA
+DATASET_LABEL,MI
+COLOR,#808080
+DRAW_ARROWS,0
+CURVE_ANGLE,NA
+CENTER_CURVES,1
+ALIGN_TO_LABELS,1
+DATA
+Actinobacteria,Bacilli,2,#808080,normal
+Actinobacteria,Clostridia,2,#808080,normal
+Actinobacteria,Coriobacteriia,2,#808080,normal
+Actinobacteria,Negativicutes,2,#808080,normal
+Bacilli,Clostridia,2,#808080,normal
+Bacilli,Fusobacteriia,2,#808080,normal
+Bacilli,Gammaproteobacteria,2,#808080,normal
+Bacilli,Negativicutes,2,#808080,normal
+Bacilli,Tissierellia,2,#808080,normal
+Bacteroidia,Clostridia,2,#808080,normal
+Betaproteobacteria,Gammaproteobacteria,2,#808080,normal
+Clostridia,Erysipelotrichia,2,#808080,normal
+Clostridia,Gammaproteobacteria,2,#808080,normal
+Clostridia,Negativicutes,2,#808080,normal
+Epsilonproteobacteria,Gammaproteobacteria,2,#808080,normal

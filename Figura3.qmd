@@ -39,6 +39,12 @@ colc <- c("#D55E00", "#E69F00", "#F0E442", "#56B4E9", "#009E73", "#0072B2","#CEC
 names(colc) <- c("IS_Tn", "Phage", "Phage_like", "CE", "Integron", "MI", "Cellular") 
 ```
 
+Cargar funciones
+
+```{r Load_funciones}
+source("scripts/phylo_function.R")
+```
+
 ## PASO 2: Manipulación y Limpieza de los datos
 
 ```{r}
@@ -380,12 +386,6 @@ sig_mat <- sig_mat %>%
 
 # Alinea la matriz de significancia con el árbol filogenético
 sig_mat <- sig_mat[class_tree_w_g9$tip.label, colnames(phylo_heatmap_mat)]
-```
-
-## PASO 10: Cargar funciones
-
-```{r Load_funciones}
-source("scripts/phylo_function.R")
 ```
 
 ## Figura 3B. Mapa de colores

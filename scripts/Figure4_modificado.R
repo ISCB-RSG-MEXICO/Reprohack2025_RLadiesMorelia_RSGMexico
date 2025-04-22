@@ -1,13 +1,15 @@
-###
-#Manuscript title: Landscape of mobile genetic elements and their antibiotic resistance cargo in prokaryotic genomes
+# Título del manuscrito: Paisaje de elementos genéticos móviles y su carga de resistencia
+# a antibióticos en genomas procariotas
 
-#The following code can be used for creating Figure 4 in the manuscript
+# El siguiente código puede utilizarse para crear la Figura 4 del manuscrito
 
-#19-02-2021
-#supriya.khedkar@embl.de
-###
+# Fecha de Creacion: 19-02-2021
+# Autor: supriya.khedkar@embl.de
 
-####load packages####
+# Modificado por: Evelia Coss
+# Fechad de modificacion: 6 de abril 2025
+
+#---- Cargar paquetes ----- 
 
 library(tidyverse)
 library(cowplot)
@@ -16,61 +18,73 @@ library(RColorBrewer)
 library(phytools) 
 library(viridis)
 
-#### load data ####
-setwd("/g/scb2/bork/khedkar/jumpAR/promge_manuscript/")
-data_mf <- read_tsv("raw_data/recombinase_hgt_cluster_master_file.txt", col_names = F)
-mge_bins <- read_tsv("raw_data/mge_bins_final.txt",col_names = T)
-tax <- read_tsv("raw_data/hgt_species.list", col_names = F)
-class_tree <- read.tree("raw_data/progenomes2_class_tree.nwk")
-glist <- read_tsv("raw_data/genome_status_supplementary_tableS2.txt", col_names = T)
+#---- PASO 1: Importar datos ----- 
 
-# load functions #
+data_mf <- read_tsv("data/raw_data/recombinase_hgt_cluster_master_file.txt.gz", col_names = F)
+mge_bins <- read_tsv("data/raw_data/mge_bins_final.txt.gz",col_names = T)
+tax <- read_tsv("data/raw_data/hgt_species.list.gz", col_names = F)
+class_tree <- read.tree("data/raw_data/progenomes2_class_tree.nwk")
+glist <- read_tsv("data/raw_data/genome_status_supplementary_tableS2.txt.gz", col_names = T)
 
-duo_maker <- function(x, sep = ":") {
-  a <- strsplit(x, split = sep)[[1]]
-  if(length(a) > 2) {
-    aa <- combn(a, 2, paste, collapse = ":")
-    paste(aa, collapse = ";")
-  } else {
-    x
-  }
-}
+# Cargamos el archivo con datos anotados sobre elementos genéticos móviles (MGE)
+dat_mge <- read_tsv("data/processed_data/resolved_MGE_hgt_top_tax_final.txt.gz", col_names = F)
 
-#remove low and medium quality genomes#
+# > Tabla con datos de transferencia horizontal a nivel de clase taxonómica
+# Esta tabla incluye información sobre las recombinasas asociadas a distintos tipos de MGE
+data_mge_class <- read_tsv("data/processed_data/resolved_MGE_hgt_class_level_final.txt.gz", col_names = F)
 
-glist_high <- glist %>% 
-  filter(genome_quality == "high")
-
-# color scheme #
+# Paleta general de colores
 colc <- c("#D55E00", "#E69F00", "#F0E442", "#56B4E9", "#009E73", "#0072B2","#CECCCC")
 names(colc) <- c("IS_Tn", "Phage", "Phage_like", "CE", "Integron", "MI", "Cellular") 
 
+# Carga funciones
+source("scripts/phylo_heatmap_function.R")
 
-#parse all mge bins# 
-mge_bins_melted <- mge_bins %>% 
-  select(1:6,9,10) %>% 
-  gather("mge","count",1:7) %>% 
-  filter(count > 0) %>% 
-  mutate(island1 = island) %>% 
-  separate(island1, c("g1","g2","g3")) %>% 
-  mutate(genome = paste(g1, g2, sep = ".")) %>% 
-  select(-g1,-g2,-g3) %>% 
-  filter(genome %in% glist_high$genome) %>% 
-  select(-genome)
+#---- PASO 2: Cambios de formato y estructura ----- 
 
-#write.table(mge_bins_melted,file = "processed_data/mge_bins_final_collapsed.txt", sep = "\t", row.names = F, col.names = T, quote = F)
+# Renombramos las columnas de `data_mf` con nombres significativos
+data_mf_rename <- data_mf %>% 
+  dplyr::rename(rec_cluster = X1, prot = X2, specI = X3, kingdom = X4, phylum = X5, class = X6, order = X7, family = X8, genus = X9) 
 
-#### Figure 4A - HGT line plot ####
-
-## assign taxonomy information and map filtered genome list ##
+# Renombramos las columnas de `tax` para que tengan nombres descriptivos.
+# Luego seleccionamos solo la columna 'genome' y filtramos los que están presentes en `glist_high`.
 tax <- tax %>% 
   dplyr::rename(specI = X1, genome = X2, kingdom = X3, phylum = X4, class = X5, family = X6) %>% 
   select(genome) %>% 
   filter(genome %in% glist_high$genome) 
 
-data_mf_rename <- data_mf %>% 
-  dplyr::rename(rec_cluster = X1, prot = X2, specI = X3, kingdom = X4, phylum = X5, class = X6, order = X7, family = X8, genus = X9) 
+# Renombramos las columnas para hacerlas más interpretables
+data_mge_class_rename <- data_mge_class %>% 
+  dplyr::rename(cor_mge = X1, island = X2, mge = X3, rec = X4, rec_cluster = X5, family = X6, class = X7, prot = X8)
 
+#---- PASO 3: Manipulación y Limpieza de los datos  ----- 
+# Obtener los genomas con la mas alta calidad
+glist_high <- glist %>% 
+  filter(genome_quality == "high")
+
+# Cambio de formato y limpieza de datos
+mge_bins_melted <- mge_bins %>% 
+  select(1:6,9,10) %>% 
+  # Reestructuramos el dataframe de formato ancho a largo
+  gather("mge","count",1:7) %>% # Convertimos las columnas 1 a 7 en dos columnas: 'mge' (nombre original de la columna) y 'count' (su valor)
+  filter(count > 0) %>% 
+  mutate(island1 = island) %>% 
+  separate(island1, c("g1","g2","g3")) %>% # Separamos 'island1' en tres componentes
+  # Unimos las dos primeras partes para crear un identificador único de genoma (e.g., "gen1.gen2")
+  mutate(genome = paste(g1, g2, sep = ".")) %>%  
+  # Eliminamos las columnas auxiliares g1, g2 y g3
+  select(-g1,-g2,-g3) %>% 
+  # Filtramos solo los genomas que están presentes en la lista `glist_high$genome`
+  filter(genome %in% glist_high$genome) %>% 
+  select(-genome)
+
+# Guardar datos
+write.table(mge_bins_melted,file = "data/processed_data/mge_bins_final_collapsed.txt", sep = "\t", row.names = F, col.names = T, quote = F)
+
+#---- PASO 3: Asignar información taxonómica y filtrar genomas de interés ----- 
+
+# Extraemos el ID del genoma a partir del identificador de proteína
+# (se asume que 'prot' tiene formato como "X.Y.Z" donde X.Y es el ID de genoma)
 datar_phy <- data_mf_rename %>% 
   mutate(prot1 = prot) %>%
   separate(prot1, c("one","two","three"), sep = "\\.", extra = "merge") %>% 
@@ -78,39 +92,53 @@ datar_phy <- data_mf_rename %>%
   select(-three) %>% 
   filter(genome %in% glist_high$genome) 
 
+## Unimos información taxonómica con los datos de proteínas ##
 datar <- left_join(tax,datar_phy, by = "genome") %>% 
-  drop_na()
+  drop_na()  # eliminamos filas con valores NA después del join
 
-##identify HGT at each taxonomic level##
+#---- PASO 4: Identificar HGT a cada nivel taxonómico ----------------------------------------------
+
+# Filtramos los clusters de recombinación (`rec_cluster`) que contienen más de una entrada,
+# y que tienen variación en el nivel taxonómico "family".
+# Esto sugiere la presencia de transferencia horizontal entre diferentes familias.
+
 #datar %>% count(rec_cluster) 
 datar_melt <- datar %>% 
-  select(-genus) %>%
-  group_by(rec_cluster) %>% 
-  filter(n() > 1) %>%
-  filter_at(vars(family), any_vars(length(unique(.)) > 1)) %>%
+  select(-genus) %>%         # Eliminamos columna de genus (no se usa aquí)
+  group_by(rec_cluster) %>%  # Agrupamos por cluster de recombinación
+  filter(n() > 1) %>%        # Nos quedamos solo con clusters que tienen más de una entrada
+  filter_at(vars(family), any_vars(length(unique(.)) > 1)) %>% # Que haya al menos dos familias distintas
   ungroup() 
 
+# Contamos el número de taxones distintos por nivel (kingdom a family) por cada cluster
 datar_tax <- datar_melt %>% 
   group_by(rec_cluster) %>% 
-  summarise_at(vars(kingdom:family), n_distinct) 
+  summarise_at(vars(kingdom:family), n_distinct) # Cuenta cuántos taxones distintos hay en cada nivel
 
+# Preparamos un resumen del nivel taxonómico más alto en el que ocurre variación
 datar_top <- datar_tax %>% 
-  mutate_at(vars(kingdom:family), ~ . - 1) %>% 
-  mutate(cumul = rowSums(.[2:6])) %>% 
-  pivot_longer(kingdom:family, names_to = "key", values_to = "value") %>% 
+  mutate_at(vars(kingdom:family), ~ . - 1) %>%  # Restamos 1 (para que 0 indique sin variación)
+  mutate(cumul = rowSums(.[2:6])) %>%           # Suma total de variación en niveles taxonómicos
+  pivot_longer(kingdom:family, names_to = "key", values_to = "value") %>% # Reorganiza a formato largo
   group_by(rec_cluster) %>% 
-  mutate(top_tax = key[which(value > 0)[1]]) %>% 
+  mutate(top_tax = key[which(value > 0)[1]]) %>% # Identifica el primer nivel donde hay variación
   ungroup() %>% 
-  pivot_wider(names_from = key, values_from = value)
+  pivot_wider(names_from = key, values_from = value) # Regresa a formato ancho
 
+# Combinamos con información de proteínas para cada cluster
 sub_datar <- datar %>% select(rec_cluster,prot)
 combine_mge <- left_join(datar_top,sub_datar, by = "rec_cluster")
-#write.table(combine_mge,file= "processed_data/pre_MGE_top_tax_file_final.txt", sep = "\t", quote = F, col.names = T, row.names = F)
 
-##MGE based stratification of recombinase clusters##
-#load data#
-dat_mge <- read_tsv("processed_data/resolved_MGE_hgt_top_tax_final.txt", col_names = F)
-#
+# Guardar datos
+write.table(combine_mge,file= "data/processed_data/pre_MGE_top_tax_file_final.txt", sep = "\t", quote = F, col.names = T, row.names = F)
+
+#---- PASO 4: Estratificación basada en MGEs de los clusters de recombinasas ---------------------
+
+# Limpiamos y formateamos el archivo:
+# - Quitamos el encabezado repetido
+# - Renombramos columnas para claridad
+# - Extraemos el nombre del genoma a partir del identificador de proteína
+# - Filtramos los genomas de interés y descartamos islas no definidas
 dat_mge_f <- dat_mge %>% 
   filter(!X5 == "rec_cluster") %>% 
   dplyr::rename(MGE = X1, ISLAND = X2, MGE_ND = X3, rec = X4, rec_cluster = X5,	cumul = X6,	top_tax = X7,	kingdom = X8,	phylum = X9, class = X10,	order = X11, family = X12, prot = X13) %>% 
@@ -119,8 +147,10 @@ dat_mge_f <- dat_mge %>%
   unite(.,genome, c("one","two"), sep = ".") %>% 
   select(-three) %>% 
   filter(genome %in% glist_high$genome) %>% 
-  filter(ISLAND != "ISLAND_ND") 
+  filter(ISLAND != "ISLAND_ND") # Excluye islas no definidas
 
+# Preparamos una versión más restringida del conjunto de datos,
+# conservando solo genomas que están también en `datar`
 dat_mge_pref <- dat_mge_f %>%
   mutate(prot1 = prot) %>%
   separate(prot1, c("one","two","three"), sep = "\\.", extra = "merge") %>% 
@@ -128,94 +158,118 @@ dat_mge_pref <- dat_mge_f %>%
   select(-three) %>%
   filter(genome %in% datar$genome)
 
+# Quitamos las columnas taxonómicas redundantes para fusionar luego con datos actualizados
 dat_mge_f1 <- dat_mge_pref %>% select(-kingdom,-phylum,-class,-order,-family)
 
+# Fusionamos los datos de MGE con la anotación taxonómica por proteína y cluster
+# Luego, reorganizamos los datos en formato largo para obtener el valor en el nivel taxonómico más informativo
 dat_with_tax <- left_join(dat_mge_f1,datar, by = c("rec_cluster","prot")) %>%
   select(MGE, rec_cluster, top_tax,prot, kingdom:family) %>%
   reshape2::melt(id = c("MGE", "rec_cluster", "top_tax","prot")) %>%
+  # Filtramos solo el nivel taxonómico que fue identificado como el más informativo
   filter(variable == top_tax) 
 
-#generate data for Figure 4C and 5#
+#---- PASO 5: Generación de datos para las figuras 4C y 5 ---------------
+
+# Fusionamos datos de recombinasas y MGEs con anotación taxonómica
+# Luego transformamos a formato largo, conservando solo el nivel taxonómico más informativo
 dat_with_tax2n <- left_join(dat_mge_f1,datar, by = c("rec_cluster","prot")) %>%
   select(MGE, MGE_ND, ISLAND, rec_cluster, top_tax,prot, kingdom:family) %>%
   reshape2::melt(id = c("MGE", "MGE_ND","rec_cluster", "ISLAND", "top_tax","prot")) %>%
-  filter(variable == top_tax) 
+  filter(variable == top_tax) #  Solo nos quedamos con la categoría taxonómica más relevante
 
+# Preparamos subconjunto con información de familia para cada recombinasa
 temp_datar <- datar %>% select(rec_cluster,prot,family)
+# Añadimos la información de familia a los datos largos con MGEs
 temp_data_with_tax2n <- left_join(dat_with_tax2n,temp_datar, by = c("rec_cluster","prot")) 
 
+# Filtramos clusters de recombinasas asociadas a MGEs móviles (excluyendo "Cellular" y "nested")
+# Luego, identificamos clusters que presentan diversidad en el nivel taxonómico relevante
 dat_with_tax3_testn <- temp_data_with_tax2n %>%
-  filter(MGE != "Cellular" & MGE != "nested") %>%
-  group_by(rec_cluster,MGE) %>%
-  mutate(val = n_distinct(value) > 1) %>% 
-  filter(val == "TRUE") %>% 
-  ungroup()  
-#write.table(dat_with_tax3_testn,file="processed_data/all_hgt_data_family_expanded_redundant_final.txt", sep = "\t", col.names = T, row.names = F, quote = F)
+  filter(MGE != "Cellular" & MGE != "nested") %>%              # Nos centramos en MGEs no celulares
+  group_by(rec_cluster, MGE) %>%                               # Agrupamos por cluster y tipo de MGE
+  mutate(val = n_distinct(value) > 1) %>%                      # Evaluamos si hay más de un taxón distinto
+  filter(val == "TRUE") %>%                                    # Conservamos solo aquellos con diversidad taxonómica
+  ungroup()
 
+# Guardar datos
+write.table(dat_with_tax3_testn,file="processed_data/all_hgt_data_family_expanded_redundant_final.txt", sep = "\t", col.names = T, row.names = F, quote = F)
+
+#---- PASO 6: Preparación de datos para cuantificar HGT según el tipo de MGE y el nivel taxonómico afectado --------------------------
+
+# Extraemos información relevante (cluster, proteína, familia) desde los datos anotados
 temp_datar <- datar %>% select(rec_cluster,prot,family)
+# Unimos esta información a los datos previos con anotación taxonómica
 temp_data_with_tax <- left_join(dat_with_tax,temp_datar, by = c("rec_cluster","prot")) 
 
+# Filtramos MGEs móviles (excluyendo los de origen celular o sin clasificar),
+# luego identificamos recombinasas que están distribuidas en más de un taxón distinto
 dat_with_tax_mge <- temp_data_with_tax %>%
-  filter(MGE != "Cellular" & MGE != "nested") %>%
-  group_by(rec_cluster,MGE) %>%
-  mutate(val = n_distinct(value) > 1) %>% 
-  filter(val == "TRUE") %>%
-  summarise(top_tax_new = unique(top_tax)) %>%
+  filter(MGE != "Cellular" & MGE != "nested") %>%        # Solo MGEs móviles
+  group_by(rec_cluster, MGE) %>%                         # Agrupamos por cluster y tipo de MGE
+  mutate(val = n_distinct(value) > 1) %>%                # Evaluamos si hay diversidad taxonómica
+  filter(val == "TRUE") %>%                              # Conservamos solo los casos con diversidad
+  summarise(top_tax_new = unique(top_tax)) %>%           # Extraemos el nivel taxonómico más informativo
   ungroup() %>%
-  group_by(MGE, top_tax_new) %>%
-  summarise(final = n()) %>% 
-  mutate(tot = sum(final)) %>% 
-  ungroup() 
+  group_by(MGE, top_tax_new) %>%                         # Agrupamos por tipo de MGE y nivel taxonómico
+  summarise(final = n()) %>%                             # Contamos número de clusters con diversidad
+  mutate(tot = sum(final)) %>%                           # Calculamos total por MGE
+  ungroup()
 
-## Enforce kingdom level counts manually to transfer between pairs of distinct archeal and bacterial phyla ##
+## Ajuste manual: Forzamos a que haya al menos 3 eventos a nivel de reino (kingdom)
+## para reflejar transferencias entre arqueas y bacterias aunque sean pocas pero significativas
 dat_with_tax_mge <- dat_with_tax_mge %>%
   mutate(final = if_else(top_tax_new == "kingdom",3,as.numeric(final))) 
 
+# Ordenamos niveles de factores para visualización ordenada
 dat_with_tax_mge$top_tax_new <- factor(dat_with_tax_mge$top_tax_new, levels = rev(c("kingdom","phylum","class","order","family")))
 dat_with_tax_mge$MGE <- factor(dat_with_tax_mge$MGE,levels = c("IS_Tn","CE","MI","Phage","Phage_like","Integron"))
 
-## Plot Figure 4A #
+#---- Figura 4A --------------------------
+
+# Generamos un gráfico de línea con puntos para visualizar los eventos de HGT
+# por nivel taxonómico (kingdom, phylum, etc.) estratificados por tipo de MGE
+
 mge_tax_log <- ggplot(dat_with_tax_mge, aes(x = top_tax_new, y = final, color = MGE)) + 
-  geom_point(aes(group = MGE), size = 3) +
-  geom_line(aes(group = MGE), size = 1) +
-  scale_colour_manual(values = colc) +
-  scale_y_log10()
+  geom_point(aes(group = MGE), size = 3) +   # Puntos grandes para cada tipo de MGE
+  geom_line(aes(group = MGE), size = 1) +    # Conectamos puntos con líneas para cada tipo de MGE
+  scale_colour_manual(values = colc) +       # Usamos una paleta de colores personalizada
+  scale_y_log10()                            # Escala logarítmica para visualizar mejor las diferencias
+
+# Personalizamos el gráfico con un tema limpio y rotación de etiquetas
 mge_tax_log + 
-  theme_cowplot(font_size = 15) + 
-  theme(axis.text.x = element_text(angle = 90,hjust = 1,vjust = 0.5)) + 
-  labs(y = "#HGT events", x = "")
+  theme_cowplot(font_size = 15) +            # Estilo claro y moderno
+  theme(axis.text.x = element_text(angle = 90,hjust = 1,vjust = 0.5)) + # Rotamos etiquetas del eje X
+  labs(y = "#HGT events", x = "")            # Etiquetas de los ejes
 
+#---- Figura 4B - HGT heatmap at taxonomic class level -------------------------- 
 
-####Figure 4B - HGT heatmap at taxonomic class level####
-data_mge_class <- read_tsv("processed_data/resolved_MGE_hgt_class_level_final.txt", col_names = F)
-data_mge_class_rename <- data_mge_class %>% 
-  dplyr::rename(cor_mge = X1, island = X2, mge = X3, rec = X4, rec_cluster = X5, family = X6, class = X7, prot = X8)
-
+# Preprocesamiento de la tabla con información de clases taxonómicas y MGEs
 data_mge_class_phy <- data_mge_class_rename %>% 
-  mutate(prot1 = prot) %>%
+  mutate(prot1 = prot) %>%  # Guardamos la columna original de proteínas en una nueva columna
   separate(prot1, c("one","two","three"), sep = "\\.", extra = "merge") %>% 
-  unite(.,genome, c("one","two"), sep = ".") %>% 
-  select(-three) %>% 
-  filter(genome %in% tax$genome) %>% 
-  filter(.,!grepl("Cellular",cor_mge))
+  unite(.,genome, c("one","two"), sep = ".") %>%  # Reunimos los dos primeros fragmentos para identificar el genoma
+  select(-three) %>%  # Eliminamos el componente restante de la separación
+  filter(genome %in% tax$genome) %>%  # Filtramos solo los genomas presentes en la lista filtrada de taxonomía
+  filter(.,!grepl("Cellular",cor_mge))  # Excluimos elementos que no son MGEs móviles ("Cellular")
 
-## genomes sharing recombinase i.e. showing HGT ##
+## Identificación de recombinasas compartidas entre genomas (potenciales eventos de HGT) ##
 data_mge_class_hgt <- data_mge_class_phy %>% 
-  group_by(rec_cluster) %>% 
-  summarise(count = n()) %>%  
-  filter(., count > 1) 
+  group_by(rec_cluster) %>%  # Agrupamos por clúster de recombinasa
+  summarise(count = n()) %>%  # Contamos cuántos genomas comparten ese clúster
+  filter(., count > 1)  # Nos quedamos solo con aquellos compartidos por más de un genoma (indicador de HGT)
 
-data_hgt <- left_join(data_mge_class_hgt, data_mge_class_phy, by = "rec_cluster") 
+# Filtramos la tabla original para quedarnos solo con los clústeres que muestran posible HGT
+data_hgt <- left_join(data_mge_class_hgt, data_mge_class_phy, by = "rec_cluster")
 
-# calculate hgt events for recombinase #
+# ----- Paso 10: Contar combinaciones de familias por recombinasa
 pre_hgt <- data_hgt %>% 
   group_by(rec_cluster) %>% 
   summarise(family = paste(family, collapse = ":")) %>% 
   group_by(rec_cluster,family) %>% 
   summarise(count = n()) 
 
-
-## make 3 or more combinations of taxonomic family to 2 and merge redundant combinations A:B and B:A ##
+# Normalizar combinaciones de familias (A:B ≡ B:A)
 pre_hgt_decoupled <- pre_hgt %>% 
   group_by(family) %>% 
   mutate(nfamily = duo_maker(family)) %>% 
@@ -227,18 +281,7 @@ pre_hgt_decoupled <- pre_hgt %>%
   ungroup() %>%
   filter(.,!grepl("NA ",nfamily))
 
-# count_hgt <- pre_hgt %>%
-# group_by(family) %>%
-# mutate(nfamily = duo_maker(family)) %>%
-# ungroup() %>%
-# separate_rows(nfamily, sep = ";") %>% group_by(nfamily) %>% summarise(ncount = sum(count))  %>%
-# mutate(nfamily = map_chr(nfamily,~toString(sort(str_split(.x, ":")[[1]])))) %>%
-# group_by(nfamily)  %>%
-# summarise(final_count = sum(ncount)) %>%
-# ungroup() %>%
-# filter(.,!grepl("NA ",nfamily))
-# count_hgt %>% mutate (hgt = sum(final_count))
-# Total HGT events family level 6536 
+# ----- Paso 10: ----------------
 
 ## compute recombinase HGT events across taxonomic class ##
 rel_family_class <- data_hgt %>% 
@@ -267,6 +310,7 @@ pre_hgt_class2 <- left_join(pre_hgt_class1,rel_family_class, by = "family2") %>%
 pre_hgt_class2 %>% mutate(tot = sum(final_count))
 #Total HGT events class level 2823 for high quality genomes
 
+# ----- Paso 10: ----------------
 ## Compute HGT based on MGE to obtain heatmap arcs
 data_mge_class_phy_MGE <- data_mge_class_rename %>% 
   mutate(prot1 = prot) %>%
@@ -298,7 +342,7 @@ pre_hgt_decoupled_MGE <- pre_hgt_MGE %>%
   ungroup() %>%
   filter(.,!grepl("NA ",nfamily))
 
-
+# -----Cálculo de eventos de transferencia horizontal (HGT) mediados por MGE entre clases taxonómicas ----
 rel_family_class_MGE <- data_hgt %>% 
   select(family,class) %>% 
   unique(.) %>% 
@@ -332,6 +376,7 @@ pre_hgt_decoupled_class_MGE <- pre_hgt_class2_MGE %>%
   ungroup() %>%
   separate(name_new,c("class.x", "class.y"))
 
+# -------------------
 ## HGT arcs Figure 4B for iTOL ##
 class_tab <- pre_hgt_decoupled_class_MGE %>% 
   unite(new, class.x:class.y, sep = ":") %>%
@@ -354,6 +399,8 @@ class_tab %>%
 class_tab_plot <- class_tab %>% 
   group_by(cor_mge) %>% 
   summarise(count = sum(hgt_count)) 
+
+# ----- Paso 10: ----------------
 
 ggplot(class_tab_plot, aes(x = reorder(cor_mge,-count,mean), y = count)) + 
 geom_bar(stat="identity") + 
