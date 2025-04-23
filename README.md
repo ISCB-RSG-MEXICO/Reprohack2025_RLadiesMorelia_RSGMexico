@@ -18,8 +18,8 @@ En el Github se encuentra el codigo accesible de las siguientes figuras:
 | :------------------ | :------: | ----: | 
 | Figura 2            |   [`R/Figure2.R`](https://git.embl.de/khedkar/promge/-/blob/main/R/Figure2.R?ref_type=heads)   | [`Figura2_modificado.R`](https://github.com/ISCB-RSG-MEXICO/Reprohack2025_RLadiesMorelia_RSGMexico/blob/main/scripts/Figura2_modificado.R) |
 | Figura 3            |   [`R/Figure3.R`](https://git.embl.de/khedkar/promge/-/blob/main/R/Figure3.R?ref_type=heads)   | [`Figura3_modificado.R`](https://github.com/ISCB-RSG-MEXICO/Reprohack2025_RLadiesMorelia_RSGMexico/blob/main/scripts/Figura3_modificado.R) | 
-| Figura 4            |  [`R/Figure4.R`](https://git.embl.de/khedkar/promge/-/blob/main/R/Figure4.R?ref_type=heads)   | 19.99 | 
-| Figura 5            |  [`R/Figure5.R`](https://git.embl.de/khedkar/promge/-/blob/main/R/Figure5.R?ref_type=heads)   | 42.99 | 
+| Figura 4            |  [`R/Figure4.R`](https://git.embl.de/khedkar/promge/-/blob/main/R/Figure4.R?ref_type=heads)   | [`Figura4_modificado.R`](https://github.com/ISCB-RSG-MEXICO/Reprohack2025_RLadiesMorelia_RSGMexico/blob/main/scripts/Figura4_modificado.R) | 
+| Figura 5            |  [`R/Figure5.R`](https://git.embl.de/khedkar/promge/-/blob/main/R/Figure5.R?ref_type=heads)   | [`Figura5_modificado.R`](https://github.com/ISCB-RSG-MEXICO/Reprohack2025_RLadiesMorelia_RSGMexico/blob/main/scripts/Figura5_modificado.R) | 
 
 
 Curso hecho con amor 💜.

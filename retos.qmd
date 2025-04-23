@@ -14,3 +14,4 @@ mge_pg <- read_tsv("data/processed_data/mge_bins_per_genome_final.txt.gz", col_n
 ```
 
 3.  **Diferencia con el Código Original:** En el código original, el archivo estaba descomprimido. Sin embargo, con la extensión `.gz`, se puede leer directamente el archivo comprimido sin la necesidad de usar herramientas adicionales para descomprimirlo.
+4.  **Archivos muy pesados**.
