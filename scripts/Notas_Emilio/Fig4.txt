@@ -1,0 +1,32 @@
+# > Tabla con datos de transferencia horizontal a nivel de clase taxonómica
+# Esta tabla incluye información sobre las recombinasas asociadas a distintos tipos de MGE
+data_mge_class <- read_tsv("processed_data/resolved_MGE_hgt_class_level_final.txt.gz", col_names = F)
+
+
+############################# Lo que faltaba 3 #################################
+#remove low and medium quality genomes#
+
+glist_high <- glist %>% 
+  filter(genome_quality == "high")
+
+####################### Aqui termina lo que faltaba 2 ##########################
+
+# Paleta general de colores
+colc <- c("#D55E00", "#E69F00", "#F0E442", "#56B4E9", "#009E73", "#0072B2","#CECCCC")
+names(colc) <- c("IS_Tn", "Phage", "Phage_like", "CE", "Integron", "MI", "Cellular") 
+
+
+
+
+
+
+
+
+# Esto está mucho después, solo añadir un gz para que pueda leer el archivo
+datacl <- read_tsv("raw_data/all_recombinase_clusters_mge_resolved.txt.gz", col_names = F)
+
+
+
+#load data#
+hgt_hab <- read_tsv("raw_data/hgt_habitat_final.txt.gz", col_names = F)
+all_mge <- read_tsv("raw_data/recombinase_mge_habitat_final.txt.gz", col_names = F)

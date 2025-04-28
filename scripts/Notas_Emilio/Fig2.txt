@@ -1,0 +1,60 @@
+# PASO 8: Calcular la proporción relativa de cada MGE (excluyendo los de tipo "Cellular") y genera etiquetas para graficar
+mge_pg_relative <- mge_pg_melt %>% 
+  # Excluye las variables que contienen la palabra "Cellular"
+  filter(., !grepl("Cellular", variable)) %>% 
+  # Calcula el porcentaje relativo de cada MGE respecto al total
+  mutate(
+    rel = round((total / sum(total)) * 100, digits = 2),
+    # Crea etiquetas con el nombre del MGE y su porcentaje
+    labs = paste0(variable, " (", rel, "%)")
+  ) %>%
+  # Ordena por total ascendente para mejor visualización en la gráfica
+  arrange(total)
+
+############################## Lo que faltaba ##################################
+# Calcular proporciones y posiciones
+mge_pg_relative <- mge_pg_melt %>%
+  filter(!grepl("Cellular", variable)) %>%
+  mutate(
+    rel = round((total / sum(total)) * 100, 2),
+    labs = paste0(variable, " (", rel, "%)")
+  ) %>%
+  arrange(desc(variable)) %>%
+  mutate(
+    ymax = cumsum(rel),
+    ymin = c(0, head(ymax, n = -1)),
+    label_pos = (ymin + ymax) / 2
+  )
+######################## Aqui termina lo que faltaba ###########################
+
+# Gráfico de dona con etiquetas visibles y repelentes
+donutchart_custom <- ggplot(mge_pg_relative, aes(ymax = ymax, ymin = ymin, xmax = 4.5, xmin = 2.8, fill = variable)) +
+  geom_rect(color = "white") +
+  coord_polar(theta = "y") +
+  xlim(c(2.5, 5)) +  # Aumentamos espacio a la derecha para las etiquetas
+  theme_void() +
+  scale_fill_manual(values = c("#D55E00", "#E69F00", "#F0E442", "#56B4E9", "#009E73", "#0072B2", "#CECCCC")) +
+  geom_text_repel(
+    aes(x = 4.5, y = label_pos, label = labs),
+    size = 4,
+    nudge_x = 0.5,
+    direction = "y",
+    segment.size = 0.3,
+    show.legend = FALSE,
+    min.segment.length = 0,
+    box.padding = 0.3
+  ) +
+  theme(legend.position = "none")
+
+donutchart_custom
+
+####################### Aqui termina lo que faltaba 2 ##########################
+# Insertar el donut plot dentro del barplot
+Fig2B_combined_plot <- ggdraw() +
+  draw_plot(barplot_2b) +  # Gráfico base
+  draw_plot(donutchart_custom, 
+            x = 0.35, y = 0.05,       # Posición dentro del lienzo (ajustable)
+            width = 0.8, height = 0.8)  # Tamaño del donut ployt (ajustable)
+
+Fig2B_combined_plot
+####################### Aqui termina lo que faltaba 2 ##########################

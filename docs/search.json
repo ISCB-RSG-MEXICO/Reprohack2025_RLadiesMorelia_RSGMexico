@@ -383,5 +383,47 @@
     "title": "Reproducción de figuras",
     "section": "Figuras y scripts",
     "text": "Figuras y scripts\n\nModificado por: Evelia Coss\n\n\n\n\nFigura\nScript original\nScript modificado (en español)\n\n\n\n\nFigura 2\nR/Figure2.R\nscripts/Figure2_modificado.R\n\n\nFigura 3\nR/Figure3.R\nscripts/Figure3_modificado.R\n\n\nFigura 4\nR/Figure4.R\nscripts/Figure4_modificado.R\n\n\nFigura 5\nR/Figure5.R\nscripts/Figure5_modificado.R"
+  },
+  {
+    "objectID": "datos.html",
+    "href": "datos.html",
+    "title": "Sobre los datos",
+    "section": "",
+    "text": "Creado por: Johana Castelán"
+  },
+  {
+    "objectID": "datos.html#clonar-el-repositorio-desde-r",
+    "href": "datos.html#clonar-el-repositorio-desde-r",
+    "title": "Sobre los datos",
+    "section": "Clonar el repositorio desde R",
+    "text": "Clonar el repositorio desde R\nPuedes descargar el repositorio completo empleando git clone y el link SSH, solo si ya cuentas con la llave de SSH enlazado a tu github.\ngit clone git@github.com:ISCB-RSG-MEXICO/Reprohack2025_RLadiesMorelia_RSGMexico.git"
+  },
+  {
+    "objectID": "datos.html#descargar-los-datos",
+    "href": "datos.html#descargar-los-datos",
+    "title": "Sobre los datos",
+    "section": "Descargar los datos",
+    "text": "Descargar los datos\nDe igual manera, podemos descargar los archivos necesarios a nuestra computadora y colocarlos en la carpeta “data”\n\n# Define la carpeta donde quieres guardar\ncarpeta_destino &lt;- \"data\"\n\n# &gt; raw_data\n# Define el nombre que quieres para el archivo\nnombre_archivo &lt;- \"processed_data.tar.gz\"\n# Construye la ruta completa\nruta_completa &lt;- file.path(carpeta_destino, nombre_archivo)\n\n# URL de descarga directa\nurl &lt;- \"https://git.embl.de/khedkar/promge/-/raw/main/raw_data.tar.gz\"\n\n# Aumentar timeout\noptions(timeout = 600)  # 10 minutos\n\n# Descarga\ndownload.file(url, destfile = ruta_completa, mode = \"wb\")\n\n\n# &gt; Proccessed_data\n# Define el nombre que quieres para el archivo\nnombre_archivo &lt;- \"processed_data.tar.gz\"\n\n# Construye la ruta completa\nruta_completa &lt;- file.path(carpeta_destino, nombre_archivo)\n\n# URL de descarga directa\nurl &lt;- \"https://git.embl.de/khedkar/promge/-/raw/main/processed_data.tar.gz\"\n\n# Descarga\ndownload.file(url, destfile = ruta_completa, mode = \"wb\")\n\n\n\n\n\n\n\nNote\n\n\n\nLos archivos pesan 94.2 Mb y 2280.8 Mb de manera comprimida, processed_data.tar.gz y raw_data.tar.gz, respectivamente."
+  },
+  {
+    "objectID": "datos.html#descomprimir-los-archivos-desde-r",
+    "href": "datos.html#descomprimir-los-archivos-desde-r",
+    "title": "Sobre los datos",
+    "section": "Descomprimir los archivos desde R",
+    "text": "Descomprimir los archivos desde R\n\nlibrary(R.utils)\n\nuntar('data/processed_data.tar.gz')\nuntar('data/raw_data.tar.gz')"
+  },
+  {
+    "objectID": "datos.html#importar-datos-en-r",
+    "href": "datos.html#importar-datos-en-r",
+    "title": "Sobre los datos",
+    "section": "Importar datos en R",
+    "text": "Importar datos en R\n\nFigura 2\nDatos de la Figura 2A:\n\nmge_solitary &lt;- read_tsv(\"processed_data/solitary_mge_bins_final.txt\", col_names = F)\n\nRows: 1647630 Columns: 15                                  s\n── Column specification ───────────────────────────────────\nDelimiter: \"\\t\"\nchr  (2): X10, X15\ndbl (13): X1, X2, X3, X4, X5, X6, X7, X8, X9, X11, X12,...\nDatos de la Figura 2B:\n\nmge_pg &lt;- read_tsv(\"processed_data/mge_bins_per_genome_final.txt\", col_names = T)\n\nRows: 76902 Columns: 14                                                                \n── Column specification ───────────────────────────────────────────────────────────────\nDelimiter: \"\\t\"\nchr (6): Genome, specI, kingdom, phylum, class, genus\ndbl (8): IS_Tn, Phage, Phage_like, CE, Integron, MI, Hotspot, Cellular\n\n\nFigura 3\n\ntax &lt;- read_tsv(\"raw_data/species_with_atleast_2genomes.list\", col_names=F)\n\nRows: 77107 Columns: 6                                                                \n── Column specification ──────────────────────────────────────────────────────────────\nDelimiter: \"\\t\"\nchr (6): X1, X2, X3, X4, X5, X6\n\ndb &lt;-read_tsv(\"processed_data/mge_bins_per_genome_final.txt\", col_names = T)\n\nRows: 76902 Columns: 14                                                               \n── Column specification ──────────────────────────────────────────────────────────────\nDelimiter: \"\\t\"\nchr (6): Genome, specI, kingdom, phylum, class, genus\ndbl (8): IS_Tn, Phage, Phage_like, CE, Integron, MI, Hotspot, Cellular\n\ngs &lt;-read_tsv(\"raw_data/genome_size.txt\", col_names = T)\n\nRows: 84022 Columns: 3                                                                \n── Column specification ──────────────────────────────────────────────────────────────\nDelimiter: \"\\t\"\nchr (2): strain, SpecI_id_v3\ndbl (1): ProteinGeneCounts\n\nclass_tree &lt;- read.tree(\"raw_data/progenomes2_class_tree.nwk\")\n\nEs un archivo Newick (.nwk).\n\nglist &lt;- read_tsv(\"raw_data/genome_status_supplementary_tableS2.txt\", col_names = T)\n\nRows: 84022 Columns: 7                                                                \n── Column specification ──────────────────────────────────────────────────────────────\nDelimiter: \"\\t\"\nchr (5): genome, assembly_status, Marker_lineage, genome_quality, species_with_atl...\ndbl (2): Completeness, Contamination\n\n\nFigura 4\n\ndata_mf &lt;- read_tsv(\"raw_data/recombinase_hgt_cluster_master_file.txt\", col_names = F)\n\nRows: 1807030 Columns: 9                                              0s\n── Column specification ──────────────────────────────────────────────\nDelimiter: \"\\t\"\nchr (9): X1, X2, X3, X4, X5, X6, X7, X8, X9\n\nmge_bins &lt;- read_tsv(\"raw_data/mge_bins_final.txt\",col_names = T)\n\nRows: 1953569 Columns: 15                                             \n── Column specification ──────────────────────────────────────────────\nDelimiter: \"\\t\"\nchr  (2): island, mgeR\ndbl (13): IS_Tn, Phage, Phage_like, CE, Integron, MI, Hotspot, UC,...\n\ntax &lt;- read_tsv(\"raw_data/hgt_species.list\", col_names = F)\n\nRows: 61959 Columns: 6                                                \n── Column specification ──────────────────────────────────────────────\nDelimiter: \"\\t\"\nchr (6): X1, X2, X3, X4, X5, X6\n\nclass_tree &lt;- read.tree(\"raw_data/progenomes2_class_tree.nwk\")\n\nRows: 61959 Columns: 6                                                \n── Column specification ──────────────────────────────────────────────\nDelimiter: \"\\t\"\nchr (6): X1, X2, X3, X4, X5, X6\n\nglist &lt;- read_tsv(\"raw_data/genome_status_supplementary_tableS2.txt\", col_names = T)\n\nRows: 84022 Columns: 7                                                0s\n── Column specification ──────────────────────────────────────────────\nDelimiter: \"\\t\"\nchr (5): genome, assembly_status, Marker_lineage, genome_quality, ...\ndbl (2): Completeness, Contamination"
+  },
+  {
+    "objectID": "datos.html#referencias",
+    "href": "datos.html#referencias",
+    "title": "Sobre los datos",
+    "section": "Referencias",
+    "text": "Referencias\n\nClone an existing GitHub project to new RStudio project - explicacion\nConectar a GitHub con SSH - explicacion"
   }
 ]
