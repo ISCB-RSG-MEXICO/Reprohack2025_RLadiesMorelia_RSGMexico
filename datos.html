@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Retos y problemas con el código</title>
+<title>Sobre los datos</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -132,7 +132,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tema3.html">Figuras del artículo</a></li><li class="breadcrumb-item"><a href="./retos.html">Retos y problemas con el código</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introducción</a></li><li class="breadcrumb-item"><a href="./datos.html">Sobre los datos</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -142,7 +142,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -175,7 +175,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./datos.html" class="sidebar-item-text sidebar-link">
+  <a href="./datos.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Sobre los datos</span></a>
   </div>
 </li>
@@ -240,7 +240,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./retos.html" class="sidebar-item-text sidebar-link active">
+  <a href="./retos.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Retos y problemas con el código</span></a>
   </div>
 </li>
@@ -256,16 +256,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#carga-de-archivos-comprimidos-en-r" id="toc-carga-de-archivos-comprimidos-en-r" class="nav-link active" data-scroll-target="#carga-de-archivos-comprimidos-en-r">Carga de Archivos Comprimidos en R</a></li>
+  <li><a href="#clonar-el-repositorio-desde-r" id="toc-clonar-el-repositorio-desde-r" class="nav-link active" data-scroll-target="#clonar-el-repositorio-desde-r">Clonar el repositorio desde R</a></li>
+  <li><a href="#descargar-los-datos" id="toc-descargar-los-datos" class="nav-link" data-scroll-target="#descargar-los-datos">Descargar los datos</a></li>
+  <li><a href="#descomprimir-los-archivos-desde-r" id="toc-descomprimir-los-archivos-desde-r" class="nav-link" data-scroll-target="#descomprimir-los-archivos-desde-r">Descomprimir los archivos desde R</a></li>
+  <li><a href="#importar-datos-en-r" id="toc-importar-datos-en-r" class="nav-link" data-scroll-target="#importar-datos-en-r">Importar datos en R</a>
+  <ul class="collapse">
+  <li><a href="#figura-2" id="toc-figura-2" class="nav-link" data-scroll-target="#figura-2">Figura 2</a></li>
+  <li><a href="#figura-3" id="toc-figura-3" class="nav-link" data-scroll-target="#figura-3">Figura 3</a></li>
+  <li><a href="#figura-4" id="toc-figura-4" class="nav-link" data-scroll-target="#figura-4">Figura 4</a></li>
+  </ul></li>
+  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias">Referencias</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Retos y problemas con el código</h1>
+<h1 class="title">Sobre los datos</h1>
 </div>
 
 
@@ -280,20 +289,181 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="carga-de-archivos-comprimidos-en-r" class="level2">
-<h2 class="anchored" data-anchor-id="carga-de-archivos-comprimidos-en-r">Carga de Archivos Comprimidos en R</h2>
-<p>Notas clave:</p>
-<ol type="1">
-<li><strong>Uso de Archivos Comprimidos:</strong> Cuando trabajen con archivos comprimidos (por ejemplo, con extensión .gz), no es necesario descomprimirlos manualmente antes de cargarlos en R.</li>
-<li><strong>Código Correcto para Cargar Archivos Comprimidos:</strong> Para cargar archivos comprimidos sin descomprimirlos previamente, utilicen el siguiente código:</li>
-</ol>
+<blockquote class="blockquote">
+<p>Creado por: <strong>Johana Castelán</strong></p>
+</blockquote>
+<section id="clonar-el-repositorio-desde-r" class="level2">
+<h2 class="anchored" data-anchor-id="clonar-el-repositorio-desde-r">Clonar el repositorio desde R</h2>
+<p>Puedes descargar el repositorio completo empleando <code>git clone</code> y el link SSH, solo si ya cuentas con la llave de SSH enlazado a tu github.</p>
+<pre><code>git clone git@github.com:ISCB-RSG-MEXICO/Reprohack2025_RLadiesMorelia_RSGMexico.git</code></pre>
+</section>
+<section id="descargar-los-datos" class="level2">
+<h2 class="anchored" data-anchor-id="descargar-los-datos">Descargar los datos</h2>
+<p>De igual manera, podemos descargar los archivos necesarios a nuestra computadora y colocarlos en la carpeta “data”</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mge_pg <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"data/processed_data/mge_bins_per_genome_final.txt.gz"</span>, <span class="at">col_names =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define la carpeta donde quieres guardar</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>carpeta_destino <span class="ot">&lt;-</span> <span class="st">"data"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># &gt; raw_data</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Define el nombre que quieres para el archivo</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>nombre_archivo <span class="ot">&lt;-</span> <span class="st">"processed_data.tar.gz"</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Construye la ruta completa</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>ruta_completa <span class="ot">&lt;-</span> <span class="fu">file.path</span>(carpeta_destino, nombre_archivo)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># URL de descarga directa</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://git.embl.de/khedkar/promge/-/raw/main/raw_data.tar.gz"</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Aumentar timeout</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">timeout =</span> <span class="dv">600</span>)  <span class="co"># 10 minutos</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Descarga</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(url, <span class="at">destfile =</span> ruta_completa, <span class="at">mode =</span> <span class="st">"wb"</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co"># &gt; Proccessed_data</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Define el nombre que quieres para el archivo</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>nombre_archivo <span class="ot">&lt;-</span> <span class="st">"processed_data.tar.gz"</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Construye la ruta completa</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>ruta_completa <span class="ot">&lt;-</span> <span class="fu">file.path</span>(carpeta_destino, nombre_archivo)</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co"># URL de descarga directa</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://git.embl.de/khedkar/promge/-/raw/main/processed_data.tar.gz"</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Descarga</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(url, <span class="at">destfile =</span> ruta_completa, <span class="at">mode =</span> <span class="st">"wb"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<ol start="3" type="1">
-<li><strong>Diferencia con el Código Original:</strong> En el código original, el archivo estaba descomprimido. Sin embargo, con la extensión <code>.gz</code>, se puede leer directamente el archivo comprimido sin la necesidad de usar herramientas adicionales para descomprimirlo.</li>
-<li><strong>Archivos muy pesados</strong>.</li>
-</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Los archivos pesan 94.2 Mb y 2280.8 Mb de manera comprimida, <code>processed_data.tar.gz</code> y <code>raw_data.tar.gz</code>, respectivamente.</p>
+</div>
+</div>
+</section>
+<section id="descomprimir-los-archivos-desde-r" class="level2">
+<h2 class="anchored" data-anchor-id="descomprimir-los-archivos-desde-r">Descomprimir los archivos desde R</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(R.utils)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">untar</span>(<span class="st">'data/processed_data.tar.gz'</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">untar</span>(<span class="st">'data/raw_data.tar.gz'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="importar-datos-en-r" class="level2">
+<h2 class="anchored" data-anchor-id="importar-datos-en-r">Importar datos en R</h2>
+<section id="figura-2" class="level3">
+<h3 class="anchored" data-anchor-id="figura-2">Figura 2</h3>
+<p>Datos de la Figura <strong>2A</strong>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mge_solitary <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"processed_data/solitary_mge_bins_final.txt"</span>, <span class="at">col_names =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<pre><code>Rows: 1647630 Columns: 15                                  s
+── Column specification ───────────────────────────────────
+Delimiter: "\t"
+chr  (2): X10, X15
+dbl (13): X1, X2, X3, X4, X5, X6, X7, X8, X9, X11, X12,...</code></pre>
+<p>Datos de la <strong>Figura 2B</strong>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mge_pg <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"processed_data/mge_bins_per_genome_final.txt"</span>, <span class="at">col_names =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<pre><code>Rows: 76902 Columns: 14                                                                
+── Column specification ───────────────────────────────────────────────────────────────
+Delimiter: "\t"
+chr (6): Genome, specI, kingdom, phylum, class, genus
+dbl (8): IS_Tn, Phage, Phage_like, CE, Integron, MI, Hotspot, Cellular</code></pre>
+</section>
+<section id="figura-3" class="level3">
+<h3 class="anchored" data-anchor-id="figura-3">Figura 3</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>tax <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"raw_data/species_with_atleast_2genomes.list"</span>, <span class="at">col_names=</span>F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<pre><code>Rows: 77107 Columns: 6                                                                
+── Column specification ──────────────────────────────────────────────────────────────
+Delimiter: "\t"
+chr (6): X1, X2, X3, X4, X5, X6</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>db <span class="ot">&lt;-</span><span class="fu">read_tsv</span>(<span class="st">"processed_data/mge_bins_per_genome_final.txt"</span>, <span class="at">col_names =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<pre><code>Rows: 76902 Columns: 14                                                               
+── Column specification ──────────────────────────────────────────────────────────────
+Delimiter: "\t"
+chr (6): Genome, specI, kingdom, phylum, class, genus
+dbl (8): IS_Tn, Phage, Phage_like, CE, Integron, MI, Hotspot, Cellular</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>gs <span class="ot">&lt;-</span><span class="fu">read_tsv</span>(<span class="st">"raw_data/genome_size.txt"</span>, <span class="at">col_names =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<pre><code>Rows: 84022 Columns: 3                                                                
+── Column specification ──────────────────────────────────────────────────────────────
+Delimiter: "\t"
+chr (2): strain, SpecI_id_v3
+dbl (1): ProteinGeneCounts</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>class_tree <span class="ot">&lt;-</span> <span class="fu">read.tree</span>(<span class="st">"raw_data/progenomes2_class_tree.nwk"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Es un archivo <a href="http://marvin.cs.uidaho.edu/Teaching/CS515/newickFormat.html">Newick</a> (.nwk).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>glist <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"raw_data/genome_status_supplementary_tableS2.txt"</span>, <span class="at">col_names =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<pre><code>Rows: 84022 Columns: 7                                                                
+── Column specification ──────────────────────────────────────────────────────────────
+Delimiter: "\t"
+chr (5): genome, assembly_status, Marker_lineage, genome_quality, species_with_atl...
+dbl (2): Completeness, Contamination</code></pre>
+</section>
+<section id="figura-4" class="level3">
+<h3 class="anchored" data-anchor-id="figura-4">Figura 4</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>data_mf <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"raw_data/recombinase_hgt_cluster_master_file.txt"</span>, <span class="at">col_names =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<pre><code>Rows: 1807030 Columns: 9                                              0s
+── Column specification ──────────────────────────────────────────────
+Delimiter: "\t"
+chr (9): X1, X2, X3, X4, X5, X6, X7, X8, X9</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>mge_bins <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"raw_data/mge_bins_final.txt"</span>,<span class="at">col_names =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<pre><code>Rows: 1953569 Columns: 15                                             
+── Column specification ──────────────────────────────────────────────
+Delimiter: "\t"
+chr  (2): island, mgeR
+dbl (13): IS_Tn, Phage, Phage_like, CE, Integron, MI, Hotspot, UC,...</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>tax <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"raw_data/hgt_species.list"</span>, <span class="at">col_names =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<pre><code>Rows: 61959 Columns: 6                                                
+── Column specification ──────────────────────────────────────────────
+Delimiter: "\t"
+chr (6): X1, X2, X3, X4, X5, X6</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>class_tree <span class="ot">&lt;-</span> <span class="fu">read.tree</span>(<span class="st">"raw_data/progenomes2_class_tree.nwk"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<pre><code>Rows: 61959 Columns: 6                                                
+── Column specification ──────────────────────────────────────────────
+Delimiter: "\t"
+chr (6): X1, X2, X3, X4, X5, X6</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>glist <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"raw_data/genome_status_supplementary_tableS2.txt"</span>, <span class="at">col_names =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<pre><code>Rows: 84022 Columns: 7                                                0s
+── Column specification ──────────────────────────────────────────────
+Delimiter: "\t"
+chr (5): genome, assembly_status, Marker_lineage, genome_quality, ...
+dbl (2): Completeness, Contamination</code></pre>
+</section>
+</section>
+<section id="referencias" class="level2">
+<h2 class="anchored" data-anchor-id="referencias">Referencias</h2>
+<ul>
+<li>Clone an existing GitHub project to new RStudio project - <a href="https://argoshare.is.ed.ac.uk/healthyr_book/clone-an-existing-github-project-to-new-rstudio-project.html">explicacion</a></li>
+<li>Conectar a GitHub con SSH - <a href="https://eveliacoss.github.io/Workshop_GitGithub2025/Parte1.html">explicacion</a></li>
+</ul>
 
 
 </section>

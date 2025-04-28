@@ -53,7 +53,7 @@ genomes](https://academic.oup.com/nar/article/50/6/3155/6552054)
     Escuela de Medicina de la Universidad Quetzalcoatl. Editora en Jefe
     de la revista INVESMED (Investigación y Educación Médica). Miembro
     del cuerpo académico del AMFEM (Asociación Mexicana de Facultades y
-    Escuelas de Medicina, A.C.)
+    Escuelas de Medicina, A.C.)
 -   **Johana Castelán** -
     [RSG-México](https://comunidadbioinfo.github.io/es/#:~:text=%C2%A1Bienvenidos%20a%20la%20Comunidad%20de,la%20comunidad%20de%20software%20libre.)
     y [RLadies Morelia](https://r-ladies-morelia.github.io/).
