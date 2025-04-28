@@ -7,6 +7,18 @@ format:
 
 ## Conceptos importantes del articulo
 
-Asignadas: Diana Barcelo y Marisol Navarro
+> Escrito por: **Diana Barceló** **y Marisol Navarro**
 
-Hola, soy Sol Hola, soy johanna
+### Tema: Resistencia antimicrobiana
+
+-   **Susceptibilidad antibiótica** se refiere a la capacidad de un microorganismo para ser afectado o inhibido por un determinado antibiótico (o agente antimicrobiano). Es una medida de su eficacia frente el microorganismo en cuestión. La susceptibilidad se determina mediante pruebas de laboratorio, en los que se expone el microorganismo a una o varias concentraciones de agentes antimicrobianos y se evalúa su crecimiento o inhibición.
+
+### Tema: Transferencia horizontal de genes
+
+-   **Sensibilidad antibiótica**: La sensibilidad antibiótica se utiliza para indicar la respuesta clínica de una patología a un antibiótico específico. La sensibilidad antibiótica se evalúa en función de la susceptibilidad del microorganismo causante de la infección, pero también puede depender de otros factores, como la concentración del antibiótico en el tejido infectado, la capacidad del antibiótico para llegar al sitio de la infección, la respuesta inmunológica del paciente, etc.
+
+-   **Conjugación:** Una bacteria transfiere DNA a otra a través de un "puente" formado por estructuras llamadas pilis. 
+
+-   **Transducción:** Un virus (bacteriófago) infecta una bacteria y luego introduce el DNA de otra bacteria infectada previamente en una nueva célula. 
+
+-   **Transformación:** Una bacteria puede incorporar fragmentos de ADN libre del entorno, provenientes de otras bacterias muertas o de su medio.

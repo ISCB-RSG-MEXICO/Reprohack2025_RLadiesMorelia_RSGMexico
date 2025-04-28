@@ -5,13 +5,150 @@ format:
     page-layout: full 
 ---
 
-## Estructura de los datos
-
-Asignada: Johana
-
-Variables (que dicen las filas y las columnas)
-
+> Creado por: **Johana Castelán**
 
 ## Importar datos en R
 
-Como los importamos a R.
+### Figura 2
+
+Datos de la Figura **2A**:
+
+```{r LoadData, eval=FALSE}
+mge_solitary <-read_tsv("processed_data/solitary_mge_bins_final.txt", col_names = F)
+```
+
+```         
+Rows: 1647630 Columns: 15                                  s
+── Column specification ───────────────────────────────────
+Delimiter: "\t"
+chr  (2): X10, X15
+dbl (13): X1, X2, X3, X4, X5, X6, X7, X8, X9, X11, X12,...
+```
+
+Datos de la **Figura 2B**:
+
+```{r, eval=FALSE}
+mge_pg <- read_tsv("processed_data/mge_bins_per_genome_final.txt", col_names = T)
+```
+
+```         
+Rows: 76902 Columns: 14                                                                
+── Column specification ───────────────────────────────────────────────────────────────
+Delimiter: "\t"
+chr (6): Genome, specI, kingdom, phylum, class, genus
+dbl (8): IS_Tn, Phage, Phage_like, CE, Integron, MI, Hotspot, Cellular
+```
+
+### Figura 3
+
+```{r, eval=FALSE}
+tax <- read_tsv("raw_data/species_with_atleast_2genomes.list", col_names=F)
+```
+
+```         
+Rows: 77107 Columns: 6                                                                
+── Column specification ──────────────────────────────────────────────────────────────
+Delimiter: "\t"
+chr (6): X1, X2, X3, X4, X5, X6
+```
+
+```{r, eval=FALSE}
+db <-read_tsv("processed_data/mge_bins_per_genome_final.txt", col_names = T)
+```
+
+```         
+Rows: 76902 Columns: 14                                                               
+── Column specification ──────────────────────────────────────────────────────────────
+Delimiter: "\t"
+chr (6): Genome, specI, kingdom, phylum, class, genus
+dbl (8): IS_Tn, Phage, Phage_like, CE, Integron, MI, Hotspot, Cellular
+```
+
+```{r, eval=FALSE}
+gs <-read_tsv("raw_data/genome_size.txt", col_names = T)
+```
+
+```         
+Rows: 84022 Columns: 3                                                                
+── Column specification ──────────────────────────────────────────────────────────────
+Delimiter: "\t"
+chr (2): strain, SpecI_id_v3
+dbl (1): ProteinGeneCounts
+```
+
+```{r, eval=FALSE}
+class_tree <- read.tree("raw_data/progenomes2_class_tree.nwk")
+```
+
+Es un archivo [Newick](http://marvin.cs.uidaho.edu/Teaching/CS515/newickFormat.html) (.nwk).
+
+```{r, eval=FALSE}
+glist <- read_tsv("raw_data/genome_status_supplementary_tableS2.txt", col_names = T)
+```
+
+```         
+Rows: 84022 Columns: 7                                                                
+── Column specification ──────────────────────────────────────────────────────────────
+Delimiter: "\t"
+chr (5): genome, assembly_status, Marker_lineage, genome_quality, species_with_atl...
+dbl (2): Completeness, Contamination
+```
+
+### Figura 4
+
+```{r, eval=FALSE}
+data_mf <- read_tsv("raw_data/recombinase_hgt_cluster_master_file.txt", col_names = F)
+```
+
+```         
+Rows: 1807030 Columns: 9                                              0s
+── Column specification ──────────────────────────────────────────────
+Delimiter: "\t"
+chr (9): X1, X2, X3, X4, X5, X6, X7, X8, X9
+```
+
+```{r, eval=FALSE}
+mge_bins <- read_tsv("raw_data/mge_bins_final.txt",col_names = T)
+```
+
+```         
+Rows: 1953569 Columns: 15                                             
+── Column specification ──────────────────────────────────────────────
+Delimiter: "\t"
+chr  (2): island, mgeR
+dbl (13): IS_Tn, Phage, Phage_like, CE, Integron, MI, Hotspot, UC,...
+```
+
+```{r, eval=FALSE}
+tax <- read_tsv("raw_data/hgt_species.list", col_names = F)
+```
+
+```         
+Rows: 61959 Columns: 6                                                
+── Column specification ──────────────────────────────────────────────
+Delimiter: "\t"
+chr (6): X1, X2, X3, X4, X5, X6
+```
+
+```{r, eval=FALSE}
+class_tree <- read.tree("raw_data/progenomes2_class_tree.nwk")
+```
+
+```         
+Rows: 61959 Columns: 6                                                
+── Column specification ──────────────────────────────────────────────
+Delimiter: "\t"
+chr (6): X1, X2, X3, X4, X5, X6
+```
+
+```{r, eval=FALSE}
+glist <- read_tsv("raw_data/genome_status_supplementary_tableS2.txt", col_names = T)
+```
+
+```         
+Rows: 84022 Columns: 7                                                0s
+── Column specification ──────────────────────────────────────────────
+Delimiter: "\t"
+chr (5): genome, assembly_status, Marker_lineage, genome_quality, ...
+dbl (2): Completeness, Contamination
+```

@@ -31,6 +31,8 @@ genomes](https://academic.oup.com/nar/article/50/6/3155/6552054)
 
 ## Integrantes
 
+### Instructores
+
 -   **Evelia Coss** - posdoctoral LIIGH-UNAM. Miembro de
     [LupusRGMX](https://lupusrgmx.liigh.unam.mx/quienes-somos.html),
     [Project JAGUAR](https://jaguar.liigh.unam.mx/),
@@ -55,6 +57,14 @@ genomes](https://academic.oup.com/nar/article/50/6/3155/6552054)
 -   **Johana Castelán** -
     [RSG-México](https://comunidadbioinfo.github.io/es/#:~:text=%C2%A1Bienvenidos%20a%20la%20Comunidad%20de,la%20comunidad%20de%20software%20libre.)
     y [RLadies Morelia](https://r-ladies-morelia.github.io/).
+
+### Ayudantes
+
+-   **Mayela Fosado** - Instituto de Neurobiología (INB)-UNAM.
+-   **Emilio Ortíz** - Instituto de Neurobiología (INB)-UNAM.
+-   **Mariana Devon** - Departamento de Bioinformática en Enfermedades
+    Infecciosas, ESPM-INSP.
+-   **Andrés Arredondo** - Ciencias Agrogenómicas, ENES León-UNAM.
 
 ## **Citar y reutilizar el material del curso**
 

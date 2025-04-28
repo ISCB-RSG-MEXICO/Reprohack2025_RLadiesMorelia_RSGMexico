@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -222,8 +256,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#estructura-de-los-datos" id="toc-estructura-de-los-datos" class="nav-link active" data-scroll-target="#estructura-de-los-datos">Estructura de los datos</a></li>
-  <li><a href="#importar-datos-en-r" id="toc-importar-datos-en-r" class="nav-link" data-scroll-target="#importar-datos-en-r">Importar datos en R</a></li>
+  <li><a href="#importar-datos-en-r" id="toc-importar-datos-en-r" class="nav-link active" data-scroll-target="#importar-datos-en-r">Importar datos en R</a>
+  <ul class="collapse">
+  <li><a href="#figura-2" id="toc-figura-2" class="nav-link" data-scroll-target="#figura-2">Figura 2</a></li>
+  <li><a href="#figura-3" id="toc-figura-3" class="nav-link" data-scroll-target="#figura-3">Figura 3</a></li>
+  <li><a href="#figura-4" id="toc-figura-4" class="nav-link" data-scroll-target="#figura-4">Figura 4</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -247,16 +285,112 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="estructura-de-los-datos" class="level2">
-<h2 class="anchored" data-anchor-id="estructura-de-los-datos">Estructura de los datos</h2>
-<p>Asignada: Johana</p>
-<p>Variables (que dicen las filas y las columnas)</p>
-</section>
+<blockquote class="blockquote">
+<p>Creado por: <strong>Johana Castelán</strong></p>
+</blockquote>
 <section id="importar-datos-en-r" class="level2">
 <h2 class="anchored" data-anchor-id="importar-datos-en-r">Importar datos en R</h2>
-<p>Como los importamos a R.</p>
+<section id="figura-2" class="level3">
+<h3 class="anchored" data-anchor-id="figura-2">Figura 2</h3>
+<p>Datos de la Figura <strong>2A</strong>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mge_solitary <span class="ot">&lt;-</span><span class="fu">read_tsv</span>(<span class="st">"processed_data/solitary_mge_bins_final.txt"</span>, <span class="at">col_names =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<pre><code>Rows: 1647630 Columns: 15                                  s
+── Column specification ───────────────────────────────────
+Delimiter: "\t"
+chr  (2): X10, X15
+dbl (13): X1, X2, X3, X4, X5, X6, X7, X8, X9, X11, X12,...</code></pre>
+<p>Datos de la <strong>Figura 2B</strong>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mge_pg <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"processed_data/mge_bins_per_genome_final.txt"</span>, <span class="at">col_names =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<pre><code>Rows: 76902 Columns: 14                                                                
+── Column specification ───────────────────────────────────────────────────────────────
+Delimiter: "\t"
+chr (6): Genome, specI, kingdom, phylum, class, genus
+dbl (8): IS_Tn, Phage, Phage_like, CE, Integron, MI, Hotspot, Cellular</code></pre>
+</section>
+<section id="figura-3" class="level3">
+<h3 class="anchored" data-anchor-id="figura-3">Figura 3</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>tax <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"raw_data/species_with_atleast_2genomes.list"</span>, <span class="at">col_names=</span>F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<pre><code>Rows: 77107 Columns: 6                                                                
+── Column specification ──────────────────────────────────────────────────────────────
+Delimiter: "\t"
+chr (6): X1, X2, X3, X4, X5, X6</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>db <span class="ot">&lt;-</span><span class="fu">read_tsv</span>(<span class="st">"processed_data/mge_bins_per_genome_final.txt"</span>, <span class="at">col_names =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<pre><code>Rows: 76902 Columns: 14                                                               
+── Column specification ──────────────────────────────────────────────────────────────
+Delimiter: "\t"
+chr (6): Genome, specI, kingdom, phylum, class, genus
+dbl (8): IS_Tn, Phage, Phage_like, CE, Integron, MI, Hotspot, Cellular</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>gs <span class="ot">&lt;-</span><span class="fu">read_tsv</span>(<span class="st">"raw_data/genome_size.txt"</span>, <span class="at">col_names =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<pre><code>Rows: 84022 Columns: 3                                                                
+── Column specification ──────────────────────────────────────────────────────────────
+Delimiter: "\t"
+chr (2): strain, SpecI_id_v3
+dbl (1): ProteinGeneCounts</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>class_tree <span class="ot">&lt;-</span> <span class="fu">read.tree</span>(<span class="st">"raw_data/progenomes2_class_tree.nwk"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Es un archivo <a href="http://marvin.cs.uidaho.edu/Teaching/CS515/newickFormat.html">Newick</a> (.nwk).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>glist <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"raw_data/genome_status_supplementary_tableS2.txt"</span>, <span class="at">col_names =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<pre><code>Rows: 84022 Columns: 7                                                                
+── Column specification ──────────────────────────────────────────────────────────────
+Delimiter: "\t"
+chr (5): genome, assembly_status, Marker_lineage, genome_quality, species_with_atl...
+dbl (2): Completeness, Contamination</code></pre>
+</section>
+<section id="figura-4" class="level3">
+<h3 class="anchored" data-anchor-id="figura-4">Figura 4</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>data_mf <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"raw_data/recombinase_hgt_cluster_master_file.txt"</span>, <span class="at">col_names =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<pre><code>Rows: 1807030 Columns: 9                                              0s
+── Column specification ──────────────────────────────────────────────
+Delimiter: "\t"
+chr (9): X1, X2, X3, X4, X5, X6, X7, X8, X9</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>mge_bins <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"raw_data/mge_bins_final.txt"</span>,<span class="at">col_names =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<pre><code>Rows: 1953569 Columns: 15                                             
+── Column specification ──────────────────────────────────────────────
+Delimiter: "\t"
+chr  (2): island, mgeR
+dbl (13): IS_Tn, Phage, Phage_like, CE, Integron, MI, Hotspot, UC,...</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>tax <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"raw_data/hgt_species.list"</span>, <span class="at">col_names =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<pre><code>Rows: 61959 Columns: 6                                                
+── Column specification ──────────────────────────────────────────────
+Delimiter: "\t"
+chr (6): X1, X2, X3, X4, X5, X6</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>class_tree <span class="ot">&lt;-</span> <span class="fu">read.tree</span>(<span class="st">"raw_data/progenomes2_class_tree.nwk"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<pre><code>Rows: 61959 Columns: 6                                                
+── Column specification ──────────────────────────────────────────────
+Delimiter: "\t"
+chr (6): X1, X2, X3, X4, X5, X6</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>glist <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"raw_data/genome_status_supplementary_tableS2.txt"</span>, <span class="at">col_names =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<pre><code>Rows: 84022 Columns: 7                                                0s
+── Column specification ──────────────────────────────────────────────
+Delimiter: "\t"
+chr (5): genome, assembly_status, Marker_lineage, genome_quality, ...
+dbl (2): Completeness, Contamination</code></pre>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
