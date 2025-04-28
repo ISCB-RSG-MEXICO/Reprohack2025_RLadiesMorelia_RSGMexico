@@ -1,26 +1,5 @@
 [
   {
-    "objectID": "datos.html",
-    "href": "datos.html",
-    "title": "Sobre los datos",
-    "section": "",
-    "text": "Creado por: Johana Castelán"
-  },
-  {
-    "objectID": "datos.html#estructura-de-los-datos",
-    "href": "datos.html#estructura-de-los-datos",
-    "title": "Sobre los datos",
-    "section": "",
-    "text": "Asignada: Johana\nVariables (que dicen las filas y las columnas)"
-  },
-  {
-    "objectID": "datos.html#importar-datos-en-r",
-    "href": "datos.html#importar-datos-en-r",
-    "title": "Sobre los datos",
-    "section": "Importar datos en R",
-    "text": "Importar datos en R\n\nFigura 2\nDatos de la Figura 2A:\n\nmge_solitary &lt;-read_tsv(\"processed_data/solitary_mge_bins_final.txt\", col_names = F)\n\nRows: 1647630 Columns: 15                                  s\n── Column specification ───────────────────────────────────\nDelimiter: \"\\t\"\nchr  (2): X10, X15\ndbl (13): X1, X2, X3, X4, X5, X6, X7, X8, X9, X11, X12,...\nDatos de la Figura 2B:\n\nmge_pg &lt;- read_tsv(\"processed_data/mge_bins_per_genome_final.txt\", col_names = T)\n\nRows: 76902 Columns: 14                                                                \n── Column specification ───────────────────────────────────────────────────────────────\nDelimiter: \"\\t\"\nchr (6): Genome, specI, kingdom, phylum, class, genus\ndbl (8): IS_Tn, Phage, Phage_like, CE, Integron, MI, Hotspot, Cellular\n\n\nFigura 3\n\ntax &lt;- read_tsv(\"raw_data/species_with_atleast_2genomes.list\", col_names=F)\n\nRows: 77107 Columns: 6                                                                \n── Column specification ──────────────────────────────────────────────────────────────\nDelimiter: \"\\t\"\nchr (6): X1, X2, X3, X4, X5, X6\n\ndb &lt;-read_tsv(\"processed_data/mge_bins_per_genome_final.txt\", col_names = T)\n\nRows: 76902 Columns: 14                                                               \n── Column specification ──────────────────────────────────────────────────────────────\nDelimiter: \"\\t\"\nchr (6): Genome, specI, kingdom, phylum, class, genus\ndbl (8): IS_Tn, Phage, Phage_like, CE, Integron, MI, Hotspot, Cellular\n\ngs &lt;-read_tsv(\"raw_data/genome_size.txt\", col_names = T)\n\nRows: 84022 Columns: 3                                                                \n── Column specification ──────────────────────────────────────────────────────────────\nDelimiter: \"\\t\"\nchr (2): strain, SpecI_id_v3\ndbl (1): ProteinGeneCounts\n\nclass_tree &lt;- read.tree(\"raw_data/progenomes2_class_tree.nwk\")\n\nEs un archivo Newick (.nwk).\n\nglist &lt;- read_tsv(\"raw_data/genome_status_supplementary_tableS2.txt\", col_names = T)\n\nRows: 84022 Columns: 7                                                                \n── Column specification ──────────────────────────────────────────────────────────────\nDelimiter: \"\\t\"\nchr (5): genome, assembly_status, Marker_lineage, genome_quality, species_with_atl...\ndbl (2): Completeness, Contamination\n\n\nFigura 4\n\ndata_mf &lt;- read_tsv(\"raw_data/recombinase_hgt_cluster_master_file.txt\", col_names = F)\n\nRows: 1807030 Columns: 9                                              0s\n── Column specification ──────────────────────────────────────────────\nDelimiter: \"\\t\"\nchr (9): X1, X2, X3, X4, X5, X6, X7, X8, X9\n\nmge_bins &lt;- read_tsv(\"raw_data/mge_bins_final.txt\",col_names = T)\n\nRows: 1953569 Columns: 15                                             \n── Column specification ──────────────────────────────────────────────\nDelimiter: \"\\t\"\nchr  (2): island, mgeR\ndbl (13): IS_Tn, Phage, Phage_like, CE, Integron, MI, Hotspot, UC,...\n\ntax &lt;- read_tsv(\"raw_data/hgt_species.list\", col_names = F)\n\nRows: 61959 Columns: 6                                                \n── Column specification ──────────────────────────────────────────────\nDelimiter: \"\\t\"\nchr (6): X1, X2, X3, X4, X5, X6\n\nclass_tree &lt;- read.tree(\"raw_data/progenomes2_class_tree.nwk\")\n\nRows: 61959 Columns: 6                                                \n── Column specification ──────────────────────────────────────────────\nDelimiter: \"\\t\"\nchr (6): X1, X2, X3, X4, X5, X6\n\nglist &lt;- read_tsv(\"raw_data/genome_status_supplementary_tableS2.txt\", col_names = T)\n\nRows: 84022 Columns: 7                                                0s\n── Column specification ──────────────────────────────────────────────\nDelimiter: \"\\t\"\nchr (5): genome, assembly_status, Marker_lineage, genome_quality, ...\ndbl (2): Completeness, Contamination"
-  },
-  {
     "objectID": "Figura2.html",
     "href": "Figura2.html",
     "title": "Figura 2",
@@ -292,41 +271,6 @@
     "title": "Glosario",
     "section": "",
     "text": "Escrito por: Diana Barceló y Marisol Navarro\n\n\n\n\nSusceptibilidad antibiótica se refiere a la capacidad de un microorganismo para ser afectado o inhibido por un determinado antibiótico (o agente antimicrobiano). Es una medida de su eficacia frente el microorganismo en cuestión. La susceptibilidad se determina mediante pruebas de laboratorio, en los que se expone el microorganismo a una o varias concentraciones de agentes antimicrobianos y se evalúa su crecimiento o inhibición.\n\n\n\n\n\nSensibilidad antibiótica: La sensibilidad antibiótica se utiliza para indicar la respuesta clínica de una patología a un antibiótico específico. La sensibilidad antibiótica se evalúa en función de la susceptibilidad del microorganismo causante de la infección, pero también puede depender de otros factores, como la concentración del antibiótico en el tejido infectado, la capacidad del antibiótico para llegar al sitio de la infección, la respuesta inmunológica del paciente, etc.\nConjugación: Una bacteria transfiere DNA a otra a través de un “puente” formado por estructuras llamadas pilis. \nTransducción: Un virus (bacteriófago) infecta una bacteria y luego introduce el DNA de otra bacteria infectada previamente en una nueva célula. \nTransformación: Una bacteria puede incorporar fragmentos de ADN libre del entorno, provenientes de otras bacterias muertas o de su medio."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Sobre nosotras",
-    "section": "",
-    "text": "Esta sesión promueve la reproducibilidad del código, la buena documentación del código y buenas prácticas para generar un mejor futuro en la ciencia con acceso libre a la información. Siendo parte del Reprohack2025 de R-Ladies Morelia y RSG_Mexico."
-  },
-  {
-    "objectID": "index.html#un-enfoque-computacional-para-el-estudio-de-los-elementos-genéticos-móviles-en-procariotas",
-    "href": "index.html#un-enfoque-computacional-para-el-estudio-de-los-elementos-genéticos-móviles-en-procariotas",
-    "title": "Sobre nosotras",
-    "section": "Un enfoque computacional para el estudio de los elementos genéticos móviles en procariotas",
-    "text": "Un enfoque computacional para el estudio de los elementos genéticos móviles en procariotas\nEl artículo explora cómo los elementos genéticos móviles (MGEs), como transposones, integrones, fagos y plásmidos, contribuyen a la evolución procariota y a la dispersión de resistencia a antibióticos. Usando un enfoque computacional basado en recombinasas y datos de pangenomas, analizaron ~84,000 genomas, identificando 2.8 millones de MGEs. Descubrieron que los elementos transponibles son los más abundantes y los principales portadores de genes de resistencia. Además, presentan una base de datos (http://promge.embl.de/) para futuras investigaciones.\nAquí puedes encontrar el artículo completo: Landscape of mobile genetic elements and their antibiotic resistance cargo in prokaryotic genomes"
-  },
-  {
-    "objectID": "index.html#integrantes",
-    "href": "index.html#integrantes",
-    "title": "Sobre nosotras",
-    "section": "Integrantes",
-    "text": "Integrantes\n\nInstructores\n\nEvelia Coss - posdoctoral LIIGH-UNAM. Miembro de LupusRGMX, Project JAGUAR, RiaBio, CDSB-Mexico, RSG-México y RLadies Morelia. Coordinadora de los VieRnes de Bioinformatica en el LIIGH. Instructora Certificada de The Carpentries. Contacto: correo, pagina web\nMarisol Navarro - RSG-México y RLadies Morelia.\nDiana Barceló - Profesor investigador de tiempo completo de la Escuela de Medicina de la Universidad Quetzalcoatl. Editora en Jefe de la revista INVESMED (Investigación y Educación Médica). Miembro del cuerpo académico del AMFEM (Asociación Mexicana de Facultades y Escuelas de Medicina, A.C.)\nJohana Castelán - RSG-México y RLadies Morelia.\n\n\n\nAyudantes\n\nMayela Fosado - Instituto de Neurobiología (INB)-UNAM.\nEmilio Ortíz - Instituto de Neurobiología (INB)-UNAM.\nMariana Devon - Departamento de Bioinformática en Enfermedades Infecciosas, ESPM-INSP.\nAndrés Arredondo - Ciencias Agrogenómicas, ENES León-UNAM."
-  },
-  {
-    "objectID": "index.html#citar-y-reutilizar-el-material-del-curso",
-    "href": "index.html#citar-y-reutilizar-el-material-del-curso",
-    "title": "Sobre nosotras",
-    "section": "Citar y reutilizar el material del curso",
-    "text": "Citar y reutilizar el material del curso\nLos datos del curso se pueden reutilizar y adaptar libremente con la debida atribución. Todos los datos de los cursos de estos repositorios están sujetos a la licencia Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)."
-  },
-  {
-    "objectID": "index.html#patrocinadores",
-    "href": "index.html#patrocinadores",
-    "title": "Sobre nosotras",
-    "section": "Patrocinadores",
-    "text": "Patrocinadores\n\n    \n\n\nCursos hechos con amor 💜"
   },
   {
     "objectID": "resumen.html",

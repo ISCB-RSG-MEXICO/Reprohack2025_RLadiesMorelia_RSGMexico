@@ -3,7 +3,18 @@
 -   Artículo: [Landscape of mobile genetic elements and their antibiotic resistance cargo in prokaryotic genomes](https://academic.oup.com/nar/article/50/6/3155/6552054)
 -   Github del articulo: https://git.embl.de/khedkar/promge
 -   Fecha: lunes 28 de abril, 2025
--   Integrantes: Evelia Coss, Marisol Navarro, Diana Barceló y Johana Castelán.
+
+Integrantes: 
+- **Evelia Coss** - osdoctoral LIIGH-UNAM. Miembro de LupusRGMX, Project JAGUAR, RiaBio, CDSB-Mexico, RSG-México y RLadies Morelia. Coordinadora de los VieRnes de Bioinformatica en el LIIGH. Instructora Certificada de The Carpentries. 
+- **Marisol Navarro** -  RSG-México y RLadies Morelia.
+- **Diana Barceló** - Profesor investigador de tiempo completo de la Escuela de Medicina de la Universidad Quetzalcoatl. Editora en Jefe de la revista INVESMED (Investigación y Educación Médica). Miembro del cuerpo académico del AMFEM (Asociación Mexicana de Facultades y Escuelas de Medicina, A.C.)
+- **Johana Castelán** -  RSG-México y RLadies Morelia.
+
+Ayudantes:
+- **Mayela Fosado** - Instituto de Neurobiología (INB)-UNAM.
+- **Emilio Ortíz** - Instituto de Neurobiología (INB)-UNAM.
+- **Mariana Devon** - Departamento de Bioinformática en Enfermedades Infecciosas, ESPM-INSP.
+- **Andrés Arredondo** - Ciencias Agrogenómicas, ENES León-UNAM.
 
 ## Material
 
