@@ -425,5 +425,40 @@
     "title": "Sobre los datos",
     "section": "Referencias",
     "text": "Referencias\n\nClone an existing GitHub project to new RStudio project - explicacion\nConectar a GitHub con SSH - explicacion"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Sobre nosotras",
+    "section": "",
+    "text": "Esta sesión promueve la reproducibilidad del código, la buena documentación del código y buenas prácticas para generar un mejor futuro en la ciencia con acceso libre a la información. Siendo parte del Reprohack2025 de R-Ladies Morelia y RSG_Mexico."
+  },
+  {
+    "objectID": "index.html#un-enfoque-computacional-para-el-estudio-de-los-elementos-genéticos-móviles-en-procariotas",
+    "href": "index.html#un-enfoque-computacional-para-el-estudio-de-los-elementos-genéticos-móviles-en-procariotas",
+    "title": "Sobre nosotras",
+    "section": "Un enfoque computacional para el estudio de los elementos genéticos móviles en procariotas",
+    "text": "Un enfoque computacional para el estudio de los elementos genéticos móviles en procariotas\nEl artículo explora cómo los elementos genéticos móviles (MGEs), como transposones, integrones, fagos y plásmidos, contribuyen a la evolución procariota y a la dispersión de resistencia a antibióticos. Usando un enfoque computacional basado en recombinasas y datos de pangenomas, analizaron ~84,000 genomas, identificando 2.8 millones de MGEs. Descubrieron que los elementos transponibles son los más abundantes y los principales portadores de genes de resistencia. Además, presentan una base de datos (http://promge.embl.de/) para futuras investigaciones.\nAquí puedes encontrar el artículo completo: Landscape of mobile genetic elements and their antibiotic resistance cargo in prokaryotic genomes"
+  },
+  {
+    "objectID": "index.html#integrantes",
+    "href": "index.html#integrantes",
+    "title": "Sobre nosotras",
+    "section": "Integrantes",
+    "text": "Integrantes\n\nInstructores\n\nEvelia Coss - posdoctoral LIIGH-UNAM. Miembro de LupusRGMX, Project JAGUAR, RiaBio, CDSB-Mexico, RSG-México y RLadies Morelia. Coordinadora de los VieRnes de Bioinformatica en el LIIGH. Instructora Certificada de The Carpentries. Contacto: correo, pagina web\nMarisol Navarro - RSG-México y RLadies Morelia.\nDiana Barceló - Profesor investigador de tiempo completo de la Escuela de Medicina de la Universidad Quetzalcoatl. Editora en Jefe de la revista INVESMED (Investigación y Educación Médica). Miembro del cuerpo académico del AMFEM (Asociación Mexicana de Facultades y Escuelas de Medicina, A.C.)\nJohana Castelán - RSG-México y RLadies Morelia.\n\n\n\nAyudantes\n\nMayela Fosado - Instituto de Neurobiología (INB)-UNAM.\nEmilio Ortíz - Instituto de Neurobiología (INB)-UNAM.\nMariana Devon - Departamento de Bioinformática en Enfermedades Infecciosas, ESPM-INSP.\nAndrés Arredondo - Ciencias Agrogenómicas, ENES León-UNAM."
+  },
+  {
+    "objectID": "index.html#citar-y-reutilizar-el-material-del-curso",
+    "href": "index.html#citar-y-reutilizar-el-material-del-curso",
+    "title": "Sobre nosotras",
+    "section": "Citar y reutilizar el material del curso",
+    "text": "Citar y reutilizar el material del curso\nLos datos del curso se pueden reutilizar y adaptar libremente con la debida atribución. Todos los datos de los cursos de estos repositorios están sujetos a la licencia Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)."
+  },
+  {
+    "objectID": "index.html#patrocinadores",
+    "href": "index.html#patrocinadores",
+    "title": "Sobre nosotras",
+    "section": "Patrocinadores",
+    "text": "Patrocinadores\n\n    \n\n\nCursos hechos con amor 💜"
   }
 ]
