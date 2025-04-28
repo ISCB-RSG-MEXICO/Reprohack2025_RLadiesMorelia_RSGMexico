@@ -14,3 +14,15 @@ Autores: Supriya Khedkar, Georgy Smyshlyaev, Ivica Letunic, Oleksandr M. Maistre
 Los **Elementos Genéticos Móviles** (MGE por sus siglas en inglés) en procariotas, como transposones, integrones, fagos y plásmidos, desempeñan un papel importante en la evolución procariota y en la dispersión de funciones de carga, como la **resistencia a los antibióticos**. Sin embargo, cada uno de estos tipos de MGE suele anotarse y analizarse individualmente, lo que dificulta una comprensión global de los patrones filogenéticos y ambientales de la dispersión de MGE. En consecuencia, se desarrolló un marco computacional que captura diversos tipos de MGE, sus cargas y los eventos de transferencia horizontal mediados por MGE. Para ello se utilizaron **recombinasas** como genes marcadores de MGE ubicuos, así como información pangenómica para la estimación de los límites de MGE. Este estudio fue aplicado a aproximadamente 84,000 genomas con anotación de hábitat, mapeando 2,8 millones de recombinasas específicas de MGE a seis tipos operativos de MGE, que juntos contienen, en promedio, el 13% de todos los genes de un genoma. Los elementos transponibles (TE por sus siglas en inglés) predominaron en todos los taxones (∼1.7 millones de ocurrencias), superando en número a los fagos y elementos similares a fagos (\<0.4 millones). Se registraron numerosos eventos de transferencia horizontal mediados por MEG en diversos filos y hábitats que involucran todos los tipos de MGE; se aclaró y cuantificó el grado de interacción de MGE (17%) e integrones (63%) con otras categorías de MGE, y se estableció que los MGE son portadores dominantes de genes de resistencia a antibióticos. Todos esos hallazgos se integraron en un recurso (proMGE.embl.de), el cual debería facilitar futuros estudios sobre la gran parte móvil de los genomas y su dispersión horizontal.
 
 Aquí puedes encontrar el artículo completo: [Landscape of mobile genetic elements and their antibiotic resistance cargo in prokaryotic genomes](https://academic.oup.com/nar/article/50/6/3155/6552054)
+
+### Vamos a ver estos conceptos
+
+![Tabla Categorías de Elementos Genéticos Móviles](img/ReproHack-Tabla_MGE.jpg){fig-elementos=""}
+
+[![Collage de Resistencia a antibióticos](img/ReproHack-Collage_ARGs.jpg){fig-arg=""}](https://www.3tres3.com/es-mx/articulos/resistencia-a-los-antibioticos-preguntas-frecuentes-1-de-2_2802/)
+
+![Diagrama Tipos de Recombinasas](img/ReproHack-Diagrama_Recombinasas.jpg){fig-diagrama=""}
+
+**Presentación completa**
+
+![](img/ReproHack-V1Barcelo-expo.pdf){width="1000" height="1000"}

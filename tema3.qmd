@@ -6,7 +6,7 @@ A partir de la pagina web de Git [proMGE](https://git.embl.de/khedkar/promge) re
 
 ## Datos
 
-> Modificado por Evelia Coss
+> Modificado por: **Evelia Coss**
 
 Todos los datos utilizados en este estudio están publicados y a disposición del público, como se indica en la sección de [material y métodos del manuscrito](https://academic.oup.com/nar/article/50/6/3155/6552054#347997597).
 
